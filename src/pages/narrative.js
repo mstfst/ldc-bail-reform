@@ -1,6 +1,6 @@
 import React from "react"
-import { Link } from "gatsby"
-import { Container, Row, Col } from "react-bootstrap"
+// import { Link } from "gatsby"
+import { Row, Col } from "react-bootstrap"
 
 import Layout from "../components/layout"
 import Head from '../components/head';
@@ -15,7 +15,7 @@ const NarrativePage = () => {
             <h2>interaction</h2>
           </Col>
           <Col md="4" xl="3" className="bg-secondary h-100 p-4 p-xl-5">
-            <img src="https://placehold.it/1000x1000" className="img-fluid mb-4"/>
+            <img src="https://placehold.it/1000x1000" alt="Narrative Name" className="img-fluid mb-4"/>
             <h2>Narrative Name</h2>
             <p className="lead">Narrative Biography</p>
           </Col>

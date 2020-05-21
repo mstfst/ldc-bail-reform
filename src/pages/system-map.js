@@ -2,8 +2,8 @@ import React from "react";
 import Layout from "../components/layout"
 import Head from '../components/head';
 
-import {Link, graphql, useStaticQuery} from "gatsby"
-import { Container, Card } from "react-bootstrap"
+// import {Link, graphql, useStaticQuery} from "gatsby"
+import { Container } from "react-bootstrap"
 
 import * as D3 from 'd3';
 

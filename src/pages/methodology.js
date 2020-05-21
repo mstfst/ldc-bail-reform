@@ -5,7 +5,7 @@ import Head from '../components/head';
 import { Link, graphql, useStaticQuery } from "gatsby"
 import { Container, Card } from "react-bootstrap"
 
-import blogStyles from "./blog.module.scss"
+// import blogStyles from "./blog.module.scss"
 
 
 const MethodologyPage = () => {

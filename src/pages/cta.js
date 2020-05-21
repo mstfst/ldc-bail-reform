@@ -2,10 +2,10 @@ import React from "react";
 import Layout from "../components/layout"
 import Head from '../components/head';
 
-import {Link, graphql, useStaticQuery} from "gatsby"
+// import {Link, graphql, useStaticQuery} from "gatsby"
 import { Container } from "react-bootstrap"
 
-import blogStyles from "./blog.module.scss"
+// import blogStyles from "./blog.module.scss"
 
 
 const CTAPage = () => {
