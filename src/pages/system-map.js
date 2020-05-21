@@ -3,49 +3,35 @@ import Layout from "../components/layout"
 import Head from '../components/head';
 
 import {Link, graphql, useStaticQuery} from "gatsby"
-import { Container } from "react-bootstrap"
+import { Container, Card } from "react-bootstrap"
 
-import blogStyles from "./blog.module.scss"
+import * as D3 from 'd3';
 
+const getRandomData = () =>
+  D3.range(20).map(() => ({
+    x: Math.random(), 
+    y: Math.random()
+  }));
 
 const SystemMapPage = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      allContentfulBlogPost(
-        sort:{
-          fields: publishedDate,
-          order:DESC
-        }
-      ){
-        edges {
-          node {
-            title
-            slug
-            publishedDate (
-              formatString: "MMMM Do, YYYY"
-            )
-          }
-        }
-      }
-    }
-  `);
+  const data = getRandomData();
+  const width = 400;
+  const height = 400;
+
+  const xScale = D3.scaleLinear().domain([0,1]).range([0, width]);
+  const yScale = D3.scaleLinear().domain([0,1]).range([0, height]);
 
   return (
     <Layout>
       <Head title="System Map"/>
-      <Container>
-      <h1>System Map</h1> 
-      <p>Posts will show up here.</p>
-      <ol className={blogStyles.posts}>
-        { data.allContentfulBlogPost.edges.map(edge => (
-          <li key={edge.node.title} className={blogStyles.post}>
-            <Link to={ `/blog/${edge.node.slug}`}>
-              <h2>{edge.node.title}</h2>
-              <p>{edge.node.publishedDate}</p>
-            </Link>
-          </li>
-        ))}
-      </ol>
+      <Container className="mt-4">
+        <h1>System Map</h1> 
+        <p>d3 will load here.</p>
+        <svg width={width} height={height}>
+          {data.map((d,i) => (
+            <circle key={i} cx={xScale(d.x)} cy={yScale(d.y)} r={5} />
+          ))}
+        </svg>
       </Container>
     </Layout>
   )

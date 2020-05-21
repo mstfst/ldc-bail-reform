@@ -5,6 +5,7 @@ import Carousel from '../components/carousel';
 
 import { graphql } from "gatsby";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { Container } from 'react-bootstrap';
 
 export const query = graphql`
   query($slug: String!) {
@@ -26,7 +27,7 @@ const BlogPost = (props) => {
       "embedded-asset-block": (node) => {
         const alt = node.data.target.fields.title["en-US"];
         const url = node.data.target.fields.file["en-US"].url;
-        return <img src={ url } alt={ alt } />;
+        return <img className="img-fluid" src={ url } alt={ alt } />;
       },
       "embedded-entry-block": (node) => {
         // const alt = node.data.target.fields.title["en-US"];
@@ -40,9 +41,11 @@ const BlogPost = (props) => {
   return (
     <Layout>
       <Head title={props.data.contentfulBlogPost.title}/>
-      <h1>{props.data.contentfulBlogPost.title}</h1> 
-      <p>{props.data.contentfulBlogPost.publishedDate}</p>
-      { documentToReactComponents(props.data.contentfulBlogPost.body.json, options) }
+      <Container className="mt-4">
+        <h1>{props.data.contentfulBlogPost.title}</h1> 
+        <p>{props.data.contentfulBlogPost.publishedDate}</p>
+        { documentToReactComponents(props.data.contentfulBlogPost.body.json, options) }
+      </Container>
     </Layout>
   )
 }

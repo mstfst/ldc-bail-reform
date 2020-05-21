@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import footerStyles from "./footer.module.scss"
+import { Container } from "react-bootstrap";
 
 const Footer = () => {
   const data = useStaticQuery(graphql`
@@ -14,9 +15,13 @@ const Footer = () => {
   `);
 
   return (
-    <footer className={footerStyles.footer}>
-      <p>Created by {data.site.siteMetadata.author}, © 2020</p>
-    </footer>
+    
+      <footer className={`bg-dark text-white text-center`}>
+        <Container> 
+          <p className="m-0 py-3">Created by {data.site.siteMetadata.author} © 2020</p>
+        </Container>
+      </footer>
+    
   )
 }
 

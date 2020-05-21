@@ -3,14 +3,12 @@ import React from "react"
 // import './header.module.scss'
 // import headerStyles from './header.module.scss';
 
+const clickHandler = (e) => {
+  console.log(e);
+}
 
 
 const Carousel = ( { items } ) => {
-
-  function clickHandler(e) {
-    console.log(e);
-  }
-
   return (
     <div>
       <h3>a carousel</h3>

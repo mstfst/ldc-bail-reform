@@ -8,7 +8,7 @@ module.exports = {
   /* Your site config here */
   siteMetadata: {
     title: `Bail Reform Project`,
-    author: 'Joshua Richards'
+    author: 'Law & Design CoLab'
   },
   plugins: [
     'gatsby-plugin-react-helmet',

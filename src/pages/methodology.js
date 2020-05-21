@@ -3,7 +3,7 @@ import Layout from "../components/layout"
 import Head from '../components/head';
 
 import { Link, graphql, useStaticQuery } from "gatsby"
-import { Container } from "react-bootstrap"
+import { Container, Card } from "react-bootstrap"
 
 import blogStyles from "./blog.module.scss"
 
@@ -33,19 +33,19 @@ const MethodologyPage = () => {
   return (
     <Layout>
       <Head title="Methodology"/>
-      <Container>
+      <Container className="mt-4">
       <h1>Methodology</h1> 
-      <p>Posts will show up here.</p>
-      <ol className={blogStyles.posts}>
-        { data.allContentfulBlogPost.edges.map(edge => (
-          <li key={edge} className={blogStyles.post}>
-            <Link to={ `/blog/${edge.node.slug}`}>
+      <p>Posts will show up heree.</p>
+      { data.allContentfulBlogPost.edges.map(edge => (
+        <Link key={edge.node.slug} to={ `/blog/${edge.node.slug}`}>
+          <Card className="mb-2">
+            <Card.Body>
               <h2>{edge.node.title}</h2>
-              <p>{edge.node.publishedDate}</p>
-            </Link>
-          </li>
-        ))}
-      </ol>
+              <p className="mb-0">{edge.node.publishedDate}</p>
+            </Card.Body>
+          </Card>
+        </Link>
+      ))}
       </Container>
     </Layout>
   )

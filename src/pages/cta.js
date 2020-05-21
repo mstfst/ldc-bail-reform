@@ -14,8 +14,10 @@ const CTAPage = () => {
   return (
     <Layout>
       <Head title="CTA"/>
-      <h1>CTA</h1> 
-      <p>Posts will show up here.</p>
+      <Container className="mt-4">
+        <h1>CTA</h1> 
+        <p>Posts will show up here.</p>
+      </Container>
     </Layout>
   )
 }

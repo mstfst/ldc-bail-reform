@@ -9,7 +9,7 @@ const NarrativePage = () => {
   return (
     <Layout>
       <Head title="About"/>
-      <Container>
+      <Container className="mt-4">
         <h1>Narrative</h1>
         <p>I'm Joshua, a creative technologist, living in Toronto.</p>
         <p><Link to="/contact">some cta</Link></p>

@@ -10,7 +10,7 @@ const IndexPage = () => {
   return (
     <Layout>
       <Head title="Home" />
-      <Container>
+      <Container className="mt-4">
         <h1>Hello.</h1>
         <h2>This is the little starter I put together.</h2>
         <p>It contains:</p>
