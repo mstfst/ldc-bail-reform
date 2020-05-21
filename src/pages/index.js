@@ -10,7 +10,7 @@ const IndexPage = () => {
   return (
     <Layout>
       <Head title="Home" />
-      <Jumbotron>
+      <Jumbotron className="mb-5">
         <Container className="text-center">
           <img src="https://placehold.it/300x150" className="mb-5" alt=""/>
           <p className="display-3 mb-5">According to the Auditor General, 70% of people held in Ontario jails are legally innocent.</p>
@@ -20,7 +20,8 @@ const IndexPage = () => {
           </p>
         </Container>
       </Jumbotron>
-      <Container className="mt-4">
+
+      <Container>
         <Row className="justify-content-md-center mb-4">
           <Col md="10">
             <p>If we have a bail system that is supposed to release people from jail, with the assurance that they show up for trial, and they aren’t a risk to public safety, then why does this issue exist?</p>
@@ -30,28 +31,32 @@ const IndexPage = () => {
 
         <Row className="justify-content-md-center mb-4">
           <Col md="4">
-          <Card className="bg-dark text-dark">
-            <Card.Img src="https://placehold.it/600x400" alt="Card image" />
-            <Card.ImgOverlay>
-              <Card.Title>The Bail System</Card.Title>
-              <Card.Text>
-                This is a wider card with supporting text below as a natural lead-in to
-                additional content. This content is a little bit longer.
-              </Card.Text>
-            </Card.ImgOverlay>
-          </Card>
+            <Link to="/system-map">
+              <Card className="bg-dark text-dark">
+                <Card.Img src="https://placehold.it/600x400" alt="Card image" />
+                <Card.ImgOverlay>
+                  <Card.Title>The Bail System</Card.Title>
+                  <Card.Text>
+                    This is a wider card with supporting text below as a natural lead-in to
+                    additional content. This content is a little bit longer.
+                  </Card.Text>
+                </Card.ImgOverlay>
+              </Card>
+            </Link>
           </Col>
           <Col md="4">
-          <Card className="bg-dark text-dark">
-            <Card.Img src="https://placehold.it/600x400" alt="Card image" />
-            <Card.ImgOverlay>
-              <Card.Title>The Human Experience</Card.Title>
-              <Card.Text>
-                This is a wider card with supporting text below as a natural lead-in to
-                additional content. This content is a little bit longer.
-              </Card.Text>
-            </Card.ImgOverlay>
-          </Card>
+            <Link to="/narrative">
+              <Card className="bg-dark text-dark">
+                <Card.Img src="https://placehold.it/600x400" alt="Card image" />
+                <Card.ImgOverlay>
+                  <Card.Title>The Human Experience</Card.Title>
+                  <Card.Text>
+                    This is a wider card with supporting text below as a natural lead-in to
+                    additional content. This content is a little bit longer.
+                  </Card.Text>
+                </Card.ImgOverlay>
+              </Card>
+            </Link>
           </Col>
         </Row>
 
