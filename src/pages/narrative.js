@@ -13,7 +13,7 @@ class NarrativePage extends Component {
   };
 
   handleScrollStepEnter = ({element, index, direction}) => {
-    const data = index;
+    const data = this.state.steps[index];
     element.style.backgroundColor = 'lightgoldenrodyellow';
     this.setState({data});
   
@@ -36,6 +36,9 @@ class NarrativePage extends Component {
     })
     .onStepEnter(this.handleScrollStepEnter)
     .onStepExit(this.handleScrollStepExit)
+
+    // setup resize event
+    window.addEventListener("resize", scroller.resize);
   }
 
   render() {
