@@ -8,8 +8,10 @@ This starter ships with the main Gatsby configuration files you might need to ge
 
 ## 🚀 Quick start
 
-1.  **Clone this repo install deps**
+1.  **Env Set up**
     ```shell
+    npm install -g gatsby-cli
+    git clone git@github.com:jjrchrds/ldc-bail-reform.git
     npm i
     ```
 
