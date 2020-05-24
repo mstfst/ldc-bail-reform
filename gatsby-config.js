@@ -10,7 +10,7 @@ module.exports = {
     title: `Bail Reform Project`,
     author: 'Law & Design CoLab',
   
-  methodology : [
+    methodology : [
     {
       year: "2011",
       headline : "Lorem Ipsum",

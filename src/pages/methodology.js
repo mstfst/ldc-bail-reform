@@ -2,17 +2,17 @@ import React from "react";
 import Layout from "../components/layout"
 import Head from '../components/head';
 
-import { Link, graphql, useStaticQuery } from "gatsby"
-import { Container, Card, Row, Col, Button } from "react-bootstrap"
+import { graphql, useStaticQuery } from "gatsby"
+import { Card, Row, Col, Button } from "react-bootstrap"
 
 // import blogStyles from "./blog.module.scss"
 
 
 const MethodologyPage = () => {
   
-  function indicatorClickHandler() {
-    console.log('clicked');
-  }
+  // function indicatorClickHandler() {
+  //   console.log('clicked');
+  // }
 
   const data = useStaticQuery(graphql`
     query {
@@ -44,6 +44,7 @@ const MethodologyPage = () => {
           </Col>
           <Col md="8" xl="9" className="h-100 p-4 p-xl-5">
             <div className="timeline-wrapper mr-5">
+
             { data.site.siteMetadata.methodology.map(item => (
               <div key={item.year} className="timeline-year mb-5">
                 <div className="timeline-year-content">
@@ -53,9 +54,9 @@ const MethodologyPage = () => {
                       <p className="mb-1"><strong>{item.headline}</strong></p>
                       <p className="mb-0">{item.copy}</p>
                     </div>
-                    { item.docs.map((doc, index) => (
-                      <div key={index} className="timeline-card-indicator bg-primary" id={`${item.year}-card-${index}`} style={{ left: index*40 + 'px'}} onClick={ indicatorClickHandler }>{index}</div>
-                    ))}
+                    {/* { item.docs.map((doc, index) => (
+                      <div key={index} className="timeline-card-indicator bg-primary" id={`${item.year}-card-${index}`} role="button" style={{ left: index*40 + 'px'}} onKeyDown={ indicatorClickHandler } onClick={ indicatorClickHandler }>{index}</div>
+                    ))} */}
                   </div>
 
                   { item.docs.map((doc, index) => (

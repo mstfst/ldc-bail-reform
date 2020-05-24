@@ -1,28 +1,67 @@
-import React from "react"
-// import { Link } from "gatsby"
-import { Row, Col } from "react-bootstrap"
-
+import React, { Component } from "react"
+import "intersection-observer";
+import { Step } from 'react-scrollama';
 import Layout from "../components/layout"
 import Head from '../components/head';
+import { Container } from 'react-bootstrap';
 
-const NarrativePage = () => {
-  return (
-    <Layout>
-      <Head title="Narrative"/>
-      <div className="container-fluid container-fill">
-        <Row className="h-100">
-          <Col md="8" xl="9" className="bg-light h-100 p-4 p-xl-5">
-            <h2>interaction</h2>
-          </Col>
-          <Col md="4" xl="3" className="bg-secondary h-100 p-4 p-xl-5">
-            <img src="https://placehold.it/1000x1000" alt="Narrative Name" className="img-fluid mb-4"/>
-            <h2>Narrative Name</h2>
-            <p className="lead">Narrative Biography</p>
-          </Col>
-        </Row>
-      </div>
-    </Layout>
-  )
+class NarrativePage extends Component {
+  state = {
+    data: 0,
+    steps: [10, 20, 30],
+    progress: 0,
+  };
+
+  handleScrollStepEnter = ({element, index, direction}) => {
+    const data = index;
+    element.style.backgroundColor = 'lightgoldenrodyellow';
+    this.setState({data});
+  
+  }
+  handleScrollStepExit = ({element, index, direction}) => {
+    element.style.backgroundColor = 'white';
+  }
+
+  componentDidMount(){
+    const scrollama = require('scrollama')
+    const scrollThreshold = 0.33
+    const scroller = scrollama()
+    scroller.setup({
+      // debug: true,
+      step: '.step',
+      threshold: scrollThreshold,
+      container: '.scroll__container',
+      graphic: '.scroll__graphic',
+      debug: true
+    })
+    .onStepEnter(this.handleScrollStepEnter)
+    .onStepExit(this.handleScrollStepExit)
+  }
+
+  render() {
+    const { data, steps, progress } = this.state;
+    
+    return (
+      <Layout>
+        <Head title="Narrative"/>
+        <Container>
+        <div className="graphicContainer">
+          <div>
+          {steps.map(value => (
+            <div data={value} key={value} className="step">
+              <p>step value: {value}</p>
+              {value === data && <p>{Math.round(progress * 100)}%</p>}
+            </div>
+          ))}
+          </div>
+          <div className="graphic">
+            <p>{data}</p>
+          </div>
+        </div>
+        </Container>
+      </Layout>
+    )
+  }
 }
 
 export default NarrativePage;
