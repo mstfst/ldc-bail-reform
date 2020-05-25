@@ -1,37 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
 import Layout from "../components/layout"
 import Head from '../components/head';
+import DocumentCard from '../components/document-card';
 
-import { graphql, useStaticQuery } from "gatsby"
-import { Card, Row, Col, Button } from "react-bootstrap"
+import { graphql, StaticQuery } from "gatsby"
+import { Row, Col } from "react-bootstrap"
 
-// import blogStyles from "./blog.module.scss"
+class MethodologyPage extends Component {
 
-
-const MethodologyPage = () => {
-  function indicatorClickHandler() {
-    console.log('clicked');
+  state = {
+    documents: {}
   }
 
-  const data = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          methodology {
-            year
-            headline
-            copy
-            docs {
-              date
-              author
-              title
-              quote
-            }
-          }
-        }
-      }
-    }
-  `);
+  indicatorClickHandler = (e) => {
+    const id = e.target.dataset.id;
+    const documents = this.state.documents;
+    Object.keys(documents).forEach(v => documents[v] = false);
+    documents[id] = true;
+    this.setState({documents});
+  }
+
+  render () {
 
   return (
     <Layout>
@@ -42,39 +31,67 @@ const MethodologyPage = () => {
             <h2>interaction</h2>
           </Col>
           <Col md="8" xl="9" className="h-100 p-4 p-xl-5">
-            <div className="timeline-wrapper mr-5">
+            
+            <StaticQuery
+              query = {graphql`
+                query {
+                  site {
+                    siteMetadata {
+                      methodology {
+                        year
+                        headline
+                        copy
+                        docs {
+                          date
+                          author
+                          title
+                          quote
+                        }
+                      }
+                    }
+                  }
+                }
+              `}
+              render = { data => (
+                <div className="timeline-wrapper mr-5">
+                { data.site.siteMetadata.methodology.map(item => (
+                  <div key={item.year} className="timeline-year mb-5">
+                    <div className="timeline-year-content">
+                      <div className="timeline-year-content-header d-flex pb-2 mb-4">
+                        <h1 className="display-3 pr-3"><strong>{item.year}</strong></h1>
+                        <div className="timeline-year-header-meta mt-2 pr-5 pb-3">
+                          <p className="mb-1"><strong>{item.headline}</strong></p>
+                          <p className="mb-0">{item.copy}</p>
+                        </div>
+                        { item.docs.map((doc, index) => {
+                          
+                          return (
+                            <div 
+                              key={index} 
+                              className="timeline-card-indicator bg-primary" 
+                              data-id={`${item.year}-card-${index}`} 
+                              role="button" 
+                              style={{ left: index*20 + '%'}} 
+                          
+                              onKeyDown={ this.indicatorClickHandler } 
+                              onClick={ this.indicatorClickHandler }>{index}
+                            </div>
+                          )
+                        })}
+                      </div>
 
-            { data.site.siteMetadata.methodology.map(item => (
-              <div key={item.year} className="timeline-year mb-5">
-                <div className="timeline-year-content">
-                  <div className="timeline-year-content-header d-flex pb-2 mb-4">
-                    <h1 className="display-3 pr-3"><strong>{item.year}</strong></h1>
-                    <div className="timeline-year-header-meta mt-2 pr-5 pb-3">
-                      <p className="mb-1"><strong>{item.headline}</strong></p>
-                      <p className="mb-0">{item.copy}</p>
+                      { item.docs.map((doc, index) => {
+                        return(
+                          <DocumentCard key={index} index={index} doc={doc} item={item} active={this.state.documents[`${item.year}-card-${index}`]}  />
+                        )
+                      })}
                     </div>
-                    { item.docs.map((doc, index) => (
-                      <div key={index} className="timeline-card-indicator bg-primary" id={`${item.year}-card-${index}`} role="button" style={{ left: index*40 + 'px'}} onKeyDown={ indicatorClickHandler } onClick={ indicatorClickHandler }>{index}</div>
-                    ))}
                   </div>
-
-                  { item.docs.map((doc, index) => (
-                    <Card key={`card-${index}`}className="w-75" id={`${item.year}-card-${index}`} >
-                      <Card.Header className="text-right bg-primary text-white">
-                        <small>{doc.date}</small>
-                      </Card.Header>
-                      <Card.Body>
-                        <p>{doc.author}</p>
-                        <p>{doc.title}</p>
-                        <p>{doc.quote}</p>
-                        <Button className="btn-dark">View Document</Button>
-                      </Card.Body>
-                    </Card>
-                  )) }
-                </div>
+                ))}
               </div>
-            ))}
-            </div>
+            )}
+          />
+            
           </Col>
         </Row>
       </div>
@@ -97,6 +114,7 @@ const MethodologyPage = () => {
     //   </Container>
     // </Layout>
   )
+}
 }
 
 export default MethodologyPage
