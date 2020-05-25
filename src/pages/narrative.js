@@ -22,6 +22,10 @@ class NarrativePage extends Component {
     element.style.backgroundColor = 'white';
   }
 
+  handleProgress = ({progress}) => {
+    this.setState({progress});
+  }
+
   componentDidMount(){
     const scrollama = require('scrollama')
     const scrollThreshold = 0.33
@@ -30,12 +34,12 @@ class NarrativePage extends Component {
       // debug: true,
       step: '.step',
       threshold: scrollThreshold,
-      container: '.scroll__container',
-      graphic: '.scroll__graphic',
+      progress: true,
       debug: true
     })
     .onStepEnter(this.handleScrollStepEnter)
     .onStepExit(this.handleScrollStepExit)
+    .onStepProgress(this.handleProgress)
 
     // setup resize event
     window.addEventListener("resize", scroller.resize);
@@ -53,7 +57,8 @@ class NarrativePage extends Component {
           {steps.map(value => (
             <div data={value} key={value} className="step">
               <p>step value: {value}</p>
-              {value === data && <p>{Math.round(progress * 100)}%</p>}
+              <p>step data: {data}</p>
+              { value === data && <p>{ Math.round(progress*100) }%</p> }
             </div>
           ))}
           </div>

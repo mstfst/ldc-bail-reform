@@ -9,10 +9,9 @@ import { Card, Row, Col, Button } from "react-bootstrap"
 
 
 const MethodologyPage = () => {
-  
-  // function indicatorClickHandler() {
-  //   console.log('clicked');
-  // }
+  function indicatorClickHandler() {
+    console.log('clicked');
+  }
 
   const data = useStaticQuery(graphql`
     query {
@@ -54,9 +53,9 @@ const MethodologyPage = () => {
                       <p className="mb-1"><strong>{item.headline}</strong></p>
                       <p className="mb-0">{item.copy}</p>
                     </div>
-                    {/* { item.docs.map((doc, index) => (
+                    { item.docs.map((doc, index) => (
                       <div key={index} className="timeline-card-indicator bg-primary" id={`${item.year}-card-${index}`} role="button" style={{ left: index*40 + 'px'}} onKeyDown={ indicatorClickHandler } onClick={ indicatorClickHandler }>{index}</div>
-                    ))} */}
+                    ))}
                   </div>
 
                   { item.docs.map((doc, index) => (
