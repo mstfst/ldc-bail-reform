@@ -72,9 +72,9 @@ class MethodologyPage extends Component {
                               data-id={`${item.year}-card-${index}`} 
                               role="button" 
                               style={{ left: index*20 + '%'}} 
-                          
                               onKeyDown={ this.indicatorClickHandler } 
-                              onClick={ this.indicatorClickHandler }>{index}
+                              onClick={ this.indicatorClickHandler }>
+                                {item.year}-document-{index}
                             </div>
                           )
                         })}
