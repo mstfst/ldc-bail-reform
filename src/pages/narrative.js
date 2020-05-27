@@ -5,6 +5,8 @@ import Layout from "../components/layout"
 import Head from '../components/head';
 import { Container } from 'react-bootstrap';
 
+import * as D3 from 'd3';
+
 class NarrativePage extends Component {
   state = {
     data: 0,
@@ -17,6 +19,7 @@ class NarrativePage extends Component {
     element.style.backgroundColor = 'lightgoldenrodyellow';
     this.setState({data});
   
+    console.log(D3.selectAll("p"))
   }
   handleScrollStepExit = ({element, index, direction}) => {
     element.style.backgroundColor = 'white';
