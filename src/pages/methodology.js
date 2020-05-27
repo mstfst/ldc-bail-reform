@@ -81,7 +81,7 @@ class MethodologyPage extends Component {
           <Col md="4" xl="3" className="p-4 p-xl-5">
             <h2>interaction</h2>
           </Col>
-          <Col md="8" xl="9" className="h-100 p-4 p-xl-5">
+          <Col md="8" xl="9" className="h-100 p-md-4 p-xl-5">
             
             <StaticQuery
               query = {graphql`
@@ -104,13 +104,13 @@ class MethodologyPage extends Component {
                 }
               `}
               render = { data => (
-                <div className="timeline-wrapper mr-5">
+                <div className="timeline-wrapper mr-1 mr-md-5">
                 { data.site.siteMetadata.methodology.map(item => (
                   <div key={item.year} className="timeline-year mb-5" data-index={item.year}>
                     <div className="timeline-year-content">
-                      <div className="timeline-year-content-header d-flex pb-2 mb-4">
+                      <div className="timeline-year-content-header d-md-flex pb-2 mb-4">
                         <h1 className="display-3 pr-3"><strong>{item.year}</strong></h1>
-                        <div className="timeline-year-header-meta mt-2 pr-5 pb-3">
+                        <div className="timeline-year-header-meta mt-2 pr-2 pr-md-5 pb-3">
                           <p className="mb-1"><strong>{item.headline}</strong></p>
                           <p className="mb-0">{item.copy}</p>
                         </div>
@@ -132,7 +132,7 @@ class MethodologyPage extends Component {
                           )
                         })}
                       </div>
-                      <div className="timeline-year-docs">
+                      <div className="timeline-year-docs mr-3 mr-md-5">
                         { item.docs.map((doc, index) => {
                           return(
                             <DocumentCard key={index} index={index} doc={doc} item={item} active={this.state.documents[`${item.year}-card-${index}`]}  />
