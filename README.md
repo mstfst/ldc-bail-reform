@@ -4,7 +4,7 @@
   LDC Bail Reform Project
 </h1>
 
-A starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
+This starter ships with the main Gatsby configuration files you might need to get up and running blazing fast with the blazing fast app generator for React.
 
 ## 🚀 Quick start
 
@@ -15,7 +15,7 @@ A starter ships with the main Gatsby configuration files you might need to get u
     npm i
     ```
 
-1.  **Begin developing.**
+1.  **Start developing.**
 
     Navigate into your new site’s directory and start it up.
 
