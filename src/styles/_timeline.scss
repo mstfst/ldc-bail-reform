@@ -14,4 +14,54 @@
   height: 20px;
   text-indent: -9999px;
   line-height: 0;
+  pointer-events: none;
+  background-color: hsl(211, 100%, 67%);
+  transform: scale(.5);
+  transition: .35s all;
+}
+
+.timeline-year-docs {
+
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+  margin-bottom: 10vh;
+  
+  .card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity:0;
+    transform: translateX(-30%);
+    transition: .35s all;
+    transition-delay: 0;
+    &.active {
+      opacity: 1;
+      transform: translateX(0);
+      transition-delay: .5s;
+    }
+    .badge {
+      padding: .3rem;
+      font-weight: normal;
+      border: 1px solid #999;
+    }
+  }
+}
+
+.timeline-year {
+  .display-3 {
+    transition: .35s all;
+  }
+
+  &.active {
+    .display-3 {
+      color: red;
+    }
+    .timeline-card-indicator {
+      background-color: #007bff;
+      opacity: 1;
+      pointer-events: all;
+      transform: scale(1);
+    }
+  }
 }

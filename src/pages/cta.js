@@ -9,8 +9,6 @@ import { Container } from "react-bootstrap"
 
 
 const CTAPage = () => {
-  
-
   return (
     <Layout>
       <Head title="CTA"/>
