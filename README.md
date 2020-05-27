@@ -15,7 +15,7 @@ A starter ships with the main Gatsby configuration files you might need to get u
     npm i
     ```
 
-1.  **Start developing.**
+1.  **Begin developing.**
 
     Navigate into your new site’s directory and start it up.
 
