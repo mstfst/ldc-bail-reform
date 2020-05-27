@@ -7,7 +7,7 @@
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: `Bail Reform Project`,
+    title: `Bail Reform`,
     author: 'Law & Design CoLab',
   
     methodology : [
@@ -107,6 +107,13 @@ module.exports = {
         path: `${__dirname}/src/`
       }
     },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: `fonts`,
+    //     path: `${__dirname}/src/fonts/`,
+    //   },
+    // },
     'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',

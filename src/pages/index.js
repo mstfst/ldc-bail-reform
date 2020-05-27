@@ -15,8 +15,8 @@ const IndexPage = () => {
           <Row className="justify-content-center">   
             <Col md="10" className="text-center">
               <img src="https://placehold.it/300x150" className="mb-5" alt=""/>
-              <p className="display-4 mb-5">According to the Auditor General, 70% of people held in Ontario jails are legally innocent.</p>
-              <h3 className="mb-5">Why?</h3>
+              <h1 className="display-1 mb-5">According to the Auditor General, 70% of people held in Ontario jails are legally innocent.</h1>
+              <p className="display-4 mb-5">Why?</p>
               <p>
                 <Button variant="primary">Learn more</Button>
               </p>
@@ -39,7 +39,7 @@ const IndexPage = () => {
               <Card className="bg-dark text-dark mb-3">
                 <Card.Img src="https://placehold.it/600x400" alt="Card image" />
                 <Card.ImgOverlay>
-                  <Card.Title>The Bail System</Card.Title>
+                  <Card.Title><h3>The Bail System</h3></Card.Title>
                   <Card.Text>
                     This is a wider card with supporting text below as a natural lead-in to
                     additional content. This content is a little bit longer.
@@ -53,7 +53,7 @@ const IndexPage = () => {
               <Card className="bg-dark text-dark mb-3">
                 <Card.Img src="https://placehold.it/600x400" alt="Card image" />
                 <Card.ImgOverlay>
-                  <Card.Title>The Human Experience</Card.Title>
+                  <Card.Title><h3>The Human Experience</h3></Card.Title>
                   <Card.Text>
                     This is a wider card with supporting text below as a natural lead-in to
                     additional content. This content is a little bit longer.
@@ -72,7 +72,7 @@ const IndexPage = () => {
 
         <Row className="justify-content-md-center mb-4 text-center">
           <Col md="4">
-            <h3>What We Can Do</h3>
+            <h2>What We Can Do</h2>
             <p>Ways to create momentum for bail reform.</p>
           </Col>
         </Row>
