@@ -11,13 +11,17 @@ const IndexPage = () => {
     <Layout>
       <Head title="Home" />
       <Jumbotron className="mb-5">
-        <Container className="text-center">
-          <img src="https://placehold.it/300x150" className="mb-5" alt=""/>
-          <p className="display-3 mb-5">According to the Auditor General, 70% of people held in Ontario jails are legally innocent.</p>
-          <h3 className="mb-5">Why?</h3>
-          <p>
-            <Button variant="primary">Learn more</Button>
-          </p>
+        <Container>
+          <Row className="justify-content-center">   
+            <Col md="10" className="text-center">
+              <img src="https://placehold.it/300x150" className="mb-5" alt=""/>
+              <p className="display-4 mb-5">According to the Auditor General, 70% of people held in Ontario jails are legally innocent.</p>
+              <h3 className="mb-5">Why?</h3>
+              <p>
+                <Button variant="primary">Learn more</Button>
+              </p>
+            </Col>
+        </Row>
         </Container>
       </Jumbotron>
 
@@ -32,7 +36,7 @@ const IndexPage = () => {
         <Row className="justify-content-md-center mb-4">
           <Col md="4">
             <Link to="/system-map">
-              <Card className="bg-dark text-dark">
+              <Card className="bg-dark text-dark mb-3">
                 <Card.Img src="https://placehold.it/600x400" alt="Card image" />
                 <Card.ImgOverlay>
                   <Card.Title>The Bail System</Card.Title>
@@ -46,7 +50,7 @@ const IndexPage = () => {
           </Col>
           <Col md="4">
             <Link to="/narrative">
-              <Card className="bg-dark text-dark">
+              <Card className="bg-dark text-dark mb-3">
                 <Card.Img src="https://placehold.it/600x400" alt="Card image" />
                 <Card.ImgOverlay>
                   <Card.Title>The Human Experience</Card.Title>
@@ -74,19 +78,19 @@ const IndexPage = () => {
         </Row>
 
         <Row className="justify-content-md-center mb-5">
-          <Col>
+          <Col xs="12" md="4">
             <Link to="">
-              <img src="https://placehold.it/400x300" className="img-fluid" alt=""/>
+              <img src="https://placehold.it/400x300" className="img-fluid mb-4" alt=""/>
             </Link>
           </Col>
-          <Col>
+          <Col xs="12" md="4">
             <Link to="">
-              <img src="https://placehold.it/400x300" className="img-fluid" alt=""/>
+              <img src="https://placehold.it/400x300" className="img-fluid mb-4" alt=""/>
             </Link>
           </Col>
-          <Col>
+          <Col xs="12" md="4">
             <Link to="">
-              <img src="https://placehold.it/400x300" className="img-fluid" alt=""/>
+              <img src="https://placehold.it/400x300" className="img-fluid mb-4" alt=""/>
             </Link>
           </Col>
         </Row>

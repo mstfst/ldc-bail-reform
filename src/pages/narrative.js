@@ -1,11 +1,13 @@
 import React, { Component } from "react"
 import "intersection-observer";
-import { Step } from 'react-scrollama';
+// import { Step } from 'react-scrollama';
 import Layout from "../components/layout"
 import Head from '../components/head';
 import { Container } from 'react-bootstrap';
 
 class NarrativePage extends Component {
+  scroller;
+
   state = {
     data: 0,
     steps: [10, 20, 30],
@@ -29,20 +31,24 @@ class NarrativePage extends Component {
   componentDidMount(){
     const scrollama = require('scrollama')
     const scrollThreshold = 0.33
-    const scroller = scrollama()
-    scroller.setup({
+    this.scroller = scrollama()
+    this.scroller.setup({
       // debug: true,
       step: '.step',
       threshold: scrollThreshold,
       progress: true,
-      debug: true
+      // debug: true
     })
     .onStepEnter(this.handleScrollStepEnter)
     .onStepExit(this.handleScrollStepExit)
     .onStepProgress(this.handleProgress)
 
     // setup resize event
-    window.addEventListener("resize", scroller.resize);
+    window.addEventListener("resize", this.scroller.resize);
+  }
+
+  componentWillUnmount(){
+    this.scroller.destroy();
   }
 
   render() {
