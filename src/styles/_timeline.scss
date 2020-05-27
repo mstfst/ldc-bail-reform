@@ -40,6 +40,11 @@
       transform: translateX(0);
       transition-delay: .5s;
     }
+    .badge {
+      padding: .3rem;
+      font-weight: normal;
+      border: 1px solid #999;
+    }
   }
 }
 

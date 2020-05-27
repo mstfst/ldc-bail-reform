@@ -9,6 +9,9 @@ const DocumentCard = ({doc, item, index, active }) => {
         <small>{doc.date}</small>
       </Card.Header>
       <Card.Body>
+        <div>
+          <span class="badge badge-light mb-3">mental health</span>
+        </div>
         <h5>{doc.title}</h5>
         <p>{doc.author}</p>
         <h6 className="mb-5">"{doc.quote}"</h6>

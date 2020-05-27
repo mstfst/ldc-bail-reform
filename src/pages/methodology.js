@@ -115,6 +115,8 @@ class MethodologyPage extends Component {
                           <p className="mb-0">{item.copy}</p>
                         </div>
                         { item.docs.map((doc, index) => {
+                          const length = item.docs.length;
+                          const offset = (index / length) * 100;
                           
                           return (
                             <div 
@@ -122,7 +124,7 @@ class MethodologyPage extends Component {
                               className="timeline-card-indicator" 
                               data-id={`${item.year}-card-${index}`} 
                               role="button" 
-                              style={{ left: index*20 + '%'}} 
+                              style={{ left: offset + '%'}} 
                               onKeyDown={ this.indicatorClickHandler } 
                               onClick={ this.indicatorClickHandler }>
                                 {item.year}-document-{index}
