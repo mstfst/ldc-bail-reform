@@ -1,0 +1,50 @@
+@font-face {
+    font-family: "Martin";
+    font-weight: 400;
+    font-style: normal;
+    src: url("../../static/fonts/MARTIN-Regular.otf") format("opentype"), url("../../static/fonts/MARTIN-Regular.ttf") format("truetype");
+    font-display: swap;
+  }
+
+@font-face {
+  font-family: "Crimson Text";
+  font-weight: 400;
+  font-style: normal;
+  src: url("../../static/fonts/CrimsonText-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Crimson Text";
+  font-weight: 400;
+  font-style: italic;
+  src: url("../../static/fonts/CrimsonText-Italic.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Crimson Text";
+  font-weight: 500;
+  font-style: normal;
+  src: url("../../static/fonts/CrimsonText-SemiBold.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Crimson Text";
+  font-weight: 500;
+  font-style: italic;
+  src: url("../../static/fonts/CrimsonText-SemiBoldItalic.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Crimson Text";
+  font-weight: 600;
+  font-style: normal;
+  src: url("../../static/fonts/CrimsonText-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Crimson Text";
+  font-weight: 600;
+  font-style: italic;
+  src: url("../../static/fonts/CrimsonText-BoldItalic.ttf") format("truetype");
+  font-display: swap;
+}
