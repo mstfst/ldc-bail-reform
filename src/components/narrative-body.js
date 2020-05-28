@@ -22,11 +22,7 @@ class NarrativeSection extends Component {
   };
 
   handleScrollStepEnter = ({element, index, direction}) => {
-    const data = this.state.steps[index];
     // element.style.backgroundColor = 'lightgoldenrodyellow';
-    this.setState({data});
-
-
   }
   handleScrollStepExit = ({element, index, direction}) => {
     // element.style.backgroundColor = 'white';
@@ -61,7 +57,7 @@ class NarrativeSection extends Component {
       step: '#narrative-step',
       threshold: scrollThreshold,
       progress: true,
-      debug: true
+      debug: false
     })
     .onStepEnter(this.handleScrollStepEnter)
     .onStepExit(this.handleScrollStepExit)
@@ -88,12 +84,50 @@ class NarrativeSection extends Component {
   }
 
   return (
-    <div id="narrative-scroll">
-      <div id="narrative-step" style={{
-        height:"600vh", 
-        backgroundAttachment:"fixed", 
+    <div>
+      <div style={{
+        top: "0",
+        left: "0",
+        margin: "0",
+        width: "99vw",
+        height: "100vh",
+        backgroundImage: `url("assets/cell-window.jpg")`,
         backgroundSize: "cover",
-        backgroundImage: `url(`+ narrativeBgImg  +`)`
+        position: "fixed",
+        zIndex: "-1",
+        opacity: progress < 0.3? 1 : 0
+      }}>
+      </div>
+      <div style={{
+        top: "0",
+        left: "0",
+        margin: "0",
+        width: "99vw",
+        height: "100vh",
+        backgroundImage: `url("assets/convict-direction.jpg")`,
+        backgroundSize: "cover",
+        position: "fixed",
+        zIndex: "-1",
+        opacity: progress > 0.3 & progress < 0.66 ? 1 : 0
+      }}>
+      </div>
+      <div style={{
+        top: "0",
+        left: "0",
+        margin: "0",
+        width: "99vw",
+        height: "100vh",
+        backgroundImage: `url("assets/jail-cell.jpg")`,
+        position: "fixed",
+        backgroundSize: "cover",
+        zIndex: "-1",
+        opacity:  progress > 0.66? 1 : 0
+      }}>
+      </div>
+    <div id="narrative-scroll">
+      
+      <div id="narrative-step" style={{
+        height:"600vh"
         }}>
         <div style={narrativePgStyle}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec risus urna, tincidunt vitae lacus ut, aliquet pellentesque justo. Duis vel ante tincidunt, tincidunt ipsum et, placerat dui. Fusce at sem at ipsum faucibus auctor. Nam sapien nisi, auctor imperdiet suscipit sit amet, dignissim at libero. In in lorem facilisis, egestas enim a, vestibulum lorem. Aenean facilisis leo id justo pharetra volutpat. Vivamus consequat iaculis ultricies. Suspendisse eu tincidunt odio, vitae aliquam velit. Integer tristique metus mi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis rutrum molestie metus vel sodales. Cras a massa non justo bibendum egestas a nec lectus. Fusce faucibus sapien vel nulla dapibus ornare. Nulla fringilla felis non venenatis feugiat. Nam ultricies ornare sapien eu luctus.
@@ -108,6 +142,8 @@ class NarrativeSection extends Component {
         </div>
       </div>
     </div>
+    </div>
+    
   )
 }
 }
