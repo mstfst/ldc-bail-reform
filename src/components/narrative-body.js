@@ -17,7 +17,6 @@ class NarrativeSection extends Component {
   state = {
     data: 0,
     backgroundImages: ["assets/cell-window.jpg", "assets/convict-direction.jpg", "assets/jail-cell.jpg"],
-    steps: [10, 20, 30],
     progress: 0,
     narrativeBgImg: "assets/cell-window.jpg"
   };
