@@ -1,7 +1,7 @@
  #system-map {
   position: relative;
   background-color: #fffdfb;
-  background-color: #d9ba9b; 
+  // background-color: #d9ba9b; 
   padding: 1rem;
  }
  
@@ -29,15 +29,15 @@
   .step {
     visibility: hidden;
     margin: 0 auto;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(221, 124, 124, 0.1);
+    pointer-events: none;
   }
   
   .step:last-child {
     margin-bottom: 0;
   }
   
-  .step.is-active p {
-    background-color: goldenrod;
-    color: #3b3b3b;
-  }
+  // .step.is-active p {
+  //   background-color: goldenrod;
+  //   color: #3b3b3b;
+  // }
