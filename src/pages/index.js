@@ -5,6 +5,8 @@ import { Row, Col, Jumbotron, Button, Container, Card } from "react-bootstrap"
 import Layout from "../components/layout"
 import Head from '../components/head';
 
+import ChevronDown from "../../static/assets/chevron-down.svg";
+
 
 const IndexPage = () => {
   return (
@@ -16,9 +18,13 @@ const IndexPage = () => {
             <Col md="10" className="text-center">
               <img src="https://placehold.it/300x150" className="mb-5" alt=""/>
               <h1 className="display-1 mb-5">According to the Auditor General, 70% of people held in Ontario jails are legally innocent.</h1>
-              <p className="display-4 mb-5">Why?</p>
+              <p className="display-2 mb-5">Why?</p>
               <p>
-                <Button variant="primary">Learn more</Button>
+                <Button variant="link" className="heartbeat" aria-label="Learn more">
+                  <Link to="/#main">
+                    <ChevronDown />
+                  </Link>
+                </Button>
               </p>
             </Col>
         </Row>
@@ -26,46 +32,44 @@ const IndexPage = () => {
       </Jumbotron>
 
       <Container>
-        <Row className="justify-content-md-center mb-4">
+        <Row className="justify-content-md-center mt-4 mb-4" id="main">
           <Col md="10">
-            <p>If we have a bail system that is supposed to release people from jail, with the assurance that they show up for trial, and they aren’t a risk to public safety, then why does this issue exist?</p>
+            <p className="display-4"><strong>If we have a bail system that is supposed to release people from jail, with the assurance that they show up for trial, and they aren’t a risk to public safety, then why does this issue exist?</strong></p>
             <p>We’ve created some resources to try and help you answer this question:</p>
           </Col>
         </Row>
 
-        <Row className="justify-content-md-center mb-4">
-          <Col md="4">
-            <Link to="/system-map">
-              <Card className="bg-dark text-dark mb-3">
-                <Card.Img src="https://placehold.it/600x400" alt="Card image" />
-                <Card.ImgOverlay>
-                  <Card.Title><h3>The Bail System</h3></Card.Title>
-                  <Card.Text>
-                    This is a wider card with supporting text below as a natural lead-in to
-                    additional content. This content is a little bit longer.
-                  </Card.Text>
-                </Card.ImgOverlay>
-              </Card>
-            </Link>
-          </Col>
-          <Col md="4">
-            <Link to="/narrative">
-              <Card className="bg-dark text-dark mb-3">
-                <Card.Img src="https://placehold.it/600x400" alt="Card image" />
-                <Card.ImgOverlay>
-                  <Card.Title><h3>The Human Experience</h3></Card.Title>
-                  <Card.Text>
-                    This is a wider card with supporting text below as a natural lead-in to
-                    additional content. This content is a little bit longer.
-                  </Card.Text>
-                </Card.ImgOverlay>
-              </Card>
-            </Link>
-          </Col>
-        </Row>
+        <Row className="mb-4 pb-4">
+          <Row className="justify-content-md-center mb-4">
+            <Col md="5" lg="4">
+              <Link to="/system-map">
+                <Card className="bg-dark text-dark mb-3">
+                  <Card.Img src="https://placehold.it/600x400" alt="Card image" />
+                  <Card.ImgOverlay className="align-contents-bottom">
+                    <Card.Title><h3>The Bail System</h3></Card.Title>
+                    <Card.Text className="min-height-3rem">
+                      How bail is supposed to work and when it doesn’t.
+                    </Card.Text>
+                  </Card.ImgOverlay>
+                </Card>
+              </Link>
+            </Col>
+            <Col md="5" lg="4">
+              <Link to="/narrative">
+                <Card className="bg-dark text-dark mb-3">
+                  <Card.Img src="https://placehold.it/600x400" alt="Card image" />
+                  <Card.ImgOverlay className="align-contents-bottom">
+                    <Card.Title><h3>The Human Experience</h3></Card.Title>
+                    <Card.Text className="min-height-3rem">
+                      The human cost of bail.
+                    </Card.Text>
+                  </Card.ImgOverlay>
+                </Card>
+              </Link>
+            </Col>
+          </Row>
 
-        <Row className="justify-content-md-center mb-5 text-center">
-          <Col md="6">
+          <Col md="12" className="text-center mb-4 pb-4">
             <p>Check out what the experts have to say in <Link to="/methodology">the Reports</Link>.</p>
           </Col>
         </Row>
@@ -79,17 +83,17 @@ const IndexPage = () => {
 
         <Row className="justify-content-md-center mb-5">
           <Col xs="12" md="4">
-            <Link to="">
+            <Link to="" aria-label="Read more about Risk Averse Culture">
               <img src="https://placehold.it/400x300" className="img-fluid mb-4" alt=""/>
             </Link>
           </Col>
           <Col xs="12" md="4">
-            <Link to="">
+            <Link to="" aria-label="Read more about Socioeconomic factors">
               <img src="https://placehold.it/400x300" className="img-fluid mb-4" alt=""/>
             </Link>
           </Col>
           <Col xs="12" md="4">
-            <Link to="">
+            <Link to="" aria-label="Read more about Insufficient Resources">
               <img src="https://placehold.it/400x300" className="img-fluid mb-4" alt=""/>
             </Link>
           </Col>
