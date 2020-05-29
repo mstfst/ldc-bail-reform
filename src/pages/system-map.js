@@ -5,7 +5,7 @@ import Head from "../components/head"
 import "./system-map.scss"
 // import {Link, graphql, useStaticQuery} from "gatsby"
 import { Container } from "react-bootstrap"
-import * as D3 from "D3"
+import * as D3 from "d3"
 
 class SystemMapPage extends Component {
   scroller
