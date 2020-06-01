@@ -4,7 +4,7 @@ import Layout from "../components/layout"
 import Head from "../components/head"
 import "./system-map.scss"
 // import {Link, graphql, useStaticQuery} from "gatsby"
-import { Container } from "react-bootstrap"
+import { Button, Container, Modal } from "react-bootstrap"
 import * as D3 from "d3"
 import svgSystemMap from "../../static/assets/svg/SM_mag31.svg"
 
@@ -12,6 +12,18 @@ class SystemMapPage extends Component {
   scroller
   steps
   systemMap
+
+  state = {
+    show: true,
+  }
+
+  setShow = ({ isVisible }) => {
+    let show = isVisible
+    this.setState({ show })
+  }
+
+  handleClose = () => this.setShow(false)
+  handleShow = () => this.setShow(true)
 
   handleScrollStepEnter = ({ element, index, direction }) => {
     console.log("enter")
@@ -49,7 +61,6 @@ class SystemMapPage extends Component {
   }
 
   componentDidMount() {
-
     console.log(svgSystemMap)
 
     // Storing handy d3 selections
@@ -83,7 +94,7 @@ class SystemMapPage extends Component {
 
     // Loading the Systemp Map svg
     // D3.xml("assets/svg/SM_mag31.svg").then(function (smSvg) {
-      D3.xml(svgSystemMap).then(function (smSvg) {
+    D3.xml(svgSystemMap).then(function (smSvg) {
       const viewBoxWidth = 1400 // svg container width
       const viewBoxHeight = 700 // svg container height. Needs to be the same as height for svg-wrapper specified in SCSS
 
@@ -104,26 +115,33 @@ class SystemMapPage extends Component {
       D3.select("#zaps").style("opacity", 0)
       D3.select("#cogs").style("opacity", 0)
 
-      let style = window.getComputedStyle(D3.select(".mt-4.container").node()).marginLeft
+      let style = window.getComputedStyle(D3.select(".mt-4.container").node())
+        .marginLeft
       console.log(style)
 
-      // console.log(D3.select(".mt-4.container").node())
-      D3.select("#zaps")
-        .selectAll("rect")
+      D3.select("#cogs")
+        .selectAll("circle")
         .on("click", function (d, i, n) {
-          console.log(d)
-          console.log(i)
-          console.log(n)
-          console.log(D3.event.pageX)
-          console.log(D3.event.pageY)
-          D3.select("#tooltip-div")
-            .style("left", D3.event.pageX -150 + "px")
-            .style("top", D3.event.pageY - 28 + "px")
-            .style("opacity", "1")
-            .style("pointer-events", "auto")
-
-          // D3.select("body").style("overflow", "hidden")
+          console.log("test")
         })
+
+      // console.log(D3.select(".mt-4.container").node())
+      // D3.select("#zaps")
+      //   .selectAll("rect")
+      //   .on("click", function (d, i, n) {
+      //     console.log(d)
+      //     console.log(i)
+      //     console.log(n)
+      //     console.log(D3.event.pageX)
+      //     console.log(D3.event.pageY)
+      //     D3.select("#tooltip-div")
+      //       .style("left", D3.event.pageX + "px")
+      //       .style("top", D3.event.pageY + "px")
+      //       .style("opacity", "1")
+      //       .style("pointer-events", "auto")
+
+      //     // D3.select("body").style("overflow", "hidden")
+      //   })
     })
   }
 
@@ -140,7 +158,7 @@ class SystemMapPage extends Component {
           <p>D3 will load here.</p>
 
           <div id="system-map">
-          <div id="tooltip-wrapper">
+            <div id="tooltip-wrapper">
               <div id="tooltip-div">
                 <p>Tooltip</p>
                 <button id="closeTooltip">X</button>
@@ -153,9 +171,26 @@ class SystemMapPage extends Component {
               <div className="step"></div>
               <div className="step"></div>
             </div>
-            
           </div>
         </Container>
+        <Modal
+          show={this.state.show}
+          onHide={this.handleClose}
+          animation={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={this.handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Layout>
     )
   }
