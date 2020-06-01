@@ -6,6 +6,7 @@ import "./system-map.scss"
 // import {Link, graphql, useStaticQuery} from "gatsby"
 import { Container } from "react-bootstrap"
 import * as D3 from "d3"
+import svgSystemMap from "../../static/assets/svg/SM_mag31.svg"
 
 class SystemMapPage extends Component {
   scroller
@@ -48,6 +49,9 @@ class SystemMapPage extends Component {
   }
 
   componentDidMount() {
+
+    console.log(svgSystemMap)
+
     // Storing handy d3 selections
     this.systemMap = D3.select("#system-map")
     this.steps = D3.select("#step-wrapper").selectAll(".step")
@@ -78,12 +82,14 @@ class SystemMapPage extends Component {
     // window.addEventListener("resize", this.handleResize);
 
     // Loading the Systemp Map svg
-    D3.xml("assets/svg/SM_mag31.svg").then(function (smSvg) {
+    // D3.xml("assets/svg/SM_mag31.svg").then(function (smSvg) {
+      D3.xml(svgSystemMap).then(function (smSvg) {
       const viewBoxWidth = 1400 // svg container width
       const viewBoxHeight = 700 // svg container height. Needs to be the same as height for svg-wrapper specified in SCSS
 
       // Storing a selection of the root node for the imported SVG
       let svgMap = D3.select(smSvg).select("svg").node()
+      console.log(svgMap)
 
       // Appending the imported SVG to svg-wrapper
       let mainSvg = D3.select("#svg-wrapper").node().appendChild(svgMap)
