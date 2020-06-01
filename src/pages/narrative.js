@@ -5,6 +5,8 @@ import Layout from "../components/layout"
 import Head from '../components/head';
 import NarrativeComponent from "../components/narrative-body"
 
+import * as D3 from 'd3';
+
 class NarrativePage extends Component {
 
 
