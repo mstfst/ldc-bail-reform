@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Layout from "./layout"
 import Head from './head';
 import DocumentCard from './document-card';
-import { Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import * as d3 from 'd3';
 
 import { graphql, StaticQuery } from "gatsby"
@@ -11,7 +11,7 @@ import { Row, Col } from "react-bootstrap"
 
 const narration = [
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec risus urna, tincidunt vitae lacus ut, aliquet pellentesque justo. Duis vel ante tincidunt, tincidunt ipsum et, placerat dui. Fusce at sem at ipsum faucibus auctor. Nam sapien nisi, auctor imperdiet suscipit sit amet, dignissim at libero. In in lorem facilisis, egestas enim a, vestibulum lorem. Aenean facilisis leo id justo pharetra volutpat. Vivamus consequat iaculis ultricies. Suspendisse eu tincidunt odio, vitae aliquam velit. Integer tristique metus mi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis rutrum molestie metus vel sodales. Cras a massa non justo bibendum egestas a nec lectus. Fusce faucibus sapien vel nulla dapibus ornare. Nulla fringilla felis non venenatis feugiat. Nam ultricies ornare sapien eu luctus.",
-  "Aenean interdum laoreet massa, a scelerisque metus vestibulum eget. Fusce libero eros, egestas ac gravida at, tincidunt non libero. Sed tempus ullamcorper augue. Nullam accumsan odio risus, ut maximus mi gravida consequat. In blandit nibh vel dui ultricies maximus. Vivamus fermentum et lacus at aliquet. Nullam et neque faucibus, pellentesque erat sed, vulputate nisi. Mauris velit justo, aliquet eget laoreet imperdiet, cursus quis enim. Etiam viverra nunc dapibus felis elementum placerat. In et sollicitudin odio, sagittis tincidunt tortor. In eget quam bibendum, pretium tellus ac, ultricies elit. Integer rutrum, massa ac iaculis facilisis, ante risus auctor elit, nec tempor arcu sem id magna. Sed venenatis augue mauris, fringilla laoreet sapien maximus rutrum. Sed pretium, mauris eget egestas porta, lorem urna accumsan nisi, vitae facilisis tortor odio sit amet tellus. Vivamus varius fermentum libero. Cras nibh lectus, consectetur sit amet luctus ut, fringilla ornare quam.",
+  " \n  ",
   "Nullam vehicula libero vel augue fermentum, ut ultrices felis mollis. Duis a arcu lacus. Donec a urna non metus posuere luctus eget et risus. Praesent diam turpis, finibus eu dolor eu, cursus scelerisque est. Morbi fringilla feugiat urna malesuada ultrices. Cras vitae placerat erat, non finibus diam. Curabitur vitae mi ex. Donec in convallis mauris."
 ]
 
@@ -83,12 +83,12 @@ class NarrativeSection extends Component {
   const { stp, steps, progress, images, narrativeBgImg } = this.state;
 
   const narrativePgStyle = {
-    paddingTop: "100vh",
+    paddingTop: "30vh",
     paddingLeft: "10vw",
     paddingRight: "10vw",
-    fontSize: "30px",
+    paddingBottom: "50vh",
+    fontSize: "1.3em",
     color: "white",
-    height: "200vh"
   }
 
   return (
@@ -99,48 +99,78 @@ class NarrativeSection extends Component {
         margin: "0",
         width: "99vw",
         height: "100vh",
-        backgroundImage: `url("assets/cell-window.jpg")`,
+        backgroundImage: `url("assets/arrest-handcuffs-adobestock.jpg")`,
         backgroundSize: "cover",
         position: "fixed",
         zIndex: "-1",
         opacity: 1
       }}>
       </div>
-      <div style={{
-        top: "0",
-        left: "0",
-        margin: "0",
-        width: "99vw",
-        height: "100vh",
-        backgroundImage: `url("assets/convict-direction.jpg")`,
-        backgroundSize: "cover",
-        position: "fixed",
-        zIndex: "-1",
-        opacity: stp === 1? progress*2-0.2 : stp === 2? 1 : 0
-      }}>
-      </div>
-      <div style={{
-        top: "0",
-        left: "0",
-        margin: "0",
-        width: "99vw",
-        height: "100vh",
-        backgroundImage: `url("assets/jail-cell.jpg")`,
-        position: "fixed",
-        backgroundSize: "cover",
-        zIndex: "-1",
-        opacity:  stp === 2? progress*2-0.2 : 0
-      }}>
-      </div>
-    <div id="narrative-scroll">
-      {narration.map( (page, pageNum) => (
+      <div id="narrative-scroll">
         <div className="narrative-step" style={narrativePgStyle}>
-          {page}
-          {console.log(stp)}
+          <Row>
+            <Col sm={4}>
+              <img src="assets/avatar.png" width="100%"/>
+            </Col>
+            <Col sm={8} style={{position: "relative"}}>
+              <span style={{position: "absolute", bottom: 0, right: 0}}>
+                <h1>Meet Nathan</h1> 
+                <p>Nathan is a 26 year old Indigenous man with a loving family and lots of friends. He struggled in his early twenties with finding his footing, but things were looking up - he was hoping to start taking courses at a local community college. </p>
+                <p>Nathan’s encounter with the bail system began when he was arrested for petty theft. </p>
+              </span>
+            </Col>
+          </Row>
         </div>
-      ))}
-      
-    </div>
+        <div className="narrative-step" style={narrativePgStyle}>
+          <img src="assets/car_small.png" width="60%" style={{marginLeft: "-5vw"}}/>
+          <h1>Arrest</h1>
+          <p>Nathan was on his way home from the grocery store when he was arrested by three police officers. Seeing a few people watching him get arrested, instinctively, he tried to turn away, but was instantly pulled back and swung to the ground, landing on his arm. He groaned. </p>
+          <p>As the officers forced him into the back of a police cruiser, Nathan began worrying. What would happen if he didn’t show up for his shift tomorrow? If his boss learned of his arrest, would he lose his job? How would he contact his family to let them know where he was?</p>
+          <p>Nathan tried to get answers, calling out his questions, but the officers stayed silent.</p>
+        </div>
+        <div className="narrative-step" style={narrativePgStyle}>
+          <Row>
+            <Col sm={4}>
+              <img src="assets/payphone.png" width="100%"/>
+            </Col>
+            <Col sm={8} style={{position: "relative"}}>
+              <span style={{position: "absolute", bottom: "10vh", right: 0}}>
+                <h1>The Police Station</h1> 
+                <p>Once at the police station, Nathan’s phone and wallet were taken away. He asked to call his family because he knows that they’d be worried sick, but the officers said no. He’d only be allowed to call a lawyer.</p>
+                <p>Nathan didn’t know any lawyers, so the police gave him an option to call duty counsel. The duty counsel told him curtly to not answer any question from the police. Nathan had a lot more questions, but the duty counsel said he had to go. Nathan gripped the phone tightly.</p>
+              </span>
+            </Col>
+          </Row>
+        </div>
+        <div className="narrative-step" style={narrativePgStyle}>    
+          <h1>The Police Station</h1> 
+          <p>After the phone call, Nathan found himself in a bare cell. It was bare, with no furniture or even a blanket. He sat down, and the cold floor gave him shivers. As the shock of his arrest faded away, he felt hungry, and realized that he hadn’t had anything to eat or drink in hours. </p>
+          <div style={{display:"flex", justifyContent:"center"}}>
+            <Button size="lg" style={{margin:"10px"}}>Speak Up</Button>
+            <Button size="lg" style={{margin:"10px"}}>Wait</Button>
+          </div>
+        </div>
+        <div className="narrative-step" style={narrativePgStyle}>    
+          <Row>
+            <Col sm={4}>
+              <img src="assets/calendar.png" width="100%"/>
+            </Col>
+            <Col sm={8} style={{position: "relative"}}>
+              <span style={{position: "absolute", bottom: "10vh", right: 0}}>
+                <h1>The Court</h1> 
+                <p>The next day Nathan was shoved into a police car and taken to the courthouse, with no idea as to what might happen there. After getting pat-down searched at a screening area, he was taken into a filthy holding cell. There were stains on the floor, and the air stank. No toilet paper - no dry ones, anyway. At one point, an officer dropped off two cereal bars and a juice box. Nathan wolfed them down. Those were the first things he had eaten in more than a day. </p>
+                <p>Nathan didn’t end up seeing a judge - his bail hearing was delayed until further notice.</p>
+              </span>
+            </Col>
+          </Row>
+        </div>
+        <div className="narrative-step" style={narrativePgStyle}>    
+          <h1>Conclusion</h1> 
+          <p>In the end, Nathan spent 8 days in pretrial detention before charges against him were withdrawn by the crown.</p>
+          <p>The consequences of Nathan’s time in detention were severe. He lost his job because he couldn’t communicate with his boss while detained. He started experiencing trauma from the harsh conditions at police and court holding cells. </p>
+          <p>Going to college suddenly looked impossible. </p>
+        </div>
+      </div>
     </div>
     
   )
