@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Layout from "./layout"
 import Head from './head';
 import DocumentCard from './document-card';
-import { Container, Button } from 'react-bootstrap';
+import { Container, Button, Modal } from 'react-bootstrap';
 import * as d3 from 'd3';
 
 import { graphql, StaticQuery } from "gatsby"
@@ -23,7 +23,9 @@ class NarrativeSection extends Component {
     steps: [0,1,2],
     backgroundImages: ["assets/cell-window.jpg", "assets/convict-direction.jpg", "assets/jail-cell.jpg"],
     progress: 0,
-    narrativeBgImg: "assets/cell-window.jpg"
+    narrativeBgImg: "assets/cell-window.jpg",
+    modal1State: false,
+    modal2state: false
   };
 
   handleScrollStepEnter = ({element, index, direction}) => {
@@ -82,13 +84,18 @@ class NarrativeSection extends Component {
   render () {
   const { stp, steps, progress, images, narrativeBgImg } = this.state;
 
-  const narrativePgStyle = {
-    paddingTop: "30vh",
-    paddingLeft: "10vw",
-    paddingRight: "10vw",
-    paddingBottom: "50vh",
-    fontSize: "1.3em",
-    color: "white",
+
+  const narrativePgStyle = (step) => {
+    console.log(step)
+    return {
+      paddingTop: "30vh",
+      paddingLeft: "10vw",
+      paddingRight: "10vw",
+      paddingBottom: "50vh",
+      fontSize: "1.3em",
+      color: "white",
+      opacity: progress > 0.5? 1.5-progress*2 : progress*2
+    }
   }
 
   return (
@@ -107,7 +114,7 @@ class NarrativeSection extends Component {
       }}>
       </div>
       <div id="narrative-scroll">
-        <div className="narrative-step" style={narrativePgStyle}>
+        <div className="narrative-step" style={narrativePgStyle(1)}>
           <Row>
             <Col sm={4}>
               <img src="assets/avatar.png" width="100%"/>
@@ -121,14 +128,14 @@ class NarrativeSection extends Component {
             </Col>
           </Row>
         </div>
-        <div className="narrative-step" style={narrativePgStyle}>
+        <div className="narrative-step" style={narrativePgStyle(1)}>
           <img src="assets/car_small.png" width="60%" style={{marginLeft: "-5vw"}}/>
           <h1>Arrest</h1>
           <p>Nathan was on his way home from the grocery store when he was arrested by three police officers. Seeing a few people watching him get arrested, instinctively, he tried to turn away, but was instantly pulled back and swung to the ground, landing on his arm. He groaned. </p>
           <p>As the officers forced him into the back of a police cruiser, Nathan began worrying. What would happen if he didn’t show up for his shift tomorrow? If his boss learned of his arrest, would he lose his job? How would he contact his family to let them know where he was?</p>
           <p>Nathan tried to get answers, calling out his questions, but the officers stayed silent.</p>
         </div>
-        <div className="narrative-step" style={narrativePgStyle}>
+        <div className="narrative-step" style={narrativePgStyle(1)}>
           <Row>
             <Col sm={4}>
               <img src="assets/payphone.png" width="100%"/>
@@ -142,7 +149,7 @@ class NarrativeSection extends Component {
             </Col>
           </Row>
         </div>
-        <div className="narrative-step" style={narrativePgStyle}>    
+        <div className="narrative-step" style={narrativePgStyle(1)}>    
           <h1>The Police Station</h1> 
           <p>After the phone call, Nathan found himself in a bare cell. It was bare, with no furniture or even a blanket. He sat down, and the cold floor gave him shivers. As the shock of his arrest faded away, he felt hungry, and realized that he hadn’t had anything to eat or drink in hours. </p>
           <div style={{display:"flex", justifyContent:"center"}}>
@@ -150,7 +157,28 @@ class NarrativeSection extends Component {
             <Button size="lg" style={{margin:"10px"}}>Wait</Button>
           </div>
         </div>
-        <div className="narrative-step" style={narrativePgStyle}>    
+
+        <Modal>
+          <Modal.Header closeButton>
+            <Modal.Title>Speak up about being</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>“Hello? Can I get something to eat here? I’m freezing and hungry!” He called this out repeatedly.</p>
+            <p>Eventually a police officer came by. “We can’t give you anything” he said.</p>
+          </Modal.Body>
+        </Modal>
+
+        <Modal>
+          <Modal.Header closeButton>
+            <Modal.Title>Wait until someone comes and speak to them</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Nathan decided that there’s no point in speaking up when no one is listening. He curled up in the corner of the cell, trying to preserve what little warmth he has.</p>
+            <p>In the 15 or so hours he was at the station, no one came to give him anything. </p>
+          </Modal.Body>
+        </Modal>
+
+        <div className="narrative-step" style={narrativePgStyle(1)}>    
           <Row>
             <Col sm={4}>
               <img src="assets/calendar.png" width="100%"/>
@@ -164,7 +192,7 @@ class NarrativeSection extends Component {
             </Col>
           </Row>
         </div>
-        <div className="narrative-step" style={narrativePgStyle}>    
+        <div className="narrative-step" style={narrativePgStyle(1)}>    
           <h1>Conclusion</h1> 
           <p>In the end, Nathan spent 8 days in pretrial detention before charges against him were withdrawn by the crown.</p>
           <p>The consequences of Nathan’s time in detention were severe. He lost his job because he couldn’t communicate with his boss while detained. He started experiencing trauma from the harsh conditions at police and court holding cells. </p>
