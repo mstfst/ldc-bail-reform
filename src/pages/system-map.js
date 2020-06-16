@@ -3,11 +3,12 @@ import "intersection-observer"
 import Layout from "../components/layout"
 import Head from "../components/head"
 import "./system-map.scss"
-// import {Link, graphql, useStaticQuery} from "gatsby"
+import { graphql, StaticQuery } from "gatsby"
 import { Button, Container, Modal } from "react-bootstrap"
 import * as D3 from "d3"
 // import svgSystemMap from "../../static/assets/svg/SM_mag31.svg"
 import svgSystemMap from "../../static/assets/svg/SM_200604.svg"
+// import Img from "gatsby-image"
 
 class SystemMapPage extends Component {
   scroller
@@ -16,6 +17,7 @@ class SystemMapPage extends Component {
   modalX
   modalY
   modalMargin
+  currentImage = ""
 
   state = {
     showModalFixed: false,
@@ -33,8 +35,6 @@ class SystemMapPage extends Component {
 
   handleScrollStepEnter = ({ element, index, direction }) => {
     // console.log("enter")
-
-    
 
     // Handling visibility of "layer" elements based on step number
     if (index === 0) {
@@ -74,6 +74,10 @@ class SystemMapPage extends Component {
   }
 
   componentDidMount() {
+    // TEMPORARY: overriding the Container styling to make it wider
+    // Need to coordinate with rest of the styling
+    D3.selectAll(".mt-4.container").style("max-width", "1300px")
+
     // Storing the global "this" object to later reference it in D3 event functions
     const self = this
 
@@ -112,7 +116,10 @@ class SystemMapPage extends Component {
       const viewBoxHeight = 600 // svg container height. Needs to be the same as height for svg-wrapper specified in SCSS
 
       // Vertically centering the svg when it becomes sticky
-      D3.select("#svg-wrapper").style("top", d => `${(window.innerHeight - 600)/2}px`)
+      D3.select("#svg-wrapper").style(
+        "top",
+        d => `${(window.innerHeight - 600) / 2}px`
+      )
 
       // Storing a selection of the root node for the imported SVG
       let svgMap = D3.select(smSvg).select("svg").node()
@@ -124,8 +131,8 @@ class SystemMapPage extends Component {
         .attr("width", "100%")
         .attr("height", "100%")
         .attr("viewBox", "0 0 " + viewBoxWidth + " " + viewBoxHeight)
-        .selectAll("title").remove()
-
+        .selectAll("title")
+        .remove()
 
       // Hiding elements that shouldn't appear right away
       // These will later be shown based on scrollama triggers
@@ -142,6 +149,7 @@ class SystemMapPage extends Component {
           self.modalX = "0px"
           self.modalY = "0px"
           self.setState({ showModalFixed: true })
+          self.currentImage = this.id
         })
 
       // Adding event listeners: layer 1 (cogs)
@@ -174,17 +182,18 @@ class SystemMapPage extends Component {
       <Layout>
         <Head title="System Map" />
         <Container className="mt-4">
-          <h1>System Map</h1>
-          <p>D3 will load here.</p>
-
+          <div className="text-center col-md-10">
+            <h1 className="display-1 mb-5">System Map</h1>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
+              commodo at rhoncus, vitae. Consequat, condimentum convallis nisl
+              hac. Et a, sed suscipit egestas fringilla. Eu non tristique
+              facilisi fringilla facilisi arcu urna sociis nibh. Volutpat
+              gravida tincidunt ut venenatis egestas in tellus. Ridiculus
+              commodo vel arcu, facilisis velit, mattis fermentum pellentesque.
+            </p>
+          </div>
           <div id="system-map">
-            <div id="tooltip-wrapper">
-              <div id="tooltip-div">
-                <p>Tooltip</p>
-                <p id="node-name"></p>
-                <button id="closeTooltip">X</button>
-              </div>
-            </div>
             <div id="svg-wrapper"></div>
             <div id="step-wrapper">
               <div className="step"></div>
@@ -200,6 +209,48 @@ class SystemMapPage extends Component {
           animation={false}
           id="modalFixed"
         >
+          <StaticQuery
+            query={graphql`
+              query {
+                allContentfulSystemMapStageDetail {
+                  edges {
+                    node {
+                      stageId
+                      title
+                      stageContent {
+                        json
+                      }
+                      stageImage {
+                        title
+                        fluid(maxHeight: 400, maxWidth: 200) {
+                          src
+                        }
+                      }
+                      stageFootnote
+                    }
+                  }
+                }
+              }
+            `}
+            render={data => (
+              <div className="mr-1 mr-md-5">
+                {data.allContentfulSystemMapStageDetail.edges.map(edge => (
+                  edge.node.stageId === this.currentImage &&
+                  <div>
+                    <div className="modal-header">
+                      <p className="modal-title h4">{edge.node.title}</p>
+                    </div>
+                    <div>
+                      <img src={edge.node.stageImage.fluid.src} />
+                    </div>
+                    <div>
+                      <p>{edge.node.stageFootnote}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          />
           <Modal.Header closeButton>
             <Modal.Title>Fixed Modal</Modal.Title>
           </Modal.Header>
