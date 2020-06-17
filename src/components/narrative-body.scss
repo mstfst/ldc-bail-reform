@@ -1,0 +1,33 @@
+.narrative-step {
+    padding-top: 30vh;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding-bottom: 50vh;
+    font-size: 1.3em;
+    color: white,
+}
+
+.narrative-background {
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 99vw;
+    height: 100vh;
+    background-image: url("../assets/nathan_bg.jpg");
+    background-size: cover;
+    position: fixed;
+    z-index: -1;
+    opacity: 1;
+}
+
+.justify-content-md-center{
+    align-items: center;
+}
+
+.quote {
+    font-style: italic;
+}
+
+.narrative-modal-title {
+    color: orangered;
+}
