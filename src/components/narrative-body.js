@@ -7,6 +7,7 @@ import * as d3 from 'd3';
 
 import { graphql, StaticQuery } from "gatsby"
 import { Row, Col } from "react-bootstrap"
+import "./narrative-body.scss"
 
 
 const narration = [
@@ -200,7 +201,6 @@ class NarrativeSection extends Component {
         </div>
       </div>
     </div>
-    
   )
 }
 }
