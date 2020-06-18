@@ -12,8 +12,7 @@
     left: 0;
     margin: 0;
     width: 99vw;
-    height: 100vh;
-    background-image: url("../assets/nathan_bg.jpg");
+    height: 100vh;    
     background-size: cover;
     position: fixed;
     z-index: -1;
@@ -30,4 +29,45 @@
 
 .narrative-modal-title {
     color: orangered;
+}
+
+h1, h2 {
+    color: white;
+}
+
+.phone-card {
+    color: black;
+}
+
+.kara-card {
+    margin: 15px;
+    color: black;
+    border-radius: 0;
+}
+
+.kara-card h1 {
+    color: orangered;
+}
+
+.kara-card-content {
+    padding: 10px;
+}
+
+#george-conditions ol {
+    list-style: none;
+    counter-reset: my-awesome-counter;
+}
+
+#george-conditions li:not(.x){
+    counter-increment: my-awesome-counter;
+}
+#george-conditions ol li::before{
+    content: counter(my-awesome-counter) "  ";
+    color: pink;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#george-conditions ul li::before{
+    content: none;
 }
