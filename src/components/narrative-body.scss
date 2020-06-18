@@ -27,7 +27,7 @@
     font-style: italic;
 }
 
-.narrative-modal-title {
+.narrative-modal-title  h1{
     color: orangered;
 }
 
@@ -35,8 +35,20 @@ h1, h2 {
     color: white;
 }
 
-.phone-card {
+#nathan-wait-modal{
+    min-width: 590px;
+}
+
+.kara-phone-card{
+    margin: 10px;
+    border-radius: 0;
+    margin-bottom: 70px;
+}
+
+.kara-phone-card-content {
     color: black;
+    padding: 5px;
+    font-size:0.75em;
 }
 
 .kara-card {
@@ -63,9 +75,11 @@ h1, h2 {
 }
 #george-conditions ol li::before{
     content: counter(my-awesome-counter) "  ";
-    color: pink;
-    font-size: 1.5em;
+    color: #F08FDB;
+    font-family: Martin, "Arial Condensed Black", Impact, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 2em;
     font-weight: bold;
+    transform: rotate(30deg);
 }
 
 #george-conditions ul li::before{
@@ -75,4 +89,34 @@ h1, h2 {
 #george-police-check {
     align-items: flex-end;
     justify-content: center;
+}
+
+#nathan-police-station{
+    align-items: flex-end;
+}
+
+.narrative-button-left {
+    margin: 10px;
+    background-color: #F08FDB;
+    border-radius: 0;
+    border-color: white;
+    transform: rotate(3deg);
+    font-family: Martin, "Arial Condensed Black", Impact, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.narrative-button-right {
+    margin: 10px;
+    background-color: #F08FDB;
+    border-radius: 0;
+    border-color: white;
+    transform: rotate(-4deg);
+    font-family: Martin, "Arial Condensed Black", Impact, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    padding-left: 50px;
+    padding-right: 50px;
 }
