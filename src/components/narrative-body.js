@@ -174,7 +174,7 @@ class NarrativeSection extends Component {
             </Row>
           </div>
           <div className="narrative-step">
-            <Row className="justify-content-md-center">
+            <Row className="justify-content-md-center" id="nathan-police-station">
               <Col md={4}>
                 <img src="assets/payphone_w.png" width="100%" />
               </Col>
@@ -193,17 +193,20 @@ class NarrativeSection extends Component {
                 <h1>The Police Station</h1>
                 <p>After the phone call, Nathan found himself in a bare cell. It was bare, with no furniture or even a blanket. He sat down, and the cold floor gave him shivers. As the shock of his arrest faded away, he felt hungry, and realized that he hadn’t had anything to eat or drink in hours. </p>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <Button size="lg" style={{ margin: "10px" }} onClick={this.handleNathanModal1Show}>Speak Up</Button>
-                  <Button size="lg" style={{ margin: "10px" }} onClick={this.handleNathanModal2Show}>Wait</Button>
+                  <Button size="lg" onClick={this.handleNathanModal1Show} className="narrative-button-left">Speak Up</Button>
+                  <Button size="lg" onClick={this.handleNathanModal2Show} className="narrative-button-right">Wait</Button>
                 </div>
               </Col>
             </Row>
 
           </div>
-
           <Modal show={nathanModal1} onHide={this.handleModalClose} animation={false} >
             <Modal.Header closeButton>
-              <Modal.Title className="narrative-modal-title">Speak up about being hungry</Modal.Title>
+              <Modal.Title className="narrative-modal-title">
+                <h1>
+                  Speak up about being hungry
+                </h1>
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Row>
@@ -219,9 +222,13 @@ class NarrativeSection extends Component {
             </Modal.Body>
           </Modal>
 
-          <Modal show={nathanModal2} onHide={this.handleModalClose} animation={false}>
+          <Modal show={nathanModal2} onHide={this.handleModalClose} animation={false} id="nathan-wait-modal">
             <Modal.Header closeButton>
-              <Modal.Title className="narrative-modal-title">Wait until someone comes and speak to them</Modal.Title>
+              <Modal.Title className="narrative-modal-title">
+                <h1>
+                  Wait until someone comes and speak to them  
+                </h1>
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Row>
@@ -282,23 +289,47 @@ class NarrativeSection extends Component {
           <div className="narrative-step">
             <Row className="justify-content-md-center" md={4}>
               <Col>
-                <Card>
-                  <Card.Body className="phone-card">
-                    This is some text within a card body.
+                <Card className="kara-phone-card">
+                  <Card.Body className="kara-phone-card-content">
+                    <Row className="justify-content-md-center">
+                      <Col md={5}>
+                        <img src="./assets/avatar.svg" width="100%" />
+                      </Col>
+                      <Col md={7}>
+                        <p>Jason M.</p>
+                        <p>905-225-0101</p>
+                      </Col>
+                    </Row>
                   </Card.Body>
                 </Card>
               </Col>
               <Col>
-                <Card>
-                  <Card.Body className="phone-card">
-                    This is some text within a card body.
+                <Card className="kara-phone-card">
+                  <Card.Body className="kara-phone-card-content">
+                    <Row className="justify-content-md-center">
+                      <Col md={5}>
+                        <img src="./assets/avatar.svg" width="100%" />
+                      </Col>
+                      <Col md={7}>
+                        <p>Mark R.</p>
+                        <p>418-543-0901</p>
+                      </Col>
+                    </Row>
                   </Card.Body>
                 </Card>
               </Col>
               <Col>
-                <Card>
-                  <Card.Body className="phone-card">
-                    This is some text within a card body.
+                <Card className="kara-phone-card">
+                  <Card.Body className="kara-phone-card-content">
+                    <Row className="justify-content-md-center">
+                      <Col md={5}>
+                        <img src="./assets/avatar.svg" width="100%" />
+                      </Col>
+                      <Col md={7}>
+                        <p>Amy Z.</p>
+                        <p>905-555-0123</p>
+                      </Col>
+                    </Row>
                   </Card.Body>
                 </Card>
               </Col>
@@ -318,8 +349,8 @@ class NarrativeSection extends Component {
                 <h1>Family or money?</h1>
                 <p>Amy was a friend with a landline and an easy-to-remember number. Through her, Kara got in touch with her mom, but not before a full week had gone by. She considered purchasing her mom landline so that she could talk without relying  on Amy. But her bills were piling up. </p>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <Button size="lg" style={{ margin: "10px" }} onClick={this.handleKaraModal1Show}>Buy Landline</Button>
-                  <Button size="lg" style={{ margin: "10px" }} onClick={this.handleKaraModal2Show}>Call Amy</Button>
+                  <Button size="lg" onClick={this.handleKaraModal1Show} className="narrative-button-left">Buy Landline</Button>
+                  <Button size="lg" onClick={this.handleKaraModal2Show} className="narrative-button-right">Call Amy</Button>
                 </div>
               </Col>
             </Row>
@@ -328,7 +359,11 @@ class NarrativeSection extends Component {
 
           <Modal show={karaModal1} onHide={this.handleModalClose} animation={false}>
             <Modal.Header closeButton>
-              <Modal.Title className="narrative-modal-title">Buy a landline duty</Modal.Title>
+              <Modal.Title className="narrative-modal-title">
+                <h1>
+                  Buy a landline duty
+                </h1>
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Row>
@@ -344,7 +379,11 @@ class NarrativeSection extends Component {
 
           <Modal show={karaModal2} onHide={this.handleModalClose} animation={false}>
             <Modal.Header closeButton>
-              <Modal.Title className="narrative-modal-title">Stick with calling Amy</Modal.Title>
+              <Modal.Title className="narrative-modal-title">
+                <h1>
+                Stick with calling Amy
+                </h1>
+              </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Row>
@@ -523,16 +562,16 @@ class NarrativeSection extends Component {
           </div>
 
           <div className="narrative-step">
-            <Row>
-              <Col>
+            <Row className="justify-content-md-center">
+              <Col md={6}>
                 <h1>Working while on bail</h1>
                 <p>A few weeks after George was released, on a steamy Friday afternoon at the end of his shift, a worker didn’t show up for her shift. George’s boss then threatened that he’d fire George unless George worked an extra three hours after his shift to cover for the worker. </p>
                 <p>If George lost his job, it would be extremely hard for him to get hired somewhere else due to his involvement with the justice system. But he also knew that he would get in trouble if Anita didn’t know about or agreed to him working extra.</p>
               </Col>
             </Row>
             <Row className="justify-content-md-center">
-              <Button size="lg" style={{ margin: "10px" }} onClick={this.handleKaraModal1Show}>Buy Landline</Button>
-              <Button size="lg" style={{ margin: "10px" }} onClick={this.handleKaraModal2Show}>Call Amy</Button>
+              <Button size="lg" onClick={this.handleKaraModal1Show} className="narrative-button-left">Work</Button>
+              <Button size="lg" onClick={this.handleKaraModal2Show} className="narrative-button-right">Go Home</Button>
             </Row>
           </div>
 
@@ -554,12 +593,12 @@ class NarrativeSection extends Component {
           </div>
 
           <div className="narrative-step">
-            <Row>
-              <Col>
+            <Row className="justify-content-md-center">
+              <Col md={7}>
                 <h1>What happened next</h1>
                 <p>
-                George was stunned when he came home to a police car and two police officers waiting at his door. He was arrested again for breaking bail conditions and now had more charges than before.</p> 
-<p>Breaking bail conditions is an Administration of Justice offense extremely difficult to get bail for. As a result, George planned to plead guilty for failing to comply just so he could have better access to mental health care programs as a sentenced prisoner.
+                  George was stunned when he came home to a police car and two police officers waiting at his door. He was arrested again for breaking bail conditions and now had more charges than before.</p>
+                <p>Breaking bail conditions is an Administration of Justice offense extremely difficult to get bail for. As a result, George planned to plead guilty for failing to comply just so he could have better access to mental health care programs as a sentenced prisoner.
                 </p>
               </Col>
             </Row>
