@@ -522,6 +522,49 @@ class NarrativeSection extends Component {
             </Row>
           </div>
 
+          <div className="narrative-step">
+            <Row>
+              <Col>
+                <h1>Working while on bail</h1>
+                <p>A few weeks after George was released, on a steamy Friday afternoon at the end of his shift, a worker didn’t show up for her shift. George’s boss then threatened that he’d fire George unless George worked an extra three hours after his shift to cover for the worker. </p>
+                <p>If George lost his job, it would be extremely hard for him to get hired somewhere else due to his involvement with the justice system. But he also knew that he would get in trouble if Anita didn’t know about or agreed to him working extra.</p>
+              </Col>
+            </Row>
+            <Row className="justify-content-md-center">
+              <Button size="lg" style={{ margin: "10px" }} onClick={this.handleKaraModal1Show}>Buy Landline</Button>
+              <Button size="lg" style={{ margin: "10px" }} onClick={this.handleKaraModal2Show}>Call Amy</Button>
+            </Row>
+          </div>
+
+          <div className="narrative-step">
+            <Row className="justify-content-md-center" id="george-police-check">
+              <Col md={2}>
+                <img src="./assets/buzzer.png" width="100%" />
+              </Col>
+              <Col md={5}>
+                <h1>Police check</h1>
+                <p>
+                  Having agreed to stay at work, George tried to reach his surety, but he couldn’t get an internet connection. The customers were waiting. He put his phone away.
+                </p>
+                <p>
+                  When the police did their check knock on George’s door to make sure he was at home, there was no answer.
+                </p>
+              </Col>
+            </Row>
+          </div>
+
+          <div className="narrative-step">
+            <Row>
+              <Col>
+                <h1>What happened next</h1>
+                <p>
+                George was stunned when he came home to a police car and two police officers waiting at his door. He was arrested again for breaking bail conditions and now had more charges than before.</p> 
+<p>Breaking bail conditions is an Administration of Justice offense extremely difficult to get bail for. As a result, George planned to plead guilty for failing to comply just so he could have better access to mental health care programs as a sentenced prisoner.
+                </p>
+              </Col>
+            </Row>
+          </div>
+
         </div>
       </div>
     )
