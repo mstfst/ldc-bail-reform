@@ -4,7 +4,7 @@ import Layout from "../components/layout"
 import Head from "../components/head"
 import "./system-map.scss"
 import { graphql, StaticQuery } from "gatsby"
-import { Button, Container, Modal } from "react-bootstrap"
+import { Button, Card, Col, Container, Modal, Row } from "react-bootstrap"
 import * as D3 from "d3"
 // import svgSystemMap from "../../static/assets/svg/SM_mag31.svg"
 import svgSystemMap from "../../static/assets/svg/SM_200604.svg"
@@ -41,18 +41,23 @@ class SystemMapPage extends Component {
       D3.select("#cogs").style("display", "none")
       D3.select("#zaps").style("display", "none")
       D3.select("#base").selectAll("image").style("pointer-events", "auto")
+      D3.select("#layer-prompt").text("Layer 0")
+      D3.select("#sm-legend").style("display", "block")
     }
 
     if (index === 1) {
       D3.select("#cogs").style("display", "block")
       D3.select("#zaps").style("display", "none")
       D3.select("#base").selectAll("image").style("pointer-events", "none")
+      D3.select("#layer-prompt").text("Layer 1")
+      D3.select("#sm-legend").style("display", "block")
     }
 
     if (index === 2) {
       D3.select("#cogs").style("display", "none")
       D3.select("#zaps").style("display", "block")
       D3.select("#base").selectAll("image").style("pointer-events", "none")
+      D3.select("#layer-prompt").text("Layer 2")
     }
   }
 
@@ -182,34 +187,108 @@ class SystemMapPage extends Component {
       <Layout>
         <Head title="System Map" />
         <Container className="mt-4">
-          <div className="text-center col-md-10">
-            <h1 className="display-1 mb-5">System Map</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
-              commodo at rhoncus, vitae. Consequat, condimentum convallis nisl
-              hac. Et a, sed suscipit egestas fringilla. Eu non tristique
-              facilisi fringilla facilisi arcu urna sociis nibh. Volutpat
-              gravida tincidunt ut venenatis egestas in tellus. Ridiculus
-              commodo vel arcu, facilisis velit, mattis fermentum pellentesque.
-            </p>
-          </div>
-          <div id="system-map">
-            <div id="svg-wrapper"></div>
-            <div id="step-wrapper">
-              <div className="step"></div>
-              <div className="step"></div>
-              <div className="step"></div>
-              <div className="step"></div>
-            </div>
-          </div>
+          <Row>
+            <Col sm={11} md={9} id="main-col">
+              <div className="text-center col-md-10">
+                <h1 className="display-1 mb-5">System Map</h1>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
+                  commodo at rhoncus, vitae. Consequat, condimentum convallis
+                  nisl hac. Et a, sed suscipit egestas fringilla. Eu non
+                  tristique facilisi fringilla facilisi arcu urna sociis nibh.
+                  Volutpat gravida tincidunt ut venenatis egestas in tellus.
+                  Ridiculus commodo vel arcu, facilisis velit, mattis fermentum
+                  pellentesque.
+                </p>
+              </div>
+              <div id="characters__title">
+                <p>Meet the characters</p>
+              </div>
+
+              <StaticQuery
+                query={graphql`
+                  query {
+                    allContentfulSystemMapCharacters {
+                      edges {
+                        node {
+                          characterInitial
+                          characterName
+                          characterDescription {
+                            characterDescription
+                          }
+                        }
+                      }
+                    }
+                  }
+                `}
+                render={data => (
+                  <Container id="characters__wrapper">
+                    <Row>
+                      {data.allContentfulSystemMapCharacters.edges.map(edge => (
+                        <Col xs={10} sm={10} md={4} className="mb-5">
+                          <Card>
+                            <Card.Body className="character-card__body">
+                              <div id="character-card__id">
+                                {edge.node.characterInitial}
+                              </div>
+                              <Card.Title>{edge.node.characterName}</Card.Title>
+                              <Card.Text id="character-card__text">
+                                {
+                                  edge.node.characterDescription
+                                    .characterDescription
+                                }
+                              </Card.Text>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      ))}
+                    </Row>
+                    <div id="arrow-down">
+                      <svg
+                        width="53"
+                        height="33"
+                        viewBox="0 0 53 33"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M26.5858 23.7187L0 0V9.28125L26.5858 33L53 9.28125V0L26.5858 23.7187Z"
+                          fill="#E5521D"
+                        />
+                      </svg>
+                    </div>
+                  </Container>
+                )}
+              />
+
+              <div id="system-map">
+                <div id="svg-wrapper"></div>
+                <div id="step-wrapper">
+                  <div className="step"></div>
+                  <div className="step"></div>
+                  <div className="step"></div>
+                  <div className="step"></div>
+                </div>
+              </div>
+            </Col>
+            <Col sm={1} md={3} id="sidebar-col">
+              <div id="sidebar-wrapper">
+                <p id="layer-prompt"></p>
+                <div id="sm-legend">
+                  <p>Legend</p>
+                </div>
+              </div>
+            </Col>
+          </Row>
         </Container>
+
         <Modal
           show={this.state.showModalFixed}
           onHide={this.handleCloseFixed}
           animation={false}
           id="modalFixed"
         >
-          <StaticQuery
+          {/* <StaticQuery
             query={graphql`
               query {
                 allContentfulSystemMapStageDetail {
@@ -235,8 +314,10 @@ class SystemMapPage extends Component {
             render={data => (
               <div className="mr-1 mr-md-5">
                 {data.allContentfulSystemMapStageDetail.edges.map(edge => (
-                  edge.node.stageId === this.currentImage &&
                   <div>
+                    <Modal.Header closeButton>
+                      <Modal.Title>Fixed Modal</Modal.Title>
+                    </Modal.Header>
                     <div className="modal-header">
                       <p className="modal-title h4">{edge.node.title}</p>
                     </div>
@@ -250,10 +331,7 @@ class SystemMapPage extends Component {
                 ))}
               </div>
             )}
-          />
-          <Modal.Header closeButton>
-            <Modal.Title>Fixed Modal</Modal.Title>
-          </Modal.Header>
+          /> */}
           <Modal.Body>For layer 0</Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleCloseFixed}>
