@@ -10,6 +10,8 @@ import * as D3 from "d3"
 import svgSystemMap from "../../static/assets/svg/SM_200604.svg"
 // import Img from "gatsby-image"
 
+import StaticModal from "../components/static-modal"
+
 class SystemMapPage extends Component {
   scroller
   steps
@@ -22,6 +24,7 @@ class SystemMapPage extends Component {
   state = {
     showModalFixed: false,
     showModalMoving: false,
+    staticModalActiveContent: ''
   }
 
   setShow = ({ isVisible }) => {
@@ -151,9 +154,11 @@ class SystemMapPage extends Component {
       D3.select("#base")
         .selectAll("image")
         .on("click", function () {
+          // console.log(this.id);
           self.modalX = "0px"
           self.modalY = "0px"
           self.setState({ showModalFixed: true })
+          self.setState({ staticModalActiveContent: this.id})
           self.currentImage = this.id
         })
 
@@ -211,6 +216,7 @@ class SystemMapPage extends Component {
                     allContentfulSystemMapCharacters {
                       edges {
                         node {
+                          id
                           characterInitial
                           characterName
                           characterDescription {
@@ -225,7 +231,7 @@ class SystemMapPage extends Component {
                   <Container id="characters__wrapper">
                     <Row>
                       {data.allContentfulSystemMapCharacters.edges.map(edge => (
-                        <Col xs={10} sm={10} md={4} className="mb-5">
+                        <Col key={edge.node.id} xs={10} sm={10} md={4} className="mb-5">
                           <Card>
                             <Card.Body className="character-card__body">
                               <div id="character-card__id">
@@ -282,66 +288,12 @@ class SystemMapPage extends Component {
           </Row>
         </Container>
 
-        <Modal
+        <StaticModal
           show={this.state.showModalFixed}
           onHide={this.handleCloseFixed}
-          animation={false}
-          id="modalFixed"
-        >
-          {/* <StaticQuery
-            query={graphql`
-              query {
-                allContentfulSystemMapStageDetail {
-                  edges {
-                    node {
-                      stageId
-                      title
-                      stageContent {
-                        json
-                      }
-                      stageImage {
-                        title
-                        fluid(maxHeight: 400, maxWidth: 200) {
-                          src
-                        }
-                      }
-                      stageFootnote
-                    }
-                  }
-                }
-              }
-            `}
-            render={data => (
-              <div className="mr-1 mr-md-5">
-                {data.allContentfulSystemMapStageDetail.edges.map(edge => (
-                  <div>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Fixed Modal</Modal.Title>
-                    </Modal.Header>
-                    <div className="modal-header">
-                      <p className="modal-title h4">{edge.node.title}</p>
-                    </div>
-                    <div>
-                      <img src={edge.node.stageImage.fluid.src} />
-                    </div>
-                    <div>
-                      <p>{edge.node.stageFootnote}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          /> */}
-          <Modal.Body>For layer 0</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleCloseFixed}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={this.handleCloseFixed}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
+          activeContent={this.state.staticModalActiveContent}
+        /> 
+
         <Modal
           show={this.state.showModalMoving}
           onHide={this.handleClose}
