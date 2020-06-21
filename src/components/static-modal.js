@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal, Button, Row, Col } from 'react-bootstrap'
 import Img from "gatsby-image"
 
 // const StaticModal = ({data}) => {
@@ -21,8 +21,8 @@ const StaticModal = (props) => {
               }
               stageImage {
                 title
-                fluid(maxHeight: 400, maxWidth: 200) {
-                  src
+                fluid(maxHeight: 400, maxWidth: 400) {
+                  ...GatsbyContentfulFluid
                 }
               }
               stageFootnote
@@ -47,7 +47,13 @@ const StaticModal = (props) => {
           <Modal.Title>{ modalContent.node.title }</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <img src={modalContent.node.stageImage.fluid.src} />
+          <Row>
+            <Col md="4">
+              <Img fluid={modalContent.node.stageImage.fluid} />
+            </Col>
+            <Col>
+            </Col>
+          </Row>
         </Modal.Body> 
         <Modal.Footer>
           <Button variant="secondary" onClick={props.onHide}>
