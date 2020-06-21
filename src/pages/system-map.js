@@ -24,7 +24,7 @@ class SystemMapPage extends Component {
   state = {
     showModalFixed: false,
     showModalMoving: false,
-    staticModalActiveContent: ''
+    staticModalActiveContent: "",
   }
 
   setShow = ({ isVisible }) => {
@@ -46,6 +46,7 @@ class SystemMapPage extends Component {
       D3.select("#base").selectAll("image").style("pointer-events", "auto")
       D3.select("#layer-prompt").text("Layer 0")
       D3.select("#sm-legend").style("display", "block")
+      D3.select(".sm-layer__title").text("System map - layer 1")
     }
 
     if (index === 1) {
@@ -54,6 +55,7 @@ class SystemMapPage extends Component {
       D3.select("#base").selectAll("image").style("pointer-events", "none")
       D3.select("#layer-prompt").text("Layer 1")
       D3.select("#sm-legend").style("display", "block")
+      D3.select(".sm-layer__title").text("System map - layer 2")
     }
 
     if (index === 2) {
@@ -61,6 +63,7 @@ class SystemMapPage extends Component {
       D3.select("#zaps").style("display", "block")
       D3.select("#base").selectAll("image").style("pointer-events", "none")
       D3.select("#layer-prompt").text("Layer 2")
+      D3.select(".sm-layer__title").text("System map - layer 3")
     }
   }
 
@@ -132,6 +135,9 @@ class SystemMapPage extends Component {
       // Storing a selection of the root node for the imported SVG
       let svgMap = D3.select(smSvg).select("svg").node()
 
+      // Appending the layer title paragraph
+      D3.select("#svg-wrapper").append("div").append("p").classed("sm-layer__title", "true")
+
       // Appending the imported SVG to svg-wrapper
       D3.select("#svg-wrapper").node().appendChild(svgMap)
 
@@ -158,7 +164,7 @@ class SystemMapPage extends Component {
           self.modalX = "0px"
           self.modalY = "0px"
           self.setState({ showModalFixed: true })
-          self.setState({ staticModalActiveContent: this.id})
+          self.setState({ staticModalActiveContent: this.id })
           self.currentImage = this.id
         })
 
@@ -231,7 +237,13 @@ class SystemMapPage extends Component {
                   <Container id="characters__wrapper">
                     <Row>
                       {data.allContentfulSystemMapCharacters.edges.map(edge => (
-                        <Col key={edge.node.id} xs={10} sm={10} md={4} className="mb-5">
+                        <Col
+                          key={edge.node.id}
+                          xs={10}
+                          sm={10}
+                          md={4}
+                          className="mb-5"
+                        >
                           <Card>
                             <Card.Body className="character-card__body">
                               <div id="character-card__id">
@@ -268,6 +280,9 @@ class SystemMapPage extends Component {
               />
 
               <div id="system-map">
+                {/* <div id="sm-layer__title">
+                  <p></p>
+                </div> */}
                 <div id="svg-wrapper"></div>
                 <div id="step-wrapper">
                   <div className="step"></div>
@@ -292,7 +307,7 @@ class SystemMapPage extends Component {
           show={this.state.showModalFixed}
           onHide={this.handleCloseFixed}
           activeContent={this.state.staticModalActiveContent}
-        /> 
+        />
 
         <Modal
           show={this.state.showModalMoving}
