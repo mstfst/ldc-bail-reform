@@ -2,6 +2,8 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { Modal, Button, Row, Col } from 'react-bootstrap'
 import Img from "gatsby-image"
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+
 
 // const StaticModal = ({data}) => {
 const StaticModal = (props) => {
@@ -33,6 +35,18 @@ const StaticModal = (props) => {
     `
   )
 
+  const options = {
+    renderNode: {
+      "embedded-asset-block": (node) => {
+        const alt = node.data.target.fields.title["en-US"];
+        const url = node.data.target.fields.file["en-US"].url;
+        console.log(node);
+        return <img src={ url } className="img-fluid mb-3" alt={ alt } />;
+      },
+    },
+    renderText: text => text.split('\n').flatMap((text, i) => [i > 0 && <br />, text])
+  }
+
   //based on the prop activeContent, let modalContent = the node with a matching id
   let modalContent = data.allContentfulSystemMapStageDetail.edges.find(obj => obj.node.stageId === props.activeContent);
   
@@ -52,6 +66,7 @@ const StaticModal = (props) => {
               <Img fluid={modalContent.node.stageImage.fluid} />
             </Col>
             <Col>
+            { documentToReactComponents(modalContent.node.stageContent.json, options) }
             </Col>
           </Row>
         </Modal.Body> 
