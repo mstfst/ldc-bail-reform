@@ -56,6 +56,7 @@ const StaticModal = (props) => {
         show={props.show}
         onHide={props.onHide}
         id="modalFixed"
+        size="lg"
       >
         <Modal.Header closeButton>
           <Modal.Title>{ modalContent.node.title }</Modal.Title>
