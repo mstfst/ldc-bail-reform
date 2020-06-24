@@ -1,5 +1,6 @@
 body {
   background-color: #fffdfb;
+  color: #322c2c;
 }
 
 //  .container {
@@ -19,7 +20,7 @@ body {
   display: inline-block;
   background-color: #fffdfb;
   margin-bottom: 200px;
-  width: 100%
+  width: 100%;
 }
 
 #svg-wrapper {
@@ -71,19 +72,24 @@ body {
   pointer-events: none;
 }
 
-.step {
+.step-layer {
   visibility: hidden;
   margin: 0 auto;
   background-color: rgba(221, 124, 124, 0.1);
   pointer-events: none;
 }
 
-.step:last-child {
+.step-layer:last-child {
   margin-bottom: 0;
 }
 
 .sm-layer__title {
-  color: teal;
+  margin: 0px;
+  height: 0px;
+  background: coral;
+  font-family: Martin;
+  font-size: 36px;
+  font-weight: 400;
 }
 
 #tooltip-wrapper {
@@ -100,11 +106,6 @@ body {
   color: white;
 }
 
-// .step.is-active p {
-//   background-color: goldenrod;
-//   color: #3b3b3b;
-// }
-
 .card {
   background: #322c2c;
   color: #fffdfb;
@@ -119,7 +120,7 @@ body {
 }
 
 #characters__title {
-  color: #322c2c;
+  // color: #322c2c;
   text-align: center;
   font-size: 60px;
   font-weight: 500;
@@ -154,7 +155,13 @@ body {
 
 #arrow-down {
   text-align: center;
-margin: 10px 0;
+  margin: 10px 0;
+}
+
+.prompt {
+  color: #e5521d;
+  font-family: Crimson Text;
+  font-size: 1.2rem;
 }
 
 // #main-col {

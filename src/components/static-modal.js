@@ -25,7 +25,7 @@ const StaticModal = props => {
               }
               stageImage {
                 title
-                fluid(maxHeight: 400, maxWidth: 400) {
+                fluid(maxHeight: 600) {
                   ...GatsbyContentfulFluid
                 }
               }
@@ -55,6 +55,9 @@ const StaticModal = props => {
     obj => obj.node.stageId === props.activeContent
   )
 
+  let modalPosition = `${(window.innerHeight - 450) / 2}px`
+  
+
   if (modalContent) {
     return (
       <Modal
@@ -62,6 +65,7 @@ const StaticModal = props => {
         onHide={props.onHide}
         id="modalFixed"
         size="lg"
+        style={{top: modalPosition }}
       >
         <Modal.Header closeButton>
           <Modal.Title>{modalContent.node.title}</Modal.Title>

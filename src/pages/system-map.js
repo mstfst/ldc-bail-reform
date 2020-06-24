@@ -37,7 +37,8 @@ class SystemMapPage extends Component {
   handleCloseFixed = () => this.setState({ showModalFixed: false })
 
   handleScrollStepEnter = ({ element, index, direction }) => {
-    // console.log("enter")
+    console.log(element)
+    console.log(index)
 
     // Handling visibility of "layer" elements based on step number
     if (index === 0) {
@@ -47,6 +48,7 @@ class SystemMapPage extends Component {
       D3.select("#layer-prompt").text("Layer 0")
       D3.select("#sm-legend").style("display", "block")
       D3.select(".sm-layer__title").text("System map - layer 1")
+      D3.select(".prompt").style("display", "none")
     }
 
     if (index === 1) {
@@ -56,6 +58,8 @@ class SystemMapPage extends Component {
       D3.select("#layer-prompt").text("Layer 1")
       D3.select("#sm-legend").style("display", "block")
       D3.select(".sm-layer__title").text("System map - layer 2")
+      D3.select(".prompt").style("display", "block")
+
     }
 
     if (index === 2) {
@@ -79,7 +83,7 @@ class SystemMapPage extends Component {
     // console.log(this.systemMap)
 
     // let stepH = Math.floor(window.innerHeight * 0.75)
-    this.steps.style("height", window.innerHeight * 1.5 + "px")
+    this.layerSteps.style("height", window.innerHeight * 1.5 + "px")
 
     this.scroller.resize()
   }
@@ -94,7 +98,7 @@ class SystemMapPage extends Component {
 
     // Storing a selection of the steps element
     // this.systemMap = D3.select("#system-map")
-    this.steps = D3.select("#step-wrapper").selectAll(".step")
+    this.layerSteps = D3.select("#step-wrapper").selectAll(".step-layer")
 
     // Creating the scroller
     const scrollama = require("scrollama")
@@ -107,7 +111,7 @@ class SystemMapPage extends Component {
     const scrollThreshold = 0.9
     this.scroller
       .setup({
-        step: "#step-wrapper .step",
+        step: ".stepx",
         threshold: scrollThreshold,
         progress: true,
         debug: false,
@@ -136,7 +140,10 @@ class SystemMapPage extends Component {
       let svgMap = D3.select(smSvg).select("svg").node()
 
       // Appending the layer title paragraph
-      D3.select("#svg-wrapper").append("div").append("p").classed("sm-layer__title", "true")
+      D3.select("#svg-wrapper")
+        .append("p")
+        .classed("sm-layer__title", "true")
+        .text("")
 
       // Appending the imported SVG to svg-wrapper
       D3.select("#svg-wrapper").node().appendChild(svgMap)
@@ -212,7 +219,7 @@ class SystemMapPage extends Component {
                   pellentesque.
                 </p>
               </div>
-              <div id="characters__title">
+              <div className="stepx" id="characters__title">
                 <p>Meet the characters</p>
               </div>
 
@@ -285,15 +292,18 @@ class SystemMapPage extends Component {
                 </div> */}
                 <div id="svg-wrapper"></div>
                 <div id="step-wrapper">
-                  <div className="step"></div>
-                  <div className="step"></div>
-                  <div className="step"></div>
-                  <div className="step"></div>
+                  <div className="stepx step-layer"></div>
+                  <div className="stepx step-layer"></div>
+                  <div className="stepx step-layer"></div>
                 </div>
               </div>
             </Col>
             <Col sm={1} md={3} id="sidebar-col">
               <div id="sidebar-wrapper">
+                <p id="prompt-0" className="prompt">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Libero tortor sed erat elit. Nibh sapien ipsum nisi justo.
+                </p>
                 <p id="layer-prompt"></p>
                 <div id="sm-legend">
                   <p>Legend</p>
