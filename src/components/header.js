@@ -1,6 +1,6 @@
 import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
-import { Navbar, Nav, Container} from "react-bootstrap"
+import { Navbar, Nav, Container } from "react-bootstrap"
 // import './header.module.scss'
 // import headerStyles from './header.module.scss';
 
@@ -18,7 +18,10 @@ const Header = () => {
   return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand as={Link} to="/"><h1 className="brand">{ data.site.siteMetadata.title }</h1></Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          <img src="https://placehold.it/30x30" />
+          <h1 className="brand">{ data.site.siteMetadata.title }</h1>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
