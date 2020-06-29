@@ -23,20 +23,23 @@
     align-items: center;
 }
 
-.quote {
-    font-style: italic;
-}
+/* This puts all CSS mods that may have a global impact (due to its name) into a local scope (by selecting the #narrative-scroll parent container) */
+#narrative-scroll {
+    .quote {
+        font-style: italic;
+    }
 
-.narrative-modal-title  h1{
-    color: orangered;
-}
+    .narrative-modal-title  h1{
+        color: orangered;
+    }
 
-h1, h2 {
-    color: white;
-}
+    h1, h2 {
+        color: white;
+    }
 
-#nathan-wait-modal{
-    min-width: 590px;
+    #nathan-wait-modal{
+        min-width: 590px;
+    }
 }
 
 .kara-phone-card{

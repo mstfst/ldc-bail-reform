@@ -8,7 +8,6 @@
 //  */
 
 @import "fonts.scss";
-@import "animations.scss";
 @import "custom.scss";
 @import "bootstrap/scss/_functions.scss";
 @import "bootstrap/scss/_variables.scss";
@@ -48,7 +47,15 @@
 @import "bootstrap/scss/_utilities.scss";
 @import "bootstrap/scss/_print.scss";
 
+@import "animations.scss";
 @import "timeline";
+
+// --- Debug CSS ---
+// nav {
+//   font-family: "Crimson Text";
+// }
+
+// --- End Debug ---
 
 
 // --- BAIL REFORM CUSTOM CSS ---------
