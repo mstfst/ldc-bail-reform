@@ -63,7 +63,7 @@ const StaticModal = props => {
       <Modal
         show={props.show}
         onHide={props.onHide}
-        id="modalFixed"
+        id="modalStatic"
         size="lg"
         style={{top: modalPosition }}
       >

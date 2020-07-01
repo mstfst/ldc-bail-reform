@@ -6,11 +6,9 @@ import "./system-map.scss"
 import { graphql, StaticQuery } from "gatsby"
 import { Button, Card, Col, Container, Modal, Row } from "react-bootstrap"
 import * as D3 from "d3"
-// import svgSystemMap from "../../static/assets/svg/SM_mag31.svg"
-import svgSystemMap from "../../static/assets/svg/SM_200604.svg"
-// import Img from "gatsby-image"
-
+import svgSystemMap from "../../static/assets/svg/SM_jun25.svg"
 import StaticModal from "../components/static-modal"
+import MovingModal from "../components/moving-modal"
 
 class SystemMapPage extends Component {
   scroller
@@ -22,60 +20,83 @@ class SystemMapPage extends Component {
   currentImage = ""
 
   state = {
-    showModalFixed: false,
-    showModalMoving: false,
+    showStaticModal: false,
+    showMovingModal: false,
     staticModalActiveContent: "",
+    movingModalActiveContent: "",
   }
 
   setShow = ({ isVisible }) => {
     let show = isVisible
-    this.setState({ showModalMoving: show })
+    this.setState({ showMovingModal: show })
   }
 
-  handleClose = () => this.setShow(false)
-  handleShow = () => this.setShow(true)
-  handleCloseFixed = () => this.setState({ showModalFixed: false })
+  // handleClose = () => this.setShow(false)
+  // handleShow = () => this.setShow(true)
+  handleCloseStatic = () => this.setState({ showStaticModal: false })
+  handleCloseMoving = () => this.setState({ showMovingModal: false })
 
   handleScrollStepEnter = ({ element, index, direction }) => {
     console.log(element)
     console.log(index)
 
     // Handling visibility of "layer" elements based on step number
+    // Step 0: initial state, Meet the Characters
     if (index === 0) {
-      D3.select("#cogs").style("display", "none")
-      D3.select("#zaps").style("display", "none")
-      D3.select("#base").selectAll("image").style("pointer-events", "auto")
-      D3.select("#layer-prompt").text("Layer 0")
-      D3.select("#sm-legend").style("display", "block")
+      D3.select("#prompt-0").style("display", "block")
+      D3.select("#prompt-1").style("display", "none")
+      D3.select("#sm-legend").style("display", "none")
       D3.select(".sm-layer__title").text("System map - layer 1")
-      D3.select(".prompt").style("display", "none")
     }
 
     if (index === 1) {
-      D3.select("#cogs").style("display", "block")
-      D3.select("#zaps").style("display", "none")
-      D3.select("#base").selectAll("image").style("pointer-events", "none")
-      D3.select("#layer-prompt").text("Layer 1")
-      D3.select("#sm-legend").style("display", "block")
-      D3.select(".sm-layer__title").text("System map - layer 2")
-      D3.select(".prompt").style("display", "block")
-
+      D3.select("#prompt-0").style("display", "none")
+      D3.select("#prompt-1").style("display", "none")
+      D3.select("#sm-legend").style("display", "none")
     }
 
     if (index === 2) {
       D3.select("#cogs").style("display", "none")
+      D3.select("#zaps").style("display", "none")
+      D3.select("#base").selectAll("image").style("pointer-events", "auto")
+      D3.select("#prompt-1")
+        .style("display", "block")
+        .text(
+          "Click on the pictures to get details on each stage. Once you’re done, keep scrolling!"
+        )
+      D3.select("#sm-legend").style("display", "block")
+      D3.select(".sm-layer__title").text("System map - layer 1")
+    }
+
+    if (index === 3) {
+      D3.select("#cogs").style("display", "block")
+      D3.select("#zaps").style("display", "none")
+      D3.select("#base").selectAll("image").style("pointer-events", "none")
+      D3.select("#prompt-1").text(
+        "Click on the icons to see what happens at each decision point. Keep scrolling!"
+      )
+      D3.select(".sm-layer__title").text("System map - layer 2")
+    }
+
+    if (index === 4) {
+      D3.select("#cogs").style("display", "none")
       D3.select("#zaps").style("display", "block")
       D3.select("#base").selectAll("image").style("pointer-events", "none")
-      D3.select("#layer-prompt").text("Layer 2")
+      D3.select("#prompt-1").text(
+        "Click on the icons to know more about lorem ipsum dolor."
+      )
       D3.select(".sm-layer__title").text("System map - layer 3")
     }
   }
 
   handleScrollStepExit = ({ element, index, direction }) => {
-    // console.log("exit")
+    if (index === 2 && direction === "up") {
+      D3.select("#prompt-1").style("display", "none")
+      D3.select("#sm-legend").style("display", "none")
+    }
   }
 
-  handleProgress = ({ progress }) => {}
+  // handleProgress = ({ progress }) => {}
 
   handleResize = () => {
     // console.log("resize")
@@ -85,6 +106,9 @@ class SystemMapPage extends Component {
     // let stepH = Math.floor(window.innerHeight * 0.75)
     this.layerSteps.style("height", window.innerHeight * 1.5 + "px")
 
+    D3.select("#sidebar-wrapper")
+      .style("height", window.innerHeight * 0.85 + "px")
+      .style("top", (window.innerHeight * 0.15) / 2 + "px")
     this.scroller.resize()
   }
 
@@ -112,6 +136,7 @@ class SystemMapPage extends Component {
     this.scroller
       .setup({
         step: ".stepx",
+        offset: 0.7,
         threshold: scrollThreshold,
         progress: true,
         debug: false,
@@ -143,7 +168,7 @@ class SystemMapPage extends Component {
       D3.select("#svg-wrapper")
         .append("p")
         .classed("sm-layer__title", "true")
-        .text("")
+        .text("System map - layer 1")
 
       // Appending the imported SVG to svg-wrapper
       D3.select("#svg-wrapper").node().appendChild(svgMap)
@@ -167,10 +192,11 @@ class SystemMapPage extends Component {
       D3.select("#base")
         .selectAll("image")
         .on("click", function () {
-          // console.log(this.id);
+          console.log(this.id);
           self.modalX = "0px"
           self.modalY = "0px"
-          self.setState({ showModalFixed: true })
+          self.setState({ showStaticModal: true })
+          self.setState({ showMovingModal: false })
           self.setState({ staticModalActiveContent: this.id })
           self.currentImage = this.id
         })
@@ -181,7 +207,9 @@ class SystemMapPage extends Component {
         .on("click", function () {
           self.modalX = D3.event.clientX + "px"
           self.modalY = D3.event.clientY + "px"
-          self.setState({ showModalMoving: true })
+          self.setState({ showStaticModal: false })
+          self.setState({ showMovingModal: true })
+          self.setState({ movingModalActiveContent: this.id })
         })
 
       // Adding event listeners: layer 2 (zaps)
@@ -191,7 +219,9 @@ class SystemMapPage extends Component {
           // console.log(self)
           self.modalX = D3.event.clientX + "px"
           self.modalY = D3.event.clientY + "px"
-          self.setState({ showModalMoving: true })
+          self.setState({ showStaticModal: false })
+          self.setState({ showMovingModal: true })
+          self.setState({ movingModalActiveContent: this.id })
         })
     })
   }
@@ -219,7 +249,7 @@ class SystemMapPage extends Component {
                   pellentesque.
                 </p>
               </div>
-              <div className="stepx" id="characters__title">
+              <div id="characters__title">
                 <p>Meet the characters</p>
               </div>
 
@@ -241,7 +271,7 @@ class SystemMapPage extends Component {
                   }
                 `}
                 render={data => (
-                  <Container id="characters__wrapper">
+                  <Container id="characters__wrapper" className="stepx">
                     <Row>
                       {data.allContentfulSystemMapCharacters.edges.map(edge => (
                         <Col
@@ -268,7 +298,7 @@ class SystemMapPage extends Component {
                         </Col>
                       ))}
                     </Row>
-                    <div id="arrow-down">
+                    <div id="arrow-down" className="stepx">
                       <svg
                         width="53"
                         height="33"
@@ -304,7 +334,7 @@ class SystemMapPage extends Component {
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Libero tortor sed erat elit. Nibh sapien ipsum nisi justo.
                 </p>
-                <p id="layer-prompt"></p>
+                <p id="prompt-1" className="prompt"></p>
                 <div id="sm-legend">
                   <p>Legend</p>
                 </div>
@@ -314,13 +344,20 @@ class SystemMapPage extends Component {
         </Container>
 
         <StaticModal
-          show={this.state.showModalFixed}
-          onHide={this.handleCloseFixed}
+          show={this.state.showStaticModal}
+          onHide={this.handleCloseStatic}
           activeContent={this.state.staticModalActiveContent}
         />
 
-        <Modal
-          show={this.state.showModalMoving}
+        <MovingModal
+          show={this.state.showMovingModal}
+          onHide={this.handleCloseMoving}
+          activeContent={this.state.movingModalActiveContent}
+          style={{ left: this.modalX, top: this.modalY }}
+        />
+
+        {/* <Modal
+          show={this.state.showMovingModal}
           onHide={this.handleClose}
           animation={false}
           style={{ left: this.modalX, top: this.modalY }}
@@ -338,7 +375,7 @@ class SystemMapPage extends Component {
               Save Changes
             </Button>
           </Modal.Footer>
-        </Modal>
+        </Modal> */}
       </Layout>
     )
   }
