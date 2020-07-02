@@ -4,6 +4,9 @@ import { Navbar, Nav, Container } from "react-bootstrap"
 // import './header.module.scss'
 // import headerStyles from './header.module.scss';
 
+/* Import SVG Components */
+import Logo from "../../static/assets/logo_navbar.svg";
+
 const Header = () => {
   const data = useStaticQuery(graphql`
     query {
@@ -16,11 +19,10 @@ const Header = () => {
   `);
 
   return (
-    <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" fixed="top">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          <img src="https://placehold.it/30x30" />
-          <h1 className="brand">{ data.site.siteMetadata.title }</h1>
+          <Logo />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
