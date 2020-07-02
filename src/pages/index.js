@@ -21,7 +21,7 @@ const IndexPage = () => {
             <Col md="10" className="text-center">
               <img src="https://placehold.it/300x150" className="mb-5" alt=""/>
               <h1 className="display-1 mb-5">According to the Auditor General, 70% of people held in Ontario jails are legally innocent.</h1>
-              <p className="display-2 mb-5">Why?</p>
+              <p className="display-3 mb-5">Why?</p>
               <p>
                 <Button variant="link" className="heartbeat" aria-label="Learn more">
                   <Link to="/#main">
@@ -37,7 +37,7 @@ const IndexPage = () => {
       <Container>
         <Row className="justify-content-md-center mt-4 mb-4" id="main">
           <Col md="10">
-            <p className="display-4"><strong>If we have a bail system that is supposed to release people from jail, with the assurance that they show up for trial, and they aren’t a risk to public safety, then why does this issue exist?</strong></p>
+            <p><strong>If we have a bail system that is supposed to release people from jail, with the assurance that they show up for trial, and they aren’t a risk to public safety, then why does this issue exist?</strong></p>
             <p>We’ve created some resources to try and help you answer this question:</p>
           </Col>
         </Row>
