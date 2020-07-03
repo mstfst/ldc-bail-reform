@@ -8,8 +8,8 @@ import Layout from "../components/layout"
 import Head from '../components/head';
 
 /* Import SVG Components */
-import ChevronDown from "../../static/assets/chevron-down.svg";
-
+import ChevronDown from "../../static/assets/svg/chevron-down.svg";
+import HomeLogo from "../../static/assets/svg/logo_homepage.svg";
 
 const IndexPage = () => {
   return (
@@ -17,9 +17,9 @@ const IndexPage = () => {
       <Head title="Home" />
       <Jumbotron className="mb-5">
         <Container>
-          <Row className="justify-content-center">   
+          <Row className="justify-content-center mt-5">   
             <Col md="10" className="text-center">
-              <img src="https://placehold.it/300x150" className="mb-5" alt=""/>
+              <HomeLogo width={200} fill='#fff' />
               <h1 className="display-1 mb-5">According to the Auditor General, 70% of people held in Ontario jails are legally innocent.</h1>
               <p className="display-3 mb-5">Why?</p>
               <p>
