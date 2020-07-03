@@ -2,10 +2,11 @@
 import React from "react"
 import { Link } from "gatsby"
 import { Row, Col, Jumbotron, Button, Container, Card } from "react-bootstrap"
+import "../styles/index.scss"
 
 /* Import Layout Components */
 import Layout from "../components/layout"
-import Head from '../components/head';
+import Head from "../components/head";
 
 /* Import SVG Components */
 import ChevronDown from "../../static/assets/svg/chevron-down.svg";

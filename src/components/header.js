@@ -27,9 +27,9 @@ const Header = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link as={Link} activeClassName="active" to="/">Introduction</Nav.Link>
-            <Nav.Link as={Link} activeClassName="active" to="/narrative">Narrative</Nav.Link>
+            <Nav.Link as={Link} activeClassName="active" to="/narrative">Stories</Nav.Link>
             <Nav.Link as={Link} activeClassName="active" to="/system-map">System Map</Nav.Link>
+            <Nav.Link as={Link} activeClassName="active" to="/issues">Issues</Nav.Link>
             <Nav.Link as={Link} activeClassName="active" to="/methodology">Methodology</Nav.Link>
             <Nav.Link as={Link} activeClassName="active" to="/cta">CTA</Nav.Link>
           </Nav>

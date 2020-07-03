@@ -7,8 +7,8 @@
 //  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
 //  */
 
-@import "fonts.scss";
-@import "custom.scss";
+@import "fonts";
+@import "custom";
 @import "bootstrap/scss/_functions.scss";
 @import "bootstrap/scss/_variables.scss";
 @import "bootstrap/scss/_mixins.scss";
@@ -47,12 +47,13 @@
 @import "bootstrap/scss/_utilities.scss";
 @import "bootstrap/scss/_print.scss";
 
-@import "animations.scss";
+@import "animations";
 @import "timeline";
 
 // --- Debug CSS ---
-// nav {
-//   font-family: "Crimson Text";
+// .display-1 {
+//   font-size: 5rem;
+//   line-height: 1;
 // }
 
 // --- End Debug ---

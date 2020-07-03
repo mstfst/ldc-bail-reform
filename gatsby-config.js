@@ -109,7 +109,6 @@ module.exports = {
     },
     {
       resolve: "gatsby-plugin-react-svg",
-      }
     },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
