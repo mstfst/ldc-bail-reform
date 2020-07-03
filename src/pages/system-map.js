@@ -8,7 +8,8 @@ import { Button, Card, Col, Container, Modal, Row } from "react-bootstrap"
 import * as D3 from "d3"
 import svgSystemMap from "../../static/assets/svg/SM_jun25.svg"
 import StaticModal from "../components/static-modal"
-import MovingModal from "../components/moving-modal"
+import CogModal from "../components/cog-modal"
+import ZapModal from "../components/zap-modal"
 
 class SystemMapPage extends Component {
   scroller
@@ -21,23 +22,25 @@ class SystemMapPage extends Component {
 
   state = {
     showStaticModal: false,
-    showMovingModal: false,
+    showCogModal: false,
+    showZapModal: false,
     staticModalActiveContent: "",
-    movingModalActiveContent: "",
+    cogModalActiveContent: "",
+    zapModalActiveContent: "",
   }
 
   setShow = ({ isVisible }) => {
     let show = isVisible
-    this.setState({ showMovingModal: show })
+    this.setState({ showCogModal: show })
   }
 
   // handleClose = () => this.setShow(false)
   // handleShow = () => this.setShow(true)
   handleCloseStatic = () => this.setState({ showStaticModal: false })
-  handleCloseMoving = () => this.setState({ showMovingModal: false })
+  handleCloseCog = () => this.setState({ showCogModal: false })
+  handleCloseZap = () => this.setState({ showZapModal: false })
 
   handleScrollStepEnter = ({ element, index, direction }) => {
-    console.log(element)
     console.log(index)
 
     // Handling visibility of "layer" elements based on step number
@@ -143,7 +146,7 @@ class SystemMapPage extends Component {
       })
       .onStepEnter(this.handleScrollStepEnter)
       .onStepExit(this.handleScrollStepExit)
-      .onStepProgress(this.handleProgress)
+    // .onStepProgress(this.handleProgress)
 
     // setup resize event
     window.addEventListener("resize", this.scroller.resize)
@@ -192,11 +195,12 @@ class SystemMapPage extends Component {
       D3.select("#base")
         .selectAll("image")
         .on("click", function () {
-          console.log(this.id);
+          console.log(this.id)
           self.modalX = "0px"
           self.modalY = "0px"
           self.setState({ showStaticModal: true })
-          self.setState({ showMovingModal: false })
+          self.setState({ showCogModal: false })
+          self.setState({ showZapModal: false })
           self.setState({ staticModalActiveContent: this.id })
           self.currentImage = this.id
         })
@@ -204,24 +208,28 @@ class SystemMapPage extends Component {
       // Adding event listeners: layer 1 (cogs)
       D3.select("#cog-click")
         .selectAll("rect")
-        .on("click", function () {
+        .on("click", function (d) {
+          console.log(this.id)
           self.modalX = D3.event.clientX + "px"
           self.modalY = D3.event.clientY + "px"
           self.setState({ showStaticModal: false })
-          self.setState({ showMovingModal: true })
-          self.setState({ movingModalActiveContent: this.id })
+          self.setState({ showCogModal: true })
+          self.setState({ showZapModal: false })
+          self.setState({ cogModalActiveContent: this.id })
         })
 
       // Adding event listeners: layer 2 (zaps)
       D3.select("#zap-click")
         .selectAll("rect")
         .on("click", function () {
+          console.log(this)
           // console.log(self)
           self.modalX = D3.event.clientX + "px"
           self.modalY = D3.event.clientY + "px"
           self.setState({ showStaticModal: false })
-          self.setState({ showMovingModal: true })
-          self.setState({ movingModalActiveContent: this.id })
+          self.setState({ showCogModal: false })
+          self.setState({ showZapModal: true })
+          self.setState({ zapModalActiveContent: this.id })
         })
     })
   }
@@ -349,22 +357,27 @@ class SystemMapPage extends Component {
           activeContent={this.state.staticModalActiveContent}
         />
 
-        <MovingModal
-          show={this.state.showMovingModal}
-          onHide={this.handleCloseMoving}
-          activeContent={this.state.movingModalActiveContent}
-          style={{ left: this.modalX, top: this.modalY }}
+        <CogModal
+          show={this.state.showCogModal}
+          onHide={this.handleCloseCog}
+          activeContent={this.state.cogModalActiveContent}
+        />
+
+        <ZapModal
+          show={this.state.showZapModal}
+          onHide={this.handleCloseZap}
+          activeContent={this.state.zapModalActiveContent}
         />
 
         {/* <Modal
-          show={this.state.showMovingModal}
+          show={this.state.showCogModal}
           onHide={this.handleClose}
           animation={false}
           style={{ left: this.modalX, top: this.modalY }}
-          id="modalMoving"
+          id="modalCog"
         >
           <Modal.Header closeButton>
-            <Modal.Title>Moving Modal</Modal.Title>
+            <Modal.Title>Cog Modal</Modal.Title>
           </Modal.Header>
           <Modal.Body>For layers 1 and 2</Modal.Body>
           <Modal.Footer>

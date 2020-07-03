@@ -38,7 +38,13 @@ body {
   z-index: 0;
   // top: 30px;
   // background-color: coral;
+
+  image, #cog-click, #zap-click {
+    cursor: pointer;
+  }
 }
+
+
 
 #sidebar-wrapper {
   top: 54px;

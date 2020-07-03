@@ -2,14 +2,14 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { Modal, Row, Col } from "react-bootstrap"
 import Img from "gatsby-image"
-import "./moving-modal.scss"
+import "./cog-modal.scss"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
-const MovingModal = props => {
+const CogModal = props => {
   // Change!
   const data = useStaticQuery(
     graphql`
-      query MovingModalQuery {
+      query CogModalQuery {
         allContentfulSystemMapCogDetail {
           edges {
             node {
@@ -61,7 +61,7 @@ const MovingModal = props => {
       <Modal
         show={props.show}
         onHide={props.onHide}
-        id="modal-moving"
+        id="modal-cog"
         size="lg"
         // style={{ top: modalPosition }}
       >
@@ -73,16 +73,13 @@ const MovingModal = props => {
               >
                   <Img fluid={modalContent.node.cogImage.fluid} />
               </div>
-              {/* <Col md="4">
-              <Img fluid={modalContent.node.cogSvg.fluid} />
-            </Col> */}
             </Col>
             <Col md="9">
               <Modal.Title>{modalContent.node.title}</Modal.Title>
             </Col>
             {modalContent.node.characters.map(character => (
               <Col md="1">
-                <div className="moving-modal__id">
+                <div className="cog-modal__id">
                   {character.characterInitial}
                 </div>
               </Col>
@@ -92,14 +89,14 @@ const MovingModal = props => {
         <Modal.Body>
           <Row>
             <Col>
-              <p className="moving-modal__subtitle">What’s being decided:</p>
+              <p className="cog-modal__subtitle">What’s being decided:</p>
               {documentToReactComponents(
                 modalContent.node.cogWhat.json,
                 options
               )}
             </Col>
             <Col>
-              <p className="moving-modal__subtitle">How’s it being decided?</p>
+              <p className="cog-modal__subtitle">How’s it being decided?</p>
               {documentToReactComponents(
                 modalContent.node.cogHow.json,
                 options
@@ -114,4 +111,4 @@ const MovingModal = props => {
   }
 }
 
-export default MovingModal
+export default CogModal

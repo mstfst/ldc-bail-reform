@@ -1,4 +1,4 @@
-#modal-moving {
+#modal-zap {
   .row {
     width: 100%;
   }
@@ -31,7 +31,7 @@
     font-size: 42px;
   }
 
-  .col-md-9 {
+  .col-md-11 {
     padding-left: 0px;
   }
 
@@ -41,7 +41,7 @@
     font-weight: 500;
   }
 
-  .moving-modal__id {
+  .zap-modal__id {
     vertical-align: top;
     display: inline-block;
     margin: 0 0 0 1rem;
@@ -56,7 +56,7 @@
     border-radius: 50%;
   }
 
-  .moving-modal__subtitle {
+  .zap-modal__subtitle {
     font-family: MARTIN;
     font-style: normal;
     font-weight: normal;
@@ -64,5 +64,10 @@
     font-size: 26px;
     line-height: 20px;
     color: #e5521d;
+  }
+
+  .double-column {
+    color: red;
+    column-count: 2;
   }
 }
