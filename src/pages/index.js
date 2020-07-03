@@ -5,23 +5,24 @@ import { Row, Col, Jumbotron, Button, Container, Card } from "react-bootstrap"
 
 /* Import Layout Components */
 import Layout from "../components/layout"
-import Head from '../components/head';
+import Head from "../components/head";
 
 /* Import SVG Components */
-import ChevronDown from "../../static/assets/chevron-down.svg";
-
+import ChevronDown from "../../static/assets/svg/chevron-down.svg";
+import HomeLogo from "../../static/assets/svg/logo_homepage.svg";
 
 const IndexPage = () => {
   return (
     <Layout>
       <Head title="Home" />
-      <Jumbotron className="mb-5">
+      <Jumbotron className="hero mb-5">
         <Container>
           <Row className="justify-content-center">   
             <Col md="10" className="text-center">
-              <img src="https://placehold.it/300x150" className="mb-5" alt=""/>
-              <h1 className="display-1 mb-5">According to the Auditor General, 70% of people held in Ontario jails are legally innocent.</h1>
-              <p className="display-3 mb-5">Why?</p>
+              <HomeLogo width={300} fill='#fff' className="mt-5 mb-5"/>
+              <h1 className="display-2 mt-4">According to the Auditor General</h1>
+              <h1 className="display-1 mb-5">70% of people held in Ontario jails are <span className="hero-em">legally innocent</span></h1>
+              <p className="display-3 pt-4 mb-3">Why?</p>
               <p>
                 <Button variant="link" className="heartbeat" aria-label="Learn more">
                   <Link to="/#main">

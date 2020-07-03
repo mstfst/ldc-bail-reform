@@ -1,11 +1,7 @@
 import React, { Component } from "react"
-import Button from "react-bootstrap/Button"
-import Modal from "react-bootstrap/Modal"
-import Card from "react-bootstrap/Card"
-import "bootstrap/dist/css/bootstrap.min.css"
 
 import { graphql, StaticQuery } from "gatsby"
-import { Row, Col } from "react-bootstrap"
+import { Row, Col, Button, Card, Modal } from "react-bootstrap"
 import Img from "gatsby-image"
 
 import "./narrative-body.scss"

@@ -7,8 +7,8 @@
 //  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
 //  */
 
-@import "fonts.scss";
-@import "custom.scss";
+@import "fonts";
+@import "custom";
 @import "bootstrap/scss/_functions.scss";
 @import "bootstrap/scss/_variables.scss";
 @import "bootstrap/scss/_mixins.scss";
@@ -47,12 +47,13 @@
 @import "bootstrap/scss/_utilities.scss";
 @import "bootstrap/scss/_print.scss";
 
-@import "animations.scss";
+@import "animations";
 @import "timeline";
 
 // --- Debug CSS ---
-// nav {
-//   font-family: "Crimson Text";
+// .display-1 {
+//   font-size: 5rem;
+//   line-height: 1;
 // }
 
 // --- End Debug ---
@@ -68,15 +69,16 @@
 // --- Typography ---------
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-family-headings;
-  color: $primary;
-}
-
-h1 {
-  text-transform: uppercase;
+  color: $rust;
 }
 
 h2 {
   color: $secondary;
+  text-transform: uppercase;
+}
+
+// This is for homepage hero leed & any other major block text
+.display-1, .display-2 {
   text-transform: uppercase;
 }
 
@@ -154,3 +156,33 @@ h2 {
   }
 }
 // --- End Interactions Styling ---------
+
+
+// --- Homepage Styling ---------
+
+// New styling for jumbotron
+.hero {
+  background-color: $light;
+  background-position: center center;
+  background-size: cover;
+  background-image: url("../../static/assets/home_hero.png");
+}
+
+.hero-em {
+  color: $light;
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+
+  &:before {
+    position: absolute;
+    content: '';
+    top: 4px;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: $dark;
+    transform: rotate(2deg);
+    z-index: -1;
+  }
+}
