@@ -2,7 +2,6 @@
 import React from "react"
 import { Link } from "gatsby"
 import { Row, Col, Jumbotron, Button, Container, Card } from "react-bootstrap"
-import "../styles/index.scss"
 
 /* Import Layout Components */
 import Layout from "../components/layout"
@@ -16,13 +15,14 @@ const IndexPage = () => {
   return (
     <Layout>
       <Head title="Home" />
-      <Jumbotron className="mb-5">
+      <Jumbotron className="hero mb-5">
         <Container>
-          <Row className="justify-content-center mt-5">   
+          <Row className="justify-content-center">   
             <Col md="10" className="text-center">
-              <HomeLogo width={200} fill='#fff' />
-              <h1 className="display-1 mb-5">According to the Auditor General, 70% of people held in Ontario jails are legally innocent.</h1>
-              <p className="display-3 mb-5">Why?</p>
+              <HomeLogo width={300} fill='#fff' className="mt-5 mb-5"/>
+              <h1 className="display-2 mt-4">According to the Auditor General</h1>
+              <h1 className="display-1 mb-5">70% of people held in Ontario jails are <span className="hero-em">legally innocent</span></h1>
+              <p className="display-3 pt-4 mb-3">Why?</p>
               <p>
                 <Button variant="link" className="heartbeat" aria-label="Learn more">
                   <Link to="/#main">
