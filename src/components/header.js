@@ -1,8 +1,10 @@
 import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
-import { Navbar, Nav, Container} from "react-bootstrap"
-// import './header.module.scss'
-// import headerStyles from './header.module.scss';
+import { Navbar, Nav, Container } from "react-bootstrap"
+import headerStyles from './header.module.scss';
+
+/* Import SVG Components */
+import Logo from "../../static/assets/svg/logo_navbar.svg";
 
 const Header = () => {
   const data = useStaticQuery(graphql`
@@ -16,17 +18,19 @@ const Header = () => {
   `);
 
   return (
-    <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" fixed="top">
       <Container>
-        <Navbar.Brand as={Link} to="/"><h1 className="brand">{ data.site.siteMetadata.title }</h1></Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          <Logo width={200} />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
+        <Navbar.Collapse id="responsive-navbar-nav" className={headerStyles.nav}>
           <Nav className="ml-auto">
-            <Nav.Link as={Link} activeClassName="active" to="/">Introduction</Nav.Link>
-            <Nav.Link as={Link} activeClassName="active" to="/narrative">Narrative</Nav.Link>
+            <Nav.Link as={Link} activeClassName="active" to="/narrative">Stories</Nav.Link>
             <Nav.Link as={Link} activeClassName="active" to="/system-map">System Map</Nav.Link>
+            <Nav.Link as={Link} activeClassName="active" to="/issues">Issues</Nav.Link>
             <Nav.Link as={Link} activeClassName="active" to="/methodology">Methodology</Nav.Link>
-            <Nav.Link as={Link} activeClassName="active" to="/cta">CTA</Nav.Link>
+            <Nav.Link as={Link} activeClassName="active" to="/get-involved" className={headerStyles.ctaHover}><p className={headerStyles.cta}>Get Involved</p></Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
