@@ -20,7 +20,7 @@ const IndexPage = () => {
           <Row className="justify-content-center">   
             <Col md="10" className="text-center">
               <HomeLogo width={300} fill='#fff' className="mt-5 mb-5"/>
-              <h1 className="display-2 mt-4">According to the Auditor General</h1>
+              <h1 className="display-2 mt-4 text-dark">According to the Auditor General</h1>
               <h1 className="display-1 mb-5">70% of people held in Ontario jails are <span className="hero-em">legally innocent</span></h1>
               <p className="display-3 pt-4 mb-3">Why?</p>
               <p>
