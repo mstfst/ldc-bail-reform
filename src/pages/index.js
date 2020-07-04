@@ -15,7 +15,7 @@ const IndexPage = () => {
   return (
     <Layout>
       <Head title="Home" />
-      <Jumbotron className="hero mb-5">
+      <Jumbotron className="hero mb-1">
         <Container>
           <Row className="justify-content-center">   
             <Col md="10" className="text-center">
@@ -34,9 +34,9 @@ const IndexPage = () => {
         </Row>
         </Container>
       </Jumbotron>
-
-      <Container>
-        <Row className="justify-content-md-center mt-4 mb-4" id="main">
+      
+      <Container id="main" className="pt-2">
+        <Row className="justify-content-md-center mt-5 pt-5 mb-4">
           <Col md="10">
             <p><strong>If we have a bail system that is supposed to release people from jail, with the assurance that they show up for trial, and they aren’t a risk to public safety, then why does this issue exist?</strong></p>
             <p>We’ve created some resources to try and help you answer this question:</p>
