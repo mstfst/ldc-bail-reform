@@ -107,14 +107,11 @@ module.exports = {
         path: `${__dirname}/src/`
       }
     },
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     name: `fonts`,
-    //     path: `${__dirname}/src/fonts/`,
-    //   },
-    // },
+    {
+      resolve: "gatsby-plugin-react-svg",
+    },
     'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-transformer-remark',
       options: {
