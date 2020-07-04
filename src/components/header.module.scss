@@ -1,0 +1,37 @@
+@import "../styles/_custom.scss";
+
+.nav {
+    line-height: 2rem;
+}
+
+.cta {
+    position: relative;
+    z-index: 2;
+    font-size: 1.5rem;
+    font-family: $font-family-headings;
+    text-transform: uppercase;
+    color: $dark;
+    margin-bottom: 0;
+    line-height: 2rem;
+
+    &:before {
+        position: absolute;
+        z-index: -1;
+        content: '';
+        top: 0;
+        left: -5%;
+        height: 2rem;
+        width: 110%;
+        background: $pink;
+        transform: rotate(-2deg);
+        transition: background-color 200ms ease-out;
+    }
+}
+
+.ctaHover {
+    &:hover {
+        .cta:before {
+            background: $rust;
+        }
+    }
+}

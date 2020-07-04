@@ -66,30 +66,23 @@
 //   $colors
 // );
 
-$primary:       #E5521D !default; // Bail Reform Color: Rust
-$secondary:     #322C2C !default; // Bail Reform Color: Off-Black
-// $success:       $green !default;
-// $info:          $cyan !default;
-// $warning:       $yellow !default;
-// $danger:        $red !default;
-// $light:         $gray-100 !default;
-$dark:          #333;
+@import "./colors";
 
-// $theme-colors: () !default;
-// // stylelint-disable-next-line scss/dollar-variable-default
-// $theme-colors: map-merge(
-//   (
-//     "primary":    $primary,
-//     "secondary":  $secondary,
-//     "success":    $success,
-//     "info":       $info,
-//     "warning":    $warning,
-//     "danger":     $danger,
-//     "light":      $light,
-//     "dark":       $dark
-//   ),
-//   $theme-colors
-// );
+$theme-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(
+  (
+    "rust":         $rust,
+    "black":        $black,
+    "pink":         $pink,
+    "blue":         $blue,
+    "yellow":       $yellow,
+    "red":          $red,
+    "light":        $light,
+    "dark":         $dark
+  ),
+  $theme-colors
+);
 
 // // Set a specific jump point for requesting color jumps
 // $theme-color-interval:      8% !default;
@@ -280,38 +273,14 @@ $enable-responsive-font-sizes:                true;
 // // Font, line-height, and color for body text, headings, and more.
 
 // // stylelint-disable value-keyword-case
-// $font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+// $font-family-sans-serif:      "Crimson Text", monospace, "Garamond", "Times New Roman", Times, serif !default;
 // $font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
-$font-family-base:      "Crimson Text", monospace, "Garamond", "Times New Roman", Times, serif !default;
+$font-family-base:      "Crimson Text", monospace, "Garamond", "Times New Roman", Times, serif !important;
 $font-family-headings:         Martin, "Arial Condensed Black", Impact, -apple-system, BlinkMacSystemFont, sans-serif;
 // // stylelint-enable value-keyword-case
 
 
-// BAIL REFORM TYPE OVERRIDES ---------
-
-// Bail Reform Headings
-h1, h2, h3, h4, h5, h6 {
-    font-family: $font-family-headings;
-    color: $primary;
-}
-
-h1 {
-    text-transform: uppercase;
-}
-
-h2 {
-    color: $secondary;
-    text-transform: uppercase;
-}
-
-// Custom font styling for brand in header
-.brand {
-    text-transform: uppercase;
-}
-// ------------------------------------
-
-
-$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+$font-size-base:              1rem !default; // Slightly bigger than the browser default since Crimson Text has a smaller x-height - typically 18px
 // $font-size-lg:                $font-size-base * 1.25 !default;
 // $font-size-sm:                $font-size-base * .875 !default;
 
@@ -324,11 +293,11 @@ $font-size-base:              1rem !default; // Assumes the browser default, typ
 // $font-weight-base:            $font-weight-normal !default;
 // $line-height-base:            1.5 !default;
 
-$h1-font-size:                $font-size-base * 2.5 !default;
-$h2-font-size:                $font-size-base * 2 !default;
-$h3-font-size:                $font-size-base * 1.75 !default;
-$h4-font-size:                $font-size-base * 1.5 !default;
-$h5-font-size:                $font-size-base * 1.25 !default;
+$h1-font-size:                $font-size-base * 4 !default;
+$h2-font-size:                $font-size-base * 3 !default;
+$h3-font-size:                $font-size-base * 2.6 !default;
+$h4-font-size:                $font-size-base * 1.75 !default;
+$h5-font-size:                $font-size-base * 1.3 !default;
 $h6-font-size:                $font-size-base !default;
 
 // $headings-margin-bottom:      $spacer / 2 !default;
@@ -337,16 +306,16 @@ $h6-font-size:                $font-size-base !default;
 $headings-line-height:        0.95 !default;
 // $headings-color:              null !default;
 
-$display1-size:               6.25rem !default;
-$display2-size:               5.5rem !default;
-$display3-size:               4.5rem !default;
-$display4-size:               2.5rem !default;
+$display1-size:               5.5rem !default;
+$display2-size:               3rem !default;
+$display3-size:               2rem !default;
+$display4-size:               1.25rem !default;
 
 // $display1-weight:             300 !default;
 // $display2-weight:             300 !default;
 // $display3-weight:             300 !default;
 // $display4-weight:             300 !default;
-// $display-line-height:         $headings-line-height !default;
+$display-line-height:         $headings-line-height !default;
 
 // $lead-font-size:              $font-size-base * 1.25 !default;
 // $lead-font-weight:            300 !default;
@@ -763,10 +732,10 @@ $display4-size:               2.5rem !default;
 // $navbar-toggler-font-size:          $font-size-lg !default;
 // $navbar-toggler-border-radius:      $btn-border-radius !default;
 
-// $navbar-dark-color:                 rgba($white, .5) !default;
-// $navbar-dark-hover-color:           rgba($white, .75) !default;
-// $navbar-dark-active-color:          $white !default;
-// $navbar-dark-disabled-color:        rgba($white, .25) !default;
+$navbar-dark-color:                 rgba($light, .8) !default;
+$navbar-dark-hover-color:           rgba($light, 1) !default;
+$navbar-dark-active-color:          $light !default;
+$navbar-dark-disabled-color:        rgba($light, .45) !default;
 // $navbar-dark-toggler-icon-bg:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><path stroke='#{$navbar-dark-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
 // $navbar-dark-toggler-border-color:  rgba($white, .1) !default;
 
