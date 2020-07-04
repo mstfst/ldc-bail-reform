@@ -6,8 +6,9 @@
 //  * Copyright 2011-2020 Twitter; Inc.
 //  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
 //  */
-@import "fonts.scss";
-@import "custom.scss";
+
+@import "fonts";
+@import "custom";
 @import "bootstrap/scss/_functions.scss";
 @import "bootstrap/scss/_variables.scss";
 @import "bootstrap/scss/_mixins.scss";
@@ -46,7 +47,68 @@
 @import "bootstrap/scss/_utilities.scss";
 @import "bootstrap/scss/_print.scss";
 
+@import "animations";
 @import "timeline";
+
+// --- Debug CSS ---
+// .display-1 {
+//   font-size: 5rem;
+//   line-height: 1;
+// }
+
+// --- End Debug ---
+
+
+// --- BAIL REFORM CUSTOM CSS ---------
+
+// --- Animations ---------
+.heartbeat {
+  animation: 1.5s heartbeat ease infinite;
+}
+
+// --- Typography ---------
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-headings;
+  color: $rust;
+}
+
+h2 {
+  color: $secondary;
+  text-transform: uppercase;
+}
+
+// This is for homepage hero leed & any other major block text
+.display-1, .display-2 {
+  text-transform: uppercase;
+}
+
+.display-3, .display-4 {
+  line-height: 1.4;
+}
+
+// --- End Typography ---------
+
+// --- Header ---------
+.brand {
+  text-transform: uppercase;
+  font-size: $font-size-base * 2;
+  display: inline-block;
+  margin-left: 10px;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+
+// --- Modifying Layout Components ---------
+.align-contents-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  top: 0;
+}
+
+.min-height-3rem {
+  min-height: 3rem;
+}
   
 .container-fill {
   height: calc(100vh - 112px);
@@ -57,7 +119,10 @@
   display: flex;
   justify-content: space-between;
 }
+// --- End Layout Component Mods ---------
 
+
+// --- Interactions Styling ---------
 .graphic {
   flex-basis: 60%;
   position: sticky;
@@ -88,5 +153,36 @@
   }
   &:last-child {
     margin-bottom: 0;
+  }
+}
+// --- End Interactions Styling ---------
+
+
+// --- Homepage Styling ---------
+
+// New styling for jumbotron
+.hero {
+  background-color: $light;
+  background-position: center center;
+  background-size: cover;
+  background-image: url("../../static/assets/home_hero.png");
+}
+
+.hero-em {
+  color: $light;
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+
+  &:before {
+    position: absolute;
+    content: '';
+    top: 4px;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: $dark;
+    transform: rotate(2deg);
+    z-index: -1;
   }
 }

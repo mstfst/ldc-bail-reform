@@ -8,19 +8,13 @@ import NarrativeComponent from "../components/narrative-body"
 import * as D3 from 'd3';
 
 class NarrativePage extends Component {
-
-
   render() {
-
-    
     return (
       <Layout>
         <Head title="Narrative"/>
         <NarrativeComponent />
-
       </Layout>
     )
   }
 }
-
 export default NarrativePage;
