@@ -70,4 +70,12 @@
     color: red;
     column-count: 2;
   }
+
+  .text-container {
+    column-count: 2;
+    column-gap: 40px;
+    h3 {
+      color: #F08FDB;
+    }
+  }
 }
