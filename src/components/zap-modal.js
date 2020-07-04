@@ -75,7 +75,7 @@ const ZapModal = props => {
         </Modal.Header>
         <Modal.Body>
           <Row>
-            <Col className="text-container">
+            <Col className="text-ontainer">
               {documentToReactComponents(
                 modalContent.node.zapText.json,
                 options
