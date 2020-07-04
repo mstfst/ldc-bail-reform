@@ -20,10 +20,7 @@ const ZapModal = props => {
                 }
               }
               title
-              zapHappening {
-                json
-              }
-              zapQuestions {
+              zapText {
                 json
               }
             }
@@ -78,17 +75,9 @@ const ZapModal = props => {
         </Modal.Header>
         <Modal.Body>
           <Row>
-            <Col>
-              <p className="zap-modal__subtitle">What’s actually happening:</p>
+            <Col className="text-container">
               {documentToReactComponents(
-                modalContent.node.zapHappening.json,
-                options
-              )}
-            </Col>
-            <Col>
-              <p className="zap-modal__subtitle zap-modal__questions">Question(s) to think about:</p>
-              {documentToReactComponents(
-                modalContent.node.zapQuestions.json,
+                modalContent.node.zapText.json,
                 options
               )}
             </Col>
