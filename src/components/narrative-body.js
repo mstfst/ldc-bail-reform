@@ -1,7 +1,4 @@
 import React, { Component } from "react"
-import Layout from "./layout"
-import Head from "./head"
-import DocumentCard from "./document-card"
 
 import { graphql, StaticQuery } from "gatsby"
 import { Row, Col, Button, Card, Modal } from "react-bootstrap"
@@ -32,8 +29,6 @@ class NarrativeSection extends Component {
 
   handleScrollStepEnter = ({ element, index, direction }) => {
     // element.style.backgroundColor = 'lightgoldenrodyellow';
-    console.log(index)
-
     if (index <= 5) {
       this.setState({
         bg_image: background_images[0],
@@ -154,6 +149,8 @@ class NarrativeSection extends Component {
     return (
       <div>
         <div className="narrative-background">
+          {console.log(this.props)}
+
           <StaticQuery
             query={graphql`
               query {
@@ -181,6 +178,7 @@ class NarrativeSection extends Component {
               }
             `}
             render={data => {
+              
               return stp === 1 ? (
                 <Img fluid={data.nathan_bg.childImageSharp.fluid} />
               ) : stp === 2 ? (
