@@ -72,11 +72,6 @@ const ZapModal = props => {
         </Modal.Header>
         <Modal.Body>
           <Row>
-            <Col>
-            <h4 className="text-rust">What's actually happening?</h4>
-            </Col>
-          </Row>
-          <Row>
             <Col className="text-container">
               {documentToReactComponents(
                 modalContent.node.zapText.json,
