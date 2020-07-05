@@ -6,10 +6,12 @@ import "./system-map.scss"
 import { graphql, StaticQuery } from "gatsby"
 import { Button, Card, Col, Container, Modal, Row } from "react-bootstrap"
 import * as D3 from "d3"
-import svgSystemMap from "../../static/assets/svg/SM_jun25.svg"
+import svgSystemMap from "../../static/assets/system-map/SM_jun25.svg"
 import StaticModal from "../components/static-modal"
 import CogModal from "../components/cog-modal"
 import ZapModal from "../components/zap-modal"
+
+// console.log(svgSystemMap);
 
 class SystemMapPage extends Component {
   scroller
