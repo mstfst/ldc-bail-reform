@@ -30,7 +30,7 @@ const Header = () => {
             <Nav.Link as={Link} activeClassName="active" to="/system-map">System Map</Nav.Link>
             <Nav.Link as={Link} activeClassName="active" to="/issues">Issues</Nav.Link>
             <Nav.Link as={Link} activeClassName="active" to="/methodology">Methodology</Nav.Link>
-            <Nav.Link as={Link} activeClassName="active" to="/get-involved" className={headerStyles.ctaHover}><p className={headerStyles.cta}>Get Involved</p></Nav.Link>
+            <Nav.Link as={Link} activeClassName="active" to="/cta" className={headerStyles.ctaHover}><p className={headerStyles.cta}>Get Involved</p></Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
