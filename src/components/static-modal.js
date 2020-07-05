@@ -55,7 +55,7 @@ const StaticModal = props => {
     obj => obj.node.stageId === props.activeContent
   )
 
-  let modalPosition = `${(window.innerHeight - 450) / 2}px`
+  // let modalPosition = `${(window.innerHeight - 450) / 2}px`
   
 
   if (modalContent) {
@@ -65,7 +65,7 @@ const StaticModal = props => {
         onHide={props.onHide}
         id="modalStatic"
         size="lg"
-        style={{top: modalPosition }}
+        // style={{top: modalPosition }}
       >
         <Modal.Header closeButton>
           <Modal.Title>{modalContent.node.title}</Modal.Title>
