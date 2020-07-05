@@ -171,12 +171,12 @@ $enable-responsive-font-sizes:                true;
 // //
 // // Style anchor elements.
 
-// $link-color:                              theme-color("primary") !default;
-// $link-decoration:                         none !default;
-// $link-hover-color:                        darken($link-color, 15%) !default;
-// $link-hover-decoration:                   underline !default;
-// // Darken percentage for links with `.text-*` class (e.g. `.text-success`)
-// $emphasized-link-hover-darken-percentage: 15% !default;
+$link-color:                              $rust !default;
+$link-decoration:                         none !default;
+$link-hover-color:                        darken($link-color, 15%) !default;
+$link-hover-decoration:                   underline !default;
+// Darken percentage for links with `.text-*` class (e.g. `.text-success`)
+$emphasized-link-hover-darken-percentage: 15% !default;
 
 // // Paragraphs
 // //
@@ -220,9 +220,9 @@ $enable-responsive-font-sizes:                true;
 // //
 // // Set the number of columns and specify the width of the gutters.
 
-// $grid-columns:                12 !default;
-// $grid-gutter-width:           30px !default;
-// $grid-row-columns:            6 !default;
+$grid-columns:                12 !default;
+$grid-gutter-width:           60px !default;
+$grid-row-columns:            6 !default;
 
 
 // // Components
@@ -303,7 +303,7 @@ $h6-font-size:                $font-size-base !default;
 // $headings-margin-bottom:      $spacer / 2 !default;
 // $headings-font-family:        null !default;
 // $headings-font-weight:        500 !default;
-$headings-line-height:        0.95 !default;
+$headings-line-height:        1.2 !default;
 // $headings-color:              null !default;
 
 $display1-size:               5.5rem !default;
@@ -315,7 +315,7 @@ $display4-size:               1.25rem !default;
 // $display2-weight:             300 !default;
 // $display3-weight:             300 !default;
 // $display4-weight:             300 !default;
-$display-line-height:         $headings-line-height !default;
+$display-line-height:         0.95 !default;
 
 // $lead-font-size:              $font-size-base * 1.25 !default;
 // $lead-font-weight:            300 !default;
@@ -719,7 +719,7 @@ $display-line-height:         $headings-line-height !default;
 // $navbar-padding-y:                  $spacer / 2 !default;
 // $navbar-padding-x:                  $spacer !default;
 
-// $navbar-nav-link-padding-x:         .5rem !default;
+$navbar-nav-link-padding-x:         1rem !default;
 
 // $navbar-brand-font-size:            $font-size-lg !default;
 // // Compute the navbar-brand padding-y so the navbar-brand will have the same height as navbar-text and nav-link
@@ -734,7 +734,7 @@ $display-line-height:         $headings-line-height !default;
 
 $navbar-dark-color:                 rgba($light, .8) !default;
 $navbar-dark-hover-color:           rgba($light, 1) !default;
-$navbar-dark-active-color:          $light !default;
+$navbar-dark-active-color:          $pink !default;
 $navbar-dark-disabled-color:        rgba($light, .45) !default;
 // $navbar-dark-toggler-icon-bg:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><path stroke='#{$navbar-dark-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
 // $navbar-dark-toggler-border-color:  rgba($white, .1) !default;
@@ -829,8 +829,8 @@ $navbar-dark-disabled-color:        rgba($light, .45) !default;
 // $card-spacer-y:                     .75rem !default;
 // $card-spacer-x:                     1.25rem !default;
 // $card-border-width:                 $border-width !default;
-// $card-border-radius:                $border-radius !default;
-// $card-border-color:                 rgba($black, .125) !default;
+$card-border-radius:                   0 !default;
+$card-border-color:                    transparent !default;
 // $card-inner-border-radius:          subtract($card-border-radius, $card-border-width) !default;
 // $card-cap-bg:                       rgba($black, .03) !default;
 // $card-cap-color:                    null !default;
@@ -840,8 +840,8 @@ $navbar-dark-disabled-color:        rgba($light, .45) !default;
 
 // $card-img-overlay-padding:          1.25rem !default;
 
-// $card-group-margin:                 $grid-gutter-width / 2 !default;
-// $card-deck-margin:                  $card-group-margin !default;
+$card-group-margin:                 $grid-gutter-width / 2 !default;
+$card-deck-margin:                  $card-group-margin !default;
 
 // $card-columns-count:                3 !default;
 // $card-columns-gap:                  1.25rem !default;
