@@ -1,7 +1,20 @@
-/* Import React, Gatsby & React Bootstrap */
-import React from "react"
-import { Link } from "gatsby"
-
-/* Import Layout Components */
+import React from "react";
 import Layout from "../components/layout"
-import Head from "../components/head";
+import Head from '../components/head';
+
+import { Container } from "react-bootstrap"
+
+
+const issues = () => {
+  return (
+    <Layout>
+      <Head title="Issues"/>
+      <Container className="mt-4">
+        <h1>Issues</h1> 
+        <p>Issues will show up here.</p>
+      </Container>
+    </Layout>
+  )
+}
+
+export default issues
