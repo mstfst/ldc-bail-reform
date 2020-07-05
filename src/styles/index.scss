@@ -156,9 +156,17 @@ h1, h2, h3, h4, h5, h6 {
 // New styling for jumbotron
 .hero {
   background-color: $light;
-  background-position: center center;
-  background-size: cover;
-  background-image: url("../../static/assets/home_hero.png");
+  position: relative;
+}
+
+.hero-bg {
+  display: block;
+  position: absolute !important;
+  height: calc(100vh - 3rem);
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
 .hero-em {

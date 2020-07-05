@@ -1,21 +1,37 @@
 /* Import React, Gatsby & React Bootstrap */
 import React from "react"
-import { Link } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import { Row, Col, Jumbotron, Button, Container, Card } from "react-bootstrap"
+import Img from "gatsby-image"
 
 /* Import Layout Components */
 import Layout from "../components/layout"
 import Head from "../components/head";
 
-/* Import SVG Components */
+/* Import graphics */
 import ChevronDown from "../../static/assets/svg/chevron-down.svg";
 import HomeLogo from "../../static/assets/svg/logo_homepage.svg";
+// import hero from "../images/home_hero.png"
 
 const IndexPage = () => {
+  const data = useStaticQuery(graphql `
+    query {
+      file(relativePath: { eq: "images/home_hero.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 2000) {
+            ...GatsbyImageSharpFluid
+            ...GatsbyImageSharpFluidLimitPresentationSize
+          }
+        }
+      }
+    }
+  `)
+
   return (
     <Layout>
       <Head title="Home" />
       <Jumbotron className="hero mb-1">
+        <Img className="hero-bg" fluid={data.file.childImageSharp.fluid} alt="A jail cell overlaid with a stylized pink dot pattern" />
         <Container>
           <Row className="justify-content-center">   
             <Col md="10" className="text-center">
