@@ -15,15 +15,15 @@ module.exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  res.data.allContentfulBlogPost.edges.forEach((edge) => {
-    createPage({
-      component: blogTemplate,
-      path: `/blog/${edge.node.slug}`,
-      context: {
-        slug: edge.node.slug
-      }
-    })
-  });
+  // res.data.allContentfulBlogPost.edges.forEach((edge) => {
+  //   createPage({
+  //     component: blogTemplate,
+  //     path: `/blog/${edge.node.slug}`,
+  //     context: {
+  //       slug: edge.node.slug
+  //     }
+  //   })
+  // });
   //1. get path to template
   //2. get markdown data
   //3. create new pages
