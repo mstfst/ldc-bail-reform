@@ -26,13 +26,3 @@ const Layout = (props) => {
 }
 
 export default Layout
-
-export const pageQuery = graphql`
-  query HeaderImageQuery {
-    headerImage: imageSharp(id: { regex: "/header/" }) {
-      sizes(maxWidth: 1240 ) {
-        ...GatsbyImageSharpSizes
-      }
-    }
-  }
-`

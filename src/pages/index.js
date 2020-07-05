@@ -11,7 +11,6 @@ import Head from "../components/head";
 /* Import graphics */
 import ChevronDown from "../../static/assets/svg/chevron-down.svg";
 import HomeLogo from "../../static/assets/svg/logo_homepage.svg";
-// import hero from "../images/home_hero.png"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql `
