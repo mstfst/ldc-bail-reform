@@ -53,7 +53,7 @@ const IndexPage = () => {
       <Container id="main" className="pt-2">
         <Row className="justify-content-md-center mt-5 pt-5 mb-4">
           <Col md="10">
-            <p className="display-3"><b>If we have a bail system that is supposed to release people from jail, with the assurance that they show up for trial, and they aren’t a risk to public safety, then why does this issue exist?</b></p>
+            <p><strong>If we have a bail system that is supposed to release people from jail, with the assurance that they show up for trial, and they aren’t a risk to public safety, then why does this issue exist?</strong></p>
             <p>We’ve created some resources to try and help you answer this question:</p>
           </Col>
         </Row>
