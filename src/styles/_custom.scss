@@ -220,9 +220,9 @@ $emphasized-link-hover-darken-percentage: 15% !default;
 // //
 // // Set the number of columns and specify the width of the gutters.
 
-// $grid-columns:                12 !default;
-// $grid-gutter-width:           30px !default;
-// $grid-row-columns:            6 !default;
+$grid-columns:                12 !default;
+$grid-gutter-width:           60px !default;
+$grid-row-columns:            6 !default;
 
 
 // // Components
@@ -829,8 +829,8 @@ $navbar-dark-disabled-color:        rgba($light, .45) !default;
 // $card-spacer-y:                     .75rem !default;
 // $card-spacer-x:                     1.25rem !default;
 // $card-border-width:                 $border-width !default;
-// $card-border-radius:                $border-radius !default;
-// $card-border-color:                 rgba($black, .125) !default;
+$card-border-radius:                   0 !default;
+$card-border-color:                    transparent !default;
 // $card-inner-border-radius:          subtract($card-border-radius, $card-border-width) !default;
 // $card-cap-bg:                       rgba($black, .03) !default;
 // $card-cap-color:                    null !default;
@@ -840,8 +840,8 @@ $navbar-dark-disabled-color:        rgba($light, .45) !default;
 
 // $card-img-overlay-padding:          1.25rem !default;
 
-// $card-group-margin:                 $grid-gutter-width / 2 !default;
-// $card-deck-margin:                  $card-group-margin !default;
+$card-group-margin:                 $grid-gutter-width / 2 !default;
+$card-deck-margin:                  $card-group-margin !default;
 
 // $card-columns-count:                3 !default;
 // $card-columns-gap:                  1.25rem !default;

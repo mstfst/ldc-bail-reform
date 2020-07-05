@@ -71,17 +71,12 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $font-family-headings;
 }
 
-h2 {
-  text-transform: uppercase;
-}
-
-// This is for homepage hero leed & any other major block text
-.display-1, .display-2 {
-  text-transform: uppercase;
-}
-
 .display-3, .display-4 {
   line-height: 1.4;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }
 
 // --- End Typography ---------
