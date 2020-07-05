@@ -7,21 +7,12 @@ import headerStyles from './header.module.scss';
 import Logo from "../../static/assets/svg/logo_navbar.svg";
 
 const Header = () => {
-  const data = useStaticQuery(graphql`	
-    query {	
-      site {	
-        siteMetadata {	
-          title	
-        }	
-      }	
-    }	
-  `);	
-
+  
   return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" fixed="top">
       <Container>
         <Navbar.Brand as={Link} to="/" aria-label="Go to homepage">
-          <Logo width={200} alt={data.site.title} />
+          <Logo width={200}/>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className={headerStyles.nav}>
