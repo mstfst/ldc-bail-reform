@@ -5,7 +5,7 @@ import Head from '../components/head';
 import { Container } from "react-bootstrap"
 
 
-const Issues = () => {
+const IssuesPages = () => {
   return (
     <Layout>
       <Head title="Issues"/>
@@ -17,4 +17,4 @@ const Issues = () => {
   )
 }
 
-export default Issues
+export default IssuesPages
