@@ -109,6 +109,11 @@ module.exports = {
     },
     {
       resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          exclude: /system-map/
+        }
+      }
     },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
