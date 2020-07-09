@@ -6,12 +6,19 @@ import Footer from "./footer"
 import "../styles/index.scss"
 import layoutStyles from './layout.module.scss';
 
+if (typeof window !== "undefined") {
+  // eslint-disable-next-line global-require
+  require("smooth-scroll")('a[href*="#"]')
+}
+
 const Layout = (props) => {
   return (
     <div className={layoutStyles.container}>
       <div className={layoutStyles.content}>
         <Header/>
-        {props.children}
+        <div className="pt-5">
+          {props.children}
+        </div>
       </div>
       <Footer/>
     </div>
