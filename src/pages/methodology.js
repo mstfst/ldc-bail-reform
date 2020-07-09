@@ -9,14 +9,16 @@ import { Container, Row, Col } from "react-bootstrap"
 const MethodologyPage = () => {
   // scroller
 
-  // const state = {
-  //   data: 0,
-  //   steps: [10, 20, 30],
-  //   progress: 0,
-  //   documents: {
-  //     '2011-card-0': true,
-  //   }
-  // }
+  const [state, setState] = useState({
+    data: 0,
+    steps: [10, 20, 30],
+    progress: 0,
+    documents: {
+      '2011-card-0': true,
+    }
+  });
+
+  console.log(state);
 
   const data = useStaticQuery(graphql`
     query {
@@ -28,25 +30,17 @@ const MethodologyPage = () => {
             description {
               description
             }
-          }
-        }
-      }
-      allContentfulTimelineEvent {
-        edges {
-          node {
-            eventDate
-            eventTitle
-          }
-        }
-      }
-      allContentfulTimelineDocument {
-        edges {
-          node {
-            title
-            date
-            author
-            quote
-            url
+            events {
+              eventTitle
+              eventDate
+            }
+            documents {
+              title
+              date
+              author
+              quote
+              url
+            }
           }
         }
       }
@@ -54,12 +48,8 @@ const MethodologyPage = () => {
   `)
 
   const years = data.allContentfulTimelineYear.edges;
-  const documents = data.allContentfulTimelineEvent.edges;
-  const events = data.allContentfulTimelineDocument.edges;
 
   console.log(years);
-  console.log(documents);
-  console.log(events);
 
   // const handleScrollStepEnter = ({element, index, direction}) => {
 
@@ -123,48 +113,57 @@ const MethodologyPage = () => {
             <h2>interaction</h2>
           </Col>
           <Col md="8" xl="9" className="h-100 p-md-4 p-xl-5">
-            {/*  
+            
             <div className="timeline-wrapper mr-1 mr-md-5">
-            { data.site.siteMetadata.methodology.map(item => (
-              <div key={item.year} className="timeline-year mb-5" data-index={item.year}>
+            { data.allContentfulTimelineYear.edges.map(item => {
+              console.log(item.node);
+              return (
+              <div key={item.node.year} className="timeline-year mb-5" data-index={item.node.year}>
                 <div className="timeline-year-content">
                   <div className="timeline-year-content-header d-md-flex pb-2 mb-4">
-                    <h1 className="display-3 pr-3"><strong>{item.year}</strong></h1>
+                    <h1 className="display-3 pr-3"><strong>{item.node.year}</strong></h1>
                     <div className="timeline-year-header-meta mt-2 pr-2 pr-md-5 pb-3">
-                      <p className="mb-1"><strong>{item.headline}</strong></p>
-                      <p className="mb-0">{item.copy}</p>
+                      <p className="mb-1"><strong>{item.node.headline}</strong></p>
+                      <p className="mb-0">{item.node.description.description}</p>
                     </div>
-                    { item.docs.map((doc, index) => {
-                      const length = item.docs.length;
+                    { item.node.documents.map((doc, index) => {
+                      const length = item.node.documents.length;
                       const offset = (index / length) * 100;
                             
                       return (
                         <div 
                           key={index} 
                           className="timeline-card-indicator" 
-                          data-id={`${item.year}-card-${index}`} 
+                          data-id={`${item.node.year}-card-${index}`} 
                           role="button" 
                           style={{ left: offset + '%'}} 
-                          onKeyDown={ this.indicatorClickHandler } 
-                          onClick={ this.indicatorClickHandler }>
-                            {item.year}-document-{index}
+                          // onKeyDown={ indicatorClickHandler } 
+                          // onClick={ indicatorClickHandler }
+                        >
+                          {item.node.year}-document-{index}
                         </div>
                       )
                     })}
                   </div>
                   <div className="timeline-year-docs mr-3 mr-md-5">
-                    { item.docs.map((doc, index) => {
+                    { item.node.documents.map((doc, index) => {
                       return(
-                        <DocumentCard key={index} index={index} doc={doc} item={item} active={this.state.documents[`${item.year}-card-${index}`]}  />
+                        <DocumentCard 
+                          key={index} 
+                          index={index} 
+                          doc={doc} 
+                          item={item.node} 
+                          active={state.documents[`${item.node.year}-card-${index}`]}  />
                       )
                     })}
                   </div>
                 </div>
               </div>
-            ))}
+            )})
+          }
             </div>  
-            */}
-            </Col>
+          
+          </Col>
         </Row>
       </Container>
     </Layout>
