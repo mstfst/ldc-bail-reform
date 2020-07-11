@@ -45,6 +45,14 @@
 // $teal:    #20c997 !default;
 // $cyan:    #17a2b8 !default;
 
+$rust:          #e5521d !default; // Bail Reform Color: Rust
+$pink:          #F08FDB !default; // Bail Reform Color: Pink
+$blue:          #A7D6CC !default; // Bail Reform: Cog Blue
+$yellow:        #EDC80F !default; // Bail Reform: Zap Yellow
+$red:           #FE2E00 !default; // Bail Reform: Zap Red
+$light:         #FFFDFB; // Bail Reform Color: BG (Off-White)
+$dark:          #322C2C; // Bail Reform Color: Off-Black
+
 // $colors: () !default;
 // // stylelint-disable-next-line scss/dollar-variable-default
 // $colors: map-merge(
@@ -66,14 +74,14 @@
 //   $colors
 // );
 
-@import "./colors";
+// @import "./colors";
 
 $theme-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $theme-colors: map-merge(
   (
+    "primary":      $rust,
     "rust":         $rust,
-    "black":        $black,
     "pink":         $pink,
     "blue":         $blue,
     "yellow":       $yellow,

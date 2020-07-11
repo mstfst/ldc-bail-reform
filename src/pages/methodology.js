@@ -54,9 +54,7 @@ const MethodologyPage = () => {
 
   useEffect(() => {
     
-    
     years.map((year) => {
-      let isFirst = true;
       year.node.documents.map( (doc, index ) => {
         const newKey = `${year.node.year}-card-${index}`;
         
@@ -114,14 +112,21 @@ const MethodologyPage = () => {
   // }
 
   const indicatorClickHandler = (e) => {
-    console.log(documents);
+   
     const id = e.target.dataset.id;
     updateActiveDocumentCard(id);
   }
 
   const updateActiveDocumentCard = (id) => {
+    const year = id.split('-')[0];
+ 
     const newDocuments = { ...documents}
-    Object.keys(newDocuments).forEach(v => newDocuments[v] = false);
+    Object.keys(newDocuments).forEach(v => {
+      if ( v.includes(year) ) {
+        newDocuments[v] = false
+      }
+    });
+
     newDocuments[id] = true;
     setDocuments({...newDocuments});
   }
@@ -129,7 +134,14 @@ const MethodologyPage = () => {
   return (
     <Layout>
       <Head title="Methodology"/>
-      <Container>
+      <Container className="mt-5">
+        <Row className="justify-content-center text-center">
+          <Col md="8">
+            <h1 className="text-rust">LOREM IPSUM DOLOR SIT AMET</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem commodo at rhoncus, vitae. Consequat, condimentum convallis nisl hac. Et a, sed suscipit egestas fringilla. Eu non tristique facilisi fringilla facilisi arcu urna sociis nibh. Volutpat gravida tincidunt ut venenatis egestas in tellus. Ridiculus commodo vel arcu, facilisis velit, mattis fermentum pellentesque.</p>
+          </Col>
+        </Row>
+
         <Row className="">
           <Col md="4" xl="3" className="p-4 p-xl-5">
             <h2>interaction</h2>
@@ -145,10 +157,11 @@ const MethodologyPage = () => {
                 <div className="timeline-year-content">
                   <div className="timeline-year-content-header d-md-flex pb-2 mb-4">
                     <h1 className="display-3 pr-3"><strong>{item.node.year}</strong></h1>
-                    <div className="timeline-year-header-meta mt-2 pr-2 pr-md-5 pb-3">
+                    <div className="timeline-year-header-meta mt-4 pr-2 pr-md-5 pb-3">
                       <p className="mb-1"><strong>{item.node.headline}</strong></p>
                       <p className="mb-0">{item.node.description.description}</p>
                     </div>
+                    
                     <div className="timeline-year-buttons">
                     
                     </div>
@@ -164,7 +177,7 @@ const MethodologyPage = () => {
                           role="button" 
                           style={{ left: offset + '%'}} 
                           // onKeyDown={ indicatorClickHandler } 
-                          // onClick={ indicatorClickHandler }
+                          onClick={ indicatorClickHandler }
                         >
                           {item.node.year}-document-{index}
                         </div>
