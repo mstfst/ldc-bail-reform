@@ -62,11 +62,8 @@ const ZapModal = props => {
         <Modal.Header>
           <Row>
             <Col md="1">
-              <div
-                style={{  }}
-              >
-                  <Img fluid={modalContent.node.zapImage.fluid} />
-              </div>
+              <Img fluid={modalContent.node.zapImage.fluid} />
+
             </Col>
             <Col md="11">
               <Modal.Title>{modalContent.node.title}</Modal.Title>
@@ -74,6 +71,11 @@ const ZapModal = props => {
           </Row>
         </Modal.Header>
         <Modal.Body>
+          <Row>
+            <Col>
+            <h4 className="text-rust">What's actually happening?</h4>
+            </Col>
+          </Row>
           <Row>
             <Col className="text-container">
               {documentToReactComponents(

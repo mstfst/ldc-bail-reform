@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/layout"
 import Head from '../components/head';
 import DocumentCard from '../components/document-card';
@@ -12,13 +12,14 @@ const MethodologyPage = () => {
   const [state, setState] = useState({
     data: 0,
     steps: [10, 20, 30],
-    progress: 0,
-    documents: {
-      '2011-card-0': true,
-    }
+    progress: 0
   });
 
-  console.log(state);
+  //'2011-card-0': true,
+
+  const [documents, setDocuments] = useState({})
+
+  // console.log(state);
 
   const data = useStaticQuery(graphql`
     query {
@@ -47,9 +48,29 @@ const MethodologyPage = () => {
     }
   `)
 
-  const years = data.allContentfulTimelineYear.edges;
+  // console.log(data);
 
-  console.log(years);
+  const years = [ ...data.allContentfulTimelineYear.edges].reverse();
+
+  useEffect(() => {
+    
+    
+    years.map((year) => {
+      let isFirst = true;
+      year.node.documents.map( (doc, index ) => {
+        const newKey = `${year.node.year}-card-${index}`;
+        
+        setDocuments(prevState => {
+          return {
+            ...prevState,
+            [newKey]: index > 0 ? false : true
+          }
+        });
+        
+      });
+    })
+    
+  }, []); 
 
   // const handleScrollStepEnter = ({element, index, direction}) => {
 
@@ -92,17 +113,18 @@ const MethodologyPage = () => {
   //   this.scroller.destroy();
   // }
 
-  // const indicatorClickHandler = (e) => {
-  //   const id = e.target.dataset.id;
-  //   this.updateActiveDocumentCard(id);
-  // }
+  const indicatorClickHandler = (e) => {
+    console.log(documents);
+    const id = e.target.dataset.id;
+    updateActiveDocumentCard(id);
+  }
 
-  // const updateActiveDocumentCard = (id) => {
-  //   const documents = this.state.documents;
-  //   Object.keys(documents).forEach(v => documents[v] = false);
-  //   documents[id] = true;
-  //   this.setState({documents});
-  // }
+  const updateActiveDocumentCard = (id) => {
+    const newDocuments = { ...documents}
+    Object.keys(newDocuments).forEach(v => newDocuments[v] = false);
+    newDocuments[id] = true;
+    setDocuments({...newDocuments});
+  }
 
   return (
     <Layout>
@@ -115,8 +137,9 @@ const MethodologyPage = () => {
           <Col md="8" xl="9" className="h-100 p-md-4 p-xl-5">
             
             <div className="timeline-wrapper mr-1 mr-md-5">
-            { data.allContentfulTimelineYear.edges.map(item => {
-              console.log(item.node);
+            { years.map(item => {
+              // console.log(documents);
+              // console.log(item.node);
               return (
               <div key={item.node.year} className="timeline-year mb-5" data-index={item.node.year}>
                 <div className="timeline-year-content">
@@ -126,34 +149,40 @@ const MethodologyPage = () => {
                       <p className="mb-1"><strong>{item.node.headline}</strong></p>
                       <p className="mb-0">{item.node.description.description}</p>
                     </div>
+                    <div className="timeline-year-buttons">
                     { item.node.documents.map((doc, index) => {
                       const length = item.node.documents.length;
                       const offset = (index / length) * 100;
                             
                       return (
-                        <div 
+                        <button 
                           key={index} 
                           className="timeline-card-indicator" 
                           data-id={`${item.node.year}-card-${index}`} 
                           role="button" 
                           style={{ left: offset + '%'}} 
                           // onKeyDown={ indicatorClickHandler } 
-                          // onClick={ indicatorClickHandler }
+                          onClick={ indicatorClickHandler }
                         >
                           {item.node.year}-document-{index}
-                        </div>
+                        </button>
                       )
                     })}
+                    </div>
                   </div>
                   <div className="timeline-year-docs mr-3 mr-md-5">
                     { item.node.documents.map((doc, index) => {
+                      let id = `${item.node.year}-card-${index}`;
+                      // console.log(documents[id]);
+
                       return(
                         <DocumentCard 
                           key={index} 
                           index={index} 
                           doc={doc} 
                           item={item.node} 
-                          active={state.documents[`${item.node.year}-card-${index}`]}  />
+                          active={documents[id]}
+                        />
                       )
                     })}
                   </div>
