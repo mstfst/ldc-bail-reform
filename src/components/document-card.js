@@ -10,7 +10,7 @@ const DocumentCard = ({doc, item, index, active }) => {
       </Card.Header>
       <Card.Body>
         <div>
-          <span class="badge badge-light mb-3">mental health</span>
+          <span className="badge badge-light mb-3">mental health</span>
         </div>
         <h5>{doc.title}</h5>
         <p>{doc.author}</p>

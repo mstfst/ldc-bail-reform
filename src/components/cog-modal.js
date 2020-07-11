@@ -1,6 +1,6 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { Modal, Row, Col } from "react-bootstrap"
+import { Container, Modal, Row, Col } from "react-bootstrap"
 import Img from "gatsby-image"
 import "./cog-modal.scss"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
@@ -66,27 +66,21 @@ const CogModal = props => {
         // style={{ top: modalPosition }}
       >
         <Modal.Header>
-          <Row>
-            <Col md="1">
-              <div
-                style={{  }}
-              >
-                  <Img fluid={modalContent.node.cogImage.fluid} />
-              </div>
-            </Col>
-            <Col md="9">
-              <Modal.Title>{modalContent.node.title}</Modal.Title>
-            </Col>
-            {modalContent.node.characters.map(character => (
-              <Col md="1">
-                <div className="cog-modal__id">
-                  {character.characterInitial}
-                </div>
-              </Col>
-            ))}
-          </Row>
+          <Img className="modal-header-icon mr-2" fluid={modalContent.node.cogImage.fluid} />
+      
+          <Modal.Title>{modalContent.node.title}</Modal.Title>
+          <div className="modal-header-icons ml-auto">
+          {modalContent.node.characters.map(character => (
+      
+            <div className="cog-modal__id">
+              {character.characterInitial}
+            </div>
+        
+          ))}
+          </div>
         </Modal.Header>
         <Modal.Body>
+       
           <Row>
             <Col>
               <p className="cog-modal__subtitle">What’s being decided:</p>
