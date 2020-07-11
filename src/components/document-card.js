@@ -12,7 +12,7 @@ const DocumentCard = ({doc, item, index, active }) => {
         <h5>{doc.title}</h5>
         <p>{doc.author}</p>
         <h6 className="mb-5">"{doc.quote}"</h6>
-        <Button variant="primary">View Document</Button>
+        <Button variant="rust">View Document</Button>
       </Card.Body>
     </Card>
   )

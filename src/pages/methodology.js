@@ -9,11 +9,11 @@ import { Container, Row, Col } from "react-bootstrap"
 const MethodologyPage = () => {
   // scroller
 
-  const [state, setState] = useState({
-    data: 0,
-    steps: [10, 20, 30],
-    progress: 0
-  });
+  // const [state, setState] = useState({
+  //   data: 0,
+  //   steps: [10, 20, 30],
+  //   progress: 0
+  // });
 
   //'2011-card-0': true,
 
@@ -161,7 +161,7 @@ const MethodologyPage = () => {
                       <p className="mb-1"><strong>{item.node.headline}</strong></p>
                       <p className="mb-0">{item.node.description.description}</p>
                     </div>
-                    
+
                     <div className="timeline-year-buttons">
                     
                     </div>
