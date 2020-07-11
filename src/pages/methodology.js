@@ -169,6 +169,36 @@ const MethodologyPage = () => {
                       )
                     })}
                     </div>
+                    { item.node.documents.map((doc, index) => {
+                      const length = item.node.documents.length;
+                      const offset = (index / length) * 100;
+                            
+                      return (
+                        <div 
+                          key={index} 
+                          className="timeline-card-indicator" 
+                          data-id={`${item.node.year}-card-${index}`} 
+                          role="button" 
+                          style={{ left: offset + '%'}} 
+                          // onKeyDown={ indicatorClickHandler } 
+                          // onClick={ indicatorClickHandler }
+                        >
+                          {item.node.year}-document-{index}
+                        </div>
+                      )
+                    })}
+                  </div>
+                  <div className="timeline-year-docs mr-3 mr-md-5">
+                    { item.node.documents.map((doc, index) => {
+                      return(
+                        <DocumentCard 
+                          key={index} 
+                          index={index} 
+                          doc={doc} 
+                          item={item.node} 
+                          active={state.documents[`${item.node.year}-card-${index}`]}  />
+                      )
+                    })}
                   </div>
                   <div className="timeline-year-docs mr-3 mr-md-5">
                     { item.node.documents.map((doc, index) => {
