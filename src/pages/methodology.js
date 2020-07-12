@@ -2,11 +2,21 @@ import React, { useState, useEffect } from "react";
 import Layout from "../components/layout"
 import Head from '../components/head';
 import DocumentCard from '../components/document-card';
+import { Scrollama, Step } from 'react-scrollama';
 
 import { graphql, useStaticQuery } from "gatsby"
 import { Container, Row, Col } from "react-bootstrap"
 
 const MethodologyPage = () => {
+
+  const [currentStepIndex, setCurrentStepIndex] = useState(null);
+
+  // This callback fires when a Step hits the offset threshold. It receives the
+  // data prop of the step, which in this demo stores the index of the step.
+  const onStepEnter = ({ data }) => {
+    console.log('on step enter called');
+    setCurrentStepIndex(data);
+  };
   // scroller
 
   // const [state, setState] = useState({
@@ -14,8 +24,6 @@ const MethodologyPage = () => {
   //   steps: [10, 20, 30],
   //   progress: 0
   // });
-
-  //'2011-card-0': true,
 
   const [documents, setDocuments] = useState({})
 
@@ -135,6 +143,28 @@ const MethodologyPage = () => {
     <Layout>
       <Head title="Methodology"/>
       <Container className="mt-5">
+        <div style={{ margin: '50vh 0', border: '2px dashed skyblue' }}>
+          <div style={{ position: 'sticky', top: 0, border: '1px solid orchid' }}>
+            I'm sticky. The current triggered step index is: {currentStepIndex}
+          </div>
+          <Scrollama onStepEnter={onStepEnter} debug>
+            {[1, 2, 3, 4].map((_, stepIndex) => (
+              <Step data={stepIndex} key={stepIndex}>
+                <div
+                  style={{
+                    margin: '50vh 0',
+                    border: '1px solid gray',
+                    opacity: currentStepIndex === stepIndex ? 1 : 0.2,
+                  }}
+                >
+                  I'm a Scrollama Step of index {stepIndex}
+                </div>
+              </Step>
+            ))}
+          </Scrollama>
+        </div>
+      </Container>
+      <Container className="mt-5">
         <Row className="justify-content-center text-center">
           <Col md="8">
             <h1 className="text-rust">LOREM IPSUM DOLOR SIT AMET</h1>
@@ -143,10 +173,11 @@ const MethodologyPage = () => {
         </Row>
 
         <Row className="">
-          <Col md="4" xl="3" className="p-4 p-xl-5">
-            <h2>interaction</h2>
+          <Col md="2" xl="2" className="p-4 p-xl-5">
+            <p>Legend</p>
+            <p>Timeline</p>
           </Col>
-          <Col md="8" xl="9" className="h-100 p-md-4 p-xl-5">
+          <Col md="9" xl="9" className="h-100 p-md-4 p-xl-5">
             
             <div className="timeline-wrapper mr-1 mr-md-5">
             { years.map(item => {
@@ -154,37 +185,46 @@ const MethodologyPage = () => {
               // console.log(item.node);
               return (
               <div key={item.node.year} className="timeline-year mb-5" data-index={item.node.year}>
-                <div className="timeline-year-content">
+                <div className="timeline-year-content position-relative">
                   <div className="timeline-year-content-header d-md-flex pb-2 mb-4">
-                    <h1 className="display-3 pr-3"><strong>{item.node.year}</strong></h1>
+                    <h1 className="pr-3"><strong>{item.node.year}</strong></h1>
+                 
                     <div className="timeline-year-header-meta mt-4 pr-2 pr-md-5 pb-3">
                       <p className="mb-1"><strong>{item.node.headline}</strong></p>
                       <p className="mb-0">{item.node.description.description}</p>
                     </div>
 
-                    <div className="timeline-year-buttons">
-                    
+                    <div className="timeline-year-indicators">          
+                      { item.node.documents.map((doc, index) => {
+                        const length = item.node.documents.length;
+                        const offset = (index / length) * 100;
+                              
+                        return (
+                          <div 
+                            key={index} 
+                            className="timeline-card-indicator" 
+                            data-id={`${item.node.year}-card-${index}`} 
+                            role="button" 
+                            style={{ left: offset + '%'}} 
+                            // onKeyDown={ indicatorClickHandler } 
+                            onClick={ indicatorClickHandler }
+                          >
+                            {item.node.year}-document-{index}
+                          </div>
+                        )
+                      })}
                     </div>
-                    { item.node.documents.map((doc, index) => {
-                      const length = item.node.documents.length;
-                      const offset = (index / length) * 100;
-                            
-                      return (
-                        <div 
-                          key={index} 
-                          className="timeline-card-indicator" 
-                          data-id={`${item.node.year}-card-${index}`} 
-                          role="button" 
-                          style={{ left: offset + '%'}} 
-                          // onKeyDown={ indicatorClickHandler } 
-                          onClick={ indicatorClickHandler }
-                        >
-                          {item.node.year}-document-{index}
-                        </div>
-                      )
-                    })}
                   </div>
-                  
+                  <div className="timeline-year-events">
+                  { item.node.events.map((event, index) => {
+                    return (
+                      <div>
+                        <h5 className="text-rust mb-0">{event.eventDate}</h5>
+                        <p>{event.eventTitle}</p>
+                      </div>
+                    )
+                  })}
+                  </div>
                   <div className="timeline-year-docs mr-3 mr-md-5">
                     { item.node.documents.map((doc, index) => {
                       let id = `${item.node.year}-card-${index}`;

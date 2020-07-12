@@ -23,6 +23,7 @@
     "gatsby-plugin-react-helmet": "^3.3.9",
     "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-sass": "^2.3.10",
+    "gatsby-plugin-scroll-reveal": "0.0.7",
     "gatsby-plugin-sharp": "^2.6.17",
     "gatsby-remark-images": "^3.3.17",
     "gatsby-remark-relative-images": "^0.3.0",
@@ -37,6 +38,7 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^6.1.0",
     "react-jss": "^10.3.0",
+    "react-reveal": "^1.2.2",
     "react-scrollama": "^2.2.10",
     "scrollama": "^2.2.1",
     "smooth-scroll": "^16.1.3"
