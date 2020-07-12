@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import "bootstrap/dist/css/bootstrap.min.css"
 
 import { graphql, StaticQuery } from "gatsby"
 import Img from "gatsby-image"
@@ -23,8 +22,12 @@ class NarrativeSection extends Component {
     story_stp: 0,
     progress: 0,
     overall_step: 0,
-        kara_opacity: 0,
+    kara_opacity: 0,
     george_opacity: 0,
+    contentPosition: {
+      position: "sticky",
+      top: 0
+    }
   }
 
   handleScrollStepEnter = ({ element, index, direction }) => {
@@ -32,6 +35,14 @@ class NarrativeSection extends Component {
     this.setState({
       overall_step: index,
     })
+
+    this.setState({
+      contentPosition: {
+        position: "sticky",
+        top: 0
+      }
+    })
+
     if (index <= 5) {
       this.setState({
         kara_opacity: 0,
@@ -53,12 +64,16 @@ class NarrativeSection extends Component {
     }
   }
   handleScrollStepExit = ({ element, index, direction }) => {
-    // element.style.backgroundColor = 'white';
-    // console.log("scroll step exit")
+    this.setState({
+      contentPosition: {
+        position: "relative",
+        top: 0
+      }
+    })
   }
 
   handleProgress = ({ progress }) => {
-    this.setState({ progress })
+   this.setState({ progress })
   }
 
   componentDidMount() {
@@ -72,7 +87,8 @@ class NarrativeSection extends Component {
         step: ".narrative-step",
         threshold: scrollThreshold,
         progress: true,
-        debug: false,
+        offset: 0.2,
+        debug: true,
       })
       .onStepEnter(this.handleScrollStepEnter)
       .onStepExit(this.handleScrollStepExit)
@@ -93,16 +109,15 @@ class NarrativeSection extends Component {
       overall_step,
       kara_opacity,
       george_opacity,
+      contentPosition
     } = this.state
-
-    const narrativePgStyle = step => {
-      return {
-        opacity: progress > 0.5 ? 1.5 - progress * 2 : progress * 2,
-      }
-    }
+    console.log("PROGRESS: " + progress)
 
     return (
+
       <div>
+        <div className="gradient-background" ></div>
+
         <StaticQuery
           query={graphql`
             query {
@@ -130,8 +145,6 @@ class NarrativeSection extends Component {
             }
           `}
           render={data => {
-            
-
             return (
               <div>
                 <div className="narrative-background">
@@ -151,26 +164,18 @@ class NarrativeSection extends Component {
                 </div>
               </div>
             )
-
-            // return story_stp === 1 ? (
-            //   <Img fluid={data.nathan_bg.childImageSharp.fluid}/>
-            // ) : story_stp === 2 ? (
-            //   <Img fluid={data.kara_bg.childImageSharp.fluid} width="100%"/>
-            // ) : (
-            //   <Img fluid={data.george_bg.childImageSharp.fluid} width="100%"/>
-            // )
           }}
         />
 
         <div id="narrative-scroll">
           {/* NATHAN */}
-          <NathanNarrative className="narrative-step" progress={progress} />
+          <NathanNarrative progress={progress} contentPosition={contentPosition} />
 
           {/* KARA */}
-          <KaraNarrative className="narrative-step" progress={progress} />
+          <KaraNarrative progress={progress} contentPosition={contentPosition}/>
 
           {/* GEORGE */}
-          <GeorgeNarrative className="narrative-step" progress={progress} />
+          <GeorgeNarrative progress={progress} contentPosition={contentPosition}/>
         </div>
       </div>
     )
