@@ -120,7 +120,7 @@ class SystemMapPage extends Component {
   componentDidMount() {
     // TEMPORARY: overriding the Container styling to make it wider
     // Need to coordinate with rest of the styling
-    D3.selectAll(".mt-4.container").style("max-width", "1300px")
+    // D3.selectAll(".mt-4.container").style("max-width", "1300px")
 
     // Storing the global "this" object to later reference it in D3 event functions
     const self = this
@@ -247,8 +247,8 @@ class SystemMapPage extends Component {
         <Container className="mt-4">
           <Row>
             <Col sm={11} md={9} id="main-col">
-              <div className="text-center col-md-10">
-                <h1 className="display-1 mb-5">System Map</h1>
+              <div className="text-center col-md-12">
+                <h1 className="display-1 mb-5 text-rust">System Map</h1>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
                   commodo at rhoncus, vitae. Consequat, condimentum convallis
@@ -259,7 +259,7 @@ class SystemMapPage extends Component {
                   pellentesque.
                 </p>
               </div>
-              <div id="characters__title">
+              <div className="text-dark" id="characters__title">
                 <p>Meet the characters</p>
               </div>
 
@@ -291,12 +291,12 @@ class SystemMapPage extends Component {
                           md={4}
                           className="mb-5"
                         >
-                          <Card>
+                          <Card className="bg-dark text-light">
                             <Card.Body className="character-card__body">
                               <div id="character-card__id">
                                 {edge.node.characterInitial}
                               </div>
-                              <Card.Title>{edge.node.characterName}</Card.Title>
+                              <Card.Title className="character-card__title">{edge.node.characterName}</Card.Title>
                               <Card.Text id="character-card__text">
                                 {
                                   edge.node.characterDescription
