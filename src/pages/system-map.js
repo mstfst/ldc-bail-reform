@@ -289,9 +289,9 @@ class SystemMapPage extends Component {
                           xs={10}
                           sm={10}
                           md={4}
-                          className="mb-5"
+                          className="mb-5 card-custom-column"
                         >
-                          <Card className="bg-dark text-light">
+                          <Card className="bg-dark text-light card-custom-dark">
                             <Card.Body className="character-card__body">
                               <div id="character-card__id">
                                 {edge.node.characterInitial}
