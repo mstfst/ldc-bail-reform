@@ -36,6 +36,8 @@ const CogModal = props => {
     `
   )
 
+  let modalPosition
+
   const options = {
     renderNode: {
       "embedded-asset-block": node => {
@@ -54,8 +56,6 @@ const CogModal = props => {
     obj => obj.node.cogId === props.activeContent
   )
 
-//   let modalPosition = `${(window.innerHeight - 450) / 2}px`
-
   if (modalContent) {
     return (
       <Modal
@@ -63,33 +63,30 @@ const CogModal = props => {
         onHide={props.onHide}
         id="modal-cog"
         size="lg"
-        // style={{ top: modalPosition }}
+        centered
       >
         <Modal.Header>
-          <Img className="modal-header-icon mr-2" fluid={modalContent.node.cogImage.fluid} />
-      
+          <Img
+            className="modal-header-icon mr-2"
+            fluid={modalContent.node.cogImage.fluid}
+          />
           <Modal.Title>{modalContent.node.title}</Modal.Title>
           <div className="modal-header-icons ml-auto">
-          {modalContent.node.characters.map(character => (
-      
-            <div className="cog-modal__id">
-              {character.characterInitial}
-            </div>
-        
-          ))}
+            {modalContent.node.characters.map(character => (
+              <div className="cog-modal__id">{character.characterInitial}</div>
+            ))}
           </div>
         </Modal.Header>
         <Modal.Body>
-       
           <Row>
-            <Col>
+            <Col className="cog-modal__what">
               <p className="cog-modal__subtitle">What’s being decided:</p>
               {documentToReactComponents(
                 modalContent.node.cogWhat.json,
                 options
               )}
             </Col>
-            <Col>
+            <Col className="cog-modal__how">
               <p className="cog-modal__subtitle">How’s it being decided?</p>
               {documentToReactComponents(
                 modalContent.node.cogHow.json,

@@ -1,14 +1,18 @@
+// Test: font smoothing for firefox
+// body {
+//   -moz-osx-font-smoothing: grayscale;
+//   -webkit-font-smoothing: antialiased;
+//   font-smoothing: antialiased;
+// }
+
+#modal-cog.modal-lg {
+  max-width: 900px;
+}
+
 #modal-cog {
-  // .row {
-  //   width: 100%;
-  // }
 
   p {
     margin-bottom: 0.4rem;
-  }
-
-  b {
-    font-weight: 500;
   }
 
   .modal-body {
@@ -37,7 +41,7 @@
 
   .modal-title {
     font-size: 36px;
-    line-height: 29px;
+    line-height: 30px;
     font-weight: 500;
   }
 
@@ -49,9 +53,9 @@
     color: #322c2c;
     font-family: Martin;
     font-size: 38px;
-    height: 40px;
-    line-height: 35px;
-    width: 40px;
+    height: 35px;
+    line-height: 30px;
+    width: 35px;
     text-align: center;
     border-radius: 50%;
   }
@@ -60,14 +64,23 @@
     font-family: MARTIN;
     font-style: normal;
     font-weight: normal;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     font-size: 26px;
     line-height: 20px;
     color: #e5521d;
   }
+
+  .modal-header-icon {
+    width: 25px;
+    height: auto;
+    margin-top: 5px;
+  }
+
+  .cog-modal__what ul {
+    list-style-type: none;
+    padding-left: 25px;
+    margin-bottom: 0px;
+  }
+
 }
 
-.modal-header-icon {
-  width: 35px;
-  height: auto;
-}
