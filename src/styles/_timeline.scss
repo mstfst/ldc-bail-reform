@@ -14,7 +14,7 @@
   height: 20px;
   text-indent: -9999px;
   line-height: 0;
-  pointer-events: none;
+  // pointer-events: none;
   background-color: hsl(211, 100%, 67%);
   transform: scale(.5);
   transition: .35s all;
@@ -32,12 +32,13 @@
     top: 0;
     left: 0;
     opacity:0;
-    transform: translateX(-30%);
-    transition: .35s all;
+    transform: translateY(20%);
+    transition: .35s all ease-in;
     transition-delay: 0;
     &.active {
+      z-index: 10;
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
       transition-delay: .5s;
     }
     .badge {
