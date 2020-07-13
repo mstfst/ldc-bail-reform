@@ -2,21 +2,12 @@ import React, { useState, useEffect } from "react";
 import Layout from "../components/layout"
 import Head from '../components/head';
 import DocumentCard from '../components/document-card';
-import { Scrollama, Step } from 'react-scrollama';
 
 import { graphql, useStaticQuery } from "gatsby"
 import { Container, Row, Col } from "react-bootstrap"
 
 const MethodologyPage = () => {
 
-  const [currentStepIndex, setCurrentStepIndex] = useState(null);
-
-  // This callback fires when a Step hits the offset threshold. It receives the
-  // data prop of the step, which in this demo stores the index of the step.
-  const onStepEnter = ({ data }) => {
-    console.log('on step enter called');
-    setCurrentStepIndex(data);
-  };
   // scroller
 
   // const [state, setState] = useState({
@@ -142,28 +133,7 @@ const MethodologyPage = () => {
   return (
     <Layout>
       <Head title="Methodology"/>
-      <Container className="mt-5">
-        <div style={{ margin: '50vh 0', border: '2px dashed skyblue' }}>
-          <div style={{ position: 'sticky', top: 0, border: '1px solid orchid' }}>
-            I'm sticky. The current triggered step index is: {currentStepIndex}
-          </div>
-          <Scrollama onStepEnter={onStepEnter} debug>
-            {[1, 2, 3, 4].map((_, stepIndex) => (
-              <Step data={stepIndex} key={stepIndex}>
-                <div
-                  style={{
-                    margin: '50vh 0',
-                    border: '1px solid gray',
-                    opacity: currentStepIndex === stepIndex ? 1 : 0.2,
-                  }}
-                >
-                  I'm a Scrollama Step of index {stepIndex}
-                </div>
-              </Step>
-            ))}
-          </Scrollama>
-        </div>
-      </Container>
+
       <Container className="mt-5">
         <Row className="justify-content-center text-center">
           <Col md="8">
