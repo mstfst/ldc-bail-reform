@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-
+import "intersection-observer"
 import { graphql, StaticQuery } from "gatsby"
 import Img from "gatsby-image"
 
@@ -8,12 +8,6 @@ import KaraNarrative from "./narrative/kara"
 import GeorgeNarrative from "./narrative/george"
 
 import "./narrative-body.scss"
-
-const background_images = [
-  "./assets/nathan_bg.jpg",
-  "./assets/kara_bg.jpg",
-  "./assets/george_bg.jpg",
-]
 
 class NarrativeSection extends Component {
   scroller
@@ -87,7 +81,7 @@ class NarrativeSection extends Component {
         step: ".narrative-step",
         threshold: scrollThreshold,
         progress: true,
-        offset: 0.2,
+        offset: 0.8,
         debug: true,
       })
       .onStepEnter(this.handleScrollStepEnter)
@@ -169,13 +163,13 @@ class NarrativeSection extends Component {
 
         <div id="narrative-scroll">
           {/* NATHAN */}
-          <NathanNarrative progress={progress} contentPosition={contentPosition} />
+          <NathanNarrative progress={progress} step={overall_step} contentPosition={contentPosition} />
 
           {/* KARA */}
-          <KaraNarrative progress={progress} contentPosition={contentPosition}/>
+          <KaraNarrative progress={progress} step={overall_step} contentPosition={contentPosition}/>
 
           {/* GEORGE */}
-          <GeorgeNarrative progress={progress} contentPosition={contentPosition}/>
+          <GeorgeNarrative progress={progress} step={overall_step} contentPosition={contentPosition}/>
         </div>
       </div>
     )
