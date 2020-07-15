@@ -48,7 +48,7 @@ const ZapModal = props => {
     obj => obj.node.zapId === props.activeContent
   )
 
-//   let modalPosition = `${(window.innerHeight - 450) / 2}px`
+  //   let modalPosition = `${(window.innerHeight - 450) / 2}px`
 
   if (modalContent) {
     return (
@@ -57,33 +57,24 @@ const ZapModal = props => {
         onHide={props.onHide}
         id="modal-zap"
         size="lg"
-        // style={{ top: modalPosition }}
+        centered
       >
-        <Modal.Header>
-          <Row>
-            <Col md="1">
-              <Img fluid={modalContent.node.zapImage.fluid} />
-
-            </Col>
-            <Col md="11">
-              <Modal.Title>{modalContent.node.title}</Modal.Title>
-            </Col>
-          </Row>
+        <Modal.Header className="zap-modal__header">
+          <Img
+            className="modal-header-icon mr-2"
+            fluid={modalContent.node.zapImage.fluid}
+          />
+          <Modal.Title>{modalContent.node.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Row>
-            <Col>
-            <h4 className="text-rust">What's actually happening?</h4>
-            </Col>
-          </Row>
-          <Row>
-            <Col className="text-container">
-              {documentToReactComponents(
-                modalContent.node.zapText.json,
-                options
-              )}
-            </Col>
-          </Row>
+          <div>
+            <h4 className="text-rust zap-subtitle">
+              What's actually happening:
+            </h4>
+          </div>
+          <div className="text-container">
+            {documentToReactComponents(modalContent.node.zapText.json, options)}
+          </div>
         </Modal.Body>
       </Modal>
     )

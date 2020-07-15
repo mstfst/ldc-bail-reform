@@ -2,16 +2,13 @@ import React, { Component } from "react"
 import "intersection-observer"
 import Layout from "../components/layout"
 import Head from "../components/head"
-// import "./system-map.scss"
 import { graphql, StaticQuery } from "gatsby"
-import { Button, Card, Col, Container, Modal, Row } from "react-bootstrap"
+import { Card, Col, Container, Row } from "react-bootstrap"
 import * as D3 from "d3"
 import svgSystemMap from "../../static/assets/system-map/SM_jun25.svg"
 import StaticModal from "../components/static-modal"
 import CogModal from "../components/cog-modal"
 import ZapModal from "../components/zap-modal"
-
-// console.log(svgSystemMap);
 
 class SystemMapPage extends Component {
   scroller
@@ -48,14 +45,12 @@ class SystemMapPage extends Component {
     // Handling visibility of "layer" elements based on step number
     // Step 0: initial state, Meet the Characters
     if (index === 0) {
-      D3.select("#prompt-0").style("display", "block")
       D3.select("#prompt-1").style("display", "none")
       D3.select("#sm-legend").style("display", "none")
       D3.select(".sm-layer__title").text("System map - layer 1")
     }
 
     if (index === 1) {
-      D3.select("#prompt-0").style("display", "none")
       D3.select("#prompt-1").style("display", "none")
       D3.select("#sm-legend").style("display", "none")
     }
@@ -112,21 +107,24 @@ class SystemMapPage extends Component {
     this.layerSteps.style("height", window.innerHeight * 1.5 + "px")
 
     D3.select("#sidebar-wrapper")
-      .style("height", window.innerHeight * 0.85 + "px")
-      .style("top", (window.innerHeight * 0.15) / 2 + "px")
+      .style("height", window.innerHeight * 0.8 + "px")
+      .style("top", (window.innerHeight * 0.2) / 2 + "px")
+
+    // Vertically centering the svg when it becomes sticky
+    D3.select("#svg-wrapper").style(
+      "top",
+      d => `${(window.innerHeight * 0.2) / 2}px`
+    )
+
     this.scroller.resize()
   }
 
   componentDidMount() {
-    // TEMPORARY: overriding the Container styling to make it wider
-    // Need to coordinate with rest of the styling
-    D3.selectAll(".mt-4.container").style("max-width", "1300px")
 
     // Storing the global "this" object to later reference it in D3 event functions
     const self = this
 
     // Storing a selection of the steps element
-    // this.systemMap = D3.select("#system-map")
     this.layerSteps = D3.select("#step-wrapper").selectAll(".step-layer")
 
     // Creating the scroller
@@ -159,12 +157,6 @@ class SystemMapPage extends Component {
     D3.xml(svgSystemMap).then(function (smSvg) {
       const viewBoxWidth = 1400 // svg container width
       const viewBoxHeight = 600 // svg container height. Needs to be the same as height for svg-wrapper specified in SCSS
-
-      // Vertically centering the svg when it becomes sticky
-      D3.select("#svg-wrapper").style(
-        "top",
-        d => `${(window.innerHeight - 600) / 2}px`
-      )
 
       // Storing a selection of the root node for the imported SVG
       let svgMap = D3.select(smSvg).select("svg").node()
@@ -245,87 +237,95 @@ class SystemMapPage extends Component {
       <Layout>
         <Head title="System Map" />
         <Container className="mt-4">
+          {/* New Row */}
           <Row>
-            <Col sm={11} md={9} id="main-col">
-              <div className="text-center col-md-10">
-                <h1 className="display-1 mb-5">System Map</h1>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
-                  commodo at rhoncus, vitae. Consequat, condimentum convallis
-                  nisl hac. Et a, sed suscipit egestas fringilla. Eu non
-                  tristique facilisi fringilla facilisi arcu urna sociis nibh.
-                  Volutpat gravida tincidunt ut venenatis egestas in tellus.
-                  Ridiculus commodo vel arcu, facilisis velit, mattis fermentum
-                  pellentesque.
-                </p>
-              </div>
-              <div id="characters__title">
-                <p>Meet the characters</p>
-              </div>
+            <div className="text-center col-md-12">
+              <h1 className="display-1 mb-5 text-rust">System Map</h1>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem
+                commodo at rhoncus, vitae. Consequat, condimentum convallis nisl
+                hac. Et a, sed suscipit egestas fringilla. Eu non tristique
+                facilisi fringilla facilisi arcu urna sociis nibh. Volutpat
+                gravida tincidunt ut venenatis egestas in tellus. Ridiculus
+                commodo vel arcu, facilisis velit, mattis fermentum
+                pellentesque.
+              </p>
+            </div>
+            <div className="text-dark" id="characters__title">
+              <p>Meet the characters</p>
+            </div>
 
-              <StaticQuery
-                query={graphql`
-                  query {
-                    allContentfulSystemMapCharacters {
-                      edges {
-                        node {
-                          id
-                          characterInitial
-                          characterName
-                          characterDescription {
-                            characterDescription
-                          }
+            <StaticQuery
+              query={graphql`
+                query {
+                  allContentfulSystemMapCharacters {
+                    edges {
+                      node {
+                        id
+                        characterInitial
+                        characterName
+                        characterDescription {
+                          characterDescription
                         }
                       }
                     }
                   }
-                `}
-                render={data => (
-                  <Container id="characters__wrapper" className="stepx">
-                    <Row>
-                      {data.allContentfulSystemMapCharacters.edges.map(edge => (
-                        <Col
-                          key={edge.node.id}
-                          xs={10}
-                          sm={10}
-                          md={4}
-                          className="mb-5"
-                        >
-                          <Card>
-                            <Card.Body className="character-card__body">
-                              <div id="character-card__id">
-                                {edge.node.characterInitial}
-                              </div>
-                              <Card.Title>{edge.node.characterName}</Card.Title>
-                              <Card.Text id="character-card__text">
-                                {
-                                  edge.node.characterDescription
-                                    .characterDescription
-                                }
-                              </Card.Text>
-                            </Card.Body>
-                          </Card>
-                        </Col>
-                      ))}
-                    </Row>
-                    <div id="arrow-down" className="stepx">
-                      <svg
-                        width="53"
-                        height="33"
-                        viewBox="0 0 53 33"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+                }
+              `}
+              render={data => (
+                <Container id="characters__wrapper" className="stepx">
+                  <Row>
+                    {data.allContentfulSystemMapCharacters.edges.map(edge => (
+                      <Col
+                        key={edge.node.id}
+                        xs={10}
+                        sm={10}
+                        md={4}
+                        className="mb-5 card-custom-column"
                       >
-                        <path
-                          d="M26.5858 23.7187L0 0V9.28125L26.5858 33L53 9.28125V0L26.5858 23.7187Z"
-                          fill="#E5521D"
-                        />
-                      </svg>
-                    </div>
-                  </Container>
-                )}
-              />
-
+                        <Card className="bg-dark text-light card-custom-dark">
+                          <Card.Body className="character-card__body">
+                            <div id="character-card__id">
+                              {edge.node.characterInitial}
+                            </div>
+                            <Card.Title className="character-card__title">
+                              {edge.node.characterName}
+                            </Card.Title>
+                            <Card.Text id="character-card__text">
+                              {
+                                edge.node.characterDescription
+                                  .characterDescription
+                              }
+                            </Card.Text>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    ))}
+                  </Row>
+                  <div id="prompt-0" className="prompt text-center">
+                    Lorem ipsum
+                  </div>
+                  <div id="arrow-down" className="stepx">
+                    <svg
+                      width="53"
+                      height="33"
+                      viewBox="0 0 53 33"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M26.5858 23.7187L0 0V9.28125L26.5858 33L53 9.28125V0L26.5858 23.7187Z"
+                        fill="#E5521D"
+                      />
+                    </svg>
+                  </div>
+                </Container>
+              )}
+            />
+          </Row>
+          {/* Old Row */}
+          <Row>
+            <Col sm={11} md={9} id="main-col">
               <div id="system-map">
                 {/* <div id="sm-layer__title">
                   <p></p>
@@ -340,13 +340,34 @@ class SystemMapPage extends Component {
             </Col>
             <Col sm={1} md={3} id="sidebar-col">
               <div id="sidebar-wrapper">
-                <p id="prompt-0" className="prompt">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Libero tortor sed erat elit. Nibh sapien ipsum nisi justo.
-                </p>
                 <p id="prompt-1" className="prompt"></p>
-                <div id="sm-legend">
-                  <p>Legend</p>
+                <div id="sm-legend" className="text-dark">
+                  <h4>Legend</h4>
+                  <div className="sm-legend__item">
+                    <div className="sm-legend__symbol">
+                      <svg
+                        width="50"
+                        height="10"
+                        viewBox="0 0 62 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M61.7071 8.70711C62.0976 8.31658 62.0976 7.68342 61.7071 7.29289L55.3431 0.928932C54.9526 0.538408 54.3195 0.538408 53.9289 0.928932C53.5384 1.31946 53.5384 1.95262 53.9289 2.34315L59.5858 8L53.9289 13.6569C53.5384 14.0474 53.5384 14.6805 53.9289 15.0711C54.3195 15.4616 54.9526 15.4616 55.3431 15.0711L61.7071 8.70711ZM0 9H61V7H0V9Z"
+                          fill="black"
+                        />
+                      </svg>
+                    </div>
+                    <p>Lorem ipsum dolor</p>
+                  </div>
+                  <div className="sm-legend__item">
+                    <div className="sm-legend__symbol">img</div>
+                    <p>Lorem ipsum dolor</p>
+                  </div>
+                  <div className="sm-legend__item">
+                    <div className="sm-legend__symbol">img</div>
+                    <p>Lorem ipsum dolor</p>
+                  </div>
                 </div>
               </div>
             </Col>
@@ -370,27 +391,6 @@ class SystemMapPage extends Component {
           onHide={this.handleCloseZap}
           activeContent={this.state.zapModalActiveContent}
         />
-
-        {/* <Modal
-          show={this.state.showCogModal}
-          onHide={this.handleClose}
-          animation={false}
-          style={{ left: this.modalX, top: this.modalY }}
-          id="modalCog"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Cog Modal</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>For layers 1 and 2</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={this.handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal> */}
       </Layout>
     )
   }
