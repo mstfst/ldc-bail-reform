@@ -1,17 +1,21 @@
 import React from "react"
-import { Jumbotron, Container, Row, Col } from "react-bootstrap"
+import { Jumbotron, Container, Card, Row, Col } from "react-bootstrap"
 import { Link } from "gatsby"
 import "./issues-hero.scss"
 
-// const IssuesHero = (props) => {
 class IssuesHero extends React.Component {
   render(){
     return (
-      <Jumbotron className="fluid pt-5 issuesHeroWrap">
-        <Container className="mt-4">
-          <Row className="justify-content-center mt-4">
+      <Jumbotron fluid className="pt-5 issuesHeroWrap">
+        <Container>
+          <Row className="justify-content-center">
             <Col className="justify-content-center" sm="3">
-              <img src="https://placehold.it/250x250" alt="Cloud image" className="issueImage" />
+              <Card className="issueImage bg-dark text-dark">
+                <Card.Img src="https://placehold.it/400x400" alt="Cloud design" />
+                <Card.ImgOverlay className="align-contents-bottom">
+                  <Card.Title><h1 className="issue-title text-dark uppercase">{ this.props.issueName }</h1></Card.Title>
+                </Card.ImgOverlay>
+              </Card>
             </Col>
           </Row>
 
