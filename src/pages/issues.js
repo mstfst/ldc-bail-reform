@@ -1,18 +1,15 @@
-import React from "react";
+import React from "react"
+import { Row, Col, Container } from "react-bootstrap"
+
 import Layout from "../components/layout"
-import Head from '../components/head';
-
-import { Container } from "react-bootstrap"
-
+import Head from '../components/head'
+import IssuesHero from "../components/issues-hero"
 
 const IssuesPages = () => {
   return (
     <Layout>
       <Head title="Issues"/>
-      <Container className="mt-4">
-        <h1>Issues</h1> 
-        <p>Issues will show up here.</p>
-      </Container>
+      <IssuesHero />
     </Layout>
   )
 }

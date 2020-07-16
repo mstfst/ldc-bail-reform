@@ -1,0 +1,35 @@
+@import "../styles/_custom.scss";
+
+.issuesHeroWrap {
+  background: $dark;
+
+  .issueImage {
+    margin-bottom: -2rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .crookedBox {
+    background: $light;
+    transform: rotate(0.85deg);
+  }
+}
+
+.pinkTag {
+  position: relative;
+  color: $light;
+  display: inline-block;
+  z-index: 2;
+
+  &:before {
+    content: '';
+    height: 100%;
+    width: 110%;
+    top: 0;
+    left: -5%;
+    position: absolute;
+    background: $pink;
+    transform: rotate(-1deg);
+    z-index: -1;
+  }
+}
