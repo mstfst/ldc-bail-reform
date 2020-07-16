@@ -11,14 +11,9 @@
   }
 
   .issueImage {
-    margin-bottom: -2rem;
+    margin-bottom: -1.5rem;
     position: relative;
-    z-index: 2;
-  }
-
-  .crookedBox {
-    background: $light;
-    transform: rotate(0.85deg);
+    z-index: 4;
   }
 }
 
