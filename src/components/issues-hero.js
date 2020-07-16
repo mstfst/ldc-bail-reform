@@ -19,7 +19,7 @@ class IssuesHero extends React.Component {
             </Col>
           </Row>
 
-          <Row md="10" className="justify-content-center pr-4 pl-4 pt-5 pb-5 crookedBox">
+          <Row md="10" className="justify-content-center pr-4 pl-4 pt-5 pb-4 crooked-box">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris feugiat orci vel justo semper varius. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam fermentum, massa ut molestie venenatis, justo nibh laoreet risus, at imperdiet nisl purus sed augue.</p>
           </Row>
 
