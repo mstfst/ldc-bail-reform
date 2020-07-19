@@ -90,6 +90,15 @@ h1, h2, h3, h4, h5, h6 {
   vertical-align: middle;
 }
 
+.nav-dropdown {
+  .dropdown-item.active {
+    display: block;
+    width: auto;
+    background: $dark;
+    padding: 0.6rem 1.2 rem;
+  }
+}
+
 // --- Modifying Layout Components ---------
 .align-contents-bottom {
   display: flex;

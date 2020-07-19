@@ -16,10 +16,31 @@ import HomeLogo from "../../static/assets/svg/logo_homepage.svg";
 const IndexPage = () => {
   const data = useStaticQuery(graphql `
     query {
-      file(relativePath: { eq: "images/home_hero.png" }) {
+      homeHero: file(relativePath: { eq: "images/home_hero.jpg" }) {
         childImageSharp {
           fluid(quality: 90, maxWidth: 2000) {
             ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      issue1: file(relativePath: { eq: "images/issue1.jpg" }) {
+        childImageSharp {
+          fixed(width: 250) {
+            ...GatsbyImageSharpFixed_tracedSVG
+          }
+        }
+      }
+      issue2: file(relativePath: { eq: "images/issue2.jpg" }) {
+        childImageSharp {
+          fixed(width: 250) {
+            ...GatsbyImageSharpFixed_tracedSVG
+          }
+        }
+      }
+      issue3: file(relativePath: { eq: "images/issue3.jpg" }) {
+        childImageSharp {
+          fixed(width: 250) {
+            ...GatsbyImageSharpFixed_tracedSVG
           }
         }
       }
@@ -31,7 +52,7 @@ const IndexPage = () => {
       <Head title="Home" />
       <Jumbotron className="hero" fluid>
         <BackgroundImage
-          fluid={data.file.childImageSharp.fluid}
+          fluid={data.homeHero.childImageSharp.fluid}
           backgroundColor={`#F08FDB`}
           alt="A jail cell overlaid with a stylized pink dot pattern"
         >
@@ -116,18 +137,18 @@ const IndexPage = () => {
 
         <Row className="justify-content-md-center mb-5 pb-5">
           <Col xs="12" md="4" className="text-center">
-            <Link to="" aria-label="Read more about Risk Averse Culture">
-              <img src="./assets/issues_1.png" className="img-fluid mb-4" alt="Culture of Fear"/>
+            <Link to="" aria-label="Read more ">
+              <Img fixed={data.issue1.childImageSharp.fixed} className="mb-4" alt="Culture of Fear"/>
             </Link>
           </Col>
           <Col xs="12" md="4" className="text-center">
             <Link to="" aria-label="Read more about Socioeconomic factors">
-              <img src="./assets/issues_2.png" className="img-fluid mb-4" alt="Making Poverty a Crime"/>
+              <Img fixed={data.issue2.childImageSharp.fixed} className="mb-4" alt="Making Poverty a Crime"/>
             </Link>
           </Col>
           <Col xs="12" md="4" className="text-center">
             <Link to="" aria-label="Read more about Insufficient Resources">
-              <img src="./assets/issues_3.png" className="img-fluid mb-4" alt="Basic Dignity and Rights"/>
+              <Img fixed={data.issue3.childImageSharp.fixed} className="mb-4" alt="Basic Dignity and Rights"/>
             </Link>
           </Col>
         </Row>
