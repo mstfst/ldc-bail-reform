@@ -66,6 +66,24 @@ class SystemMapPage extends Component {
         )
       D3.select("#sm-legend").style("display", "block")
       D3.select(".sm-layer__title").text("System map - layer 1")
+
+      let bboxTest = D3.select("#base").select("path").node().getBBox()
+        console.log(bboxTest)
+
+        D3.select("#clip-rect")
+          .attr("x", bboxTest.x)
+          .attr("y", bboxTest.y)
+          .attr("width", 0)
+          .attr("height", bboxTest.height)
+          .transition()
+          .duration(1000)
+          .attr("width", bboxTest.width)
+
+        D3.select("#base")
+          .select("path")
+          .style("fill", "red")
+          .attr("clip-path", "url(#clipper)")
+          .style("-webkit-clip-path", "url(#clipper)")
     }
 
     if (index === 3) {
@@ -120,11 +138,10 @@ class SystemMapPage extends Component {
   }
 
   componentDidMount() {
-
     // Storing the global "this" object to later reference it in D3 event functions
     const self = this
 
-    // Storing a selection of the steps element
+    // Storing a selection of the layer steps element
     this.layerSteps = D3.select("#step-wrapper").selectAll(".step-layer")
 
     // Creating the scroller
@@ -225,6 +242,37 @@ class SystemMapPage extends Component {
           self.setState({ showZapModal: true })
           self.setState({ zapModalActiveContent: this.id })
         })
+
+      // Test clip path for arrows animations
+      let mainSvg = D3.select("#svg-wrapper").select("svg")
+      console.log(mainSvg)
+      mainSvg
+        .append("clipPath")
+        .attr("id", "clipper")
+        .append("rect")
+        .attr("id", "clip-rect")
+
+      // Test event listener to test clip path animations
+      D3.select("#arrow-down").on("click", function (d) {
+        console.log("test")
+        let bboxTest = D3.select("#base").select("path").node().getBBox()
+        console.log(bboxTest)
+
+        D3.select("#clip-rect")
+          .attr("x", bboxTest.x)
+          .attr("y", bboxTest.y)
+          .attr("width", 0)
+          .attr("height", bboxTest.height)
+          .transition()
+          .duration(1000)
+          .attr("width", bboxTest.width)
+
+        D3.select("#base")
+          .select("path")
+          .style("fill", "red")
+          .attr("clip-path", "url(#clipper)")
+          .style("-webkit-clip-path", "url(#clipper)")
+      })
     })
   }
 
@@ -327,9 +375,6 @@ class SystemMapPage extends Component {
           <Row>
             <Col sm={11} md={9} id="main-col">
               <div id="system-map">
-                {/* <div id="sm-layer__title">
-                  <p></p>
-                </div> */}
                 <div id="svg-wrapper"></div>
                 <div id="step-wrapper">
                   <div className="stepx step-layer"></div>
