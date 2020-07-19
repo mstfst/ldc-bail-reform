@@ -19,7 +19,7 @@ const Header = () => {
           <Nav className="ml-auto">
             <Nav.Link as={Link} activeClassName="active" to="/narrative">Stories</Nav.Link>
             <Nav.Link as={Link} activeClassName="active" to="/system-map">System Map</Nav.Link>
-            <NavDropdown title="Issues" id="nav-dropdown"  activeClassName="active">
+            <NavDropdown title="Issues" className="nav-dropdown"  activeClassName="active">
               <NavDropdown.Item href="/issue1">Damaging Lives</NavDropdown.Item>
               <NavDropdown.Item href="/issue2">Denying Dignity</NavDropdown.Item>
               <NavDropdown.Item href="/issue3">Culture of Fear</NavDropdown.Item>
