@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 const DocumentCard = ({doc, bg, item, index, active, category = 1 }) => {
   let colour = '',
@@ -18,8 +18,8 @@ const DocumentCard = ({doc, bg, item, index, active, category = 1 }) => {
       <Card.Body>
         <p>{doc.author}</p>
         <h5>{doc.title}</h5>
-        <p className={`lead text-${colour}`}><em>"{doc.quote}"</em></p>
-        <a className="btn btn-rust" target="_blank" href={doc.url}>View Document</a>
+        <p className={`lead `} style={{ color: bg }}><em>"{doc.quote}"</em></p>
+        <a className="btn btn-rust" target="_blank" href={doc.url} style={{ backgroundColor: bg }}> View Document</a>
       </Card.Body>
     </Card>
   )

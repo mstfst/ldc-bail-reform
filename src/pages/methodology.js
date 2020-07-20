@@ -142,7 +142,7 @@ const MethodologyPage = () => {
       <Head title="Methodology"/>
 
       <NoMobile>
-      <Container className="mt-5">
+      <Container className="my-5">
         <Row className="justify-content-center text-center">
           <Col md="8">
             <h1 className="text-rust">LOREM IPSUM DOLOR SIT AMET</h1>
@@ -177,9 +177,12 @@ const MethodologyPage = () => {
               // console.log(documents);
               // console.log(item.node);
               return (
+                
               <div key={item.node.year} className="timeline-year mb-5" data-index={item.node.year}>
+                <div className="anchor" id={`year-${ item.node.year }`}></div>
+
                 <div className="timeline-year-content position-relative">
-                  <div id={`year-${ item.node.year }`} className="timeline-year-content-header d-md-flex pb-2 mb-4">
+                  <div className="timeline-year-content-header d-md-flex pb-2 mb-5">
                     <h1 className="pr-3 timeline-year-label"><strong>{item.node.year}</strong></h1>
                  
                     <div className="timeline-year-header-meta mt-4 pr-2 pr-md-5 pb-3">
@@ -246,6 +249,7 @@ const MethodologyPage = () => {
                   </div>
                 </div>
               </div>
+              
             )})
           }
             </div>  
