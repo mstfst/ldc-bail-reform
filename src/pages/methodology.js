@@ -97,14 +97,16 @@ const MethodologyPage = () => {
     if (typeof window === 'undefined') return;
 
     const scrollama = require('scrollama')
-    const scrollThreshold = 0.2;
+    const scrollThreshold = 0.5;
+    const scrollOffset = 0.3;
     const scroller = scrollama()
 
     scroller.setup({
       step: '.timeline-year',
       threshold: scrollThreshold,
       progress: true,
-      // debug: true
+      offset: scrollOffset,
+      debug: true
     })
     .onStepEnter(handleScrollStepEnter)
     .onStepExit(handleScrollStepExit)
@@ -142,7 +144,7 @@ const MethodologyPage = () => {
       <Head title="Methodology"/>
 
       <NoMobile>
-      <Container className="my-5">
+      <Container className="my-5 pt-5">
         <Row className="justify-content-center text-center">
           <Col md="8">
             <h1 className="text-rust">LOREM IPSUM DOLOR SIT AMET</h1>
@@ -194,12 +196,11 @@ const MethodologyPage = () => {
                       { sortedDocs.map((doc, index) => {
                         const month = parseFloat(doc.date.split('-')[1]) - 1;
 
+                        //set indicator counts
                         indicators[doc.date] = indicators[doc.date] || [];
                         indicators[doc.date].push([doc.date]);
                         
                         const offsetTop = (indicators[doc.date].length - 1) * 25;
-                        // console.log(offsetTop);
-
                         const offsetLeft = (month / 12) * 100;
 
                         const bg = doc.category ? doc.category.hexCode : '#888';
@@ -221,9 +222,13 @@ const MethodologyPage = () => {
                   </div>
                   <div className="timeline-year-events">
                   { item.node.events.map((event, index) => {
+
+                    const month = parseFloat(event.eventDate.split('-')[1]) - 1;
+                    const offsetTop = (month / 12) * 100;
+
                     return (
-                      <div key={index}>
-                        <h5 className="text-rust mb-0">{event.eventDate}</h5>
+                      <div key={index} className="timeline-event" style={{top: offsetTop + "%"}}>
+                        <h6 className="timeline-event-title text-rust mb-0">{event.eventDate}</h6>
                         <p>{event.eventTitle}</p>
                       </div>
                     )
