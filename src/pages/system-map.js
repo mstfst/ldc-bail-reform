@@ -283,7 +283,9 @@ class SystemMapPage extends Component {
                 render={data => (
                   <Container id="characters__wrapper" className="stepx">
                     <Row>
-                      {data.allContentfulSystemMapCharacters.edges.map(edge => (
+                      {data.allContentfulSystemMapCharacters.edges.map(edge => {
+                        console.log(edge.node.characterName)
+                        return (
                         <Col
                           key={edge.node.id}
                           xs={10}
@@ -297,16 +299,17 @@ class SystemMapPage extends Component {
                                 {edge.node.characterInitial}
                               </div>
                               <Card.Title>{edge.node.characterName}</Card.Title>
+
                               <Card.Text id="character-card__text">
-                                {
-                                  edge.node.characterDescription
-                                    .characterDescription
-                                }
+                                { edge.node.characterDescription ? edge.node.characterDescription.characterDescription : '' }
                               </Card.Text>
                             </Card.Body>
                           </Card>
                         </Col>
-                      ))}
+                        )
+                      }
+                        
+                      )}
                     </Row>
                     <div id="arrow-down" className="stepx">
                       <svg

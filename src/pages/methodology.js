@@ -174,8 +174,6 @@ const MethodologyPage = () => {
               const sortedDocs = [ ...item.node.documents];
               sortedDocs.sort((a,b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0));
               
-              console.log(item.node.documents);
-              console.log(sortedDocs);
               // console.log(documents);
               // console.log(item.node);
               return (
@@ -192,7 +190,6 @@ const MethodologyPage = () => {
                     <div className="timeline-year-indicators">          
                       { sortedDocs.map((doc, index) => {
                         const month = parseFloat(doc.date.split('-')[1]) - 1;
-                        console.log(sortedDocs.category);
 
                         indicators[doc.date] = indicators[doc.date] || [];
                         indicators[doc.date].push([doc.date]);
@@ -203,7 +200,6 @@ const MethodologyPage = () => {
                         const offsetLeft = (month / 12) * 100;
 
                         const bg = doc.category ? doc.category.hexCode : '#888';
-                        console.log(doc.date + ', ' + bg);
 
                         return (
                           <div 
