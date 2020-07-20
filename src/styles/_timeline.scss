@@ -5,6 +5,7 @@
 .timeline-year-content-header {
   position: relative;
   border-bottom: 1px solid #555;
+
 }
 
 .timeline-year-indicators {
@@ -32,7 +33,7 @@
   top: 0;
   border-left: 1px solid black;
   height: 100%;
-  width: 100%;
+  width: 16.67%;
   margin-left: 10px;
   padding-left: 10px;
 }
@@ -67,13 +68,14 @@
 }
 
 .timeline-year {
+
   .timeline-year-label {
     transition: .35s all;
   }
 
   &.active {
     .timeline-year-label {
-      color: red;
+      color: $rust;
     }
     .timeline-card-indicator {
       background-color: #007bff;
@@ -100,5 +102,12 @@
 
 .legend {
   position: sticky;
-  top: 120px;
+  top: 100px;
+}
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -90px;
+  visibility: hidden;
 }
