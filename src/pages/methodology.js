@@ -106,7 +106,7 @@ const MethodologyPage = () => {
       threshold: scrollThreshold,
       progress: true,
       offset: scrollOffset,
-      debug: true
+      // debug: true
     })
     .onStepEnter(handleScrollStepEnter)
     .onStepExit(handleScrollStepExit)
@@ -115,6 +115,7 @@ const MethodologyPage = () => {
     // setup resize event
     window.addEventListener("resize", scroller.resize);
     return () => {
+      scroller.destroy();
       window.removeEventListener('resize', scroller.resize)
     };
   }, [])
@@ -127,8 +128,8 @@ const MethodologyPage = () => {
 
   const updateActiveDocumentCard = (id) => {
     const year = id.split('-')[0];
- 
     const newDocuments = { ...documents}
+
     Object.keys(newDocuments).forEach(v => {
       if ( v.includes(year) ) {
         newDocuments[v] = false
