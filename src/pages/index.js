@@ -3,6 +3,7 @@ import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import { Row, Col, Jumbotron, Button, Container, Card } from "react-bootstrap"
 import Img from "gatsby-image"
+import BackgroundImage from "gatsby-background-image"
 
 /* Import Layout Components */
 import Layout from "../components/layout"
@@ -15,11 +16,31 @@ import HomeLogo from "../../static/assets/svg/logo_homepage.svg";
 const IndexPage = () => {
   const data = useStaticQuery(graphql `
     query {
-      file(relativePath: { eq: "images/home_hero.png" }) {
+      homeHero: file(relativePath: { eq: "images/home_hero.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 2000) {
+          fluid(quality: 90, maxWidth: 2000) {
             ...GatsbyImageSharpFluid
-            ...GatsbyImageSharpFluidLimitPresentationSize
+          }
+        }
+      }
+      issue1: file(relativePath: { eq: "images/issue1.jpg" }) {
+        childImageSharp {
+          fixed(width: 250) {
+            ...GatsbyImageSharpFixed_tracedSVG
+          }
+        }
+      }
+      issue2: file(relativePath: { eq: "images/issue2.jpg" }) {
+        childImageSharp {
+          fixed(width: 250) {
+            ...GatsbyImageSharpFixed_tracedSVG
+          }
+        }
+      }
+      issue3: file(relativePath: { eq: "images/issue3.jpg" }) {
+        childImageSharp {
+          fixed(width: 250) {
+            ...GatsbyImageSharpFixed_tracedSVG
           }
         }
       }
@@ -29,30 +50,35 @@ const IndexPage = () => {
   return (
     <Layout>
       <Head title="Home" />
-      <Jumbotron className="hero mb-1">
-        <Img className="hero-bg" fluid={data.file.childImageSharp.fluid} alt="A jail cell overlaid with a stylized pink dot pattern" />
-        <Container>
-          <Row className="justify-content-center">   
-            <Col md="10" className="text-center">
-              <HomeLogo width={300} fill='#fff' className="mt-5 mb-5"/>
-              <h1 className="display-2 mt-4 mb-0 text-rust uppercase">According to the Auditor General</h1>
-              <h1 className="display-1 mb-5 text-rust uppercase">70% of people held in Ontario jails are <span className="hero-em">legally innocent</span></h1>
-              <p className="display-3 pt-4 mb-3">Why?</p>
-              <p>
-                <Button variant="link" className="heartbeat" aria-label="Learn more">
-                  <Link to="/#main">
-                    <ChevronDown />
-                  </Link>
-                </Button>
-              </p>
-            </Col>
-        </Row>
-        </Container>
+      <Jumbotron className="hero" fluid>
+        <BackgroundImage
+          fluid={data.homeHero.childImageSharp.fluid}
+          backgroundColor={`#F08FDB`}
+          alt="A jail cell overlaid with a stylized pink dot pattern"
+        >
+          <Container>
+            <Row className="justify-content-center">   
+              <Col md="10" className="text-center">
+                <HomeLogo width={200} fill='#fff' className="mt-5 mb-5"/>
+                <h1 className="display-2 mt-4 mb-0 text-rust uppercase">According to the Auditor General</h1>
+                <h1 className="display-1 mb-5 text-rust uppercase">70% of people held in Ontario jails are <span className="hero-em">legally innocent</span></h1>
+                <p className="display-3 pt-4 mb-3">Why?</p>
+                <p>
+                  <Button variant="link" className="heartbeat mb-4" aria-label="Learn more">
+                    <Link to="/#main">
+                      <ChevronDown />
+                    </Link>
+                  </Button>
+                </p>
+              </Col>
+            </Row>
+          </Container>
+        </BackgroundImage>
       </Jumbotron>
-      
-      <Container id="main" className="pt-2">
-        <Row className="justify-content-md-center mt-5 pt-5 mb-4">
-          <Col md="10">
+
+      <Container>
+        <Row id="main" className="justify-content-md-center pt-5 mb-4">
+          <Col className="mt-4" md="10">
             <p><strong>If we have a bail system that is supposed to release people from jail, with the assurance that they show up for trial, and they aren’t a risk to public safety, then why does this issue exist?</strong></p>
             <p>We’ve created some resources to try and help you answer this question:</p>
           </Col>
@@ -111,18 +137,18 @@ const IndexPage = () => {
 
         <Row className="justify-content-md-center mb-5 pb-5">
           <Col xs="12" md="4" className="text-center">
-            <Link to="" aria-label="Read more about Risk Averse Culture">
-              <img src="./assets/issues_1.png" className="img-fluid mb-4" alt="Culture of Fear"/>
+            <Link to="" aria-label="Read more ">
+              <Img fixed={data.issue1.childImageSharp.fixed} className="mb-4" alt="Culture of Fear"/>
             </Link>
           </Col>
           <Col xs="12" md="4" className="text-center">
             <Link to="" aria-label="Read more about Socioeconomic factors">
-              <img src="./assets/issues_2.png" className="img-fluid mb-4" alt="Making Poverty a Crime"/>
+              <Img fixed={data.issue2.childImageSharp.fixed} className="mb-4" alt="Making Poverty a Crime"/>
             </Link>
           </Col>
           <Col xs="12" md="4" className="text-center">
             <Link to="" aria-label="Read more about Insufficient Resources">
-              <img src="./assets/issues_3.png" className="img-fluid mb-4" alt="Basic Dignity and Rights"/>
+              <Img fixed={data.issue3.childImageSharp.fixed} className="mb-4" alt="Basic Dignity and Rights"/>
             </Link>
           </Col>
         </Row>
