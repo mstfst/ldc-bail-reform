@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 const DocumentCard = ({doc, bg, item, index, active, category = 1 }) => {
   let colour = '',
