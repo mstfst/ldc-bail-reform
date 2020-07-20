@@ -7,6 +7,12 @@
   border-bottom: 1px solid #555;
 }
 
+.timeline-year-indicators {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+
 .timeline-card-indicator {
   position: absolute;
   bottom: -10px;
@@ -61,12 +67,12 @@
 }
 
 .timeline-year {
-  .display-3 {
+  .timeline-year-label {
     transition: .35s all;
   }
 
   &.active {
-    .display-3 {
+    .timeline-year-label {
       color: red;
     }
     .timeline-card-indicator {
@@ -90,4 +96,9 @@
 
 .scaleDown {
   transform: scale(1);
+}
+
+.legend {
+  position: sticky;
+  top: 120px;
 }
