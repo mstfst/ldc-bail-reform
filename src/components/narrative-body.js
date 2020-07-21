@@ -58,7 +58,7 @@ class NarrativeSection extends Component {
   }
 
   handleProgress = ({ progress }) => {
-   this.setState({ progress })
+    this.setState({ progress })
   }
 
   componentDidMount() {
@@ -94,15 +94,21 @@ class NarrativeSection extends Component {
       overall_step,
       kara_opacity,
       george_opacity,
-      contentPosition
+      contentPosition,
     } = this.state
-    console.log("PROGRESS: " + progress)
+
+    var content_opacity
+    content_opacity =
+      progress < 0.3
+        ? (1 / 0.23) * progress -0.3
+        : progress > 0.7
+        ? -(1 / 0.3) * progress + 3
+        : 1
 
     return (
-
       <div>
         <ProgressBar />
-        <div className="gradient-background" ></div>
+        <div className="gradient-background"></div>
 
         <StaticQuery
           query={graphql`
@@ -153,15 +159,27 @@ class NarrativeSection extends Component {
           }}
         />
 
-        <div id="narrative-scroll">
+        <div id="narrative-scroll" style={{ opacity: content_opacity }}>
           {/* NATHAN */}
-          <NathanNarrative progress={progress} step={overall_step} contentPosition={contentPosition} />
+          <NathanNarrative
+            progress={progress}
+            step={overall_step}
+            contentPosition={contentPosition}
+          />
 
           {/* KARA */}
-          <KaraNarrative progress={progress} step={overall_step} contentPosition={contentPosition}/>
+          <KaraNarrative
+            progress={progress}
+            step={overall_step}
+            contentPosition={contentPosition}
+          />
 
           {/* GEORGE */}
-          <GeorgeNarrative progress={progress} step={overall_step} contentPosition={contentPosition}/>
+          <GeorgeNarrative
+            progress={progress}
+            step={overall_step}
+            contentPosition={contentPosition}
+          />
         </div>
       </div>
     )
