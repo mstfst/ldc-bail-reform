@@ -1,4 +1,5 @@
 .narrative-step{
+
   padding-top: 30vh;
   padding-left: 10vw;
   padding-right: 10vw;
@@ -25,6 +26,14 @@
   position: absolute;
   top: -35vh;
   width: 40vw;
+}
+
+#nathan-choice-slide {
+  height: 75vh;
+}
+
+#kara-choice-slide {
+  height: 75vh;
 }
 
 .sticky {
@@ -132,6 +141,9 @@
   justify-content: center;
 }
 
+#george-choice-slide {
+  height: 85vh;
+}
 #nathan-police-station {
   align-items: flex-end;
 }
