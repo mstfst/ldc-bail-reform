@@ -10,7 +10,9 @@ import Logo from "../../static/assets/svg/logo_navbar.svg"
 
 const Header = () => {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
+    
+    <div>
+<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
       <Container>
         <Navbar.Brand as={Link} to="/" aria-label="Go to homepage">
           <Logo width={200}/>
@@ -33,6 +35,7 @@ const Header = () => {
       </Container>
     </Navbar>
     <ProgressBar/>
+    </div>
 
   )
 }
