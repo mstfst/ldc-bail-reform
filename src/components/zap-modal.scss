@@ -1,3 +1,7 @@
+#modal-zap.modal-lg {
+  max-width: 900px;
+}
+
 #modal-zap {
   .row {
     width: 100%;
@@ -71,11 +75,30 @@
     column-count: 2;
   }
 
+  .zap-modal__header {
+    justify-content: flex-start;
+  }
+
+  .modal-header-icon {
+    width: 25px;
+    height: auto;
+    margin-top: 5px;
+  }
+
   .text-container {
     column-count: 2;
     column-gap: 40px;
+    height: auto;
     h3 {
       color: #F08FDB;
     }
+
+    ul {
+      padding-left: 15px;
+    }
+  }
+
+  .zap-subtitle {
+
   }
 }

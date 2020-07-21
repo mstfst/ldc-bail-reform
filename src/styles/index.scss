@@ -80,8 +80,6 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
-// --- End Typography ---------
-
 // --- Header ---------
 .brand {
   text-transform: uppercase;
@@ -90,6 +88,15 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 10px;
   margin-bottom: 0;
   vertical-align: middle;
+}
+
+.nav-dropdown {
+  .dropdown-item.active {
+    display: block;
+    width: auto;
+    background: $dark;
+    padding: 0.6rem 1.2 rem;
+  }
 }
 
 // --- Modifying Layout Components ---------
@@ -113,6 +120,24 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   justify-content: space-between;
 }
+
+.crooked-box {
+  position: relative;
+  z-index: 2;
+
+  &:before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background: $light;
+    transform: rotate(0.85deg);
+    z-index: -1;
+  }
+}
+
 // --- End Layout Component Mods ---------
 
 
@@ -158,16 +183,8 @@ h1, h2, h3, h4, h5, h6 {
 .hero {
   background-color: $light;
   position: relative;
-}
-
-.hero-bg {
-  display: block;
-  position: absolute !important;
-  height: calc(100vh - 3rem);
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 0;
+  padding-top: 3rem; // Only needed if navbar is set to "fixed=top" vs. "sticky=top"
+  padding-bottom: 0;
 }
 
 .hero-em {
@@ -188,3 +205,4 @@ h1, h2, h3, h4, h5, h6 {
     z-index: -1;
   }
 }
+// --- End Homepage Styling ---------

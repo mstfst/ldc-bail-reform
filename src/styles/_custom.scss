@@ -45,6 +45,7 @@
 // $teal:    #20c997 !default;
 // $cyan:    #17a2b8 !default;
 
+$purple:        #7100AD;
 $rust:          #e5521d !default; // Bail Reform Color: Rust
 $pink:          #F08FDB !default; // Bail Reform Color: Pink
 $blue:          #A7D6CC !default; // Bail Reform: Cog Blue
@@ -87,7 +88,8 @@ $theme-colors: map-merge(
     "yellow":       $yellow,
     "red":          $red,
     "light":        $light,
-    "dark":         $dark
+    "dark":         $dark,
+    "purple":       $purple
   ),
   $theme-colors
 );
@@ -827,7 +829,7 @@ $navbar-dark-disabled-color:        rgba($light, .45) !default;
 
 // // Jumbotron
 
-// $jumbotron-padding:                 2rem !default;
+$jumbotron-padding:                 0 !default;
 // $jumbotron-color:                   null !default;
 // $jumbotron-bg:                      $gray-200 !default;
 
