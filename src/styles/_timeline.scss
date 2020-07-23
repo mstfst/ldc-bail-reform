@@ -7,6 +7,12 @@
   border-bottom: 1px solid #555;
 }
 
+.timeline-year-indicators {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+
 .timeline-card-indicator {
   position: absolute;
   bottom: -10px;
@@ -20,11 +26,22 @@
   transition: .35s all;
 }
 
+.timeline-year-events {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  border-left: 1px solid black;
+  height: 100%;
+  width: 100%;
+  margin-left: 10px;
+  padding-left: 10px;
+}
+
 .timeline-year-docs {
 
   position: relative;
   overflow: hidden;
-  min-height: 400px;
+  min-height: 300px;
   margin-bottom: 10vh;
   
   .card {
@@ -50,12 +67,12 @@
 }
 
 .timeline-year {
-  .display-3 {
+  .timeline-year-label {
     transition: .35s all;
   }
 
   &.active {
-    .display-3 {
+    .timeline-year-label {
       color: red;
     }
     .timeline-card-indicator {
@@ -65,4 +82,23 @@
       transform: scale(1);
     }
   }
+}
+
+.react-reveal {
+  transition: .5s all ease-out;
+  transition-delay: 1s;
+}
+
+.scaleUp {
+  transform: scale(1.2);
+  color: $rust;
+}
+
+.scaleDown {
+  transform: scale(1);
+}
+
+.legend {
+  position: sticky;
+  top: 120px;
 }

@@ -5,17 +5,17 @@ import DocumentCard from '../components/document-card';
 
 import { graphql, useStaticQuery } from "gatsby"
 import { Container, Row, Col } from "react-bootstrap"
+import NoMobile from "../components/NoMobile";
 
 const MethodologyPage = () => {
+
   // scroller
 
-  // const [state, setState] = useState({
-  //   data: 0,
-  //   steps: [10, 20, 30],
-  //   progress: 0
-  // });
-
-  //'2011-card-0': true,
+  const [state, setState] = useState({
+    data: 0,
+    steps: [10, 20, 30],
+    progress: 0
+  });
 
   const [documents, setDocuments] = useState({})
 
@@ -41,7 +41,12 @@ const MethodologyPage = () => {
               author
               quote
               url
+              category {
+                title
+                hexCode
+              }
             }
+
           }
         }
       }
@@ -64,52 +69,53 @@ const MethodologyPage = () => {
             [newKey]: index > 0 ? false : true
           }
         });
-        
       });
     })
     
   }, []); 
 
-  // const handleScrollStepEnter = ({element, index, direction}) => {
+  const handleScrollStepEnter = ({element, index, direction}) => {
 
-  //   console.log(element.dataset.index);
+    console.log(element.dataset.index);
 
-  //   const data = this.state.steps[index];
-  //   element.classList.add('active');
-  //   this.setState({data});
+    const data = state.steps[index];
+    element.classList.add('active');
+    setState({data});
 
-  //   this.updateActiveDocumentCard(`${element.dataset.index}-card-0`);
-  // }
+    // this.updateActiveDocumentCard(`${element.dataset.index}-card-0`);
+  }
 
-  // const handleScrollStepExit = ({element, index, direction}) => {
-  //   element.classList.remove('active');
-  // }
+  const handleScrollStepExit = ({element, index, direction}) => {
+    element.classList.remove('active');
+  }
 
-  // const handleProgress = ({progress}) => {
-  //   this.setState({progress});
-  // }
+  const handleProgress = ({progress}) => {
+    setState({progress});
+  }
 
-  // componentDidMount(){
-  //   const scrollama = require('scrollama')
-  //   const scrollThreshold = 0.2;
-  //   this.scroller = scrollama()
-  //   this.scroller.setup({
-  //     step: '.timeline-year',
-  //     threshold: scrollThreshold,
-  //     progress: true,
-  //     // debug: true
-  //   })
-  //   .onStepEnter(this.handleScrollStepEnter)
-  //   .onStepExit(this.handleScrollStepExit)
-  //   .onStepProgress(this.handleProgress)
+  useEffect(()=> {
+    if (typeof window === 'undefined') return;
 
-  //   // setup resize event
-  //   window.addEventListener("resize", this.scroller.resize);
-  // }
+    const scrollama = require('scrollama')
+    const scrollThreshold = 0.2;
+    const scroller = scrollama()
 
-  // componentWillUnmount(){
-  //   this.scroller.destroy();
-  // }
+    scroller.setup({
+      step: '.timeline-year',
+      threshold: scrollThreshold,
+      progress: true,
+      // debug: true
+    })
+    .onStepEnter(handleScrollStepEnter)
+    .onStepExit(handleScrollStepExit)
+    .onStepProgress(handleProgress)
+
+    // setup resize event
+    window.addEventListener("resize", scroller.resize);
+    return () => {
+      window.removeEventListener('resize', scroller.resize)
+    };
+  }, [])
 
   const indicatorClickHandler = (e) => {
    
@@ -134,6 +140,8 @@ const MethodologyPage = () => {
   return (
     <Layout>
       <Head title="Methodology"/>
+
+      <NoMobile>
       <Container className="mt-5">
         <Row className="justify-content-center text-center">
           <Col md="8">
@@ -143,56 +151,91 @@ const MethodologyPage = () => {
         </Row>
 
         <Row className="">
-          <Col md="4" xl="3" className="p-4 p-xl-5">
-            <h2>interaction</h2>
+          <Col md="2" xl="2" className="p-4 p-xl-5">
+            <div className="legend">
+              <p>Legend</p>
+              <p>Timeline</p>
+              <ul className="list-unstyled">
+              { years.map(item => (
+                <li key={`legend-${item.node.year}`}>
+                  <a href={`#year-${item.node.year}`}>{ item.node.year }</a>
+                </li>
+              ))}
+              </ul>
+            </div>
+
           </Col>
-          <Col md="8" xl="9" className="h-100 p-md-4 p-xl-5">
+          <Col md="9" xl="9" className="h-100 p-md-4 p-xl-5">
             
             <div className="timeline-wrapper mr-1 mr-md-5">
             { years.map(item => {
+
+              const indicators = {};
+              const sortedDocs = [ ...item.node.documents];
+              sortedDocs.sort((a,b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0));
+              
               // console.log(documents);
               // console.log(item.node);
               return (
               <div key={item.node.year} className="timeline-year mb-5" data-index={item.node.year}>
-                <div className="timeline-year-content">
-                  <div className="timeline-year-content-header d-md-flex pb-2 mb-4">
-                    <h1 className="display-3 pr-3"><strong>{item.node.year}</strong></h1>
+                <div className="timeline-year-content position-relative">
+                  <div id={`year-${ item.node.year }`} className="timeline-year-content-header d-md-flex pb-2 mb-4">
+                    <h1 className="pr-3 timeline-year-label"><strong>{item.node.year}</strong></h1>
+                 
                     <div className="timeline-year-header-meta mt-4 pr-2 pr-md-5 pb-3">
                       <p className="mb-1"><strong>{item.node.headline}</strong></p>
                       <p className="mb-0">{item.node.description.description}</p>
                     </div>
 
-                    <div className="timeline-year-buttons">
-                    
+                    <div className="timeline-year-indicators">          
+                      { sortedDocs.map((doc, index) => {
+                        const month = parseFloat(doc.date.split('-')[1]) - 1;
+
+                        indicators[doc.date] = indicators[doc.date] || [];
+                        indicators[doc.date].push([doc.date]);
+                        
+                        const offsetTop = (indicators[doc.date].length - 1) * 25;
+                        // console.log(offsetTop);
+
+                        const offsetLeft = (month / 12) * 100;
+
+                        const bg = doc.category ? doc.category.hexCode : '#888';
+
+                        return (
+                          <div 
+                            key={index} 
+                            className="timeline-card-indicator" 
+                            data-id={`${item.node.year}-card-${index}`} 
+                            role="button" 
+                            style={{ left: offsetLeft + '%', top: offsetTop + 'px', backgroundColor: bg}}
+                            onClick={ indicatorClickHandler }
+                          >
+                            {item.node.year}-document-{index}
+                          </div>
+                        )
+                      })}
                     </div>
-                    { item.node.documents.map((doc, index) => {
-                      const length = item.node.documents.length;
-                      const offset = (index / length) * 100;
-                            
-                      return (
-                        <div 
-                          key={index} 
-                          className="timeline-card-indicator" 
-                          data-id={`${item.node.year}-card-${index}`} 
-                          role="button" 
-                          style={{ left: offset + '%'}} 
-                          // onKeyDown={ indicatorClickHandler } 
-                          onClick={ indicatorClickHandler }
-                        >
-                          {item.node.year}-document-{index}
-                        </div>
-                      )
-                    })}
                   </div>
-                  
+                  <div className="timeline-year-events">
+                  { item.node.events.map((event, index) => {
+                    return (
+                      <div key={index}>
+                        <h5 className="text-rust mb-0">{event.eventDate}</h5>
+                        <p>{event.eventTitle}</p>
+                      </div>
+                    )
+                  })}
+                  </div>
                   <div className="timeline-year-docs mr-3 mr-md-5">
-                    { item.node.documents.map((doc, index) => {
+                    { sortedDocs.map((doc, index) => {
+                      const bg = doc.category ? doc.category.hexCode : '#888';
                       let id = `${item.node.year}-card-${index}`;
                       // console.log(documents[id]);
 
                       return(
                         <DocumentCard 
                           key={index} 
+                          bg={bg}
                           index={index} 
                           doc={doc} 
                           item={item.node} 
@@ -210,6 +253,7 @@ const MethodologyPage = () => {
           </Col>
         </Row>
       </Container>
+      </NoMobile>
     </Layout>
   )
 }
