@@ -1,16 +1,29 @@
 import React from "react"
 import { Row, Col, Container } from "react-bootstrap"
+import { useStaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Head from '../components/head'
 import IssuesHero from "../components/issues-hero"
 import MomentumTabs from "../components/issues-momentum"
 
-const Issue1Page = () => {
+const Issue2Page = () => {
+  const data = useStaticQuery(graphql `
+    query {
+      issue2: file(relativePath: { eq: "images/issue2.jpg" }) {
+        childImageSharp {
+          fixed(width: 250) {
+            ...GatsbyImageSharpFixed_tracedSVG
+          }
+        }
+      }
+    }
+  `)
+
   return (
     <Layout>
       <Head title="Issues"/>
-      <IssuesHero issueName="First Issue" link1="/issue1#momentum" link2="/issue1#opportunity" link3="/issue1#explanation" />
+      <IssuesHero issueName="Denying Dignity and Basic Rights" issueImg={ data.issue2.childImageSharp.fixed } link1="/issue2#momentum" link2="/issue2#opportunity" link3="/issue2#explanation" />
 
       <Row it="momentum" className="justify-content-center">
         <Col className="mb-2" md="9">
@@ -39,4 +52,4 @@ const Issue1Page = () => {
   )
 }
 
-export default Issue1Page
+export default Issue2Page
