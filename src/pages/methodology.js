@@ -98,7 +98,7 @@ const MethodologyPage = () => {
 
     const scrollama = require('scrollama')
     const scrollThreshold = 0.5;
-    const scrollOffset = 0.3;
+    const scrollOffset = 0.5;
     const scroller = scrollama()
 
     scroller.setup({
