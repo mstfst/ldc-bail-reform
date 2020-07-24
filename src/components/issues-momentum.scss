@@ -1,1 +1,29 @@
 @import "../styles/_custom.scss";
+
+.momentum {
+  .momentum-tab-row {
+    padding-left: 0.5rem;
+    padding-bottom: 0;
+  }
+
+  .momentum-tab {
+    background: $rust;
+    border-radius: 4px 4px 0 0;
+    
+    a {
+      border-radius: 4px 4px 0 0;
+      color: white;
+    }
+
+    a.active {
+      background: $dark;
+    }
+  }
+
+  .momentum-pane {
+    background: $dark;
+    width: 100%;
+    padding: 2rem;
+    color: white;
+  }
+}
