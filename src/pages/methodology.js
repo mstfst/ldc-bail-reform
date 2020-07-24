@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Layout from "../components/layout"
 import Head from '../components/head';
 import DocumentCard from '../components/document-card';
@@ -10,6 +10,7 @@ import NoMobile from "../components/NoMobile";
 const MethodologyPage = () => {
 
   // scroller
+  const timeline = useRef(null);
 
   const [state, setState] = useState({
     data: 0,
@@ -18,11 +19,21 @@ const MethodologyPage = () => {
   });
 
   const [documents, setDocuments] = useState({})
+  const [filter, setFilter] = useState({})
 
   // console.log(state);
 
   const data = useStaticQuery(graphql`
     query {
+      allContentfulTimelineCategory {
+        edges {
+          node {
+            id
+            title
+            hexCode
+          }
+        }
+      }
       allContentfulTimelineYear {
         edges {
           node {
@@ -42,6 +53,7 @@ const MethodologyPage = () => {
               quote
               url
               category {
+                id
                 title
                 hexCode
               }
@@ -53,14 +65,23 @@ const MethodologyPage = () => {
     }
   `)
 
-  // console.log(data);
-
   const years = [ ...data.allContentfulTimelineYear.edges].reverse();
+  const categories = [...data.allContentfulTimelineCategory.edges];
 
   useEffect(() => {
+
+    categories.forEach((category) => {
+      const id = category.node.id;
+      setFilter( prevState => {
+        return {
+          ...prevState,
+          [id] : false
+        }
+      })
+    })
     
-    years.map((year) => {
-      year.node.documents.map( (doc, index ) => {
+    years.forEach((year) => {
+      year.node.documents.forEach( (doc, index ) => {
         const newKey = `${year.node.year}-card-${index}`;
         
         setDocuments(prevState => {
@@ -75,14 +96,9 @@ const MethodologyPage = () => {
   }, []); 
 
   const handleScrollStepEnter = ({element, index, direction}) => {
-
-    console.log(element.dataset.index);
-
     const data = state.steps[index];
     element.classList.add('active');
     setState({data});
-
-    // this.updateActiveDocumentCard(`${element.dataset.index}-card-0`);
   }
 
   const handleScrollStepExit = ({element, index, direction}) => {
@@ -121,7 +137,6 @@ const MethodologyPage = () => {
   }, [])
 
   const indicatorClickHandler = (e) => {
-   
     const id = e.target.dataset.id;
     updateActiveDocumentCard(id);
   }
@@ -140,6 +155,47 @@ const MethodologyPage = () => {
     setDocuments({...newDocuments});
   }
 
+  const updateActiveCategories = (id) => {
+
+    setFilter(prevState => {
+      return {
+        ...prevState,
+        [id] : !filter[id]
+      }
+    });
+
+  }
+
+  useEffect(()=> {
+    const indicators = timeline.current.querySelectorAll('.timeline-card-indicator');
+    let filterActive = false;
+
+    Object.keys(filter).forEach( (key, index) => {
+      if ( filter[key] ) {
+        filterActive = true;
+      }
+    })
+
+    if ( filterActive ) {
+      for (const indicator of indicators) {
+        indicator.style.display = 'none';
+      }
+      Object.keys(filter).forEach( (key, index) => {
+        for (const indicator of indicators) {
+          if ( filter[key] && indicator.dataset.cat === key) {
+            indicator.style.display = 'block';
+          }
+        }
+      })
+      
+    }  else {
+      for (const indicator of indicators) {
+        indicator.style.display = 'block';
+      }
+    }
+
+  }, [filter])
+
   return (
     <Layout>
       <Head title="Methodology"/>
@@ -157,6 +213,18 @@ const MethodologyPage = () => {
           <Col md="2" xl="2" className="p-4 p-xl-5">
             <div className="legend">
               <p>Legend</p>
+              <ul className="list-unstyled">
+              { categories.map((category, index) => (
+                <li key={`category-${index}`}>
+                  <button 
+                    className={`no-swag btn-category ${filter[ category.node.id ] ? 'active' : ''}`}
+                    onClick={ () => updateActiveCategories( category.node.id )}>
+                    { category.node.title }
+                  </button>
+                </li>
+              ))}
+              </ul>
+
               <p>Timeline</p>
               <ul className="list-unstyled">
               { years.map(item => (
@@ -170,7 +238,7 @@ const MethodologyPage = () => {
           </Col>
           <Col md="9" xl="9" className="h-100 p-md-4 p-xl-5">
             
-            <div className="timeline-wrapper mr-1 mr-md-5">
+            <div ref={timeline} className="timeline-wrapper mr-1 mr-md-5">
             { years.map(item => {
 
               const indicators = {};
@@ -211,6 +279,7 @@ const MethodologyPage = () => {
                             key={index} 
                             className="timeline-card-indicator" 
                             data-id={`${item.node.year}-card-${index}`} 
+                            data-cat={doc.category ?  doc.category.id : ''}
                             role="button" 
                             style={{ left: offsetLeft + '%', top: offsetTop + 'px', backgroundColor: bg}}
                             onClick={ indicatorClickHandler }
