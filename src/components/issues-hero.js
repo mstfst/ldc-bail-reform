@@ -10,7 +10,7 @@ class IssuesHero extends React.Component {
       <Jumbotron fluid className="pt-5 pb-4 issuesHeroWrap">
         <Container>
           <Row className="justify-content-center">
-            <Col className="justify-content-center" sm="3">
+            <Col className="justify-content-center p-0" sm="3">
               <Card className="issueImage bg-dark text-dark">
                 <Img fixed={this.props.issueImg} alt={ this.props.issueName } />
               </Card>
