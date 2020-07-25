@@ -134,3 +134,17 @@
 .timeline-card {
   box-shadow: -2px 4px 6px rgba(0, 0, 0, .4);
 }
+
+.no-swag {
+  border: none;
+  background: none;
+  padding: 0;
+  border-bottom: 1px solid transparent;
+  &.active {
+    border-bottom: 1px solid  black;
+  }
+}
+
+.btn-category {
+  margin-bottom: 5px;
+}
