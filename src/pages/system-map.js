@@ -120,7 +120,6 @@ class SystemMapPage extends Component {
   }
 
   componentDidMount() {
-
     // Storing the global "this" object to later reference it in D3 event functions
     const self = this
 
@@ -236,7 +235,7 @@ class SystemMapPage extends Component {
     return (
       <Layout>
         <Head title="System Map" />
-        <Container className="mt-4">
+        <Container className="my-5 pt-5">
           {/* New Row */}
           <Row>
             <div className="text-center col-md-12">
@@ -270,39 +269,42 @@ class SystemMapPage extends Component {
                       }
                     }
                   }
-                }`
-              }
-    
-                render={data => (
-                  <Container id="characters__wrapper" className="stepx">
-                    <Row>
-                      {data.allContentfulSystemMapCharacters.edges.map(edge => {
-                        console.log(edge.node.characterName)
-                        return (
-                          <Col
-                            key={edge.node.id}
-                            xs={10}
-                            sm={10}
-                            md={4}
-                            className="mb-5"
-                          >
-                            <Card>
-                              <Card.Body className="character-card__body">
-                                <div id="character-card__id">
-                                  {edge.node.characterInitial}
-                                </div>
-                                <Card.Title>{edge.node.characterName}</Card.Title>
+                }
+              `}
+              render={data => (
+                <Container id="characters__wrapper" className="stepx">
+                  <Row>
+                    {data.allContentfulSystemMapCharacters.edges.map(edge => {
+                      // console.log(edge.node.characterName)
+                      return (
+                        <Col
+                          key={edge.node.id}
+                          xs={10}
+                          sm={10}
+                          md={4}
+                          className="mb-5 card-custom-column"
+                        >
+                          <Card className="bg-dark text-light card-custom-dark">
+                            <Card.Body className="character-card__body">
+                              <div id="character-card__id">
+                                {edge.node.characterInitial}
+                              </div>
+                              <Card.Title className="character-card__title">
+                                {edge.node.characterName}
+                              </Card.Title>
+                              <Card.Text id="character-card__text">
+                                {edge.node.characterDescription
+                                  ? edge.node.characterDescription
+                                      .characterDescription
+                                  : ""}
+                              </Card.Text>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      )
+                    })}
+                  </Row>
 
-                                <Card.Text id="character-card__text">
-                                  { edge.node.characterDescription ? edge.node.characterDescription.characterDescription : '' }
-                                </Card.Text>
-                              </Card.Body>
-                            </Card>
-                          </Col>
-                        )
-                      })}
-                    </Row>
-                    
                   <div id="prompt-0" className="prompt text-center">
                     Lorem ipsum
                   </div>
