@@ -16,9 +16,9 @@ const DocumentCard = ({doc, bg, item, index, active, category = 1 }) => {
         <h5 className="text-uppercase my-1">{doc.date}</h5>
       </Card.Header>
       <Card.Body>
-        <p className="mb-2">{doc.author}</p>
-        <p className="lead" style={{ color: bg }}>{doc.title}</p>
-        <p className={`lead `}><em>"{doc.quote}"</em></p>
+        <p className="author mb-2">{doc.author}</p>
+        <p className="title mb-2">{doc.title}</p>
+        <p className="quote mb-4" style={{ color: bg }}><em>"{doc.quote}"</em></p>
         <a className="btn btn-rust" target="_blank" href={doc.url}> View Document</a>
       </Card.Body>
     </Card>

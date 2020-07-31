@@ -11,7 +11,8 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "import": "env-cmd -f .env node import/csv-import.js"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.4.0",
