@@ -173,15 +173,34 @@ const MethodologyPage = ({data}) => {
             <div className="legend">
               <p className="text-uppercase">Legend</p>
               <ul className="list-unstyled">
-              { categories.map((category, index) => (
-                <li key={`category-${index}`}>
-                  <button 
-                    className={`no-swag btn-category ${filter[ category.node.id ] ? 'active' : ''}`}
-                    onClick={ () => updateActiveCategories( category.node.id )}>
-                    { category.node.title }
-                  </button>
-                </li>
-              ))}
+              { categories.map((category, index) => {
+                const bg = category.node.hexCode;
+                console.log(bg);
+                return (
+                  <li key={`category-${index}`}>
+
+                  <div class="form-check">
+                    <input 
+                      onClick={ () => updateActiveCategories( category.node.id )}
+                      class="form-check-input" 
+                      type="checkbox" 
+                      value="" 
+                      id={`defaultCheck-${index}`}
+                    />
+                    <label style={{ color: bg }} class="form-check-label" for={`defaultCheck-${index}`}>
+                      { category.node.title }
+                    </label>
+                  </div>
+                    
+                    {/* <button 
+                      
+                      className={`no-swag btn-category ${filter[ category.node.id ] ? 'active' : ''}`}
+                      
+                    </button> */}
+                  </li>
+                )
+              }
+              )}
               </ul>
 
               <p className="text-uppercase">Timeline</p>
