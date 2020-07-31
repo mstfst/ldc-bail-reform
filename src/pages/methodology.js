@@ -3,11 +3,11 @@ import Layout from "../components/layout"
 import Head from '../components/head';
 import DocumentCard from '../components/document-card';
 
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql } from "gatsby"
 import { Container, Row, Col } from "react-bootstrap"
 import NoMobile from "../components/NoMobile";
 
-const MethodologyPage = () => {
+const MethodologyPage = ({data}) => {
 
   // scroller
   const timeline = useRef(null);
@@ -21,50 +21,7 @@ const MethodologyPage = () => {
   const [documents, setDocuments] = useState({})
   const [filter, setFilter] = useState({})
 
-  // console.log(state);
-
-  const data = useStaticQuery(graphql`
-    query {
-      allContentfulTimelineCategory {
-        edges {
-          node {
-            id
-            title
-            hexCode
-          }
-        }
-      }
-      allContentfulTimelineYear {
-        edges {
-          node {
-            year
-            headline
-            description {
-              description
-            }
-            events {
-              eventTitle
-              eventDate
-            }
-            documents {
-              title
-              date
-              author
-              quote
-              url
-              category {
-                id
-                title
-                hexCode
-              }
-            }
-
-          }
-        }
-      }
-    }
-  `)
-
+  // define content 
   const years = [ ...data.allContentfulTimelineYear.edges].reverse();
   const categories = [...data.allContentfulTimelineCategory.edges];
 
@@ -95,6 +52,8 @@ const MethodologyPage = () => {
     
   }, []); 
 
+
+  //Handle Scrollama
   const handleScrollStepEnter = ({element, index, direction}) => {
     const data = state.steps[index];
     element.classList.add('active');
@@ -178,19 +137,19 @@ const MethodologyPage = () => {
 
     if ( filterActive ) {
       for (const indicator of indicators) {
-        indicator.style.display = 'none';
+        indicator.classList.add('disabled');
       }
       Object.keys(filter).forEach( (key, index) => {
         for (const indicator of indicators) {
           if ( filter[key] && indicator.dataset.cat === key) {
-            indicator.style.display = 'block';
+            indicator.classList.remove('disabled');
           }
         }
       })
       
     }  else {
       for (const indicator of indicators) {
-        indicator.style.display = 'block';
+        indicator.classList.remove('disabled');
       }
     }
 
@@ -212,7 +171,7 @@ const MethodologyPage = () => {
         <Row className="">
           <Col md="2" xl="2" className="p-4 p-xl-5">
             <div className="legend">
-              <p>Legend</p>
+              <p className="text-uppercase">Legend</p>
               <ul className="list-unstyled">
               { categories.map((category, index) => (
                 <li key={`category-${index}`}>
@@ -225,7 +184,7 @@ const MethodologyPage = () => {
               ))}
               </ul>
 
-              <p>Timeline</p>
+              <p className="text-uppercase">Timeline</p>
               <ul className="list-unstyled">
               { years.map(item => (
                 <li key={`legend-${item.node.year}`}>
@@ -271,7 +230,6 @@ const MethodologyPage = () => {
                         
                         const offsetTop = (indicators[doc.date].length - 1) * 25;
                         const offsetLeft = (month / 12) * 100;
-
                         const bg = doc.category ? doc.category.hexCode : '#888';
 
                         return (
@@ -338,3 +296,45 @@ const MethodologyPage = () => {
 }
 
 export default MethodologyPage
+
+export const query = graphql`
+query {
+  allContentfulTimelineCategory {
+    edges {
+      node {
+        id
+        title
+        hexCode
+      }
+    }
+  }
+  allContentfulTimelineYear {
+    edges {
+      node {
+        year
+        headline
+        description {
+          description
+        }
+        events {
+          eventTitle
+          eventDate
+        }
+        documents {
+          title
+          date
+          author
+          quote
+          url
+          category {
+            id
+            title
+            hexCode
+          }
+        }
+
+      }
+    }
+  }
+}
+`
