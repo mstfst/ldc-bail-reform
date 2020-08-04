@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Layout from "../components/layout"
 import Head from '../components/head';
 import DocumentCard from '../components/document-card';
@@ -10,6 +10,7 @@ import NoMobile from "../components/NoMobile";
 const MethodologyPage = () => {
 
   // scroller
+  const timeline = useRef(null);
 
   const [state, setState] = useState({
     data: 0,
@@ -18,11 +19,21 @@ const MethodologyPage = () => {
   });
 
   const [documents, setDocuments] = useState({})
+  const [filter, setFilter] = useState({})
 
   // console.log(state);
 
   const data = useStaticQuery(graphql`
     query {
+      allContentfulTimelineCategory {
+        edges {
+          node {
+            id
+            title
+            hexCode
+          }
+        }
+      }
       allContentfulTimelineYear {
         edges {
           node {
@@ -42,6 +53,7 @@ const MethodologyPage = () => {
               quote
               url
               category {
+                id
                 title
                 hexCode
               }
@@ -53,14 +65,23 @@ const MethodologyPage = () => {
     }
   `)
 
-  // console.log(data);
-
   const years = [ ...data.allContentfulTimelineYear.edges].reverse();
+  const categories = [...data.allContentfulTimelineCategory.edges];
 
   useEffect(() => {
+
+    categories.forEach((category) => {
+      const id = category.node.id;
+      setFilter( prevState => {
+        return {
+          ...prevState,
+          [id] : false
+        }
+      })
+    })
     
-    years.map((year) => {
-      year.node.documents.map( (doc, index ) => {
+    years.forEach((year) => {
+      year.node.documents.forEach( (doc, index ) => {
         const newKey = `${year.node.year}-card-${index}`;
         
         setDocuments(prevState => {
@@ -75,14 +96,9 @@ const MethodologyPage = () => {
   }, []); 
 
   const handleScrollStepEnter = ({element, index, direction}) => {
-
-    console.log(element.dataset.index);
-
     const data = state.steps[index];
     element.classList.add('active');
     setState({data});
-
-    // this.updateActiveDocumentCard(`${element.dataset.index}-card-0`);
   }
 
   const handleScrollStepExit = ({element, index, direction}) => {
@@ -97,13 +113,15 @@ const MethodologyPage = () => {
     if (typeof window === 'undefined') return;
 
     const scrollama = require('scrollama')
-    const scrollThreshold = 0.2;
+    const scrollThreshold = 0.5;
+    const scrollOffset = 0.5;
     const scroller = scrollama()
 
     scroller.setup({
       step: '.timeline-year',
       threshold: scrollThreshold,
       progress: true,
+      offset: scrollOffset,
       // debug: true
     })
     .onStepEnter(handleScrollStepEnter)
@@ -113,20 +131,20 @@ const MethodologyPage = () => {
     // setup resize event
     window.addEventListener("resize", scroller.resize);
     return () => {
+      scroller.destroy();
       window.removeEventListener('resize', scroller.resize)
     };
   }, [])
 
   const indicatorClickHandler = (e) => {
-   
     const id = e.target.dataset.id;
     updateActiveDocumentCard(id);
   }
 
   const updateActiveDocumentCard = (id) => {
     const year = id.split('-')[0];
- 
     const newDocuments = { ...documents}
+
     Object.keys(newDocuments).forEach(v => {
       if ( v.includes(year) ) {
         newDocuments[v] = false
@@ -137,12 +155,53 @@ const MethodologyPage = () => {
     setDocuments({...newDocuments});
   }
 
+  const updateActiveCategories = (id) => {
+
+    setFilter(prevState => {
+      return {
+        ...prevState,
+        [id] : !filter[id]
+      }
+    });
+
+  }
+
+  useEffect(()=> {
+    const indicators = timeline.current.querySelectorAll('.timeline-card-indicator');
+    let filterActive = false;
+
+    Object.keys(filter).forEach( (key, index) => {
+      if ( filter[key] ) {
+        filterActive = true;
+      }
+    })
+
+    if ( filterActive ) {
+      for (const indicator of indicators) {
+        indicator.style.display = 'none';
+      }
+      Object.keys(filter).forEach( (key, index) => {
+        for (const indicator of indicators) {
+          if ( filter[key] && indicator.dataset.cat === key) {
+            indicator.style.display = 'block';
+          }
+        }
+      })
+      
+    }  else {
+      for (const indicator of indicators) {
+        indicator.style.display = 'block';
+      }
+    }
+
+  }, [filter])
+
   return (
     <Layout>
       <Head title="Methodology"/>
 
       <NoMobile>
-      <Container className="mt-5">
+      <Container className="my-5 pt-5">
         <Row className="justify-content-center text-center">
           <Col md="8">
             <h1 className="text-rust">LOREM IPSUM DOLOR SIT AMET</h1>
@@ -154,6 +213,18 @@ const MethodologyPage = () => {
           <Col md="2" xl="2" className="p-4 p-xl-5">
             <div className="legend">
               <p>Legend</p>
+              <ul className="list-unstyled">
+              { categories.map((category, index) => (
+                <li key={`category-${index}`}>
+                  <button 
+                    className={`no-swag btn-category ${filter[ category.node.id ] ? 'active' : ''}`}
+                    onClick={ () => updateActiveCategories( category.node.id )}>
+                    { category.node.title }
+                  </button>
+                </li>
+              ))}
+              </ul>
+
               <p>Timeline</p>
               <ul className="list-unstyled">
               { years.map(item => (
@@ -167,7 +238,7 @@ const MethodologyPage = () => {
           </Col>
           <Col md="9" xl="9" className="h-100 p-md-4 p-xl-5">
             
-            <div className="timeline-wrapper mr-1 mr-md-5">
+            <div ref={timeline} className="timeline-wrapper mr-1 mr-md-5">
             { years.map(item => {
 
               const indicators = {};
@@ -177,9 +248,12 @@ const MethodologyPage = () => {
               // console.log(documents);
               // console.log(item.node);
               return (
+                
               <div key={item.node.year} className="timeline-year mb-5" data-index={item.node.year}>
+                <div className="anchor" id={`year-${ item.node.year }`}></div>
+
                 <div className="timeline-year-content position-relative">
-                  <div id={`year-${ item.node.year }`} className="timeline-year-content-header d-md-flex pb-2 mb-4">
+                  <div className="timeline-year-content-header d-md-flex pb-2 mb-5">
                     <h1 className="pr-3 timeline-year-label"><strong>{item.node.year}</strong></h1>
                  
                     <div className="timeline-year-header-meta mt-4 pr-2 pr-md-5 pb-3">
@@ -191,12 +265,11 @@ const MethodologyPage = () => {
                       { sortedDocs.map((doc, index) => {
                         const month = parseFloat(doc.date.split('-')[1]) - 1;
 
+                        //set indicator counts
                         indicators[doc.date] = indicators[doc.date] || [];
                         indicators[doc.date].push([doc.date]);
                         
                         const offsetTop = (indicators[doc.date].length - 1) * 25;
-                        // console.log(offsetTop);
-
                         const offsetLeft = (month / 12) * 100;
 
                         const bg = doc.category ? doc.category.hexCode : '#888';
@@ -206,6 +279,7 @@ const MethodologyPage = () => {
                             key={index} 
                             className="timeline-card-indicator" 
                             data-id={`${item.node.year}-card-${index}`} 
+                            data-cat={doc.category ?  doc.category.id : ''}
                             role="button" 
                             style={{ left: offsetLeft + '%', top: offsetTop + 'px', backgroundColor: bg}}
                             onClick={ indicatorClickHandler }
@@ -218,9 +292,13 @@ const MethodologyPage = () => {
                   </div>
                   <div className="timeline-year-events">
                   { item.node.events.map((event, index) => {
+
+                    const month = parseFloat(event.eventDate.split('-')[1]) - 1;
+                    const offsetTop = (month / 12) * 100;
+
                     return (
-                      <div key={index}>
-                        <h5 className="text-rust mb-0">{event.eventDate}</h5>
+                      <div key={index} className="timeline-event" style={{top: offsetTop + "%"}}>
+                        <h6 className="timeline-event-title text-rust mb-0">{event.eventDate}</h6>
                         <p>{event.eventTitle}</p>
                       </div>
                     )
@@ -246,6 +324,7 @@ const MethodologyPage = () => {
                   </div>
                 </div>
               </div>
+              
             )})
           }
             </div>  

@@ -193,7 +193,7 @@ class NathanNarrative extends Component {
               </div>
 
               <div className="narrative-step " >
-                <div className="sticky">
+                <div className="sticky" >
                   <div className="narrative-content">
                     <Row className="justify-content-md-center">
                       <Col md={4}>
@@ -218,7 +218,7 @@ class NathanNarrative extends Component {
                 <div className="scroll-height"></div>
               </div>
               <div className="narrative-step " >
-                <div className="sticky">
+                <div className="sticky" id="nathan-choice-slide">
                   <div className="narrative-content">
                     <Row className="justify-content-md-center">
                       <Col md={8}>
