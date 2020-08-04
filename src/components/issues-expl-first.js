@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import "./issues-expl-first.scss"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import * as D3 from "d3"
-import svgExplImport from "../../static/assets/system-map/EE_jul19.svg"
+import svgExplImport from "../../static/assets/system-map/EE_1.svg"
 
 class ExplFirst extends Component {
   scroller
@@ -12,9 +12,9 @@ class ExplFirst extends Component {
   layerSteps
   index
   progress
-  step0
-  step1
-  step2
+  layer0
+  layer1
+  layer2
   s0Bbox1
   s0Bbox2
   s0Bbox3
@@ -23,117 +23,163 @@ class ExplFirst extends Component {
   s2Bbox1
   s2Bbox2
 
+  // List of ids for arrows to animate
+  nodeList = [
+    "s0-arrowP-1",
+    "s0-arrowP-2",
+    "s0-arrowP-3",
+    "s1-arrowP-1",
+    "s1-arrowP-2",
+    "s2-arrowP-1",
+    "s2-arrowP-2",
+  ]
+
+  state = {
+    step_index: 0,
+  }
+
   handleScrollStepEnter = ({ element, index, direction }) => {
     // Updating current step index
-    this.index = index
-    console.log(this.index)
+    this.setState({
+      step_index: index,
+    })
 
-    if (this.index === 0) {
+    // Animating main steps ("layers")
+
+    if (
+      this.state.step_index === 1 ||
+      this.state.step_index === 2 ||
+      this.state.step_index === 3
+    ) {
+      this.layer0.style("display", "block")
+      this.layer1.style("display", "none")
+      this.layer2.style("display", "none")
+
+      D3.select("#layer-txt-1").style("display", "block")
+      D3.select("#layer-txt-2").style("display", "none")
+      D3.select("#layer-txt-3").style("display", "none")
+
+    } else if (this.state.step_index === 4 || this.state.step_index === 5) {
+      this.layer0.style("display", "none")
+      this.layer1.style("display", "block")
+      this.layer2.style("display", "none")
+
+      D3.select("#layer-txt-1").style("display", "none")
+      D3.select("#layer-txt-2").style("display", "block")
+      D3.select("#layer-txt-3").style("display", "none")
+
+    } else if (this.state.step_index === 6 || this.state.step_index === 7) {
+      this.layer0.style("display", "none")
+      this.layer1.style("display", "none")
+      this.layer2.style("display", "block")
+
+      D3.select("#layer-txt-1").style("display", "none")
+      D3.select("#layer-txt-2").style("display", "none")
+      D3.select("#layer-txt-3").style("display", "block")
+    }
+
+    // Animating arrows.
+    if (this.state.step_index === 0) {
+      // Reset arrow clip paths to original position
+      // -> when back at step 0, arrows are hidden
+      // so they can be animated again later
       D3.select("#rect-s0-arrowP-1")
-        .attr("x", this.s0Bbox1.x)
-        .attr("y", this.s0Bbox1.y + this.s0Bbox1.height)
-        .attr("width", this.s0Bbox1.width)
-        .attr("height", this.s0Bbox1.height)
+        .attr("x", this.bbox1.x)
+        .attr("y", this.bbox1.y + this.bbox1.height)
+      D3.select("#rect-s0-arrowP-2")
+        .attr("x", this.bbox2.x)
+        .attr("y", this.bbox2.y + this.bbox2.height)
+      D3.select("#rect-s0-arrowP-3")
+        .attr("x", this.bbox3.x)
+        .attr("y", this.bbox3.y + this.bbox3.height)
+      D3.select("#rect-s1-arrowP-1")
+        .attr("x", this.bbox4.x + this.bbox4.width)
+        .attr("y", this.bbox4.y)
+      D3.select("#rect-s1-arrowP-2")
+        .attr("x", this.bbox5.x + this.bbox5.width)
+        .attr("y", this.bbox5.y)
+      D3.select("#rect-s2-arrowP-1")
+        .attr("x", this.bbox6.x + this.bbox6.width)
+        .attr("y", this.bbox6.y)
+      D3.select("#rect-s2-arrowP-2")
+        .attr("x", this.bbox7.x + this.bbox7.width)
+        .attr("y", this.bbox7.y)
 
-      D3.select("#s0-arrowP-1")
-        .attr("clip-path", "url(#clip-s0-arrowP-1)")
-        .style("-webkit-clip-path", "url(#clip-s0-arrowP-1)")
+      // Reset main arrow groups as display: none
+      D3.select("#s0-arrow-1").style("display", "none")
+      D3.select("#s0-arrow-2").style("display", "none")
+      D3.select("#s0-arrow-3").style("display", "none")
+
+      // Reset explanation texts as display: none
+      D3.selectAll(".explanation-text").style("display", "none")
+    } else if (this.state.step_index === 1) {
+      // Show main arrow group, to display overlay
+      D3.select("#s0-arrow-1").style("display", "block")
+
+      // Show corresponding explanation text in sidebar
+      D3.select("#explanation-1").style("display", "block")
+
+      // Animating arrows. First 3 arrows animate bottom to top
+      // Other 4 arrows animate right to left
+      D3.select("#rect-s0-arrowP-1")
+        .transition()
+        .duration(1000)
+        .attr("y", this.bbox1.y)
+    } else if (this.state.step_index === 2) {
+      D3.select("#s0-arrow-2").style("display", "block")
+
+      D3.select("#explanation-2").style("display", "block")
 
       D3.select("#rect-s0-arrowP-2")
-        .attr("x", this.s0Bbox2.x)
-        .attr("y", this.s0Bbox2.y + this.s0Bbox2.height)
-        .attr("width", this.s0Bbox2.width)
-        .attr("height", this.s0Bbox2.height)
+        .transition()
+        .duration(1000)
+        .attr("y", this.bbox2.y)
+    } else if (this.state.step_index === 3) {
+      D3.select("#s0-arrow-3").style("display", "block")
 
-      D3.select("#s0-arrowP-2")
-        .attr("clip-path", "url(#clip-s0-arrowP-2)")
-        .style("-webkit-clip-path", "url(#clip-s0-arrowP-2)")
+      D3.select("#explanation-3").style("display", "block")
 
       D3.select("#rect-s0-arrowP-3")
-        .attr("x", this.s0Bbox3.x)
-        .attr("y", this.s0Bbox3.y + this.s0Bbox3.height)
-        .attr("width", this.s0Bbox3.width)
-        .attr("height", this.s0Bbox3.height)
+        .transition()
+        .duration(1000)
+        .attr("y", this.bbox3.y)
+    } else if (this.state.step_index === 4) {
+      D3.select("#explanation-4").style("display", "block")
 
-      D3.select("#s0-arrowP-3")
-        .attr("clip-path", "url(#clip-s0-arrowP-3)")
-        .style("-webkit-clip-path", "url(#clip-s0-arrowP-3)")
-        
+      D3.select("#rect-s1-arrowP-1")
+        .transition()
+        .duration(1000)
+        .attr("x", this.bbox4.x)
+    } else if (this.state.step_index === 5) {
+      D3.select("#explanation-5").style("display", "block")
+
+      D3.select("#rect-s1-arrowP-2")
+        .transition()
+        .duration(1000)
+        .attr("x", this.bbox5.x)
+    } else if (this.state.step_index === 6) {
+      D3.select("#explanation-6").style("display", "block")
+
+      D3.select("#rect-s2-arrowP-1")
+        .transition()
+        .duration(1000)
+        .attr("x", this.bbox6.x)
+    } else if (this.state.step_index === 7) {
+      D3.select("#explanation-7").style("display", "block")
+
+      D3.select("#rect-s2-arrowP-2")
+        .transition()
+        .duration(1000)
+        .attr("x", this.bbox7.x)
     }
   }
 
   handleScrollStepExit = ({ element, index, direction }) => {}
 
-  handleProgress = ({ progress }) => {
-    this.progress = progress
-    console.log(this.progress)
-
-    // Handling visibility of explanation layer elements based on step number
-
-    // Step 0
-    if (this.index === 0) {
-      this.step0.style("display", "block")
-      this.step1.style("display", "none")
-      this.step2.style("display", "none")
-
-      if (progress < 0.25) {
-        // console.log("0 0")
-        this.step0.select("#titleBlock-1").style("opacity", "1")
-
-      } if (progress > 0.25) {
-        D3.select("#rect-s0-arrowP-1")
-        .transition()
-        .duration(1000)
-        .attr("y", this.s0Bbox1.y)
-      } if (progress > 0.50) {
-        D3.select("#rect-s0-arrowP-2")
-        .transition()
-        .duration(1000)
-        .attr("y", this.s0Bbox2.y)
-      } if (progress > 0.75) {
-        D3.select("#rect-s0-arrowP-3")
-        .transition()
-        .duration(1000)
-        .attr("y", this.s0Bbox3.y)
-      }
-    }
-    // Step 1
-    else if (this.index === 1) {
-      this.step0.style("display", "none")
-      this.step1.style("display", "block")
-      this.step2.style("display", "none")
-      if (progress < 0.33) {
-        // console.log("1 0")
-        this.step1.select("#titleBlock-2").style("opacity", "1")
-      } else if (progress < 0.66) {
-        // console.log("1 1")
-        this.step1.select("#s1-arrow-1").style("opacity", "1")
-      } else if (progress > 0.66) {
-        // console.log("1 2")
-        this.step1.select("#s1-arrow-2").style("opacity", "1")
-      }
-    }
-    // Step 2
-    else if (this.index === 2) {
-      this.step0.style("display", "none")
-      this.step1.style("display", "none")
-      this.step2.style("display", "block")
-      if (progress < 0.33) {
-        // console.log("2 0")
-        this.step2.select("#titleBlock-3").style("opacity", "1")
-      } else if (progress < 0.66) {
-        // console.log("2 1")
-        this.step2.select("#s2-arrow-1").style("opacity", "1")
-      } else if (progress > 0.66) {
-        // console.log("2 2")
-        this.step2.select("#s2-arrow-2").style("opacity", "1")
-      }
-    }
-  }
+  handleProgress = ({ progress }) => {}
 
   handleResize = () => {
-    this.layerSteps.style("height", window.innerHeight * 2.5 + "px")
-    console.log(this.layerSteps)
+    this.layerSteps.style("height", window.innerHeight * 0.75 + "px")
 
     D3.select("#expl-sidebar-wrapper")
       .style("height", window.innerHeight * 0.8 + "px")
@@ -156,97 +202,108 @@ class ExplFirst extends Component {
       ".expl-step-layer"
     )
 
-    D3.xml(svgExplImport).then(function (explSvg) {
-      const viewBoxWidth = 1400 // svg container width
-      const viewBoxHeight = 1120 // svg container height. Needs to be the same as height for svg-wrapper specified in SCSS
+    D3.xml(svgExplImport)
+      .then(function (explSvg) {
+        const viewBoxWidth = 1500 // svg container width
+        const viewBoxHeight = 1200 // svg container height. Needs to be the same as height for svg-wrapper specified in SCSS
 
-      // Storing a selection of the root node for the imported SVG
-      let explMap = D3.select(explSvg).select("svg").node()
+        // Storing a selection of the root node for the imported SVG
+        let explMap = D3.select(explSvg).select("svg").node()
 
-      // Appending the imported SVG to svg-wrapper
-      D3.select("#expl-svg-wrapper").node().appendChild(explMap)
+        // Appending the imported SVG to svg-wrapper
+        D3.select("#expl-svg-wrapper").node().appendChild(explMap)
 
-      D3.select(explMap)
-        .attr("width", "100%")
-        .attr("height", "100%")
-        .attr("viewBox", "0 0 " + viewBoxWidth + " " + viewBoxHeight)
-        .selectAll("title")
-        .remove()
+        D3.select(explMap)
+          .attr("width", "100%")
+          .attr("height", "100%")
+          .attr("viewBox", "0 0 " + viewBoxWidth + " " + viewBoxHeight)
+          .selectAll("title")
+          .remove()
 
-      // Calculating bounding boxes for arrows
-      self.s0Bbox1 = D3.select("#s0-arrowP-1").node().getBBox()
-      self.s0Bbox2 = D3.select("#s0-arrowP-2").node().getBBox()
-      console.log(self.s0Bbox2)
-      self.s0Bbox3 = D3.select("#s0-arrowP-3").node().getBBox()
-      // self.s1Bbox1 = D3.select("#s1-arrowP-1").node().getBBox()
-      // self.s1Bbox2 = D3.select("#s1-arrowP-2").node().getBBox()
-      // self.s2Bbox1 = D3.select("#s2-arrowP-1").node().getBBox()
-      // self.s2Bbox2 = D3.select("#s2-arrowP-2").node().getBBox()
+        ///////// BOUNDING BOXES /////////
 
-      // Initially hiding overlay elements
-      // These will later be shown based on scrollama triggers
-      self.step0 = D3.select("#slide-1")
-      self.step1 = D3.select("#slide-2")
-      self.step2 = D3.select("#slide-3")
-
-      self.step0.style("display", "none")
-      self.step1.style("display", "none")
-      self.step2.style("display", "none")
-
-      ///////// CLIP PATHS /////////
-
-      // List of ids for arrows to animate
-      let nodeList = [
-        "s0-arrowP-1",
-        "s0-arrowP-2",
-        "s0-arrowP-3",
-        "s1-arrowP-1",
-        "s1-arrowP-2",
-        "s2-arrowP-1",
-        "s2-arrowP-2",
-      ]
-
-      let mainSvg = D3.select("#expl-svg-wrapper").select("svg")
-
-      // Appending clip paths for arrows (no dimensions yet)
-      nodeList.forEach(d =>
-        mainSvg
-          .append("clipPath")
-          .attr("id", `clip-${d}`)
-          .append("rect")
-          .attr("id", `rect-${d}`)
-      )
-      // Old clip path
-      // mainSvg
-      //   .append("clipPath")
-      //   .attr("id", "clipper")
-      //   .append("rect")
-      //   .attr("id", "clip-rect")
-
-      // Creating the scroller
-      const scrollama = require("scrollama")
-      self.scroller = scrollama()
-
-      // Firing resize function
-      self.handleResize()
-
-      // Setting up the Scroller
-      const scrollThreshold = 0.9
-      self.scroller
-        .setup({
-          step: ".expl-step",
-          offset: 0.7,
-          threshold: scrollThreshold,
-          progress: true,
-          debug: true,
+        // Looping through nodeList to calculate bounding boxes
+        // Order of operations is important, this must happen before
+        // setting the layers to display: none
+        self.nodeList.forEach((d, i) => {
+          self[`bbox${i + 1}`] = D3.select("#" + d)
+            .node()
+            .getBBox()
         })
-        .onStepEnter(self.handleScrollStepEnter)
-        .onStepExit(self.handleScrollStepExit)
-        .onStepProgress(self.handleProgress)
 
-      // setup resize event
-      window.addEventListener("resize", self.scroller.resize())
-    })
+        ///////// LAYERS /////////
+
+        // Creating variables for layersƒ
+        self.layer0 = D3.select("#slide-1")
+        self.layer1 = D3.select("#slide-2")
+        self.layer2 = D3.select("#slide-3")
+
+        // Initially hide layers - will later be shown based on scrollama triggers
+        self.layer0.style("display", "none")
+        self.layer1.style("display", "none")
+        self.layer2.style("display", "none")
+
+        ///////// SCROLLAMA /////////
+
+        // Creating the scroller
+        const scrollama = require("scrollama")
+        self.scroller = scrollama()
+
+        // Firing resize function
+        self.handleResize()
+
+        // Setting up the Scroller
+        const scrollThreshold = 0.9
+        self.scroller
+          .setup({
+            step: ".expl-step",
+            offset: 0.7,
+            threshold: scrollThreshold,
+            progress: true,
+            debug: false,
+          })
+          .onStepEnter(self.handleScrollStepEnter)
+          .onStepExit(self.handleScrollStepExit)
+          .onStepProgress(self.handleProgress)
+
+        // setup resize event
+        window.addEventListener("resize", self.scroller.resize())
+      })
+      .then(d => {
+        ///////// CLIP PATHS /////////
+
+        // Appending clip paths to animate arrows
+        // In a separate promise response, otherwise would throw error
+
+        let mainSvg = D3.select("#expl-svg-wrapper").select("svg")
+
+        // Looping through nodeList to append clippaths
+        this.nodeList.forEach((d, i) => {
+          let clipPath = mainSvg
+            .append("clipPath")
+            .attr("id", `clip-${d}`)
+            .append("rect")
+            .attr("id", `rect-${d}`)
+            .attr("width", self[`bbox${i + 1}`].width)
+            .attr("height", self[`bbox${i + 1}`].height)
+
+          // Animating arrows. First 3 arrows animate bottom to top
+          // Other 4 arrows animate right to left
+          if (i < 3) {
+            clipPath
+              .attr("x", self[`bbox${i + 1}`].x)
+              .attr("y", self[`bbox${i + 1}`].y + self[`bbox${i + 1}`].height)
+          } else if (i >= 3) {
+            clipPath
+              .attr("x", self[`bbox${i + 1}`].x + self[`bbox${i + 1}`].width)
+              .attr("y", self[`bbox${i + 1}`].y)
+          }
+
+          D3.select(`#${d}`)
+            .attr("clip-path", `url(#clip-${d})`)
+            .style("-webkit-clip-path", `url(#clip-${d})`)
+        })
+      })
   }
 
   componentWillUnmount() {
@@ -288,9 +345,13 @@ class ExplFirst extends Component {
         {/* <p>{this.props.text}</p> */}
         <Row id="explanation-1__row">
           <Col sm={11} md={9} id="main-col">
-            <div id="explanation-map">
+            <div id="explanation-map" className="expl-step">
               <div id="expl-svg-wrapper"></div>
               <div id="expl-step-wrapper">
+                <div className="expl-step expl-step-layer"></div>
+                <div className="expl-step expl-step-layer"></div>
+                <div className="expl-step expl-step-layer"></div>
+                <div className="expl-step expl-step-layer"></div>
                 <div className="expl-step expl-step-layer"></div>
                 <div className="expl-step expl-step-layer"></div>
                 <div className="expl-step expl-step-layer"></div>
@@ -299,14 +360,32 @@ class ExplFirst extends Component {
           </Col>
           <Col sm={1} md={3} id="expl-sidebar-col">
             <div id="expl-sidebar-wrapper" className="text-dark">
-              <div className="explanation-text" id="explanation-1">
-                Explanation 1
+              <div id="layer-txt-1">
+                <div className="explanation-text" id="explanation-1">
+                  Explanation 1
+                </div>
+                <div className="explanation-text" id="explanation-2">
+                  Explanation 2
+                </div>
+                <div className="explanation-text" id="explanation-3">
+                  Explanation 3
+                </div>
               </div>
-              <div className="explanation-text" id="explanation-2">
-                Explanation 2
+              <div id="layer-txt-2">
+                <div className="explanation-text" id="explanation-4">
+                  Explanation 4
+                </div>
+                <div className="explanation-text" id="explanation-5">
+                  Explanation 5
+                </div>
               </div>
-              <div className="explanation-text" id="explanation-3">
-                Explanation 3
+              <div id="layer-txt-3">
+                <div className="explanation-text" id="explanation-6">
+                  Explanation 6
+                </div>
+                <div className="explanation-text" id="explanation-7">
+                  Explanation 7
+                </div>
               </div>
             </div>
           </Col>
