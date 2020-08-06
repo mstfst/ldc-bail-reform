@@ -21,16 +21,16 @@ const Header = () => {
             className={headerStyles.nav}
           >
             <Nav className="ml-auto">
-              <Nav.Link as={Link} activeClassName="active" to="/narrative">
+              <Nav.Link as={Link} to="/narrative">
                 Stories
               </Nav.Link>
-              <Nav.Link as={Link} activeClassName="active" to="/system-map">
+              <Nav.Link as={Link} to="/system-map">
                 System Map
               </Nav.Link>
               <NavDropdown
                 title="Issues"
                 className="nav-dropdown"
-                activeClassName="active"
+              
               >
                 <NavDropdown.Item href="/issue1">
                   Damaging Lives
@@ -43,7 +43,7 @@ const Header = () => {
                 </NavDropdown.Item>
               </NavDropdown>
 
-              <Nav.Link as={Link} activeClassName="active" to="/methodology">
+              <Nav.Link as={Link} to="/methodology">
                 Methodology
               </Nav.Link>
               <Nav.Link
