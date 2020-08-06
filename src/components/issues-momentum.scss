@@ -41,7 +41,10 @@
       }
 
       .article-heading {
-
+        flex: 1;
+        display: flex;
+        align-items: center;
+        padding: 1rem;
       }
     }
 
