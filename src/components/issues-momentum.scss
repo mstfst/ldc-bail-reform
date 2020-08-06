@@ -25,5 +25,12 @@
     width: 100%;
     padding: 2rem;
     color: white;
+    box-sizing: border-box;
+  }
+
+  .article-thumb {
+    background: grey;
+    height: 100px;
+    width: 100px;
   }
 }
