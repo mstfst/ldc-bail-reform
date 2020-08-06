@@ -58,6 +58,7 @@ export default class ProgressBar extends Component {
           {sections.map((section, idx) => {
             return (
               <a
+                key={`progress-${idx}`}
                 href={`#narrative-${section.title}`}
                 className="progress-step section-progress-step"
                 style={{
