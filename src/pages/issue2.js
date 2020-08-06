@@ -25,8 +25,8 @@ const Issue2Page = () => {
       <Head title="Issues"/>
       <IssuesHero issueName="Denying Dignity and Basic Rights" issueImg={ data.issue2.childImageSharp.fixed } link1="/issue2#momentum" link2="/issue2#opportunity" link3="/issue2#explanation" />
 
-      <Row it="momentum" className="justify-content-center">
-        <Col className="mb-2" md="9">
+      <Row id="momentum" className="justify-content-center">
+        <Col className="mb-2" md="10" lg="8">
           <h2 className="text-center uppercase">Momentum</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris feugiat orci vel justo semper varius. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam fermentum, massa ut molestie venenatis, justo nibh laoreet risus, at imperdiet nisl purus sed augue.</p>
         </Col>
@@ -37,7 +37,7 @@ const Issue2Page = () => {
       </Row>
 
       <Row id="opportunity" className="justify-content-center pt-5 pb-5 pl-4 pr-4 bg-rust">
-        <Col className="mb-2 pt-4 pb-4 crooked-box" md="9">
+        <Col className="mb-2 pt-4 pb-4 crooked-box" md="10" lg="8">
           <h2 className="text-center uppercase text-pink">Opportunity</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris feugiat orci vel justo semper varius. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam fermentum, massa ut molestie venenatis, justo nibh laoreet risus, at imperdiet nisl purus sed augue.</p>
         </Col>
