@@ -7,11 +7,20 @@ import NathanNarrative from "./narrative/nathan"
 import KaraNarrative from "./narrative/kara"
 import GeorgeNarrative from "./narrative/george"
 
-import ProgressBar from "./progress-bar"
+import ProgressBar from "./progress-bar/index"
 
 import "./narrative-body.scss"
 
 class NarrativeSection extends Component {
+  constructor(props) {
+    super(props)
+    // this.nathanRef = React.createRef()
+    this.karaRef = React.createRef()
+    this.georgeRef = React.createRef()
+    this.nathanRef = React.createRef()
+    this.narrativeRef = React.createRef();
+
+  }
   scroller
 
   state = {
@@ -87,6 +96,11 @@ class NarrativeSection extends Component {
     this.scroller.destroy()
   }
 
+  scrollToRef = (character) => {
+    console.log(character)
+    // window.scrollTo(0, this.karaRef.current.offsetTop)
+  }
+
   render() {
     const {
       story_stp,
@@ -100,14 +114,30 @@ class NarrativeSection extends Component {
     var content_opacity
     content_opacity =
       progress < 0.3
-        ? (1 / 0.23) * progress -0.3
+        ? (1 / 0.23) * progress - 0.3
         : progress > 0.7
         ? -(1 / 0.3) * progress + 3
         : 1
 
     return (
       <div>
-        <ProgressBar />
+        <ProgressBar
+          scrollTo={this.scrollToRef}
+          sections={[
+            {
+              title: "nathan",
+              stepCount: 5,
+            },
+            {
+              title: "kara",
+              stepCount: 8,
+            },
+            {
+              title: "george",
+              stepCount: 6,
+            },
+          ]}
+        />
         <div className="gradient-background"></div>
 
         <StaticQuery
@@ -159,15 +189,16 @@ class NarrativeSection extends Component {
           }}
         />
 
-        <div id="narrative-scroll" style={{ opacity: content_opacity }}>
+        <div id="narrative-scroll" style={{ opacity: content_opacity }} ref={this.narrativeRef}>
           {/* NATHAN */}
+          {/* <div ref={this.nathanRef} ></div> */}
           <NathanNarrative
             progress={progress}
             step={overall_step}
             contentPosition={contentPosition}
           />
-
           {/* KARA */}
+          {/* <div ref={this.karaRef} ></div> */}
           <KaraNarrative
             progress={progress}
             step={overall_step}
@@ -175,6 +206,7 @@ class NarrativeSection extends Component {
           />
 
           {/* GEORGE */}
+          {/* <div ref={this.georgeRef} ></div> */}
           <GeorgeNarrative
             progress={progress}
             step={overall_step}

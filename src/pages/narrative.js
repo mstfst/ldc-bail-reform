@@ -5,20 +5,19 @@ import { graphql, StaticQuery } from "gatsby"
 import Img from "gatsby-image"
 import Head from "../components/head"
 import NarrativeComponent from "../components/narrative-body"
+import "./narrative.scss"
 
-// have the content stick while scrolling
-// work on the scrollbar
 
 const NarrativePage = () => {
   return (
     <Layout>
       <Head title="Narrative" />
-      {/* <StaticQuery
+      <StaticQuery
           query={graphql`
             query {
               intro_bg: file(relativePath: { eq: "images/intro_bg.jpg" }) {
                 childImageSharp {
-                  fluid(maxWidth: 4000) {
+                  fluid(maxWidth: 2000) {
                     ...GatsbyImageSharpFluid
                   }
                 }
@@ -28,11 +27,11 @@ const NarrativePage = () => {
           render={data => {
             return (
               <div class="narrative-intro-background">
-                  <Img fluid={data.intro_bg.childImageSharp.fluid} />
+                  <Img fluid={data.intro_bg.childImageSharp.fluid} height="100vh" />
               </div>
             )
           }}
-        /> */}
+        />
       <NarrativeComponent />
     </Layout>
   )

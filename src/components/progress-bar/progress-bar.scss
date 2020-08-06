@@ -1,0 +1,39 @@
+$bar-width: 0.1rem;
+$box-dim: 0.8rem;
+$dot-box-dim: 0.6rem;
+$box-border: 0.1rem;
+$bar-height: 30rem;
+
+.progress-bar {
+  position: fixed;
+  height: $bar-height;
+  width: $bar-width;
+  background-color: white;
+  top: 20vh;
+  right: 2vw;
+}
+
+.progress-step {
+  position: absolute;
+  width: $box-dim;
+  height: $box-dim;
+  border: $box-border solid white;
+  background-color: rgba($color: #000000, $alpha: 0);
+  left: (-1) * $box-dim / 2 + $box-border;
+}
+
+#starter-progress-step {
+  top: (-1) * $box-dim + $box-border;
+}
+
+#end-progress-step {
+  top: $bar-height;
+}
+
+.progress-dot {
+  position: absolute;
+  width: $dot-box-dim;
+  height: $dot-box-dim;
+  background-color: rgba($color: #ffffff, $alpha: 1);
+  left: (-1) * $dot-box-dim / 2 + $box-border;
+}
