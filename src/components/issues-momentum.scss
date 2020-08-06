@@ -32,6 +32,10 @@
 
       .article-item {
         border: 1px $light solid;
+
+        img {
+          width: 100px;
+        }
       }
 
       .article-thumb {

@@ -38,12 +38,10 @@ class MomentumTabs extends React.Component {
                         <Col sm="6" className="article-list">
                         {/* Repeat this per article item */}
                           <Row className="no-gutters article-item">
-                            <Col xs="2">
-                              <img src="https://placehold.it/100x100" />
-                            </Col>
-                            <Col xs="10" className="article-heading display-4">
+                            <img src="https://placehold.it/100x100" />
+                            <div className="article-heading display-4">
                               Legal Aid Ontario’s Bail Court Cuts Endanger Constitutional Rights, Expert Warns
-                            </Col>
+                            </div>
                           </Row>
                         {/* End article item */}
                         </Col>
