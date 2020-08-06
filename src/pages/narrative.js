@@ -26,7 +26,7 @@ const NarrativePage = () => {
           `}
           render={data => {
             return (
-              <div class="narrative-intro-background">
+              <div className="narrative-intro-background">
                   <Img fluid={data.intro_bg.childImageSharp.fluid} height="100vh" />
               </div>
             )
