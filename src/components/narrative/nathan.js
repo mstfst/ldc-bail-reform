@@ -145,7 +145,7 @@ class NathanNarrative extends Component {
           const modalContent = data.allContentfulNarrativeModalTemplate.edges
 
           return (
-            <div>
+            <div id="narrative-nathan">
               <div className="narrative-step">
                 <div className="sticky">
                   <div className="narrative-content">

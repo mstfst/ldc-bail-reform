@@ -55,17 +55,18 @@ export default class ProgressBar extends Component {
         ></div>
         <div className="progress-step" id="starter-progress-step"></div>
         <div className="sections">
-          {/* {sections.map((section, idx) => {
+          {sections.map((section, idx) => {
             return (
-              <button
+              <a
+                href={`#narrative-${section.title}`}
                 className="progress-step section-progress-step"
                 style={{
                   top: `${section.section_percentage * bar_height + 1.1}rem`,
                 }}
-                onClick={this.handleScrollJump}
-              ></button>
+                // onClick={this.handleScrollJump}
+              ></a>
             )
-          })} */}
+          })}
         </div>
         <div className="progress-step" id="end-progress-step"></div>
       </div>
