@@ -169,9 +169,9 @@ const MethodologyPage = ({data}) => {
         </Row>
 
         <Row className="">
-          <Col md="2" xl="2" className="p-4 p-xl-5">
+          <Col md="2" xl="2" className="">
             <div className="legend">
-              <p className="text-uppercase">Legend</p>
+              <p className="text-uppercase mb-2">Legend</p>
               <ul className="list-unstyled">
               { categories.map((category, index) => {
                 const bg = category.node.hexCode;
@@ -187,7 +187,8 @@ const MethodologyPage = ({data}) => {
                       value="" 
                       id={`defaultCheck-${index}`}
                     />
-                    <label style={{ color: bg }} class="form-check-label" for={`defaultCheck-${index}`}>
+                    <div className="square" style={{ backgroundColor: bg }}/>
+                    <label class="form-check-label" for={`defaultCheck-${index}`}>
                       { category.node.title }
                     </label>
                   </div>
@@ -203,7 +204,7 @@ const MethodologyPage = ({data}) => {
               )}
               </ul>
 
-              <p className="text-uppercase">Timeline</p>
+              <p className="text-uppercase mb-2">Timeline</p>
               <ul className="list-unstyled">
               { years.map(item => (
                 <li key={`legend-${item.node.year}`}>
@@ -234,8 +235,8 @@ const MethodologyPage = ({data}) => {
                   <div className="timeline-year-content-header d-md-flex pb-2 mb-5">
                     <h1 className="pr-3 timeline-year-label"><strong>{item.node.year}</strong></h1>
                  
-                    <div className="timeline-year-header-meta mt-4 pr-2 pr-md-5 pb-3">
-                      <p className="mb-1"><strong>{item.node.headline}</strong></p>
+                    <div className="timeline-year-header-meta mt-3 pr-2 pr-md-5 pb-3">
+                      <p className="mb-0"><strong>{item.node.headline}</strong></p>
                       <p className="mb-0">{item.node.description.description}</p>
                     </div>
 
