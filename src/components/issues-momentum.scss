@@ -23,14 +23,48 @@
   .momentum-pane {
     background: $dark;
     width: 100%;
-    padding: 2rem;
     color: white;
     box-sizing: border-box;
-  }
+    padding: 0 2rem;
 
-  .article-thumb {
-    background: grey;
-    height: 100px;
-    width: 100px;
+    .article-list {
+      padding: 2rem;
+
+      .article-item {
+        border: 1px $light solid;
+      }
+
+      .article-thumb {
+        background: grey;
+        height: 100px;
+        width: 100px;
+      }
+
+      .article-heading {
+
+      }
+    }
+
+    .article-preview {
+      padding: 2rem;
+
+      .article-card {
+        background: white;
+        color: $dark;
+
+        .article-header {
+          background: $pink;
+          display: flex;
+          padding: 1rem;
+          font-weight: bold;
+          text-transform: italic;
+          justify-content: space-between;
+        }
+
+        .article-body {
+          padding: 1rem;
+        }
+      }
+    }
   }
 }

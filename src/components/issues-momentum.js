@@ -35,20 +35,27 @@ class MomentumTabs extends React.Component {
                   <Tab.Content>
                     <Tab.Pane eventKey={ year } className="momentum-pane">
                       <Row>
-                        <Col md="6">
-                          <h3>{ year } Thumbnails</h3>
-                          <Row className="no-gutters article-snapshot">
+                        <Col md="6" className="article-list">
+                          <Row className="no-gutters article-item">
                             <Col xs="auto" className="mr-4">
                               <img src="https://placehold.it/100x100" />
                             </Col>
-                            <Col xs="auto">
+                            <Col xs="auto" className="article-heading">
                               <h4 className="display-3">I'm an article heading.</h4>
                             </Col>
                           </Row>
                         </Col>
-                        <Col md="6">
-                          <h3>{ year } Article Snippet</h3>
-                          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Maecenas faucibus mollis interdum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                        <Col md="6" className="article-preview">
+                          <div className="article-card">
+                            <div className="article-header">
+                              <div className="source">HuffPost</div>
+                              <div className="date">03/21/2020</div>
+                            </div>
+                            <div className="article-body">
+                              <b>{ year } Article Snippet</b>
+                              <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Maecenas faucibus mollis interdum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
+                            </div>
+                          </div>
                         </Col>
                       </Row>
                     </Tab.Pane>
