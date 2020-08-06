@@ -32,14 +32,22 @@ class MomentumTabs extends React.Component {
             <Row className="pl-2 pr-2">
               { years.map(function(year) {
                 return (
-                  <Tab.Content className="p-2 momentum-pane">
-                    <Tab.Pane eventKey={ year }>
+                  <Tab.Content>
+                    <Tab.Pane eventKey={ year } className="momentum-pane">
                       <Row>
                         <Col md="6">
-                          <h5>{ year } Thumbnails</h5>
+                          <h3>{ year } Thumbnails</h3>
+                          <Row className="no-gutters article-snapshot">
+                            <Col xs="auto" className="mr-4">
+                              <img src="https://placehold.it/100x100" />
+                            </Col>
+                            <Col xs="auto">
+                              <h4 className="display-3">I'm an article heading.</h4>
+                            </Col>
+                          </Row>
                         </Col>
                         <Col md="6">
-                          <h5>{ year } Article Snippet</h5>
+                          <h3>{ year } Article Snippet</h3>
                           <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Maecenas faucibus mollis interdum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
                         </Col>
                       </Row>
