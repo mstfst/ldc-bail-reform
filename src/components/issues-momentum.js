@@ -35,17 +35,19 @@ class MomentumTabs extends React.Component {
                   <Tab.Content>
                     <Tab.Pane eventKey={ year } className="momentum-pane">
                       <Row>
-                        <Col md="6" className="article-list">
+                        <Col sm="6" className="article-list">
+                        {/* Repeat this per article item */}
                           <Row className="no-gutters article-item">
-                            <Col xs="auto" className="mr-4">
+                            <Col xs="2">
                               <img src="https://placehold.it/100x100" />
                             </Col>
-                            <Col xs="auto" className="article-heading">
-                              <h4 className="display-3">I'm an article heading.</h4>
+                            <Col xs="10" className="article-heading display-4">
+                              Legal Aid Ontario’s Bail Court Cuts Endanger Constitutional Rights, Expert Warns
                             </Col>
                           </Row>
+                        {/* End article item */}
                         </Col>
-                        <Col md="6" className="article-preview">
+                        <Col sm="6" className="article-preview">
                           <div className="article-card">
                             <div className="article-header">
                               <div className="source">HuffPost</div>
