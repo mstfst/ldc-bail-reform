@@ -18,6 +18,8 @@
     "@contentful/rich-text-react-renderer": "^13.4.0",
     "@contentful/rich-text-types": "^14.1.1",
     "bootstrap": "^4.5.0",
+    "contentful-management": "^6.0.3",
+    "csv-parse": "^4.11.1",
     "d3": "^5.16.0",
     "gatsby": "^2.23.20",
     "gatsby-background-image": "^1.1.1",

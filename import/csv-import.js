@@ -14,32 +14,43 @@ async function main () {
 
   for await (const chunk of readStream) {
     const entry = await rowToEntry(environment, chunk)
-    // console.log(chunk['First Name']);
+    // console.log(chunk);
     entry.publish();
   }
 }
 
 async function rowToEntry(env, row) {
-  
-  const firstName = capitalize_Words(row['First Name'].trim().toLowerCase());
-  const lastName = capitalize_Words(row['Last Name'].trim().toLowerCase());
-  const email = row['Electronic Address'].trim().toLowerCase();
+  const date = new Date(row['Publish (or Start Date)'])
+  const title = row['Title'];
+  const category = row['Type of Content'];
+  const quote = row['Biblio Annotation'];
+  const author = row['Author(s)']
+  const url = row['URL']
 
-  console.log(`${firstName}, ${lastName}, ${email}`);
+  // console.log(date.toISOString());
 
-  return await env.createEntry('visitor', {
+  // console.log(`
+  //   ${title}
+  //   ${category}
+  //   ${quote}
+  // `);
+
+  return await env.createEntry('timelineDocument', {
     fields: {
-      firstName: {
-        'en-US': firstName
+      date: {
+        'en-US': date.toISOString()
       },
-      lastName: {
-        'en-US': lastName
+      title: {
+        'en-US': title
       },
-      email: {
-        'en-US': email
+      author: {
+        'en-US': author
       },
-      active: {
-        'en-US': false
+      quote: {
+        'en-US': quote
+      },
+      url: {
+        'en-US': url
       }
     }
   })
