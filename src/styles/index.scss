@@ -50,6 +50,11 @@
 @import "animations";
 @import "timeline";
 @import "system-map";
+@import "narrative";
+
+body {
+  padding-top: 64px;
+}
 
 // --- Debug CSS ---
 // .display-1 {
