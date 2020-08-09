@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Row, Col, Container } from "react-bootstrap"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, StaticQuery } from "gatsby"
 import "./issues-expl-first.scss"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import * as D3 from "d3"
@@ -23,6 +23,20 @@ class ExplFirst extends Component {
   s2Bbox1
   s2Bbox2
 
+  // Options for displaying text in the sidebar
+  options = {
+    renderNode: {
+      "embedded-asset-block": node => {
+        const alt = node.data.target.fields.title["en-US"]
+        const url = node.data.target.fields.file["en-US"].url
+        console.log(node)
+        return <img src={url} className="img-fluid mb-3" alt={alt} />
+      },
+    },
+    renderText: text =>
+      text.split("\n").flatMap((text, i) => [i > 0 && <br />, text]),
+  }
+
   // List of ids for arrows to animate
   nodeList = [
     "s0-arrowP-1",
@@ -35,6 +49,7 @@ class ExplFirst extends Component {
   ]
 
   state = {
+    issue_id: 1,
     step_index: 0,
   }
 
@@ -58,7 +73,6 @@ class ExplFirst extends Component {
       D3.select("#layer-txt-1").style("display", "block")
       D3.select("#layer-txt-2").style("display", "none")
       D3.select("#layer-txt-3").style("display", "none")
-
     } else if (this.state.step_index === 4 || this.state.step_index === 5) {
       this.layer0.style("display", "none")
       this.layer1.style("display", "block")
@@ -67,7 +81,6 @@ class ExplFirst extends Component {
       D3.select("#layer-txt-1").style("display", "none")
       D3.select("#layer-txt-2").style("display", "block")
       D3.select("#layer-txt-3").style("display", "none")
-
     } else if (this.state.step_index === 6 || this.state.step_index === 7) {
       this.layer0.style("display", "none")
       this.layer1.style("display", "none")
@@ -310,39 +323,9 @@ class ExplFirst extends Component {
     this.scroller.destroy()
   }
 
-  // const data = useStaticQuery(
-  //   graphql`
-  //     query ZapModalQuery {
-  //       allContentfulSystemMapZapDetail {
-  //         edges {
-  //           node {
-  //             zapId
-  //             zapImage {
-  //               fluid(maxWidth: 50, maxHeight: 50) {
-  //                 ...GatsbyContentfulFluid
-  //               }
-  //             }
-  //             title
-  //             zapText {
-  //               json
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `
-  // )
-
-  //based on the prop activeContent, let modalContent = the node with a matching id
-  // let modalContent = data.allContentfulSystemMapZapDetail.edges.find(
-  //   obj => obj.node.zapId === props.activeContent
-  // )
-
   render() {
-    // console.log(this.props)
     return (
       <Container>
-        {/* <p>{this.props.text}</p> */}
         <Row id="explanation-1__row">
           <Col sm={11} md={9} id="main-col">
             <div id="explanation-map" className="expl-step">
@@ -360,6 +343,38 @@ class ExplFirst extends Component {
           </Col>
           <Col sm={1} md={3} id="expl-sidebar-col">
             <div id="expl-sidebar-wrapper" className="text-dark">
+              <StaticQuery
+                query={graphql`
+                  query {
+                    allContentfulIssuesEeText {
+                      edges {
+                        node {
+                          issueId
+                          stepId
+                          stepText {
+                            json
+                          }
+                        }
+                      }
+                    }
+                  }
+                `}
+                render={data =>
+                  data.allContentfulIssuesEeText.edges.map(edge => {
+                    if (edge.node.issueId === this.state.issue_id) {
+                      return (
+                        <div id={"ee-text-" + edge.node.stepId}>
+                          <p>{edge.node.stepId}</p>
+                          {documentToReactComponents(
+                            edge.node.stepText.json,
+                            this.options
+                          )}
+                        </div>
+                      )
+                    }
+                  })
+                }
+              />
               <div id="layer-txt-1">
                 <div className="explanation-text" id="explanation-1">
                   Explanation 1
