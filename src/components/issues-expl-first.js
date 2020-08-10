@@ -60,7 +60,6 @@ class ExplFirst extends Component {
     })
 
     // Animating main steps ("layers")
-
     if (
       this.state.step_index === 1 ||
       this.state.step_index === 2 ||
