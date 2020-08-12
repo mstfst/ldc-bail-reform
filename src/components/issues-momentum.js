@@ -1,25 +1,31 @@
 import React from "react"
 import { Row, Col, Nav, Tab } from "react-bootstrap"
-// import { Link } from "gatsby"
 import "./issues-momentum.scss"
 
 class MomentumTabs extends React.Component {
   render() {
-    // This array is a stand-in for Contentful content
-    // This component would need to pull data:
-    // - for each year
-    //    - for each article
-    //       - thumbnail, source, headline, date, snippet, link
-    const years = [ "2020", "2019","2018", "2017" ]
+    const documents = this.props.documents
+
+    // Fetch a list of years from Airtable query
+    const years = []
+    documents.forEach(item => {
+        let year = item.data.Date.slice(0,4);
+          if (!(years.includes(year))) {
+            years.push(year)
+          }
+      }
+    )
+    years.sort().reverse()
+    console.log(years)
     
     return (
-      <Row fluid className="justify-content-center mt-2 momentum">
+      <Row className="justify-content-center mt-2 momentum">
         <Col md="8" >
           <Tab.Container defaultActiveKey="2020">
             <Row>
               { years.map(function(year) {
                 return (
-                  <Nav variant="link" className="flex momentum-tab-row">
+                  <Nav key={ year } variant="link" className="flex momentum-tab-row">
                     <Nav.Item className="momentum-tab">
                       <Nav.Link eventKey={ year }>
                         <h4>{ year }</h4>
@@ -32,13 +38,13 @@ class MomentumTabs extends React.Component {
             <Row className="pl-2 pr-2">
               { years.map(function(year) {
                 return (
-                  <Tab.Content>
+                  <Tab.Content key={ year }>
                     <Tab.Pane eventKey={ year } className="momentum-pane">
                       <Row>
                         <Col sm="6" className="article-list">
                         {/* Repeat this per article item */}
                           <Row className="no-gutters article-item">
-                            <img src="https://placehold.it/100x100" />
+                            <img src="https://placehold.it/100x100" alt="{ year }"/>
                             <div className="article-heading display-4">
                               Legal Aid Ontario’s Bail Court Cuts Endanger Constitutional Rights, Expert Warns
                             </div>

@@ -17,6 +17,22 @@ const Issue1Page = () => {
           }
         }
       }
+      documents: allAirtable(
+          filter: {
+            table: { eq: "testTable" }
+          }
+        ) {
+          nodes {
+            data {
+              Title
+              Author
+              Date
+              Topic
+              Description
+            }
+            recordId
+          }
+        }
     }
   `)
 
@@ -34,7 +50,7 @@ const Issue1Page = () => {
 
       <Row className="justify-content-center pb-5">
         <Col md="12" lg="10">
-          <MomentumTabs />
+          <MomentumTabs documents={ data.documents.nodes } />
         </Col>
       </Row>
 
