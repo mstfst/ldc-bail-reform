@@ -1,5 +1,5 @@
 import React from "react"
-import { Row, Col, Container } from "react-bootstrap"
+import { Row, Col } from "react-bootstrap"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/layout"
@@ -33,7 +33,9 @@ const Issue3Page = () => {
       </Row>
 
       <Row className="justify-content-center pb-5">
-        <MomentumTabs />
+        <Col md="12" lg="10">
+          <MomentumTabs />
+        </Col>
       </Row>
 
       <Row id="opportunity" className="justify-content-center pt-5 pb-5 pl-4 pr-4 bg-rust">
