@@ -345,7 +345,10 @@ class ExplFirst extends Component {
               <StaticQuery
                 query={graphql`
                   query {
-                    allContentfulIssuesEeText {
+                    allContentfulIssuesEeText(
+                      filter: { issueId: { eq: 1 } }
+                      sort: { fields: [stepId] }
+                    ) {
                       edges {
                         node {
                           issueId
@@ -363,7 +366,6 @@ class ExplFirst extends Component {
                     if (edge.node.issueId === this.state.issue_id) {
                       return (
                         <div id={"ee-text-" + edge.node.stepId}>
-                          <p>{edge.node.stepId}</p>
                           {documentToReactComponents(
                             edge.node.stepText.json,
                             this.options
