@@ -94,6 +94,7 @@ class NarrativeSection extends Component {
 
   componentWillUnmount() {
     this.scroller.destroy()
+    
   }
 
   scrollToRef = (character) => {
@@ -122,7 +123,7 @@ class NarrativeSection extends Component {
     return (
       <div>
         <ProgressBar
-          scrollTo={this.scrollToRef}
+          // scrollTo={this.scrollToRef}
           sections={[
             {
               title: "nathan",
