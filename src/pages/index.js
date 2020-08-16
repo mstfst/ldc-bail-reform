@@ -101,7 +101,7 @@ const IndexPage = () => {
 
           <Col sm="12" md="4" className="text-center">
             <Link to="/narrative">
-              <Card className="bg-dark text-dark">
+              <Card id="staging" className="bg-dark text-dark">
                 <Card.Img src="https://placehold.it/400x400" alt="Card image" />
                 <Card.ImgOverlay className="align-contents-bottom">
                   <Card.Title><h3 className="text-white mb-0">The Human Experience</h3></Card.Title>
