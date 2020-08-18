@@ -74,7 +74,84 @@ const IndexPage = () => {
         </BackgroundImage>
       </Jumbotron>
 
-      
+      <Container>
+        <Row id="main" className="justify-content-md-center pt-5 mb-4">
+          <Col className="mt-4" md="10">
+            <p><strong>If we have a bail system that is supposed to release people from jail, with the assurance that they show up for trial, and they aren’t a risk to public safety, then why does this issue exist?</strong></p>
+            <p>We’ve created some resources to try and help you answer this question:</p>
+          </Col>
+        </Row>
+
+        <Row className="justify-content-between mb-5 pb-5">
+          <Col sm="12" md="4" className="text-center">
+            <Link to="/system-map">
+              <Card className="bg-dark text-dark">
+                <Card.Img src="https://placehold.it/400x400" alt="Card image" />
+                <Card.ImgOverlay className="align-contents-bottom">
+                  <Card.Title><h3 className="text-white">The Bail System</h3></Card.Title>
+                  <Card.Text className="min-height-3rem">
+                    How bail is supposed to work and when it doesn’t.
+                  </Card.Text>
+                </Card.ImgOverlay>
+              </Card>
+            </Link>
+          </Col>
+
+          <Col sm="12" md="4" className="text-center">
+            <Link to="/narrative">
+              <Card id="staging" className="bg-dark text-dark">
+                <Card.Img src="https://placehold.it/400x400" alt="Card image" />
+                <Card.ImgOverlay className="align-contents-bottom">
+                  <Card.Title><h3 className="text-white mb-0">The Human Experience</h3></Card.Title>
+                  <Card.Text className="min-height-3rem">
+                    Hear stories about the human cost of bail.
+                  </Card.Text>
+                </Card.ImgOverlay>
+              </Card>
+            </Link>
+          </Col>
+
+          <Col sm="12" md="4" className="text-center">
+            <Link to="/methodology">
+              <Card className="bg-dark text-dark">
+                <Card.Img src="https://placehold.it/400x400" alt="Card image" />
+                <Card.ImgOverlay className="align-contents-bottom">
+                  <Card.Title><h3 className="text-white">Timeline</h3></Card.Title>
+                  <Card.Text className="min-height-3rem">
+                    The human cost of bail.
+                  </Card.Text>
+                </Card.ImgOverlay>
+              </Card>
+            </Link>
+          </Col>
+        </Row>
+
+        <Row className="justify-content-md-center mb-4 text-center">
+          <Col sm="12" md="10">
+            <h2 className="uppercase">Why are innocent people in jail?</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Malesuada eget sit rhoncus sagittis. Sollicitudin in nisl, congue posuere nullam ut scelerisque. Suscipit elementum vitae laoreet dignissim. Id blandit neque est, non habitant. Nunc cras congue purus dolor facilisi. Non tempus diam condimentum mattis morbi nisl vel, ultrices.</p>
+          </Col>
+        </Row>
+
+        <Row className="justify-content-md-center mb-5 pb-5">
+          <Col xs="12" md="4" className="text-center">
+            <Link to="" aria-label="Read more ">
+              <Img fixed={data.issue1.childImageSharp.fixed} className="mb-4" alt="Culture of Fear"/>
+            </Link>
+          </Col>
+          <Col xs="12" md="4" className="text-center">
+            <Link to="" aria-label="Read more about Socioeconomic factors">
+              <Img fixed={data.issue2.childImageSharp.fixed} className="mb-4" alt="Making Poverty a Crime"/>
+            </Link>
+          </Col>
+          <Col xs="12" md="4" className="text-center">
+            <Link to="" aria-label="Read more about Insufficient Resources">
+              <Img fixed={data.issue3.childImageSharp.fixed} className="mb-4" alt="Basic Dignity and Rights"/>
+            </Link>
+          </Col>
+        </Row>
+
+      </Container>
     </Layout>
   )
 }
