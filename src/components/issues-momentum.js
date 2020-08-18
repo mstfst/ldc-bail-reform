@@ -4,19 +4,13 @@ import "./issues-momentum.scss"
 
 class MomentumTabs extends React.Component {
   render() {
-    const documents = this.props.documents
+    const docs = this.props.documents
 
-    // Fetch a list of years from Airtable query
-    const years = []
-    documents.forEach(item => {
-        let year = item.data.Date.slice(0,4);
-          if (!(years.includes(year))) {
-            years.push(year)
-          }
-      }
-    )
+    const years = [];
+    {Object.keys(docs).map(key => (
+      years.push(docs[key].data.Date.slice(0,4))
+    ))}
     years.sort().reverse()
-    console.log(years)
     
     return (
       <Row className="justify-content-center mt-2 momentum">
