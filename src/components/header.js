@@ -3,6 +3,7 @@ import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
 import headerStyles from "./header.module.scss"
+import ProgressBar from "./progress-bar"
 
 /* Import SVG Components */
 import Logo from "../../static/assets/svg/logo_navbar.svg"
@@ -58,6 +59,7 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <ProgressBar />
     </div>
   )
 }
