@@ -10,7 +10,6 @@ import Layout from "../components/layout"
 import Head from "../components/head";
 
 /* Import graphics */
-import ChevronDown from "../../static/assets/svg/chevron-down.svg";
 import HomeLogo from "../../static/assets/svg/logo_homepage.svg";
 
 const IndexPage = () => {
@@ -50,26 +49,25 @@ const IndexPage = () => {
   return (
     <Layout>
       <Head title="Home" />
-      <Jumbotron className="hero" fluid>
+      <Jumbotron 
+        className="hero vh-100" 
+        fluid>
         <BackgroundImage
+          className="h-100"
           fluid={data.homeHero.childImageSharp.fluid}
           backgroundColor={`#F08FDB`}
           alt="A jail cell overlaid with a stylized pink dot pattern"
         >
-          <Container>
-            <Row className="justify-content-center">   
-              <Col md="10" className="text-center">
-                <HomeLogo width={200} fill='#fff' className="mt-5 mb-5"/>
-                <h1 className="display-2 mt-4 mb-0 text-rust uppercase">According to the Auditor General</h1>
-                <h1 className="display-1 mb-5 text-rust uppercase">70% of people held in Ontario jails are <span className="hero-em">legally innocent</span></h1>
-                <p className="display-3 pt-4 mb-3">Why?</p>
-                <p>
-                  <Button variant="link" className="heartbeat mb-4" aria-label="Learn more">
-                    <Link to="/#main">
-                      <ChevronDown />
-                    </Link>
-                  </Button>
-                </p>
+          <Container
+            className="h-100"
+          >
+            <Row className="h-100 justify-content-center align-items-center">   
+              <Col md="8" className="text-center">
+                <HomeLogo fill='#fff' className="mt-2 mb-5 w-50"/>
+                <h1 className="display-1 mb-5 text-rust uppercase">
+                  <span className="hero-em px-5">Coming Soon!</span>
+                </h1>
+                <p className="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dui diam amet, quis mauris lorem. Ipsum tristique pellentesque lawdesigncolab.ca</p>
               </Col>
             </Row>
           </Container>
