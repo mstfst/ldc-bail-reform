@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap"
-import headerStyles from './header.module.scss';
+import headerStyles from "./header.module.scss"
 
 /* Import SVG Components */
 import Logo from "../../static/assets/svg/logo_navbar.svg";
