@@ -6,26 +6,33 @@ class MomentumTabs extends React.Component {
   render() {
     /* Functions to Transform Airtable Articles Data */
     const airtable = this.props.documents
+    // console.log(airtable)
+    // console.log(typeof airtable)
 
     // Temp storage of keys
     const docsByYear = {};
-    // Helper function to group docs from same year
-    airtable.forEach(function(item) {
-      // Create key for grouping
-      var tempKey = item.data.Date.slice(0,4);
-      if (!docsByYear.hasOwnProperty(tempKey)) {
-        docsByYear[tempKey] = {
-          "year": tempKey,
-          "docs": [] // new nested array of docs
+    // Check that data was fetched
+    if (airtable && Object.keys(airtable)) {
+      // Group docs from same year
+      Object.keys(airtable).forEach(function(key) {
+        // Create key for grouping
+        var tempKey = airtable[key].data.Date.slice(0,4);
+        if (!docsByYear.hasOwnProperty(tempKey)) {
+          docsByYear[tempKey] = {
+            "year": tempKey,
+            "docs": [] // new nested array of docs
+          }
         }
-      }
-      // push docs into the nested array under the year
-      docsByYear[tempKey].docs.push(item.data);
-    });
-    // Map object to final results array
+        // push docs into the nested array under the year
+        docsByYear[tempKey].docs.push(airtable[key].data);
+      });
+    }
+    // Map objects to final results array
     const docsByYearArray = Object.keys(docsByYear).map(function(key) {
       return docsByYear[key];
     })
+    // console.log(docsByYearArray)
+    // console.log(typeof docsByYearArray)
 
     /*Reverse order of years*/
     const docsByYearReverse = docsByYearArray.sort().reverse();
@@ -55,7 +62,7 @@ class MomentumTabs extends React.Component {
                       <Row>
                         <Col sm="6" className="article-list">
                           {item.docs.map(doc => (
-                            <Row className="no-gutters article-item">
+                            <Row key={ item.recordId } className="no-gutters article-item">
                               <img src="https://placehold.it/100x100" alt="{ item.year }"/>
                               <div className="article-heading display-4">
                                 { doc.Title }
