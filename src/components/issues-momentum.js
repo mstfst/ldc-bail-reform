@@ -6,15 +6,11 @@ class MomentumTabs extends React.Component {
   render() {
     /* Functions to Transform Airtable Articles Data */
     const airtable = this.props.documents
-    // Put Airtable object into array
-    const airtableArr = Object.keys(airtable).map(function(i) {
-      return airtable[i];
-    })
 
     // Temp storage of keys
     const docsByYear = {};
     // Helper function to group docs from same year
-    airtableArr.forEach(function(item) {
+    airtable.forEach(function(item) {
       // Create key for grouping
       var tempKey = item.data.Date.slice(0,4);
       if (!docsByYear.hasOwnProperty(tempKey)) {
@@ -30,16 +26,9 @@ class MomentumTabs extends React.Component {
     const docsByYearArray = Object.keys(docsByYear).map(function(key) {
       return docsByYear[key];
     })
-    console.log(docsByYear)
-    console.log(docsByYearArray)
-    {docsByYearArray.map(item => (
-      console.log(item.year)
-    ))}
 
     /*Reverse order of years*/
     const docsByYearReverse = docsByYearArray.sort().reverse();
-
-    const years = [2017, 2018, 2019]
     
     return (
       <Row className="justify-content-center mt-2 momentum">
