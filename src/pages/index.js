@@ -84,7 +84,7 @@ const IndexPage = () => {
               </Col>
               <Col xs="12" md="4" className="text-center">
                 <div className="card tilted-left">
-                    <div className="card-body bg-dark text-white">70% of people held in Ontario jails are legally innocent awaiting a bail hearing or court date.</div>
+                    <div className="card-body bg-dark text-white">Ontario’s overall population has grown by 50% in the last 30 years but the number of people in jail awaiting a bail hearing has grown by 300%</div>
                 </div>
               </Col>
             </Row>
