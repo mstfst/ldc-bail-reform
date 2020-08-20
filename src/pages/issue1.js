@@ -25,10 +25,6 @@ const Issue1Page = () => {
           nodes {
             data {
               Title
-              Author
-              Date
-              Topic
-              Description
             }
             recordId
           }
