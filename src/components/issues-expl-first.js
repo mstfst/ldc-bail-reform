@@ -4,14 +4,12 @@ import { useStaticQuery, graphql, StaticQuery } from "gatsby"
 import "./issues-expl-first.scss"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import * as D3 from "d3"
-import svgExplImport from "../../static/assets/system-map/EE_1.svg"
+// import svgExplImport from "../../static/assets/system-map/EE_1.svg"
+import svgExplImport from "../../static/assets/system-map/EE_1b.svg"
 
 class ExplFirst extends Component {
   scroller
-  steps
   layerSteps
-  index
-  progress
   layer0
   layer1
   layer2
@@ -22,6 +20,22 @@ class ExplFirst extends Component {
   s1Bbox2
   s2Bbox1
   s2Bbox2
+
+  state = {
+    issue_id: 1,
+    step_index: 0,
+  }
+
+  // List of ids for arrows to animate
+  nodeList = [
+    "arrow-path-1",
+    "arrow-path-2",
+    "arrow-path-3",
+    "arrow-path-4",
+    "arrow-path-5",
+    "arrow-path-6",
+    "arrow-path-7",
+  ]
 
   // Options for displaying text in the sidebar
   options = {
@@ -35,22 +49,6 @@ class ExplFirst extends Component {
     },
     renderText: text =>
       text.split("\n").flatMap((text, i) => [i > 0 && <br />, text]),
-  }
-
-  // List of ids for arrows to animate
-  nodeList = [
-    "s0-arrowP-1",
-    "s0-arrowP-2",
-    "s0-arrowP-3",
-    "s1-arrowP-1",
-    "s1-arrowP-2",
-    "s2-arrowP-1",
-    "s2-arrowP-2",
-  ]
-
-  state = {
-    issue_id: 1,
-    step_index: 0,
   }
 
   handleScrollStepEnter = ({ element, index, direction }) => {
@@ -69,120 +67,79 @@ class ExplFirst extends Component {
       this.layer1.style("display", "none")
       this.layer2.style("display", "none")
 
-      D3.select("#layer-txt-1").style("display", "block")
-      D3.select("#layer-txt-2").style("display", "none")
-      D3.select("#layer-txt-3").style("display", "none")
+      // D3.select("#layer-txt-1").style("display", "block")
+      // D3.select("#layer-txt-2").style("display", "none")
+      // D3.select("#layer-txt-3").style("display", "none")
     } else if (this.state.step_index === 4 || this.state.step_index === 5) {
       this.layer0.style("display", "none")
       this.layer1.style("display", "block")
       this.layer2.style("display", "none")
 
-      D3.select("#layer-txt-1").style("display", "none")
-      D3.select("#layer-txt-2").style("display", "block")
-      D3.select("#layer-txt-3").style("display", "none")
+      // D3.select("#layer-txt-1").style("display", "none")
+      // D3.select("#layer-txt-2").style("display", "block")
+      // D3.select("#layer-txt-3").style("display", "none")
     } else if (this.state.step_index === 6 || this.state.step_index === 7) {
       this.layer0.style("display", "none")
       this.layer1.style("display", "none")
       this.layer2.style("display", "block")
 
-      D3.select("#layer-txt-1").style("display", "none")
-      D3.select("#layer-txt-2").style("display", "none")
-      D3.select("#layer-txt-3").style("display", "block")
+      // D3.select("#layer-txt-1").style("display", "none")
+      // D3.select("#layer-txt-2").style("display", "none")
+      // D3.select("#layer-txt-3").style("display", "block")
     }
 
     // Animating arrows.
     if (this.state.step_index === 0) {
-      // Reset arrow clip paths to original position
+      // Resetting arrow clip paths to original position
       // -> when back at step 0, arrows are hidden
       // so they can be animated again later
-      D3.select("#rect-s0-arrowP-1")
-        .attr("x", this.bbox1.x)
-        .attr("y", this.bbox1.y + this.bbox1.height)
-      D3.select("#rect-s0-arrowP-2")
-        .attr("x", this.bbox2.x)
-        .attr("y", this.bbox2.y + this.bbox2.height)
-      D3.select("#rect-s0-arrowP-3")
-        .attr("x", this.bbox3.x)
-        .attr("y", this.bbox3.y + this.bbox3.height)
-      D3.select("#rect-s1-arrowP-1")
-        .attr("x", this.bbox4.x + this.bbox4.width)
-        .attr("y", this.bbox4.y)
-      D3.select("#rect-s1-arrowP-2")
-        .attr("x", this.bbox5.x + this.bbox5.width)
-        .attr("y", this.bbox5.y)
-      D3.select("#rect-s2-arrowP-1")
-        .attr("x", this.bbox6.x + this.bbox6.width)
-        .attr("y", this.bbox6.y)
-      D3.select("#rect-s2-arrowP-2")
-        .attr("x", this.bbox7.x + this.bbox7.width)
-        .attr("y", this.bbox7.y)
+
+      for (let i = 1; i < this.nodeList.length + 1; i++) {
+        console.log()
+        if (i <= 3) {
+          // For vertical animation
+          D3.select(`#rect-arrow-path-${i}`)
+            .attr("x", this[`bbox${i}`].x)
+            .attr("y", this[`bbox${i}`].y + this[`bbox${i}`].height)
+        } else {
+          // For horizontal animation
+          D3.select(`#rect-arrow-path-${i}`)
+            .attr("x", this[`bbox${i}`].x + this[`bbox${i}`].width)
+            .attr("y", this[`bbox${i}`].y)
+        }
+      }
 
       // Reset main arrow groups as display: none
-      D3.select("#s0-arrow-1").style("display", "none")
-      D3.select("#s0-arrow-2").style("display", "none")
-      D3.select("#s0-arrow-3").style("display", "none")
+      D3.select("#arrow-1").style("display", "none")
+      D3.select("#arrow-2").style("display", "none")
+      D3.select("#arrow-3").style("display", "none")
 
       // Reset explanation texts as display: none
       D3.selectAll(".explanation-text").style("display", "none")
-    } else if (this.state.step_index === 1) {
-      // Show main arrow group, to display overlay
-      D3.select("#s0-arrow-1").style("display", "block")
+    } else {
+      // If this.state.step_index > 0
+      // Show arrow group
+      D3.select(`#arrow-${this.state.step_index}`).style("display", "block")
 
-      // Show corresponding explanation text in sidebar
-      D3.select("#explanation-1").style("display", "block")
+      // Show explanation text
+      D3.select(`#explanation-${this.state.step_index}`).style(
+        "display",
+        "block"
+      )
 
-      // Animating arrows. First 3 arrows animate bottom to top
-      // Other 4 arrows animate right to left
-      D3.select("#rect-s0-arrowP-1")
-        .transition()
-        .duration(1000)
-        .attr("y", this.bbox1.y)
-    } else if (this.state.step_index === 2) {
-      D3.select("#s0-arrow-2").style("display", "block")
-
-      D3.select("#explanation-2").style("display", "block")
-
-      D3.select("#rect-s0-arrowP-2")
-        .transition()
-        .duration(1000)
-        .attr("y", this.bbox2.y)
-    } else if (this.state.step_index === 3) {
-      D3.select("#s0-arrow-3").style("display", "block")
-
-      D3.select("#explanation-3").style("display", "block")
-
-      D3.select("#rect-s0-arrowP-3")
-        .transition()
-        .duration(1000)
-        .attr("y", this.bbox3.y)
-    } else if (this.state.step_index === 4) {
-      D3.select("#explanation-4").style("display", "block")
-
-      D3.select("#rect-s1-arrowP-1")
-        .transition()
-        .duration(1000)
-        .attr("x", this.bbox4.x)
-    } else if (this.state.step_index === 5) {
-      D3.select("#explanation-5").style("display", "block")
-
-      D3.select("#rect-s1-arrowP-2")
-        .transition()
-        .duration(1000)
-        .attr("x", this.bbox5.x)
-    } else if (this.state.step_index === 6) {
-      D3.select("#explanation-6").style("display", "block")
-
-      D3.select("#rect-s2-arrowP-1")
-        .transition()
-        .duration(1000)
-        .attr("x", this.bbox6.x)
-    } else if (this.state.step_index === 7) {
-      D3.select("#explanation-7").style("display", "block")
-
-      D3.select("#rect-s2-arrowP-2")
-        .transition()
-        .duration(1000)
-        .attr("x", this.bbox7.x)
+      // Animating arrows by moving corresponding clip-path
+      // Differentiating between vertical/horizontal animations
+      if (this.state.step_index <= 3) {
+        D3.select(`#rect-arrow-path-${this.state.step_index}`)
+          .transition()
+          .duration(1000)
+          .attr("y", this[`bbox${this.state.step_index}`].y)
+      } else {
+        D3.select(`#rect-arrow-path-${this.state.step_index}`)
+          .transition()
+          .duration(1000)
+          .attr("x", this[`bbox${this.state.step_index}`].x)
+      }
     }
   }
 
@@ -245,10 +202,10 @@ class ExplFirst extends Component {
 
         ///////// LAYERS /////////
 
-        // Creating variables for layersƒ
-        self.layer0 = D3.select("#slide-1")
-        self.layer1 = D3.select("#slide-2")
-        self.layer2 = D3.select("#slide-3")
+        // Creating variables for layers
+        self.layer0 = D3.select("#layer-1")
+        self.layer1 = D3.select("#layer-2")
+        self.layer2 = D3.select("#layer-3")
 
         // Initially hide layers - will later be shown based on scrollama triggers
         self.layer0.style("display", "none")
@@ -258,6 +215,7 @@ class ExplFirst extends Component {
         ///////// SCROLLAMA /////////
 
         // Creating the scroller
+        // Inside D3.svg response, otherwise would throw error
         const scrollama = require("scrollama")
         self.scroller = scrollama()
 
@@ -284,9 +242,10 @@ class ExplFirst extends Component {
       .then(d => {
         ///////// CLIP PATHS /////////
 
-        // Appending clip paths to animate arrows
+        // Setting up clip paths to animate arrows
         // In a separate promise response, otherwise would throw error
 
+        // Selecting the SVG
         let mainSvg = D3.select("#expl-svg-wrapper").select("svg")
 
         // Looping through nodeList to append clippaths
