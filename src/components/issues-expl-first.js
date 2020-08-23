@@ -67,35 +67,49 @@ class ExplFirst extends Component {
       this.layer1.style("display", "none")
       this.layer2.style("display", "none")
 
-      // D3.select("#layer-txt-1").style("display", "block")
-      // D3.select("#layer-txt-2").style("display", "none")
-      // D3.select("#layer-txt-3").style("display", "none")
+      // Hiding text for other layers
+      D3.selectAll(".text-layer-2").style("display", "none")
+      D3.selectAll(".text-layer-3").style("display", "none")
+      
+      // When scroll direction = up, display all text for this layer
+      if (direction === "up") {
+        D3.selectAll(".text-layer-1").style("display", "block")
+      }
     } else if (this.state.step_index === 4 || this.state.step_index === 5) {
       this.layer0.style("display", "none")
       this.layer1.style("display", "block")
       this.layer2.style("display", "none")
 
-      // D3.select("#layer-txt-1").style("display", "none")
-      // D3.select("#layer-txt-2").style("display", "block")
-      // D3.select("#layer-txt-3").style("display", "none")
+      // Hiding text for other layers
+      D3.selectAll(".text-layer-1").style("display", "none")
+      D3.selectAll(".text-layer-3").style("display", "none")
+
+      // When scroll direction = up, display all text for this layer
+      if (direction === "up") {
+        D3.selectAll(".text-layer-2").style("display", "block")
+      }
     } else if (this.state.step_index === 6 || this.state.step_index === 7) {
       this.layer0.style("display", "none")
       this.layer1.style("display", "none")
       this.layer2.style("display", "block")
 
-      // D3.select("#layer-txt-1").style("display", "none")
-      // D3.select("#layer-txt-2").style("display", "none")
-      // D3.select("#layer-txt-3").style("display", "block")
+      // Hiding text for other layers
+      D3.selectAll(".text-layer-1").style("display", "none")
+      D3.selectAll(".text-layer-2").style("display", "none")
+
+      // When scroll direction = up, display all text for this layer
+      if (direction === "up") {
+        D3.selectAll(".text-layer-3").style("display", "block")
+      }
     }
 
-    // Animating arrows.
+    // Animating arrows
     if (this.state.step_index === 0) {
       // Resetting arrow clip paths to original position
       // -> when back at step 0, arrows are hidden
       // so they can be animated again later
 
       for (let i = 1; i < this.nodeList.length + 1; i++) {
-        console.log()
         if (i <= 3) {
           // For vertical animation
           D3.select(`#rect-arrow-path-${i}`)
@@ -122,10 +136,7 @@ class ExplFirst extends Component {
       D3.select(`#arrow-${this.state.step_index}`).style("display", "block")
 
       // Show explanation text
-      D3.select(`#explanation-${this.state.step_index}`).style(
-        "display",
-        "block"
-      )
+      D3.select(`#ee-text-${this.state.step_index}`).style("display", "block")
 
       // Animating arrows by moving corresponding clip-path
       // Differentiating between vertical/horizontal animations
@@ -324,7 +335,16 @@ class ExplFirst extends Component {
                   data.allContentfulIssuesEeText.edges.map(edge => {
                     if (edge.node.issueId === this.state.issue_id) {
                       return (
-                        <div id={"ee-text-" + edge.node.stepId}>
+                        <div
+                          id={"ee-text-" + edge.node.stepId}
+                          className={
+                            edge.node.stepId < 4
+                              ? "text-layer-1"
+                              : edge.node.stepId < 6
+                              ? "text-layer-2"
+                              : "text-layer-3"
+                          }
+                        >
                           {documentToReactComponents(
                             edge.node.stepText.json,
                             this.options
@@ -335,33 +355,6 @@ class ExplFirst extends Component {
                   })
                 }
               />
-              <div id="layer-txt-1">
-                <div className="explanation-text" id="explanation-1">
-                  Explanation 1
-                </div>
-                <div className="explanation-text" id="explanation-2">
-                  Explanation 2
-                </div>
-                <div className="explanation-text" id="explanation-3">
-                  Explanation 3
-                </div>
-              </div>
-              <div id="layer-txt-2">
-                <div className="explanation-text" id="explanation-4">
-                  Explanation 4
-                </div>
-                <div className="explanation-text" id="explanation-5">
-                  Explanation 5
-                </div>
-              </div>
-              <div id="layer-txt-3">
-                <div className="explanation-text" id="explanation-6">
-                  Explanation 6
-                </div>
-                <div className="explanation-text" id="explanation-7">
-                  Explanation 7
-                </div>
-              </div>
             </div>
           </Col>
         </Row>
