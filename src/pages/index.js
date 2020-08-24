@@ -72,19 +72,19 @@ const IndexPage = () => {
             <Row className="justify-content-md-center mt-4">
               <Col xs="12" md="4" className="text-center">
                 <div className="card tilted-left">
-                  <div className="card-body bg-dark text-white">
+                  <div className="card-body bg-dark text-white p-3 display-4">
                     <span className="straight-text">70% of people held in Ontario jails are legally innocent awaiting a bail hearing or court date.</span>
                     </div>
                 </div>
               </Col>
               <Col xs="12" md="4" className="text-center">
                 <div className="card tilted-right">
-                  <div className="card-body bg-dark text-white">Among those people in jail awaiting a bail hearing, Black people are overrepresented by 300% and Indigenous people by 500%.</div>
+                  <div className="card-body bg-dark text-white p-3 display-4">Among those people in jail awaiting a bail hearing, Black people are overrepresented by 300% and Indigenous people by 500%.</div>
                 </div>
               </Col>
               <Col xs="12" md="4" className="text-center">
                 <div className="card tilted-left">
-                    <div className="card-body bg-dark text-white">Ontario’s overall population has grown by 50% in the last 30 years but the number of people in jail awaiting a bail hearing has grown by 300%</div>
+                    <div className="card-body bg-dark text-white p-3 display-4">Ontario’s overall population has grown by 50% in the last 30 years but the number of people in jail awaiting a bail hearing has grown by 300%</div>
                 </div>
               </Col>
             </Row>
