@@ -18,7 +18,7 @@ const IndexPage = () => {
     query {
       homeHero: file(relativePath: { eq: "images/home_hero.jpg" }) {
         childImageSharp {
-          fluid(quality: 90, maxWidth: 2000) {
+          fluid(quality: 90) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -51,15 +51,15 @@ const IndexPage = () => {
     <Layout>
       <Head title="Home" />
       <Jumbotron
-        className="hero vh-100"
+        className="hero"
         fluid>
         <BackgroundImage
           fluid={data.homeHero.childImageSharp.fluid}
           backgroundColor={`#F08FDB`}
           alt="A jail cell overlaid with a stylized pink dot pattern"
         >
-          <Container>
-            <Row className="h-100 justify-content-center align-items-center">
+          <Container className="vh-100 pt-5">
+            <Row className="justify-content-center align-items-center">
               <Col md="8" className="text-center">
                 <HomeLogo fill='#fff' className="mt-2 mb-5 w-50"/>
                 <h1 className="display-1 mb-5 text-rust uppercase">
