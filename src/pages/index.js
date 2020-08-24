@@ -61,12 +61,12 @@ const IndexPage = () => {
           <Container className="vh-100 pt-5">
             <Row className="justify-content-center align-items-center">
               <Col md="8" className="text-center">
-                <HomeLogo fill='#fff' className="mt-2 mb-5 w-50"/>
+                <HomeLogo fill='#fff' className="mt-2 mb-4" width={250}/>
                 <h1 className="display-1 mb-5 text-rust uppercase">
-                  <span className="hero-em px-5">Coming Soon!</span>
+                  <span className="hero-em p-3">Coming Soon!</span>
                 </h1>
-                <h2 className="text-rust uppercase mb-0">Ontario's Bail System is broken</h2>
-                <h3 className="text-rust uppercase mt-0">and more people need to know:</h3>
+                <h2 className="text-rust uppercase mb-0 pb-0">Ontario's Bail System is broken</h2>
+                <h3 className="text-rust uppercase display-3">and more people need to know:</h3>
               </Col>
             </Row>
             <Row className="justify-content-md-center mt-4">
