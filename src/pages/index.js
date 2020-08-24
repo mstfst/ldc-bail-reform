@@ -106,7 +106,7 @@ const IndexPage = () => {
         <Row className="justify-content-md-center">
           <Col xs="12" md="4" className="text-center">
             <div className="card bg-rust tilted-left">
-              <h2 className="text-white">Sign Up</h2>
+              <h2 className="text-white uppercase">Sign Up</h2>
             </div>
             <p className="text-nowrap mt-3">Sign up for our mailing list! You’ll be the first to know:</p>
             <ul className="text-left">
@@ -116,7 +116,7 @@ const IndexPage = () => {
           </Col>
           <Col xs="12" md="4" className="text-center">
             <div className="card bg-rust tilted-right">
-              <h2 className="text-white">Contact Us</h2>
+              <h2 className="text-white uppercase">Contact Us</h2>
             </div>
             <p className="mt-3">To learn more about opportunities to collaborate, volunteer, or otherwise support our work, contact us at info@lawdesigncolab.ca</p>
           </Col>
