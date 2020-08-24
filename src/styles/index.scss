@@ -209,7 +209,8 @@ a.dropdown-item {
 .hero {
   background-color: $light;
   position: relative;
-  padding-top: 3rem; // Only needed if navbar is set to "fixed=top" vs. "sticky=top"
+  // RE-ENABLE THIS AFTER FULL SITE IS RELEASED WITH NAVBAR
+  // padding-top: 3rem; // Only needed if navbar is set to "fixed=top" vs. "sticky=top"
   padding-bottom: 0;
 }
 
