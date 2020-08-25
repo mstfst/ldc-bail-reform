@@ -19,10 +19,10 @@
 @import "bootstrap/scss/_code.scss";
 @import "bootstrap/scss/_grid.scss";
 // @import "bootstrap/scss/_tables.scss";
-// @import "bootstrap/scss/_forms.scss";
+@import "bootstrap/scss/_forms.scss";
 @import "bootstrap/scss/_buttons.scss";
 @import "bootstrap/scss/_transitions.scss";
-// @import "bootstrap/scss/_dropdown.scss";
+@import "bootstrap/scss/_dropdown.scss";
 // @import "bootstrap/scss/_button-group.scss";
 // @import "bootstrap/scss/_input-group.scss";
 // @import "bootstrap/scss/_custom-forms.scss";
@@ -48,7 +48,7 @@
 @import "bootstrap/scss/_print.scss";
 
 @import "animations";
-@import "timeline";
+@import "methodology";
 @import "system-map";
 
 // --- Debug CSS ---
@@ -67,6 +67,19 @@
   animation: 1.5s heartbeat ease infinite;
 }
 
+// --- Transitions ---------
+@mixin transition-300 {
+  -webkit-transition: all 300s ease-out;
+  -moz-transition: all 300s ease-out;
+  -o-transition: all 300s ease-out;
+  transition: all 300s ease-out;
+}
+
+// .container {
+//   width: 1200px;
+//   margin:auto;
+// }
+
 // --- Typography ---------
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-family-headings;
@@ -80,8 +93,6 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
-// --- End Typography ---------
-
 // --- Header ---------
 .brand {
   text-transform: uppercase;
@@ -92,7 +103,24 @@ h1, h2, h3, h4, h5, h6 {
   vertical-align: middle;
 }
 
+.nav-dropdown {
+  .dropdown-item.active {
+    display: block;
+    width: auto;
+    background: $dark;
+    padding: 0.6rem 1.2 rem;
+  }
+}
+
 // --- Modifying Layout Components ---------
+.lh-1 {
+  line-height: 1 !important;
+}
+
+.inline-block {
+  display: inline-block !important;
+}
+
 .align-contents-bottom {
   display: flex;
   flex-direction: column;
@@ -103,7 +131,7 @@ h1, h2, h3, h4, h5, h6 {
 .min-height-3rem {
   min-height: 3rem;
 }
-  
+
 .container-fill {
   height: calc(100vh - 112px);
 }
@@ -113,6 +141,38 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   justify-content: space-between;
 }
+
+.crooked-box {
+  position: relative;
+  z-index: 2;
+
+  &:before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background: $light;
+    transform: rotate(0.85deg);
+    z-index: -1;
+  }
+}
+
+.dropdown-menu {
+  background: darken($dark, 10);
+}
+
+a.dropdown-item {
+  background: darken($dark, 10);
+  color: $rust;
+
+  &:hover {
+    background: darken($dark, 15);
+    color: $pink;
+  }
+}
+
 // --- End Layout Component Mods ---------
 
 
@@ -154,20 +214,40 @@ h1, h2, h3, h4, h5, h6 {
 
 // --- Homepage Styling ---------
 
+// Only use this if site is under construction
+.coming-soon-overlay {
+  position: relative;
+
+  &:before {
+    content: '';
+    background-color: rgba(255,255,255,0.5);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
 // New styling for jumbotron
 .hero {
   background-color: $light;
   position: relative;
+  // RE-ENABLE THIS AFTER FULL SITE IS RELEASED WITH NAVBAR
+  // padding-top: 3rem; // Only needed if navbar is set to "fixed=top" vs. "sticky=top"
+  padding-bottom: 0;
 }
 
+// Styling the Gatsby bg img to realign on smaller screens
 .hero-bg {
-  display: block;
-  position: absolute !important;
-  height: calc(100vh - 3rem);
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 0;
+  @include media-breakpoint-up(xs) {
+    background-position: left center !important;
+  }
+  @include media-breakpoint-up(sm) {
+    background-position: center center;
+  }
 }
 
 .hero-em {
@@ -188,3 +268,12 @@ h1, h2, h3, h4, h5, h6 {
     z-index: -1;
   }
 }
+
+.tilted-right {
+  transform: rotate(2deg);
+}
+
+.tilted-left {
+  transform: rotate(-2deg);
+}
+// --- End Homepage Styling ---------

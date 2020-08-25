@@ -1,0 +1,161 @@
+.timeline-wrapper {
+  border-right: 2px solid $dark;
+}
+
+.timeline-year-content-header {
+  position: relative;
+  border-bottom: 2px solid $dark;
+
+}
+
+.timeline-year-indicators {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+
+.timeline-card-indicator {
+  position: absolute;
+  bottom: -10px;
+  width: 20px;
+  height: 20px;
+  text-indent: -9999px;
+  line-height: 0;
+  // pointer-events: none;
+  background-color: hsl(211, 100%, 67%);
+  transform: scale(.5);
+  transition: .35s all;
+  &.disabled {
+    opacity: .5 !important;
+    pointer-events: none !important;
+  }
+}
+
+.timeline-year-events {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  border-left: 2px solid $dark;
+  height: 100%;
+  width: 16.67%;
+  margin-left: 10px;
+  padding-left: 10px;
+}
+
+.timeline-year-docs {
+
+  position: relative;
+  // overflow: hidden;
+  min-height: 300px;
+  margin-bottom: 10vh;
+  
+  .card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity:0;
+    transform: translateY(20%);
+    transition: .35s all ease-in;
+    transition-delay: 0;
+    &.active {
+      z-index: 10;
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: .5s;
+    }
+    .badge {
+      padding: .3rem;
+      font-weight: normal;
+      border: 1px solid #999;
+    }
+  }
+}
+
+.timeline-year {
+
+  .timeline-year-label {
+    transition: .35s all;
+    color: $dark;
+  }
+
+  &.active {
+    .timeline-year-label {
+      color: $rust;
+    }
+    .timeline-card-indicator {
+      background-color: #007bff;
+      opacity: 1;
+      pointer-events: all;
+      transform: scale(1);
+    }
+  }
+}
+
+.react-reveal {
+  transition: .5s all ease-out;
+  transition-delay: 1s;
+}
+
+.scaleUp {
+  transform: scale(1.2);
+  color: $rust;
+}
+
+.scaleDown {
+  transform: scale(1);
+}
+
+.legend {
+  position: sticky;
+  top: 100px;
+}
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -90px;
+  visibility: hidden;
+}
+
+.timeline-event {
+  position: absolute;
+}
+
+.timeline-event-title {
+  position: relative;
+  &:before {
+    position: absolute;
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: $dark;
+    left: -15px;
+    transform: rotate(45deg);
+    top: 6px;
+  }
+}
+
+.timeline-card {
+  box-shadow: -2px 4px 6px rgba(0, 0, 0, .4);
+}
+
+.no-swag {
+  border: none;
+  background: none;
+  padding: 0;
+  border-bottom: 1px solid transparent;
+  &.active {
+    border-bottom: 1px solid  black;
+  }
+}
+
+.btn-category {
+  margin-bottom: 5px;
+}
+
+.square {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  margin-right: 8px;
+}

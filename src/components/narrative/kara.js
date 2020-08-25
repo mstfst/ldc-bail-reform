@@ -212,7 +212,7 @@ class KaraNarrative extends Component {
               </div>
 
               <div className="narrative-step">
-                <div className="sticky">
+                <div className="sticky" id="kara-choice-slide">
                   <div className="narrative-content">
                     <Row className="justify-content-md-center">
                       <Col md={8}>
@@ -333,7 +333,7 @@ class KaraNarrative extends Component {
               <div className="narrative-step">
                 <div className="sticky">
                   <div className="narrative-content">
-                    <Row className="justify-content-md-center" md={12}>
+                    <Row className="justify-content-md-center" >
                       <Col>
                         <Card className="kara-card">
                           <Card.Body className="kara-card-content">

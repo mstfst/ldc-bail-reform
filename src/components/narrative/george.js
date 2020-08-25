@@ -131,10 +131,6 @@ class GeorgeNarrative extends Component {
           const modalContent = data.allContentfulNarrativeModalTemplate.edges
           return (
             <div>
-
-
-
-
               <div className="narrative-step">
                 <div className="sticky">
                   <div className="narrative-content">
@@ -195,7 +191,7 @@ class GeorgeNarrative extends Component {
               </div>
 
               <div className="narrative-step">
-                <div className="sticky">
+                <div className="sticky" id="george-choice-slide">
                   <div className="narrative-content">
                     <Row className="justify-content-md-center">
                       <Col md={6}>
