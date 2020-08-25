@@ -54,6 +54,7 @@ const IndexPage = () => {
         className="hero"
         fluid>
         <BackgroundImage
+          className="hero-bg"
           fluid={data.homeHero.childImageSharp.fluid}
           backgroundColor={`#F08FDB`}
           alt="A jail cell overlaid with a stylized pink dot pattern"

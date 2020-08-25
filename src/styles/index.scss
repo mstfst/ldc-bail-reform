@@ -231,7 +231,6 @@ a.dropdown-item {
   }
 }
 
-
 // New styling for jumbotron
 .hero {
   background-color: $light;
@@ -239,6 +238,16 @@ a.dropdown-item {
   // RE-ENABLE THIS AFTER FULL SITE IS RELEASED WITH NAVBAR
   // padding-top: 3rem; // Only needed if navbar is set to "fixed=top" vs. "sticky=top"
   padding-bottom: 0;
+}
+
+// Styling the Gatsby bg img to realign on smaller screens
+.hero-bg {
+  @include media-breakpoint-up(xs) {
+    background-position: left center !important;
+  }
+  @include media-breakpoint-up(sm) {
+    background-position: center center;
+  }
 }
 
 .hero-em {
