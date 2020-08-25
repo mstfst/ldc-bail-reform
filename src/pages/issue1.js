@@ -21,6 +21,7 @@ const Issue1Page = () => {
           filter: {
             data: { 
               Include_in_Momentum_: { in : "Theme 1 - Punish S&E Conditions" }
+              Publish__or_Start_Date_: { ne: null }
             }
           }
         ) {
@@ -51,7 +52,7 @@ const Issue1Page = () => {
       </Row>
 
       <Row className="justify-content-center pb-5">
-        <Col md="12" lg="10">
+        <Col md="12">
           <MomentumTabs documents={ data.documents.nodes } />
         </Col>
       </Row>
