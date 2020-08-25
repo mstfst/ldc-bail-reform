@@ -7,8 +7,6 @@ import NathanNarrative from "./narrative/nathan"
 import KaraNarrative from "./narrative/kara"
 import GeorgeNarrative from "./narrative/george"
 
-import ProgressBar from "./progress-bar"
-
 import "./narrative-body.scss"
 
 class NarrativeSection extends Component {
@@ -107,7 +105,6 @@ class NarrativeSection extends Component {
 
     return (
       <div>
-        <ProgressBar />
         <div className="gradient-background"></div>
 
         <StaticQuery

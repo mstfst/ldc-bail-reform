@@ -10,7 +10,6 @@ import Layout from "../components/layout"
 import Head from "../components/head";
 
 /* Import graphics */
-import ChevronDown from "../../static/assets/svg/chevron-down.svg";
 import HomeLogo from "../../static/assets/svg/logo_homepage.svg";
 
 const IndexPage = () => {
