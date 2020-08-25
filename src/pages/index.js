@@ -59,7 +59,7 @@ const IndexPage = () => {
           alt="A jail cell overlaid with a stylized pink dot pattern"
         >
           <div className="coming-soon-overlay">
-            <Container className="vh-100 pt-5">
+            <Container className="h-100 pt-5 pb-5">
               <Row className="justify-content-center align-items-center">
                 <Col md="8" className="text-center">
                   <HomeLogo fill='#fff' className="mt-2 mb-4" width={250}/>
@@ -70,21 +70,21 @@ const IndexPage = () => {
                   <h3 className="text-rust uppercase lh-1">and more people need to know:</h3>
                 </Col>
               </Row>
-              <Row className="justify-content-md-center mt-4">
-                <Col xs="12" md="4" className="text-center">
-                  <div className="card tilted-left">
+              <Row className="justify-content-center mt-4">
+                <Col xs="12" sm="6" lg="4" className="text-center pb-3">
+                  <div className="card tilted-left h-100">
                     <div className="card-body bg-dark text-white p-3 display-4">
                       <span className="straight-text">70% of people held in Ontario jails are legally innocent awaiting a bail hearing or court date.</span>
                       </div>
                   </div>
                 </Col>
-                <Col xs="12" md="4" className="text-center">
-                  <div className="card tilted-right">
+                <Col xs="12" sm="6" lg="4" className="text-center pb-3">
+                  <div className="card tilted-right h-100">
                     <div className="card-body bg-dark text-white p-3 display-4">Among those people in jail awaiting a bail hearing, Black people are overrepresented by 300% and Indigenous people by 500%.</div>
                   </div>
                 </Col>
-                <Col xs="12" md="4" className="text-center">
-                  <div className="card tilted-left">
+                <Col xs="12" sm="6" lg="4" className="text-center pb-3">
+                  <div className="card tilted-left h-100">
                       <div className="card-body bg-dark text-white p-3 display-4">Ontario’s overall population has grown by 50% in the last 30 years but the number of people in jail awaiting a bail hearing has grown by 300%</div>
                   </div>
                 </Col>
