@@ -75,11 +75,6 @@
   transition: all 300s ease-out;
 }
 
-// .container {
-//   width: 1200px;
-//   margin:auto;
-// }
-
 // --- Typography ---------
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-family-headings;
@@ -113,14 +108,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 // --- Modifying Layout Components ---------
-.lh-1 {
-  line-height: 1 !important;
-}
-
-.inline-block {
-  display: inline-block !important;
-}
-
 .align-contents-bottom {
   display: flex;
   flex-direction: column;
@@ -131,7 +118,7 @@ h1, h2, h3, h4, h5, h6 {
 .min-height-3rem {
   min-height: 3rem;
 }
-
+  
 .container-fill {
   height: calc(100vh - 112px);
 }
@@ -214,40 +201,12 @@ a.dropdown-item {
 
 // --- Homepage Styling ---------
 
-// Only use this if site is under construction
-.coming-soon-overlay {
-  position: relative;
-
-  &:before {
-    content: '';
-    background-color: rgba(255,255,255,0.5);
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-}
-
 // New styling for jumbotron
 .hero {
   background-color: $light;
   position: relative;
-  // RE-ENABLE THIS AFTER FULL SITE IS RELEASED WITH NAVBAR
-  // padding-top: 3rem; // Only needed if navbar is set to "fixed=top" vs. "sticky=top"
+  padding-top: 3rem; // Only needed if navbar is set to "fixed=top" vs. "sticky=top"
   padding-bottom: 0;
-}
-
-// Styling the Gatsby bg img to realign on smaller screens
-.hero-bg {
-  @include media-breakpoint-up(xs) {
-    background-position: left center !important;
-  }
-  @include media-breakpoint-up(sm) {
-    background-position: center center;
-  }
 }
 
 .hero-em {
@@ -267,13 +226,5 @@ a.dropdown-item {
     transform: rotate(2deg);
     z-index: -1;
   }
-}
-
-.tilted-right {
-  transform: rotate(2deg);
-}
-
-.tilted-left {
-  transform: rotate(-2deg);
 }
 // --- End Homepage Styling ---------
