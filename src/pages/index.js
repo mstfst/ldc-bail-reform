@@ -104,9 +104,10 @@ const IndexPage = () => {
         </Row>
         <h1 className="text-pink text-center uppercase mt-3 mb-5">Join Us!</h1>
       </Container>
+
       <Container>
         <Row className="justify-content-center">
-          <Col md="6" lg="5"className="pb-4">
+          <Col md="6" lg="5" className="pb-4">
             <div className="card bg-rust tilted-left px-2 py-1 inline-block">
               <h3 className="text-white uppercase">Sign Up</h3>
             </div>
@@ -117,7 +118,7 @@ const IndexPage = () => {
             </ul>
           </Col>
 
-          <Col md="6" lg="5, offset:2">
+          <Col md="6" lg="5" className="mb-4">
             <div className="card bg-rust tilted-right px-2 py-1 inline-block">
               <h3 className="text-white uppercase">Contact Us</h3>
             </div>
@@ -125,7 +126,14 @@ const IndexPage = () => {
           </Col>
         </Row>
       </Container>
-      <p className="text-center mt-5"><em>Our work is graciously supported by The Action Group on Access to Justice at the Law Society of Ontario.</em></p>
+
+      <Container>
+        <Row className="justify-content-center mt-3 mb-4">
+          <Col xs="10" md="12">
+            <p className="text-center"><em>Our work is graciously supported by The Action Group on Access to Justice at the Law Society of Ontario.</em></p> 
+          </Col>
+        </Row>
+      </Container>
     </Layout>
   )
 }
