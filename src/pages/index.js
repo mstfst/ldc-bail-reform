@@ -102,13 +102,13 @@ const IndexPage = () => {
             <p>We’re advocating for change in Ontario’s bail system by doing what we do best: creating multimedia content to engage and mobilize audiences.</p>
           </Col>
         </Row>
-        <h2 className="text-pink text-center uppercase mb-5">Join Us!</h2>
+        <h1 className="text-pink text-center uppercase mt-3 mb-5">Join Us!</h1>
       </Container>
       <Container>
-        <Row className="justify-content-md-center">
-          <Col xs="12" md="4" className="text-center">
-            <div className="card bg-rust tilted-left">
-              <h2 className="text-white uppercase">Sign Up</h2>
+        <Row className="justify-content-center">
+          <Col xs="12" md="6" lg="5"className="pb-4">
+            <div className="card bg-rust tilted-left px-2 py-1 inline-block">
+              <h3 className="text-white uppercase">Sign Up</h3>
             </div>
             <p className="text-nowrap mt-3">Sign up for our mailing list! You’ll be the first to know:</p>
             <ul className="text-left">
@@ -116,15 +116,16 @@ const IndexPage = () => {
               <li className="text-left">about virtual events featuring thought leaders at the intersections of law, civic action, and creative industries.</li>
             </ul>
           </Col>
-          <Col xs="12" md="4" className="text-center">
-            <div className="card bg-rust tilted-right">
-              <h2 className="text-white uppercase">Contact Us</h2>
+
+          <Col xs="12" md="6" lg="5, offset:2">
+            <div className="card bg-rust tilted-right px-2 py-1 inline-block">
+              <h3 className="text-white uppercase">Contact Us</h3>
             </div>
-            <p className="mt-3">To learn more about opportunities to collaborate, volunteer, or otherwise support our work, contact us at info@lawdesigncolab.ca</p>
+            <p className="mt-3">To learn more about opportunities to collaborate, volunteer, or otherwise support our work, contact us at <a href="mailto:info@lawdesigncolab.ca">info@lawdesigncolab.ca</a></p>
           </Col>
         </Row>
       </Container>
-      <p className="text-rust text-center mt-5">Our work is graciously supported by The Action Group on Access to Justice at the Law Society of Ontario.</p>
+      <p className="text-center mt-5"><em>Our work is graciously supported by The Action Group on Access to Justice at the Law Society of Ontario.</em></p>
     </Layout>
   )
 }
