@@ -112,7 +112,7 @@ const IndexPage = () => {
             <div className="card bg-rust tilted-left px-2 py-1 inline-block">
               <h3 className="text-white uppercase">Sign Up</h3>
             </div>
-            <p className="text-nowrap mt-3">Sign up for our mailing list! You’ll be the first to know:</p>
+            <p className="mt-3">Sign up for our mailing list! You’ll be the first to know:</p>
             <ul className="text-left">
               <li className="text-left">when the unlockbailreform.ca goes live and is updated</li>
               <li className="text-left">about virtual events featuring thought leaders at the intersections of law, civic action, and creative industries.</li>
