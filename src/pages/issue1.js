@@ -13,7 +13,7 @@ const Issue1Page = () => {
       issue1: file(relativePath: { eq: "images/issue1.jpg" }) {
         childImageSharp {
           fixed(width: 300) {
-            ...GatsbyImageSharpFixed_tracedSVG
+            ...GatsbyImageSharpFixed
           }
         }
       }
