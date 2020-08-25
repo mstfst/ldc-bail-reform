@@ -58,37 +58,39 @@ const IndexPage = () => {
           backgroundColor={`#F08FDB`}
           alt="A jail cell overlaid with a stylized pink dot pattern"
         >
-          <Container className="vh-100 pt-5">
-            <Row className="justify-content-center align-items-center">
-              <Col md="8" className="text-center">
-                <HomeLogo fill='#fff' className="mt-2 mb-4" width={250}/>
-                <h1 className="display-1 mb-5 text-rust uppercase">
-                  <span className="hero-em p-3">Coming Soon!</span>
-                </h1>
-                <h2 className="text-rust uppercase mb-0 pb-0">Ontario's Bail System is broken</h2>
-                <h3 className="text-rust uppercase display-3">and more people need to know:</h3>
-              </Col>
-            </Row>
-            <Row className="justify-content-md-center mt-4">
-              <Col xs="12" md="4" className="text-center">
-                <div className="card tilted-left">
-                  <div className="card-body bg-dark text-white p-3 display-4">
-                    <span className="straight-text">70% of people held in Ontario jails are legally innocent awaiting a bail hearing or court date.</span>
-                    </div>
-                </div>
-              </Col>
-              <Col xs="12" md="4" className="text-center">
-                <div className="card tilted-right">
-                  <div className="card-body bg-dark text-white p-3 display-4">Among those people in jail awaiting a bail hearing, Black people are overrepresented by 300% and Indigenous people by 500%.</div>
-                </div>
-              </Col>
-              <Col xs="12" md="4" className="text-center">
-                <div className="card tilted-left">
-                    <div className="card-body bg-dark text-white p-3 display-4">Ontario’s overall population has grown by 50% in the last 30 years but the number of people in jail awaiting a bail hearing has grown by 300%</div>
-                </div>
-              </Col>
-            </Row>
-          </Container>
+          <div className="coming-soon-overlay">
+            <Container className="vh-100 pt-5">
+              <Row className="justify-content-center align-items-center">
+                <Col md="8" className="text-center">
+                  <HomeLogo fill='#fff' className="mt-2 mb-4" width={250}/>
+                  <h1 className="display-1 mb-5 text-rust uppercase">
+                    <span className="hero-em p-3">Coming Soon!</span>
+                  </h1>
+                  <h2 className="text-rust uppercase mb-0 pb-0">Ontario's Bail System is broken</h2>
+                  <h3 className="text-rust uppercase display-3">and more people need to know:</h3>
+                </Col>
+              </Row>
+              <Row className="justify-content-md-center mt-4">
+                <Col xs="12" md="4" className="text-center">
+                  <div className="card tilted-left">
+                    <div className="card-body bg-dark text-white p-3 display-4">
+                      <span className="straight-text">70% of people held in Ontario jails are legally innocent awaiting a bail hearing or court date.</span>
+                      </div>
+                  </div>
+                </Col>
+                <Col xs="12" md="4" className="text-center">
+                  <div className="card tilted-right">
+                    <div className="card-body bg-dark text-white p-3 display-4">Among those people in jail awaiting a bail hearing, Black people are overrepresented by 300% and Indigenous people by 500%.</div>
+                  </div>
+                </Col>
+                <Col xs="12" md="4" className="text-center">
+                  <div className="card tilted-left">
+                      <div className="card-body bg-dark text-white p-3 display-4">Ontario’s overall population has grown by 50% in the last 30 years but the number of people in jail awaiting a bail hearing has grown by 300%</div>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          </div>
         </BackgroundImage>
       </Jumbotron>
 
