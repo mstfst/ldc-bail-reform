@@ -4,19 +4,19 @@ import "./issues-momentum.scss"
 
 class MomentumTabs extends React.Component {
   render() {
-    /* Functions to Transform Airtable Articles Data */
+    // Rename data to make it more legible
     const airtable = this.props.documents
     // console.log(airtable)
-    // console.log(typeof airtable)
 
     // Temp storage of keys
     const docsByYear = {};
     // Check that data was fetched
-    if (airtable && Object.keys(airtable)) {
+    if (/*airtable &&*/ Object.keys(airtable)) {
       // Group docs from same year
-      Object.keys(airtable).forEach(function(key) {
+      Object.keys(airtable).forEach(function(i) {
+        console.log(typeof airtable[i].data.Publish__or_Start_Date_)
         // Create key for grouping
-        var tempKey = airtable[key].data.Date.slice(0,4);
+        var tempKey = airtable[i].data.Publish__or_Start_Date_.slice(0,4);
         if (!docsByYear.hasOwnProperty(tempKey)) {
           docsByYear[tempKey] = {
             "year": tempKey,
@@ -24,7 +24,7 @@ class MomentumTabs extends React.Component {
           }
         }
         // push docs into the nested array under the year
-        docsByYear[tempKey].docs.push(airtable[key].data);
+        docsByYear[tempKey].docs.push(airtable[i].data);
       });
     }
     // Map objects to final results array

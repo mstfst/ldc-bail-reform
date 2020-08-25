@@ -19,14 +19,20 @@ const Issue1Page = () => {
       }
       documents: allAirtable(
           filter: {
-            table: { eq: "testTable" }
+            data: { 
+              Include_in_Momentum_: { in : "Theme 1 - Punish S&E Conditions" }
+            }
           }
         ) {
           nodes {
             data {
               Title
+              Author_s_
+              URL
+              Include_in_Momentum_
+              Publish__or_Start_Date_
+              Momentum_Annotation
             }
-            recordId
           }
         }
     }
