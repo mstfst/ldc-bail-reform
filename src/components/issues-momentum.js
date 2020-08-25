@@ -6,15 +6,13 @@ class MomentumTabs extends React.Component {
   render() {
     // Rename data to make it more legible
     const airtable = this.props.documents
-    // console.log(airtable)
 
     // Temp storage of keys
     const docsByYear = {};
     // Check that data was fetched
-    if (/*airtable &&*/ Object.keys(airtable)) {
+    if (airtable && Object.keys(airtable)) {
       // Group docs from same year
       Object.keys(airtable).forEach(function(i) {
-        console.log(typeof airtable[i].data.Publish__or_Start_Date_)
         // Create key for grouping
         var tempKey = airtable[i].data.Publish__or_Start_Date_.slice(0,4);
         if (!docsByYear.hasOwnProperty(tempKey)) {
@@ -31,8 +29,6 @@ class MomentumTabs extends React.Component {
     const docsByYearArray = Object.keys(docsByYear).map(function(key) {
       return docsByYear[key];
     })
-    // console.log(docsByYearArray)
-    // console.log(typeof docsByYearArray)
 
     /*Reverse order of years*/
     const docsByYearReverse = docsByYearArray.sort().reverse();
@@ -62,7 +58,7 @@ class MomentumTabs extends React.Component {
                       <Row>
                         <Col sm="6" className="article-list">
                           {item.docs.map(doc => (
-                            <Row key={ item.recordId } className="no-gutters article-item">
+                            <Row key={ doc.key } className="no-gutters article-item">
                               <img src="https://placehold.it/100x100" alt="{ item.year }"/>
                               <div className="article-heading display-4">
                                 { doc.Title }
