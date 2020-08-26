@@ -35,7 +35,7 @@ const Issue1Page = () => {
       <Row id="explanation" className="justify-content-center">
         <Col className="mt-5 mb-5" md="10">
           <h2 className="text-center uppercase text-rust">Explorable Explanation</h2>
-          <ExplFirst text="ciao"></ExplFirst>
+          <ExplFirst></ExplFirst>
         </Col>
       </Row>
     </Layout>
