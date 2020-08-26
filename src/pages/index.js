@@ -111,7 +111,7 @@ const IndexPage = () => {
             <div className="card bg-rust tilted-left px-2 py-1 inline-block">
               <h3 className="text-white uppercase">Sign Up</h3>
             </div>
-            <p className="mt-3">Sign up for our mailing list! You’ll be the first to know:</p>
+            <p className="mt-3">Sign up for <a href="https://airtable.com/shrFS2nS5cPNWvjxa">our mailing list</a>! You’ll be the first to know:</p>
             <ul className="text-left">
               <li className="text-left">when the unlockbailreform.ca goes live and is updated</li>
               <li className="text-left">about virtual events featuring thought leaders at the intersections of law, civic action, and creative industries.</li>
@@ -130,7 +130,7 @@ const IndexPage = () => {
       <Container>
         <Row className="justify-content-center mt-3 mb-4">
           <Col xs="10" md="12">
-            <p className="text-center"><em>Our work is graciously supported by The Action Group on Access to Justice at the Law Society of Ontario.</em></p> 
+            <p className="text-center"><em>Our work is graciously supported by The Action Group on Access to Justice at the Law Society of Ontario.</em></p>
           </Col>
         </Row>
       </Container>
