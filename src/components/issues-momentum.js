@@ -70,17 +70,19 @@ class MomentumTabs extends React.Component {
                         </Col>
                         <Col sm="6" className="article-preview">
                           {item.docs.map(doc => (
-                            <div className="article-card">
-                              <div className="article-header">
-                                <div className="source">{ doc.Author_s_ }</div>
-                                <div className="date">{ doc.Publish__or_Start_Date_ }</div>
-                              </div>
-                              <div className="article-body">
-                                <b>{ doc.Title }</b>
-                                <p>{ doc.Momentum_Annotation }</p>
-                                <a href="{ doc.URL }">Read More &raquo;</a>
-                              </div>
-                            </div>
+                            <Tab.Content key={ doc.Title.slice(0,4) }>
+                              <Tab.Pane eventKey={ doc.Title.slice(0,4) } className="article-card">
+                                <div className="article-header">
+                                  <div className="source">{ doc.Author_s_ }</div>
+                                  <div className="date">{ doc.Publish__or_Start_Date_ }</div>
+                                </div>
+                                <div className="article-body">
+                                  <b>{ doc.Title }</b>
+                                  <p>{ doc.Momentum_Annotation }</p>
+                                  <a href="{ doc.URL }">Read More &raquo;</a>
+                                </div>
+                              </Tab.Pane>
+                            </Tab.Content>
                           ))}
                         </Col>
                       </Tab.Container>
