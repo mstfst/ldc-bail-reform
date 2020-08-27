@@ -38,8 +38,7 @@ class MomentumTabs extends React.Component {
         <Col md="11" >
           <Tab.Container defaultActiveKey="2020">
             <Row>
-              { docsByYearReverse.map(function(item) {
-                return (
+                { docsByYearReverse.map(item => (
                   <Nav key={ item.year } variant="link" className="flex momentum-tab-row">
                     <Nav.Item className="momentum-tab">
                       <Nav.Link eventKey={ item.year }>
@@ -47,41 +46,28 @@ class MomentumTabs extends React.Component {
                       </Nav.Link>
                     </Nav.Item>
                   </Nav>
-                )
-              })}
+                ))}
             </Row>
 
             <Row className="pl-2 pr-2">
-              { docsByYearReverse.map(function(item) {
-                return (
-                  <Tab.Content key={ item.year }>
-                    <Tab.Pane eventKey={ item.year } className="momentum-pane">
-                      <Row>
+              { docsByYearReverse.map(item => (
+                <Tab.Content key={ item.year }>
+                  <Tab.Pane eventKey={ item.year } className="momentum-pane">
+                    <Row>
                         <Col sm="6" className="article-list">
-                          {/* Navigation tabs for each article */}
-                          <Col>
-                            { item.docs.map(doc => (
-                              <Nav key={ doc.key } variant="link">
-                                <Nav.Item >
-                                  <Nav.Link eventKey={ doc.key } className="article-item">
-                                    <div className="article-heading display-3">
-                                      { doc.Title }
-                                    </div>
-                                  </Nav.Link>
-                                </Nav.Item>
-                              </Nav>
-                            ))}
-                          </Col>
-
-                          {/* EXAMPLE MAPPING
                           {item.docs.map(doc => (
-                            <Row key={ doc.key } className="no-gutters article-item">
-                              <div className="article-heading display-3">
-                                { doc.Title }
-                              </div>
-                            </Row>
-                          ))} */}
+                            <Nav key={ doc.Title.slice(0,5) } variant="link">
+                              <Nav.Item>
+                                <Nav.Link eventKey={ doc.Title.slice(0,5) } className="article-item align-items-center">
+                                  <p className="article-heading display-4">
+                                  { doc.Title }
+                                  </p>
+                                </Nav.Link>
+                              </Nav.Item>
+                            </Nav>
+                          ))}
                         </Col>
+
                         <Col sm="6" className="article-preview">
                           <div className="article-card">
                             <div className="article-header">
@@ -94,11 +80,10 @@ class MomentumTabs extends React.Component {
                             </div>
                           </div>
                         </Col>
-                      </Row>
-                    </Tab.Pane>
-                  </Tab.Content>
-                )
-              })}
+                    </Row>
+                  </Tab.Pane>
+                </Tab.Content>
+              ))}
             </Row>
           </Tab.Container>
         </Col>
