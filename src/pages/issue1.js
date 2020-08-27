@@ -22,6 +22,7 @@ const Issue1Page = () => {
             data: { 
               Include_in_Momentum_: { in : "Theme 1 - Punish S&E Conditions" }
               Publish__or_Start_Date_: { ne: null }
+              Momentum_Annotation: { ne: null }
             }
           }
         ) {

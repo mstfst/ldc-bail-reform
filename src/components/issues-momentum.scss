@@ -34,9 +34,8 @@
       .article-item {
         position: relative;
         display: flex;
-        flex: 1;
-        padding: 0.4rem 0.8rem;
-        min-height: 150px;
+        flex-direction: column;
+        min-height: 120px;
         z-index: 2;
         margin-bottom: 16px;
         background: $dark url('http://source.unsplash.com/random/800x600') no-repeat center;
@@ -66,10 +65,9 @@
       }
 
       .article-heading {
-        flex: 1;
         display: flex;
-        align-items: center;
-        padding: 1rem;
+        flex: 1;
+        padding: 1rem 2rem;
         color: white !important;
       }
     }

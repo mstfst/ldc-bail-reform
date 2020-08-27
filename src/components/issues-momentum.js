@@ -32,6 +32,8 @@ class MomentumTabs extends React.Component {
 
     // Reverse order of years
     const docsByYearReverse = docsByYearArray.sort().reverse();
+
+    console.log(docsByYearReverse)
     
     return (
       <Row className="justify-content-center mt-2 momentum">
@@ -54,32 +56,34 @@ class MomentumTabs extends React.Component {
                 <Tab.Content key={ item.year }>
                   <Tab.Pane eventKey={ item.year } className="momentum-pane">
                     <Row>
+                      <Tab.Container>
                         <Col sm="6" className="article-list">
-                          {item.docs.map(doc => (
-                            <Nav key={ doc.Title.slice(0,5) } variant="link">
-                              <Nav.Item>
-                                <Nav.Link eventKey={ doc.Title.slice(0,5) } className="article-item align-items-center">
-                                  <p className="article-heading display-4">
+                            <Nav variant="link">
+                            {item.docs.map(doc => (
+                              <Nav.Item key={ doc.Title.slice(0,4) } className="article-item">
+                                <Nav.Link eventKey={ doc.Title.slice(0,4) } className="article-heading display-4 align-items-center">
                                   { doc.Title }
-                                  </p>
                                 </Nav.Link>
                               </Nav.Item>
+                              ))}
                             </Nav>
+                        </Col>
+                        <Col sm="6" className="article-preview">
+                          {item.docs.map(doc => (
+                            <div className="article-card">
+                              <div className="article-header">
+                                <div className="source">{ doc.Author_s_ }</div>
+                                <div className="date">{ doc.Publish__or_Start_Date_ }</div>
+                              </div>
+                              <div className="article-body">
+                                <b>{ doc.Title }</b>
+                                <p>{ doc.Momentum_Annotation }</p>
+                                <a href="{ doc.URL }">Read More &raquo;</a>
+                              </div>
+                            </div>
                           ))}
                         </Col>
-
-                        <Col sm="6" className="article-preview">
-                          <div className="article-card">
-                            <div className="article-header">
-                              <div className="source">HuffPost</div>
-                              <div className="date">03/21/2020</div>
-                            </div>
-                            <div className="article-body">
-                              <b>Article Snippet</b>
-                              <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Maecenas faucibus mollis interdum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-                            </div>
-                          </div>
-                        </Col>
+                      </Tab.Container>
                     </Row>
                   </Tab.Pane>
                 </Tab.Content>
