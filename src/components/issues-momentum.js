@@ -50,6 +50,7 @@ class MomentumTabs extends React.Component {
                 )
               })}
             </Row>
+
             <Row className="pl-2 pr-2">
               { docsByYearReverse.map(function(item) {
                 return (
@@ -57,14 +58,29 @@ class MomentumTabs extends React.Component {
                     <Tab.Pane eventKey={ item.year } className="momentum-pane">
                       <Row>
                         <Col sm="6" className="article-list">
+                          {/* Navigation tabs for each article */}
+                          <Col>
+                            { item.docs.map(doc => (
+                              <Nav key={ doc.key } variant="link">
+                                <Nav.Item >
+                                  <Nav.Link eventKey={ doc.key } className="article-item">
+                                    <div className="article-heading display-3">
+                                      { doc.Title }
+                                    </div>
+                                  </Nav.Link>
+                                </Nav.Item>
+                              </Nav>
+                            ))}
+                          </Col>
+
+                          {/* EXAMPLE MAPPING
                           {item.docs.map(doc => (
                             <Row key={ doc.key } className="no-gutters article-item">
-                              <div className="article-item-bg" style={{backgroundImage: `url(http://placekitten.com/g/400/100)`}} alt="{ item.year }"/>
                               <div className="article-heading display-3">
                                 { doc.Title }
                               </div>
                             </Row>
-                          ))}
+                          ))} */}
                         </Col>
                         <Col sm="6" className="article-preview">
                           <div className="article-card">
