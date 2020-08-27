@@ -9,6 +9,8 @@ import NoMobile from "../components/NoMobile";
 
 const MethodologyPage = ({data}) => {
 
+  console.log(data.documents);
+
   // scroller
   const timeline = useRef(null);
 
@@ -175,20 +177,20 @@ const MethodologyPage = ({data}) => {
               <ul className="list-unstyled">
               { categories.map((category, index) => {
                 const bg = category.node.hexCode;
-                console.log(bg);
+                // console.log(bg);
                 return (
                   <li key={`category-${index}`}>
 
-                  <div class="form-check">
+                  <div className="form-check">
                     <input 
                       onClick={ () => updateActiveCategories( category.node.id )}
-                      class="form-check-input" 
+                      className="form-check-input" 
                       type="checkbox" 
                       value="" 
                       id={`defaultCheck-${index}`}
                     />
                     <div className="square" style={{ backgroundColor: bg }}/>
-                    <label class="form-check-label" for={`defaultCheck-${index}`}>
+                    <label className="form-check-label" htmlFor={`defaultCheck-${index}`}>
                       { category.node.title }
                     </label>
                   </div>
@@ -356,5 +358,23 @@ query {
       }
     }
   }
+
+  documents: allAirtable (
+      filter: {
+        table: { eq: "testTable" }
+      }
+    ) {
+      nodes {
+        data {
+          Title
+          Author
+          Date
+          Topic
+          Description
+        }
+        recordId
+      }
+    }
 }
+
 `
