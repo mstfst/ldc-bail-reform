@@ -31,10 +31,36 @@
       padding: 2rem;
 
       .article-item {
-        border: 1px $light solid;
+        position: relative;
+        flex: 1;
+        padding: 0.4rem 0.8rem;
+        min-height: 150px;
+        z-index: 2;
+        margin-bottom: 16px;
+        background: $dark url('http://source.unsplash.com/random') no-repeat center;
+        
+        &:last-of-type {
+          margin-bottom: 0;
+        }
 
-        img {
-          width: 100px;
+        // This code will need to be changed once we introduce images via gatsby-image via content-source-airtable
+        .article-item-bg {
+          width: auto;
+          position: absolute;
+          z-index: -2;
+          }
+        
+        &:before {
+          content: "";
+          background: linear-gradient(90deg,rgba(0,0,0,0.85),rgba(0,0,0,0.4));
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: -1;
         }
       }
 

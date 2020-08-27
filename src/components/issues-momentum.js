@@ -30,7 +30,7 @@ class MomentumTabs extends React.Component {
       return docsByYear[key];
     })
 
-    /*Reverse order of years*/
+    // Reverse order of years
     const docsByYearReverse = docsByYearArray.sort().reverse();
     
     return (
@@ -59,8 +59,8 @@ class MomentumTabs extends React.Component {
                         <Col sm="6" className="article-list">
                           {item.docs.map(doc => (
                             <Row key={ doc.key } className="no-gutters article-item">
-                              <img src="https://placehold.it/100x100" alt="{ item.year }"/>
-                              <div className="article-heading display-4">
+                              <div className="article-item-bg" style={{backgroundImage: `url(http://placekitten.com/g/400/100)`}} alt="{ item.year }"/>
+                              <div className="article-heading display-3">
                                 { doc.Title }
                               </div>
                             </Row>
