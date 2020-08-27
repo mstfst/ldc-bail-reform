@@ -1,4 +1,5 @@
 @import "../styles/_custom.scss";
+@import "../styles/index.scss";
 
 .momentum {
   .momentum-tab-row {
@@ -37,7 +38,13 @@
         min-height: 150px;
         z-index: 2;
         margin-bottom: 16px;
-        background: $dark url('http://source.unsplash.com/random') no-repeat center;
+        background: $dark url('http://source.unsplash.com/random/800x600') no-repeat center;
+        background-size: 100%;
+        @include transition-300;
+
+        &:hover {
+          background-size: 150%;
+        }
         
         &:last-of-type {
           margin-bottom: 0;
