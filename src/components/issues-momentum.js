@@ -37,7 +37,7 @@ class MomentumTabs extends React.Component {
     
     return (
       <Row className="justify-content-center mt-2 momentum">
-        <Col md="11" >
+        <Col md="8" >
           <Tab.Container defaultActiveKey="2020">
             <Row>
                 { docsByYearReverse.map(item => (
@@ -56,22 +56,24 @@ class MomentumTabs extends React.Component {
                 <Tab.Content key={ item.year }>
                   <Tab.Pane eventKey={ item.year } className="momentum-pane">
                     <Row>
-                      <Tab.Container>
+                      <Tab.Container defaultActiveKey="0">
                         <Col sm="6" className="article-list">
                             <Nav variant="link">
-                            {item.docs.map(doc => (
-                              <Nav.Item key={ doc.Title.slice(0,4) } className="article-item">
-                                <Nav.Link eventKey={ doc.Title.slice(0,4) } className="article-heading display-4 align-items-center">
+                            {item.docs.map(function(doc, index) {
+                              return (
+                              <Nav.Item key={ index } className="article-item">
+                                <Nav.Link eventKey={ index } className="article-heading display-4 align-items-center">
                                   { doc.Title }
                                 </Nav.Link>
                               </Nav.Item>
-                              ))}
+                              )})}
                             </Nav>
                         </Col>
                         <Col sm="6" className="article-preview">
-                          {item.docs.map(doc => (
-                            <Tab.Content key={ doc.Title.slice(0,4) }>
-                              <Tab.Pane eventKey={ doc.Title.slice(0,4) } className="article-card">
+                          {item.docs.map(function(doc, index) {
+                            return (
+                            <Tab.Content key={ index }>
+                              <Tab.Pane eventKey={ index } className="article-card">
                                 <div className="article-header">
                                   <div className="source">{ doc.Author_s_ }</div>
                                   <div className="date">{ doc.Publish__or_Start_Date_ }</div>
@@ -83,7 +85,7 @@ class MomentumTabs extends React.Component {
                                 </div>
                               </Tab.Pane>
                             </Tab.Content>
-                          ))}
+                          )})}
                         </Col>
                       </Tab.Container>
                     </Row>
