@@ -11,6 +11,17 @@ const MethodologyPage = ({data}) => {
 
   console.log(data.documents);
 
+  const dataByYear = data.documents.nodes.reduce(function (r, a) {
+    const year = a.data.Publish__or_Start_Date_.split('-')[0];
+
+    r[ year ] = r[ year ] || [];
+    r[ year ].push(a);
+    return r;
+    }, Object.create(null));
+
+  
+  console.log(dataByYear)
+
   // scroller
   const timeline = useRef(null);
 
@@ -220,26 +231,28 @@ const MethodologyPage = ({data}) => {
           <Col md="9" xl="9" className="h-100 p-md-4 p-xl-5">
             
             <div ref={timeline} className="timeline-wrapper mr-1 mr-md-5">
-            { years.map(item => {
+            { Object.entries(dataByYear).map(year => {
 
               const indicators = {};
-              const sortedDocs = [ ...item.node.documents];
+              console.log(year[0]);
+
+              const sortedDocs = [ ...dataByYear[year[0]] ];
               sortedDocs.sort((a,b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0));
               
               // console.log(documents);
               // console.log(item.node);
               return (
                 
-              <div key={item.node.year} className="timeline-year mb-5" data-index={item.node.year}>
-                <div className="anchor" id={`year-${ item.node.year }`}></div>
+              <div key={year} className="timeline-year mb-5" data-index={year}>
+                <div className="anchor" id={`year-${ year }`}></div>
 
                 <div className="timeline-year-content position-relative">
                   <div className="timeline-year-content-header d-md-flex pb-2 mb-5">
-                    <h1 className="pr-3 timeline-year-label"><strong>{item.node.year}</strong></h1>
+                    <h1 className="pr-3 timeline-year-label"><strong>{year}</strong></h1>
                  
                     <div className="timeline-year-header-meta mt-3 pr-2 pr-md-5 pb-3">
-                      <p className="mb-0"><strong>{item.node.headline}</strong></p>
-                      <p className="mb-0">{item.node.description.description}</p>
+                      {/* <p className="mb-0"><strong>{item.node.headline}</strong></p> */}
+                      {/* <p className="mb-0">{item.node.description.description}</p> */}
                     </div>
 
                     <div className="timeline-year-indicators">          
@@ -247,10 +260,10 @@ const MethodologyPage = ({data}) => {
                         const month = parseFloat(doc.date.split('-')[1]) - 1;
 
                         //set indicator counts
-                        indicators[doc.date] = indicators[doc.date] || [];
-                        indicators[doc.date].push([doc.date]);
+                        indicators[doc.Publish__or_Start_Date_] = indicators[doc.Publish__or_Start_Date_] || [];
+                        indicators[doc.Publish__or_Start_Date_].push([doc.Publish__or_Start_Date_]);
                         
-                        const offsetTop = (indicators[doc.date].length - 1) * 25;
+                        const offsetTop = (indicators[doc.Publish__or_Start_Date_].length - 1) * 25;
                         const offsetLeft = (month / 12) * 100;
                         const bg = doc.category ? doc.category.hexCode : '#888';
 
@@ -258,19 +271,19 @@ const MethodologyPage = ({data}) => {
                           <div 
                             key={index} 
                             className="timeline-card-indicator" 
-                            data-id={`${item.node.year}-card-${index}`} 
+                            data-id={`${year}-card-${index}`} 
                             data-cat={doc.category ?  doc.category.id : ''}
                             role="button" 
                             style={{ left: offsetLeft + '%', top: offsetTop + 'px', backgroundColor: bg}}
                             onClick={ indicatorClickHandler }
                           >
-                            {item.node.year}-document-{index}
+                            {year}-document-{index}
                           </div>
                         )
                       })}
                     </div>
                   </div>
-                  <div className="timeline-year-events">
+                  {/* <div className="timeline-year-events">
                   { item.node.events.map((event, index) => {
 
                     const month = parseFloat(event.eventDate.split('-')[1]) - 1;
@@ -283,11 +296,11 @@ const MethodologyPage = ({data}) => {
                       </div>
                     )
                   })}
-                  </div>
+                  </div> */}
                   <div className="timeline-year-docs mr-3 mr-md-5">
                     { sortedDocs.map((doc, index) => {
                       const bg = doc.category ? doc.category.hexCode : '#888';
-                      let id = `${item.node.year}-card-${index}`;
+                      let id = `${year}-card-${index}`;
                       // console.log(documents[id]);
 
                       return(
@@ -296,7 +309,7 @@ const MethodologyPage = ({data}) => {
                           bg={bg}
                           index={index} 
                           doc={doc} 
-                          item={item.node} 
+                          item={ dataByYear[year] } 
                           active={documents[id]}
                         />
                       )
@@ -359,18 +372,27 @@ query {
     }
   }
 
-  documents: allAirtable {
-      nodes {
-        data {
-          Title
-          Author
-          Date
-          Topic
-          Description
-        }
-        recordId
+  documents: allAirtable (
+    filter: {
+      data: {
+        Include_in_Interactive_Bibliography:{ eq: "Yes"}
+        Publish__or_Start_Date_: { ne: null }
+        Biblio_Annotation: { ne: null }
       }
     }
+  ) {
+    nodes {
+      data {
+        Title
+        Author_s_
+        Publish__or_Start_Date_
+        Biblio_Annotation
+        Type_of_Content
+        Tag
+      }
+      recordId
+    }
+  }
 }
 
 `
