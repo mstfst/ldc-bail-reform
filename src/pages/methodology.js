@@ -359,11 +359,7 @@ query {
     }
   }
 
-  documents: allAirtable (
-      filter: {
-        table: { eq: "testTable" }
-      }
-    ) {
+  documents: allAirtable {
       nodes {
         data {
           Title
