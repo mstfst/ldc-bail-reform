@@ -82,4 +82,10 @@ to deploy to netlify, push to master branch
 git push origin master
 ```
 
+## 💫 Debug Netlify 
+if you find your build has failed, run the following and look at your terminal
+```shell
+npm run build
+```
+
 <!-- AUTO-GENERATED-CONTENT:END -->

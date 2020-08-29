@@ -101,6 +101,18 @@ module.exports = {
       }
     },
     {
+      resolve: 'gatsby-source-airtable',
+      options: {
+        apiKey: 'keyl3VyMD42AADPXx',
+        tables: [
+          {
+            baseId: 'appToqMlXxkmbbwTr',
+            tableName: 'Interactive Bibliography'
+          }
+        ]
+      }
+    },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'src',
