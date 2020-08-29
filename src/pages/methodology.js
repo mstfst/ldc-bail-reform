@@ -9,18 +9,13 @@ import NoMobile from "../components/NoMobile";
 
 const MethodologyPage = ({data}) => {
 
-  console.log(data.documents);
-
   const dataByYear = data.documents.nodes.reduce(function (r, a) {
     const year = a.data.Publish__or_Start_Date_.split('-')[0];
-
     r[ year ] = r[ year ] || [];
     r[ year ].push(a);
     return r;
-    }, Object.create(null));
-
-  
-  console.log(dataByYear)
+    }, Object.create(null)
+  );
 
   // scroller
   const timeline = useRef(null);
@@ -50,9 +45,11 @@ const MethodologyPage = ({data}) => {
       })
     })
     
-    years.forEach((year) => {
-      year.node.documents.forEach( (doc, index ) => {
-        const newKey = `${year.node.year}-card-${index}`;
+    Object.entries(dataByYear).forEach((yearData) => {
+      const year = yearData[0];
+
+      dataByYear[year].forEach( (doc, index ) => {
+        const newKey = `${year}-card-${index}`;
         
         setDocuments(prevState => {
           return {
@@ -64,7 +61,6 @@ const MethodologyPage = ({data}) => {
     })
     
   }, []); 
-
 
   //Handle Scrollama
   const handleScrollStepEnter = ({element, index, direction}) => {
@@ -231,14 +227,14 @@ const MethodologyPage = ({data}) => {
           <Col md="9" xl="9" className="h-100 p-md-4 p-xl-5">
             
             <div ref={timeline} className="timeline-wrapper mr-1 mr-md-5">
-            { Object.entries(dataByYear).map(year => {
-
-              const indicators = {};
-              console.log(year[0]);
-
-              const sortedDocs = [ ...dataByYear[year[0]] ];
-              sortedDocs.sort((a,b) => (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0));
+            { Object.entries(dataByYear).map(yearData => {
+              const year = yearData[0];
               
+              const indicators = {};
+              const sortedDocs = [ ...dataByYear[year] ];
+              sortedDocs.sort((a,b) => (a.data.Publish__or_Start_Date_ > b.data.Publish__or_Start_Date_) ? 1 : ((b.data.Publish__or_Start_Date_ > a.data.Publish__or_Start_Date_) ? -1 : 0));
+              
+              //console.log(sortedDocs);
               // console.log(documents);
               // console.log(item.node);
               return (
@@ -257,13 +253,14 @@ const MethodologyPage = ({data}) => {
 
                     <div className="timeline-year-indicators">          
                       { sortedDocs.map((doc, index) => {
-                        const month = parseFloat(doc.date.split('-')[1]) - 1;
+                        
+                        const month = parseFloat(doc.data.Publish__or_Start_Date_.split('-')[1]) - 1;
 
                         //set indicator counts
-                        indicators[doc.Publish__or_Start_Date_] = indicators[doc.Publish__or_Start_Date_] || [];
-                        indicators[doc.Publish__or_Start_Date_].push([doc.Publish__or_Start_Date_]);
+                        indicators[doc.data.Publish__or_Start_Date_] = indicators[doc.data.Publish__or_Start_Date_] || [];
+                        indicators[doc.data.Publish__or_Start_Date_].push([doc.data.Publish__or_Start_Date_]);
                         
-                        const offsetTop = (indicators[doc.Publish__or_Start_Date_].length - 1) * 25;
+                        const offsetTop = (indicators[doc.data.Publish__or_Start_Date_].length - 1) * 25;
                         const offsetLeft = (month / 12) * 100;
                         const bg = doc.category ? doc.category.hexCode : '#888';
 
@@ -389,6 +386,7 @@ query {
         Biblio_Annotation
         Type_of_Content
         Tag
+        URL
       }
       recordId
     }
