@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 
 const DocumentCard = ({doc, bg, item, index, active, category = 1 }) => {
-  console.log(doc);
+  // console.log(doc);
   let colour = '',
       headerTextColour = ''
 

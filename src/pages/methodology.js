@@ -4,10 +4,29 @@ import Head from '../components/head';
 import DocumentCard from '../components/document-card';
 
 import { graphql } from "gatsby"
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, Form } from "react-bootstrap"
 import NoMobile from "../components/NoMobile";
 
 const MethodologyPage = ({data}) => {
+
+  //slugify, move to helper
+  function slugify (str) {
+    str = str.replace(/^\s+|\s+$/g, ''); // trim
+    str = str.toLowerCase();
+  
+    // remove accents, swap ñ for n, etc
+    var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+    var to   = "aaaaeeeeiiiioooouuuunc------";
+    for (var i=0, l=from.length ; i<l ; i++) {
+        str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+    }
+
+    str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+        .replace(/\s+/g, '-') // collapse whitespace and replace by -
+        .replace(/-+/g, '-'); // collapse dashes
+
+    return str;
+  }
 
   const dataByYear = data.documents.nodes.reduce(function (r, a) {
     const year = a.data.Publish__or_Start_Date_.split('-')[0];
@@ -16,6 +35,26 @@ const MethodologyPage = ({data}) => {
     return r;
     }, Object.create(null)
   );
+
+  const categories = data.documents.nodes.reduce(function (r, a) {
+    const category = a.data.Type_of_Content;
+
+    let cat;
+
+    if (category === null) {
+      cat = 'None'
+    } else {
+      cat = category[0];
+    }
+
+    
+    r[ cat ] = r[ cat ] || [];
+    r[ cat ].push(a);
+    return r;
+    }, Object.create(null)
+  );
+  
+  console.log(categories);
 
   // scroller
   const timeline = useRef(null);
@@ -30,13 +69,12 @@ const MethodologyPage = ({data}) => {
   const [filter, setFilter] = useState({})
 
   // define content 
-  const years = [ ...data.allContentfulTimelineYear.edges].reverse();
-  const categories = [...data.allContentfulTimelineCategory.edges];
+  // const categories = [...data.allContentfulTimelineCategory.edges];
 
   useEffect(() => {
 
-    categories.forEach((category) => {
-      const id = category.node.id;
+    Object.keys(categories).forEach((category, index) => {
+      const id = slugify(category);
       setFilter( prevState => {
         return {
           ...prevState,
@@ -179,27 +217,27 @@ const MethodologyPage = ({data}) => {
 
         <Row className="">
           <Col md="2" xl="2" className="">
+            
             <div className="legend">
               <p className="text-uppercase mb-2">Legend</p>
               <ul className="list-unstyled">
-              { categories.map((category, index) => {
-                const bg = category.node.hexCode;
+              { Object.keys(categories).map((category, index) => {
+                const bg = "blue";
                 // console.log(bg);
                 return (
                   <li key={`category-${index}`}>
 
                   <div className="form-check">
-                    <input 
-                      onClick={ () => updateActiveCategories( category.node.id )}
+                    <Form.Check
+                      custom 
+                      onClick={ () => updateActiveCategories( slugify(category) )}
                       className="form-check-input" 
                       type="checkbox" 
                       value="" 
                       id={`defaultCheck-${index}`}
+                      label={ category }
                     />
-                    <div className="square" style={{ backgroundColor: bg }}/>
-                    <label className="form-check-label" htmlFor={`defaultCheck-${index}`}>
-                      { category.node.title }
-                    </label>
+                    
                   </div>
                     
                     {/* <button 
@@ -215,9 +253,9 @@ const MethodologyPage = ({data}) => {
 
               <p className="text-uppercase mb-2">Timeline</p>
               <ul className="list-unstyled">
-              { years.map(item => (
-                <li key={`legend-${item.node.year}`}>
-                  <a href={`#year-${item.node.year}`}>{ item.node.year }</a>
+              { Object.keys(dataByYear).map(key => (
+                <li key={`legend-${key}`}>
+                  <a href={`#year-${key}`}>{ key }</a>
                 </li>
               ))}
               </ul>
@@ -266,7 +304,7 @@ const MethodologyPage = ({data}) => {
                             key={index} 
                             className="timeline-card-indicator" 
                             data-id={`${year}-card-${index}`} 
-                            data-cat={doc.category ?  doc.category.id : ''}
+                            data-cat={doc.data.Type_of_Content ?  slugify(doc.data.Type_of_Content[0]) : ''}
                             role="button" 
                             style={{ left: offsetLeft + '%', top: offsetTop + 'px', backgroundColor: bg}}
                             onClick={ indicatorClickHandler }
