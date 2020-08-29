@@ -13,24 +13,28 @@ const Issue1Page = () => {
       issue1: file(relativePath: { eq: "images/issue1.jpg" }) {
         childImageSharp {
           fixed(width: 300) {
-            ...GatsbyImageSharpFixed_tracedSVG
+            ...GatsbyImageSharpFixed
           }
         }
       }
       documents: allAirtable(
           filter: {
-            table: { eq: "testTable" }
+            data: { 
+              Include_in_Momentum_: { in : "Theme 1 - Punish S&E Conditions" }
+              Publish__or_Start_Date_: { ne: null }
+              Momentum_Annotation: { ne: null }
+            }
           }
         ) {
           nodes {
             data {
               Title
-              Author
-              Date
-              Topic
-              Description
+              Author_s_
+              URL
+              Include_in_Momentum_
+              Publish__or_Start_Date_
+              Momentum_Annotation
             }
-            recordId
           }
         }
     }
@@ -49,7 +53,7 @@ const Issue1Page = () => {
       </Row>
 
       <Row className="justify-content-center pb-5">
-        <Col md="12" lg="10">
+        <Col md="12">
           <MomentumTabs documents={ data.documents.nodes } />
         </Col>
       </Row>
