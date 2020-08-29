@@ -234,9 +234,6 @@ const MethodologyPage = ({data}) => {
               const sortedDocs = [ ...dataByYear[year] ];
               sortedDocs.sort((a,b) => (a.data.Publish__or_Start_Date_ > b.data.Publish__or_Start_Date_) ? 1 : ((b.data.Publish__or_Start_Date_ > a.data.Publish__or_Start_Date_) ? -1 : 0));
               
-              //console.log(sortedDocs);
-              // console.log(documents);
-              // console.log(item.node);
               return (
                 
               <div key={year} className="timeline-year mb-5" data-index={year}>
