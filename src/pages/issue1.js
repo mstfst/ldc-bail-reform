@@ -12,8 +12,8 @@ const Issue1Page = () => {
     query {
       issue1: file(relativePath: { eq: "images/issue1.jpg" }) {
         childImageSharp {
-          fixed(width: 300) {
-            ...GatsbyImageSharpFixed
+          fluid(quality: 75, maxWidth: 600) {
+            ...GatsbyImageSharpFluid
           }
         }
       }
@@ -43,7 +43,7 @@ const Issue1Page = () => {
   return (
     <Layout>
       <Head title="Issues"/>
-      <IssuesHero issueName="Worsening the Lives of Marginalized People" issueImg={ data.issue1.childImageSharp.fixed } link1="/issue1#momentum" link2="/issue1#opportunity" link3="/issue1#explanation" />
+      <IssuesHero issueName="Worsening the Lives of Marginalized People" issueImg={ data.issue1.childImageSharp.fluid } link1="/issue1#momentum" link2="/issue1#opportunity" link3="/issue1#explanation" />
 
       <Row id="momentum" className="justify-content-center pt-5">
         <Col className="mb-2" md="10" lg="8">

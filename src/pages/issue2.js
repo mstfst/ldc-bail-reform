@@ -12,8 +12,8 @@ const Issue2Page = () => {
     query {
       issue2: file(relativePath: { eq: "images/issue2.jpg" }) {
         childImageSharp {
-          fixed(width: 300) {
-            ...GatsbyImageSharpFixed_tracedSVG
+          fluid(quality: 75, maxWidth: 600) {
+            ...GatsbyImageSharpFluid
           }
         }
       }
@@ -23,7 +23,7 @@ const Issue2Page = () => {
   return (
     <Layout>
       <Head title="Issues"/>
-      <IssuesHero issueName="Denying Dignity and Basic Rights" issueImg={ data.issue2.childImageSharp.fixed } link1="/issue2#momentum" link2="/issue2#opportunity" link3="/issue2#explanation" />
+      <IssuesHero issueName="Denying Dignity and Basic Rights" issueImg={ data.issue2.childImageSharp.fluid } link1="/issue2#momentum" link2="/issue2#opportunity" link3="/issue2#explanation" />
 
       <Row id="momentum" className="justify-content-center">
         <Col className="mb-2" md="10" lg="8">

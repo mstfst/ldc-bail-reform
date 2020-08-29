@@ -12,7 +12,7 @@ class IssuesHero extends React.Component {
           <Row className="justify-content-center">
             <Col className="justify-content-center p-0" sm="3">
               <Card className="issueImage bg-dark text-dark">
-                <Img fixed={this.props.issueImg} alt={ this.props.issueName } />
+                <Img fluid={this.props.issueImg} alt={ this.props.issueName } className="issueImageImg"/>
               </Card>
             </Col>
           </Row>
