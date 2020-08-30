@@ -1,23 +1,23 @@
 import React, { Component } from "react"
 import { Row, Col, Container } from "react-bootstrap"
 import { useStaticQuery, graphql, StaticQuery } from "gatsby"
-import "./issues-expl-second.scss"
+import "./issues-expl-third.scss"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import * as D3 from "d3"
-// import svgExplImport from "../../static/assets/system-map/EE_1.svg"
-import svgExplImport from "../../static/assets/system-map/EE_2.svg"
+// import svgExplImport from "../../static/assets/system-map/EE_2_reduced.svg"
+import svgExplImport from "../../static/assets/system-map/EE_3.svg"
 
-class ExplSecond extends Component {
+
+class ExplThird extends Component {
   scroller
   layerSteps
   layer1
   layer2
   layer3
-  layer4
-  numberOfSteps = D3.range(10)
+  numberOfSteps = D3.range(8)
 
   state = {
-    issue_id: 2,
+    issue_id: 3,
     step_index: 0,
   }
 
@@ -27,9 +27,6 @@ class ExplSecond extends Component {
     "arrow-path-2",
     "arrow-path-3",
     "arrow-path-4",
-    "arrow-path-5",
-    "arrow-path-6",
-    "arrow-path-7",
   ]
 
   // Options for displaying text in the sidebar
@@ -58,12 +55,12 @@ class ExplSecond extends Component {
     if (
       this.state.step_index === 1 ||
       this.state.step_index === 2 ||
-      this.state.step_index === 3
+      this.state.step_index === 3 ||
+      this.state.step_index === 4
     ) {
       this.layer1.style("display", "block")
       this.layer2.style("display", "none")
       this.layer3.style("display", "none")
-      this.layer4.style("display", "none")
 
       // Hiding text for other layers
       D3.selectAll(".text-layer-2").style("display", "none")
@@ -74,11 +71,10 @@ class ExplSecond extends Component {
       if (direction === "up") {
         D3.selectAll(".text-layer-1").style("display", "block")
       }
-    } else if (this.state.step_index === 4 || this.state.step_index === 5) {
+    } else if (this.state.step_index === 5) {
       this.layer1.style("display", "none")
       this.layer2.style("display", "block")
       this.layer3.style("display", "none")
-      this.layer4.style("display", "none")
 
       // Hiding text for other layers
       D3.selectAll(".text-layer-1").style("display", "none")
@@ -89,11 +85,10 @@ class ExplSecond extends Component {
       if (direction === "up") {
         D3.selectAll(".text-layer-2").style("display", "block")
       }
-    } else if (this.state.step_index === 6 || this.state.step_index === 7) {
+    } else if (this.state.step_index >= 6) {
       this.layer1.style("display", "none")
       this.layer2.style("display", "none")
       this.layer3.style("display", "block")
-      this.layer4.style("display", "none")
 
       // Hiding text for other layers
       D3.selectAll(".text-layer-1").style("display", "none")
@@ -104,136 +99,121 @@ class ExplSecond extends Component {
       if (direction === "up") {
         D3.selectAll(".text-layer-3").style("display", "block")
       }
-    } else if (this.state.step_index > 7) {
-      this.layer1.style("display", "none")
-      this.layer2.style("display", "none")
-      this.layer3.style("display", "none")
-      this.layer4.style("display", "block")
-
-      // Hiding text for other layers
-      D3.selectAll(".text-layer-1").style("display", "none")
-      D3.selectAll(".text-layer-2").style("display", "none")
-      D3.selectAll(".text-layer-3").style("display", "none")
-
-      // When scroll direction = up, display all text for this layer
-      if (direction === "up") {
-        D3.selectAll(".text-layer-4").style("display", "block")
-      }
     }
 
-    // Animating arrows
-    if (this.state.step_index === 0) {
-      // Resetting arrow clip paths to original position
-      // -> when back at step 0, arrows are hidden
-      // so they can be animated again later
+    // // Animating arrows
+    // if (this.state.step_index === 0) {
+    //   // Resetting arrow clip paths to original position
+    //   // -> when back at step 0, arrows are hidden
+    //   // so they can be animated again later
 
-      for (let i = 1; i <= this.nodeList.length; i++) {
-        if (i < 3 || i === 6) {
-          // Down
-          D3.select(`#rect-arrow-path-${i}`)
-            .attr("x", this[`bbox${i}`].x)
-            .attr("y", this[`bbox${i}`].y - this[`bbox${i}`].height)
-        } else if (i === 3 || i === 7) {
-          // NE
-          D3.select(`#rect-arrow-path-${i}`)
-            .attr("x", this[`bbox${i}`].x - this[`bbox${i}`].width)
-            .attr("y", this[`bbox${i}`].y + this[`bbox${i}`].height)
-        } else if (i === 4) {
-          // Up
-          D3.select(`#rect-arrow-path-${i}`)
-            .attr("x", this[`bbox${i}`].x)
-            .attr("y", this[`bbox${i}`].y + this[`bbox${i}`].height)
-        } else if (i === 5) {
-          // Right
-          D3.select(`#rect-arrow-path-${i}`)
-            .attr("x", this[`bbox${i}`].x - this[`bbox${i}`].width)
-            .attr("y", this[`bbox${i}`].y)
-        }
-      }
+    //   for (let i = 1; i <= this.nodeList.length; i++) {
+    //     if (i < 3 || i === 6) {
+    //       // Down
+    //       D3.select(`#rect-arrow-path-${i}`)
+    //         .attr("x", this[`bbox${i}`].x)
+    //         .attr("y", this[`bbox${i}`].y - this[`bbox${i}`].height)
+    //     } else if (i === 3 || i === 7) {
+    //       // NE
+    //       D3.select(`#rect-arrow-path-${i}`)
+    //         .attr("x", this[`bbox${i}`].x - this[`bbox${i}`].width)
+    //         .attr("y", this[`bbox${i}`].y + this[`bbox${i}`].height)
+    //     } else if (i === 4) {
+    //       // Up
+    //       D3.select(`#rect-arrow-path-${i}`)
+    //         .attr("x", this[`bbox${i}`].x)
+    //         .attr("y", this[`bbox${i}`].y + this[`bbox${i}`].height)
+    //     } else if (i === 5) {
+    //       // Right
+    //       D3.select(`#rect-arrow-path-${i}`)
+    //         .attr("x", this[`bbox${i}`].x - this[`bbox${i}`].width)
+    //         .attr("y", this[`bbox${i}`].y)
+    //     }
+    //   }
 
-      // Reset main arrow groups as display: none
-      D3.select("#arrow-1").style("display", "none")
-      D3.select("#arrow-2").style("display", "none")
-      D3.select("#arrow-3").style("display", "none")
-      D3.select("#arrow-4").style("display", "none")
+    //   // Reset main arrow groups as display: none
+    //   D3.select("#arrow-1").style("display", "none")
+    //   D3.select("#arrow-2").style("display", "none")
+    //   D3.select("#arrow-3").style("display", "none")
+    //   D3.select("#arrow-4").style("display", "none")
 
-      // Handling titleBlock exceptions
-      D3.select("#titleBlock-1").style("display", "none")
-      D3.select("#titleBlock-6").style("display", "none")
+    //   // Handling titleBlock exceptions
+    //   D3.select("#titleBlock-1").style("display", "none")
+    //   D3.select("#titleBlock-6").style("display", "none")
 
-      // Reset explanation texts as display: none
-      D3.selectAll(".explanation-text").style("display", "none")
-    } else if (this.state.step_index === 1) {
-      // Show arrow group
-      D3.select("#arrow-1").style("display", "block")
+    //   // Reset explanation texts as display: none
+    //   D3.selectAll(".explanation-text").style("display", "none")
+    // } else if (this.state.step_index === 1) {
+    //   // Show arrow group
+    //   D3.select("#arrow-1").style("display", "block")
 
-      // Show explanation text
-      D3.select("#ee-text-1").style("display", "block")
+    //   // Show explanation text
+    //   D3.select("#ee-text-1").style("display", "block")
 
-      console.log(D3.select("#arrow-path-1").node())
+    //   console.log(D3.select("#arrow-path-1").node())
 
-      console.log(this.bbox1)
-    } else if (this.state.step_index === 2) {
-      // Show arrow group
-      D3.select("#arrow-2").style("display", "block")
-    } else if (this.state.step_index === 3) {
-      // Show Overlay
-      D3.select("#titleBlock-1").style("display", "block")
+    //   console.log(this.bbox1)
+    // } else if (this.state.step_index === 2) {
+    //   // Show arrow group
+    //   D3.select("#arrow-2").style("display", "block")
+    // } else if (this.state.step_index === 3) {
+    //   // Show Overlay
+    //   D3.select("#titleBlock-1").style("display", "block")
 
-      // Animating arrow
-      D3.select("#rect-arrow-path-1")
-        .transition()
-        .duration(1000)
-        .attr("x", this.bbox1.x)
-        .attr("y", this.bbox1.y)
+    //   // Animating arrow
+    //   D3.select("#rect-arrow-path-1")
+    //     .transition()
+    //     .duration(1000)
+    //     .attr("x", this.bbox1.x)
+    //     .attr("y", this.bbox1.y)
 
-      // Animating arrow
-      D3.select("#rect-arrow-path-2")
-        .transition()
-        .duration(1000)
-        .attr("x", this.bbox2.x)
-        .attr("y", this.bbox2.y)
-    } else if (this.state.step_index === 4 || this.state.step_index === 5) {
-      D3.select("#arrow-3").style("display", "block")
+    //   // Animating arrow
+    //   D3.select("#rect-arrow-path-2")
+    //     .transition()
+    //     .duration(1000)
+    //     .attr("x", this.bbox2.x)
+    //     .attr("y", this.bbox2.y)
+    // } else if (this.state.step_index === 4 || this.state.step_index === 5) {
+    //   D3.select("#arrow-3").style("display", "block")
 
-      // Animating arrow
-      D3.select("#rect-arrow-path-3")
-        .transition()
-        .duration(1500)
-        .attr("x", this.bbox3.x)
-        .attr("y", this.bbox3.y)
-    } else if (this.state.step_index === 6 || this.state.step_index === 7) {
-      D3.select("#arrow-4").style("display", "block")
+    //   // Animating arrow
+    //   D3.select("#rect-arrow-path-3")
+    //     .transition()
+    //     .duration(1500)
+    //     .attr("x", this.bbox3.x)
+    //     .attr("y", this.bbox3.y)
+    // } else if (this.state.step_index === 6 || this.state.step_index === 7) {
+    //   D3.select("#arrow-4").style("display", "block")
 
-      // Animating arrow
-      D3.select("#rect-arrow-path-4")
-        .transition()
-        .duration(1000)
-        .attr("x", this.bbox4.x)
-        .attr("y", this.bbox4.y)
-    } else if (this.state.step_index === 8) {
-      // Animating arrow
-      D3.select("#rect-arrow-path-5")
-        .transition()
-        .duration(1000)
-        .attr("x", this.bbox5.x)
-        .attr("y", this.bbox5.y)
-    } else if (this.state.step_index === 9) {
-      // Animating arrow
-      D3.select("#rect-arrow-path-6")
-        .transition()
-        .duration(1000)
-        .attr("x", this.bbox6.x)
-        .attr("y", this.bbox6.y)
-      D3.select("#titleBlock-6").style("display", "block")
-    } else if (this.state.step_index === 10) {
-      // Animating arrow
-      D3.select("#rect-arrow-path-7")
-        .transition()
-        .duration(1500)
-        .attr("x", this.bbox7.x)
-        .attr("y", this.bbox7.y)
-    }
+    //   // Animating arrow
+    //   D3.select("#rect-arrow-path-4")
+    //     .transition()
+    //     .duration(1000)
+    //     .attr("x", this.bbox4.x)
+    //     .attr("y", this.bbox4.y)
+    // } else if (this.state.step_index === 8) {
+    //   // Animating arrow
+    //   D3.select("#rect-arrow-path-5")
+    //     .transition()
+    //     .duration(1000)
+    //     .attr("x", this.bbox5.x)
+    //     .attr("y", this.bbox5.y)
+    // } else if (this.state.step_index === 9) {
+    //   // Animating arrow
+    //   D3.select("#rect-arrow-path-6")
+    //     .transition()
+    //     .duration(1000)
+    //     .attr("x", this.bbox6.x)
+    //     .attr("y", this.bbox6.y)
+    //   D3.select("#titleBlock-6").style("display", "block")
+    // } else if (this.state.step_index === 10) {
+    //   // Animating arrow
+    //   D3.select("#rect-arrow-path-7")
+    //     .transition()
+    //     .duration(1500)
+    //     .attr("x", this.bbox7.x)
+    //     .attr("y", this.bbox7.y)
+    // }
   }
 
   handleScrollStepExit = ({ element, index, direction }) => {}
@@ -287,11 +267,11 @@ class ExplSecond extends Component {
         // Looping through nodeList to calculate bounding boxes
         // Order of operations is important, this must happen before
         // setting the layers to display: none
-        self.nodeList.forEach((d, i) => {
-          self[`bbox${i + 1}`] = D3.select("#" + d)
-            .node()
-            .getBBox()
-        })
+        // self.nodeList.forEach((d, i) => {
+        //   self[`bbox${i + 1}`] = D3.select("#" + d)
+        //     .node()
+        //     .getBBox()
+        // })
 
         ///////// LAYERS /////////
 
@@ -299,13 +279,11 @@ class ExplSecond extends Component {
         self.layer1 = D3.select("#layer-1")
         self.layer2 = D3.select("#layer-2")
         self.layer3 = D3.select("#layer-3")
-        self.layer4 = D3.select("#layer-4")
 
         // Initially hide layers - will later be shown based on scrollama triggers
         self.layer1.style("display", "none")
         self.layer2.style("display", "none")
         self.layer3.style("display", "none")
-        self.layer4.style("display", "none")
 
         ///////// SCROLLAMA /////////
 
@@ -334,61 +312,61 @@ class ExplSecond extends Component {
         // setup resize event
         window.addEventListener("resize", self.scroller.resize())
       })
-      .then(d => {
-        ///////// CLIP PATHS /////////
+      // .then(d => {
+      //   ///////// CLIP PATHS /////////
 
-        // Setting up clip paths to animate arrows
-        // In a separate promise response, otherwise would throw error
+      //   // Setting up clip paths to animate arrows
+      //   // In a separate promise response, otherwise would throw error
 
-        // Selecting the SVG
-        let mainSvg = D3.select("#expl-svg-wrapper").select("svg")
+      //   // Selecting the SVG
+      //   let mainSvg = D3.select("#expl-svg-wrapper").select("svg")
 
-        // Looping through nodeList to append clippaths
-        this.nodeList.forEach((d, i) => {
-          let clipPath = mainSvg
-            .append("clipPath")
-            .attr("id", `clip-${d}`)
-            .append("rect")
-            .attr("id", `rect-${d}`)
-            .attr("width", self[`bbox${i + 1}`].width)
-            .attr("height", self[`bbox${i + 1}`].height)
+      //   // Looping through nodeList to append clippaths
+      //   this.nodeList.forEach((d, i) => {
+      //     let clipPath = mainSvg
+      //       .append("clipPath")
+      //       .attr("id", `clip-${d}`)
+      //       .append("rect")
+      //       .attr("id", `rect-${d}`)
+      //       .attr("width", self[`bbox${i + 1}`].width)
+      //       .attr("height", self[`bbox${i + 1}`].height)
 
-          // Animating arrows. Directions:
-          // 1 - down
-          // 2 - down
-          // 3 - NE
-          // 4 - up
-          // 5 - right
-          // 6 - down (like 2)
-          // 7 - NE (like 3)
+      //     // Animating arrows. Directions:
+      //     // 1 - down
+      //     // 2 - down
+      //     // 3 - NE
+      //     // 4 - up
+      //     // 5 - right
+      //     // 6 - down (like 2)
+      //     // 7 - NE (like 3)
 
-          if (i + 1 < 3 || i + 1 === 6) {
-            // Down
-            clipPath
-              .attr("x", self[`bbox${i + 1}`].x)
-              .attr("y", self[`bbox${i + 1}`].y - self[`bbox${i + 1}`].height)
-          } else if (i + 1 === 3 || i + 1 === 7) {
-            // NE
-            clipPath
-              .attr("x", self[`bbox${i + 1}`].x - self[`bbox${i + 1}`].width)
-              .attr("y", self[`bbox${i + 1}`].y + self[`bbox${i + 1}`].height)
-          } else if (i + 1 === 4) {
-            // Up
-            clipPath
-              .attr("x", self[`bbox${i + 1}`].x)
-              .attr("y", self[`bbox${i + 1}`].y + self[`bbox${i + 1}`].height)
-          } else if (i + 1 === 5) {
-            // Right
-            clipPath
-              .attr("x", self[`bbox${i + 1}`].x - self[`bbox${i + 1}`].width)
-              .attr("y", self[`bbox${i + 1}`].y)
-          }
+      //     if (i + 1 < 3 || i + 1 === 6) {
+      //       // Down
+      //       clipPath
+      //         .attr("x", self[`bbox${i + 1}`].x)
+      //         .attr("y", self[`bbox${i + 1}`].y - self[`bbox${i + 1}`].height)
+      //     } else if (i + 1 === 3 || i + 1 === 7) {
+      //       // NE
+      //       clipPath
+      //         .attr("x", self[`bbox${i + 1}`].x - self[`bbox${i + 1}`].width)
+      //         .attr("y", self[`bbox${i + 1}`].y + self[`bbox${i + 1}`].height)
+      //     } else if (i + 1 === 4) {
+      //       // Up
+      //       clipPath
+      //         .attr("x", self[`bbox${i + 1}`].x)
+      //         .attr("y", self[`bbox${i + 1}`].y + self[`bbox${i + 1}`].height)
+      //     } else if (i + 1 === 5) {
+      //       // Right
+      //       clipPath
+      //         .attr("x", self[`bbox${i + 1}`].x - self[`bbox${i + 1}`].width)
+      //         .attr("y", self[`bbox${i + 1}`].y)
+      //     }
 
-          D3.select(`#${d}`)
-            .attr("clip-path", `url(#clip-${d})`)
-            .style("-webkit-clip-path", `url(#clip-${d})`)
-        })
-      })
+      //     D3.select(`#${d}`)
+      //       .attr("clip-path", `url(#clip-${d})`)
+      //       .style("-webkit-clip-path", `url(#clip-${d})`)
+      //   })
+      // })
   }
 
   componentWillUnmount() {
@@ -464,4 +442,4 @@ class ExplSecond extends Component {
   }
 }
 
-export default ExplSecond
+export default ExplThird

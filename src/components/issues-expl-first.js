@@ -285,17 +285,6 @@ class ExplFirst extends Component {
               .attr("y", self[`bbox${i + 1}`].y)
           }
 
-          // Debug rectangles to visualize clippaths
-          D3.select(`#${d}`)
-            .append("rect")
-            .attr("x", self[`bbox${i + 1}`].x)
-            .attr("y", self[`bbox${i + 1}`].y + self[`bbox${i + 1}`].height)
-            .attr("width", self[`bbox${i + 1}`].width)
-            .attr("height", self[`bbox${i + 1}`].height)
-            .attr("stroke", "red")
-            .attr("stroke-width", "2px")
-            .attr("fill", "none")
-
           D3.select(`#${d}`)
             .attr("clip-path", `url(#clip-${d})`)
             .style("-webkit-clip-path", `url(#clip-${d})`)
