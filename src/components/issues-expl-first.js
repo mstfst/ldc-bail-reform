@@ -70,7 +70,7 @@ class ExplFirst extends Component {
       // Hiding text for other layers
       D3.selectAll(".text-layer-2").style("display", "none")
       D3.selectAll(".text-layer-3").style("display", "none")
-      
+
       // When scroll direction = up, display all text for this layer
       if (direction === "up") {
         D3.selectAll(".text-layer-1").style("display", "block")
@@ -131,6 +131,10 @@ class ExplFirst extends Component {
       // Reset explanation texts as display: none
       D3.selectAll(".explanation-text").style("display", "none")
     } else {
+      //debug
+      console.log(D3.select(`#arrow-path-${this.state.step_index}`).node())
+      console.log(this[`bbox${this.state.step_index}`])
+
       // If this.state.step_index > 0
       // Show arrow group
       D3.select(`#arrow-${this.state.step_index}`).style("display", "block")
@@ -280,6 +284,17 @@ class ExplFirst extends Component {
               .attr("x", self[`bbox${i + 1}`].x + self[`bbox${i + 1}`].width)
               .attr("y", self[`bbox${i + 1}`].y)
           }
+
+          // Debug rectangles to visualize clippaths
+          D3.select(`#${d}`)
+            .append("rect")
+            .attr("x", self[`bbox${i + 1}`].x)
+            .attr("y", self[`bbox${i + 1}`].y + self[`bbox${i + 1}`].height)
+            .attr("width", self[`bbox${i + 1}`].width)
+            .attr("height", self[`bbox${i + 1}`].height)
+            .attr("stroke", "red")
+            .attr("stroke-width", "2px")
+            .attr("fill", "none")
 
           D3.select(`#${d}`)
             .attr("clip-path", `url(#clip-${d})`)

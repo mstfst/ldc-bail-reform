@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Row, Col, Container } from "react-bootstrap"
 import { useStaticQuery, graphql, StaticQuery } from "gatsby"
-import "./issues-expl-first.scss"
+import "./issues-expl-second.scss"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import * as D3 from "d3"
 // import svgExplImport from "../../static/assets/system-map/EE_1.svg"
@@ -51,6 +51,8 @@ class ExplSecond extends Component {
     this.setState({
       step_index: index,
     })
+
+    console.log(this.state.step_index)
 
     // Animating main steps ("layers")
     if (
@@ -125,27 +127,31 @@ class ExplSecond extends Component {
       // -> when back at step 0, arrows are hidden
       // so they can be animated again later
 
-      for (let i = 0; i < this.nodeList.length; i++) {
+      D3.select("#debug-rect-arrow-path-1")
+        .attr("x", this.bbox1.x)
+        .attr("y", this.bbox1.y - this.bbox1.height)
+
+      for (let i = 1; i <= this.nodeList.length; i++) {
         if (i < 3 || i === 6) {
           // Down
           D3.select(`#rect-arrow-path-${i}`)
-            .attr("x", this[`bbox${i + 1}`].x)
-            .attr("y", this[`bbox${i + 1}`].y - this[`bbox${i + 1}`].height)
+            .attr("x", this[`bbox${i}`].x)
+            .attr("y", this[`bbox${i}`].y - this[`bbox${i}`].height)
         } else if (i === 3 || i === 7) {
           // NE
           D3.select(`#rect-arrow-path-${i}`)
-            .attr("x", this[`bbox${i + 1}`].x - this[`bbox${i + 1}`].width)
-            .attr("y", this[`bbox${i + 1}`].y + this[`bbox${i + 1}`].height)
+            .attr("x", this[`bbox${i}`].x - this[`bbox${i}`].width)
+            .attr("y", this[`bbox${i}`].y + this[`bbox${i}`].height)
         } else if (i === 4) {
           // Up
           D3.select(`#rect-arrow-path-${i}`)
-            .attr("x", this[`bbox${i + 1}`].x)
-            .attr("y", this[`bbox${i + 1}`].y + this[`bbox${i + 1}`].height)
+            .attr("x", this[`bbox${i}`].x)
+            .attr("y", this[`bbox${i}`].y + this[`bbox${i}`].height)
         } else if (i === 5) {
           // Right
           D3.select(`#rect-arrow-path-${i}`)
-            .attr("x", this[`bbox${i + 1}`].x - this[`bbox${i + 1}`].width)
-            .attr("y", this[`bbox${i + 1}`].y)
+            .attr("x", this[`bbox${i}`].x - this[`bbox${i}`].width)
+            .attr("y", this[`bbox${i}`].y)
         }
       }
 
@@ -154,6 +160,10 @@ class ExplSecond extends Component {
       D3.select("#arrow-2").style("display", "none")
       D3.select("#arrow-3").style("display", "none")
       D3.select("#arrow-4").style("display", "none")
+
+      // Handling titleBlock exceptions
+      D3.select("#titleBlock-1").style("display", "none")
+      D3.select("#titleBlock-6").style("display", "none")
 
       // Reset explanation texts as display: none
       D3.selectAll(".explanation-text").style("display", "none")
@@ -164,25 +174,113 @@ class ExplSecond extends Component {
       // Show explanation text
       D3.select("#ee-text-1").style("display", "block")
 
-      // Animating arrow
-        D3.select("#rect-arrow-path-1")
-          .transition()
-          .duration(1000)
-          .attr("y", this.bbox1.y)
+      // Debug
+      D3.select("#debug-rect-arrow-path-1")
+        .transition()
+        .duration(1000)
+        .attr("x", this.bbox1.x)
+        .attr("y", this.bbox1.y)
 
-      // // Animating arrows by moving corresponding clip-path
-      // // Differentiating between vertical/horizontal animations
-      // if (this.state.step_index <= 3) {
-      //   D3.select(`#rect-arrow-path-${this.state.step_index}`)
-      //     .transition()
-      //     .duration(1000)
-      //     .attr("y", this[`bbox${this.state.step_index}`].y)
-      // } else {
-      //   D3.select(`#rect-arrow-path-${this.state.step_index}`)
-      //     .transition()
-      //     .duration(1000)
-      //     .attr("x", this[`bbox${this.state.step_index}`].x)
-      // }
+      // Animating arrow
+      D3.select("#rect-arrow-path-1")
+        .transition()
+        .duration(1000)
+        .attr("x", this.bbox1.x)
+        .attr("y", this.bbox1.y)
+
+      console.log(D3.select("#arrow-path-1").node())
+
+      console.log(this.bbox1)
+    } else if (this.state.step_index === 2) {
+      // Show arrow group
+      D3.select("#arrow-2").style("display", "block")
+
+      // Debug
+      D3.select("#debug-rect-arrow-path-2")
+        .transition()
+        .duration(1000)
+        .attr("x", this.bbox2.x)
+        .attr("y", this.bbox2.y)
+
+      // Animating arrow
+      D3.select("#rect-arrow-path-2")
+        .transition()
+        .duration(1000)
+        .attr("x", this.bbox2.x)
+        .attr("y", this.bbox2.y)
+    } else if (this.state.step_index === 3) {
+      // Show Overlay
+      D3.select("#titleBlock-1").style("display", "block")
+    } else if (this.state.step_index === 4 || this.state.step_index === 5) {
+      D3.select("#arrow-3").style("display", "block")
+      // Debug
+      D3.select("#debug-rect-arrow-path-3")
+        .transition()
+        .duration(1500)
+        .attr("x", this.bbox3.x)
+        .attr("y", this.bbox3.y)
+
+        // Animating arrow
+      D3.select("#rect-arrow-path-3")
+      .transition()
+      .duration(1000)
+      .attr("x", this.bbox3.x)
+      .attr("y", this.bbox3.y)
+    } else if (this.state.step_index === 6 || this.state.step_index === 7) {
+      D3.select("#arrow-4").style("display", "block")
+      // Debug
+      D3.select("#debug-rect-arrow-path-4")
+        .transition()
+        .duration(1000)
+        .attr("x", this.bbox4.x)
+        .attr("y", this.bbox4.y)
+
+        // Animating arrow
+      D3.select("#rect-arrow-path-4")
+      .transition()
+      .duration(1000)
+      .attr("x", this.bbox4.x)
+      .attr("y", this.bbox4.y)
+    } else if (this.state.step_index === 8) {
+      D3.select("#debug-rect-arrow-path-5")
+        .transition()
+        .duration(1000)
+        .attr("x", this.bbox5.x)
+        .attr("y", this.bbox5.y)
+
+        // Animating arrow
+      D3.select("#rect-arrow-path-5")
+      .transition()
+      .duration(1000)
+      .attr("x", this.bbox5.x)
+      .attr("y", this.bbox5.y)
+    } else if (this.state.step_index === 9) {
+      D3.select("#debug-rect-arrow-path-6")
+        .transition()
+        .duration(1000)
+        .attr("x", this.bbox6.x)
+        .attr("y", this.bbox6.y)
+
+        // Animating arrow
+      D3.select("#rect-arrow-path-6")
+      .transition()
+      .duration(1000)
+      .attr("x", this.bbox6.x)
+      .attr("y", this.bbox6.y)
+      D3.select("#titleBlock-6").style("display", "block")
+    } else if (this.state.step_index === 10) {
+      D3.select("#debug-rect-arrow-path-7")
+        .transition()
+        .duration(1000)
+        .attr("x", this.bbox7.x)
+        .attr("y", this.bbox7.y)
+
+        // Animating arrow
+      D3.select("#rect-arrow-path-7")
+      .transition()
+      .duration(1000)
+      .attr("x", this.bbox7.x)
+      .attr("y", this.bbox7.y)
     }
   }
 
@@ -241,6 +339,8 @@ class ExplSecond extends Component {
           self[`bbox${i + 1}`] = D3.select("#" + d)
             .node()
             .getBBox()
+
+          console.log(self[`bbox${i + 1}`])
         })
 
         ///////// LAYERS /////////
@@ -312,24 +412,56 @@ class ExplSecond extends Component {
           // 6 - down (like 2)
           // 7 - NE (like 3)
 
-          if (i < 3 || i === 6) {
+          if (i + 1 < 3 || i + 1 === 6) {
             // Down
             clipPath
               .attr("x", self[`bbox${i + 1}`].x)
               .attr("y", self[`bbox${i + 1}`].y - self[`bbox${i + 1}`].height)
-          } else if (i === 3 || i === 7) {
+          } else if (i + 1 === 3 || i + 1 === 7) {
             // NE
             clipPath
               .attr("x", self[`bbox${i + 1}`].x - self[`bbox${i + 1}`].width)
               .attr("y", self[`bbox${i + 1}`].y + self[`bbox${i + 1}`].height)
-          } else if (i === 4) {
+          } else if (i + 1 === 4) {
             // Up
             clipPath
               .attr("x", self[`bbox${i + 1}`].x)
               .attr("y", self[`bbox${i + 1}`].y + self[`bbox${i + 1}`].height)
-          } else if (i === 5) {
+          } else if (i + 1 === 5) {
             // Right
             clipPath
+              .attr("x", self[`bbox${i + 1}`].x - self[`bbox${i + 1}`].width)
+              .attr("y", self[`bbox${i + 1}`].y)
+          }
+
+          // Debug rectangles to visualize clippaths
+          let debugRect = D3.select(`#${d}`)
+            .append("rect")
+            .attr("id", `debug-rect-${d}`)
+            .attr("width", self[`bbox${i + 1}`].width)
+            .attr("height", self[`bbox${i + 1}`].height)
+            .attr("stroke", "none")
+            .attr("stroke-width", "2px")
+            .attr("fill", "none")
+
+          if (i + 1 < 3 || i + 1 === 6) {
+            // Down
+            debugRect
+              .attr("x", self[`bbox${i + 1}`].x)
+              .attr("y", self[`bbox${i + 1}`].y - self[`bbox${i + 1}`].height)
+          } else if (i + 1 === 3 || i + 1 === 7) {
+            // NE
+            debugRect
+              .attr("x", self[`bbox${i + 1}`].x - self[`bbox${i + 1}`].width)
+              .attr("y", self[`bbox${i + 1}`].y + self[`bbox${i + 1}`].height)
+          } else if (i + 1 === 4) {
+            // Up
+            debugRect
+              .attr("x", self[`bbox${i + 1}`].x)
+              .attr("y", self[`bbox${i + 1}`].y + self[`bbox${i + 1}`].height)
+          } else if (i + 1 === 5) {
+            // Right
+            debugRect
               .attr("x", self[`bbox${i + 1}`].x - self[`bbox${i + 1}`].width)
               .attr("y", self[`bbox${i + 1}`].y)
           }
@@ -355,7 +487,7 @@ class ExplSecond extends Component {
               <div id="expl-step-wrapper">
                 {this.numberOfSteps.map((person, index) => (
                   <div className="expl-step expl-step-layer">
-                    Hello, {person} from {index}!
+                    Hello, {person + 1} from {index + 1}!
                   </div>
                 ))}
               </div>
