@@ -12,7 +12,7 @@ const NarrativePage = () => {
   return (
     <Layout>
       <Head title="Narrative" />
-      <StaticQuery
+      {/* <StaticQuery 
           query={graphql`
             query {
               intro_bg: file(relativePath: { eq: "images/intro_bg.jpg" }) {
@@ -26,12 +26,12 @@ const NarrativePage = () => {
           `}
           render={data => {
             return (
-              <div className="narrative-intro-background">
-                  <Img fluid={data.intro_bg.childImageSharp.fluid} height="80vh" />
+              <div className="narrative-intro-background" style={{height: "80vh"}}>
+                  <Img fluid={data.intro_bg.childImageSharp.fluid}  />
               </div> 
             )
           }}
-        />
+        /> */}
       <NarrativeComponent />
     </Layout>
   )

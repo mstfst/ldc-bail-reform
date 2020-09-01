@@ -40,11 +40,31 @@
   position: sticky;
   top: 0;
   height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 
 .narrative-content {
   position: absolute;
   bottom: 0;
+} 
+
+#narrative-scroll-indicator {
+  margin-top: 10vh;
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#narrative-intro-header{
+  color: #F08FDB !important;
+}
+
+#narrative-intro{
+  text-align: center;
+  height: 90vh;
 }
 
 .narrative-intro-background {
@@ -106,7 +126,7 @@
   border-radius: 0;
 }
 
-.kara-card h1 {
+.kara-card-content-heading{
   color: orangered;
 }
 

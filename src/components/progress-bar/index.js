@@ -59,62 +59,44 @@ export default class ProgressBar extends Component {
     })
 
     return (
-      <div className="progress-bar">
+      <div className="progress-bar" style={{opacity:this.props.opacity}}>
         <div
           className="progress-dot"
           style={{ top: `${(progress / 100) * bar_height}rem` }}
         ></div>
-        {/* <button
+        <button
           className="progress-step"
-          id="starter-progress-step"
-          value="home"
+          value="intro"
           onClick={this.handleScrollJump}
-        /> */}
+          style={{ top: "-0.2rem" }}
+        />
+        <div class="narrative-bar" id="intro-bar" />
         <button
           className="progress-step"
           value="nathan"
           onClick={this.handleScrollJump}
-          style={{ top: "0.5rem" }}
+          style={{ top: "1.2rem" }}
         />
         <div class="narrative-bar" id="nathan-bar" />
         <button
           className="progress-step"
           value="kara"
           onClick={this.handleScrollJump}
-          style={{ top: "9.3rem" }}
+          style={{ top: "9.79rem" }}
         />
         <div class="narrative-bar" id="kara-bar" />
         <button
           className="progress-step"
           value="george"
           onClick={this.handleScrollJump}
-          style={{ top: "21.4rem" }}
+          style={{ top: "21.49rem" }}
         />
         <div class="narrative-bar" id="george-bar" />
         <div
           className="progress-step"
           value="george"
-          
           style={{ top: "30rem" }}
         />
-
-        {/* <a className="progress-step"  href="#narrative-kara" />
-        <a className="progress-step"  href="#narrative-george" /> */}
-        {/* <div className="sections">
-          {sections.map((section, idx) => {
-            return (
-              <a
-                href={`#narrative-${section.title}`}
-                className="progress-step section-progress-step"
-                style={{
-                  top: `${section.section_percentage * bar_height + 1.1}rem`,
-                }}
-                onClick={this.handleScrollJump}
-              ></a>
-            )
-          })}
-        </div>
-        <div className="progress-step" id="end-progress-step"></div> */}
       </div>
     )
   }

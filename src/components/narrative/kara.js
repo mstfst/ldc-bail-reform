@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col"
 import Modal from "react-bootstrap/Modal"
 import Button from "react-bootstrap/Button"
 import Card from "react-bootstrap/Card"
+import Container from "react-bootstrap/Container"
 import { StaticQuery, graphql } from "gatsby"
 import { BLOCKS } from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
@@ -131,20 +132,22 @@ class KaraNarrative extends Component {
                       <Col md={5} className="narrative-text-container">
                         <span>
                           <h1>
-                            {this.querySlideContent(narrativeContent, 1, "heading")}
+                            {this.querySlideContent(
+                              narrativeContent,
+                              1,
+                              "heading"
+                            )}
                           </h1>
                           {this.querySlideContent(narrativeContent, 1, "body")}
                         </span>
                       </Col>
                       <Col md={4}>
-                        <img src="./assets/kara.png" width="100%" />
+                        <img src="./assets/kara.png" width="100%" alt="kara-persona"/>
                       </Col>
                     </Row>
                   </div>
                 </div>
                 <div className="scroll-height"></div>
-
-
               </div>
 
               <div className="narrative-step">
@@ -156,7 +159,7 @@ class KaraNarrative extends Component {
                           <Card.Body className="kara-phone-card-content">
                             <Row className="justify-content-md-center">
                               <Col md={5}>
-                                <img src="./assets/avatar.svg" width="100%" />
+                                <img src="./assets/avatar.svg" width="100%" alt="blank-avatar"/>
                               </Col>
                               <Col md={7}>
                                 <p>Jason M.</p>
@@ -171,7 +174,7 @@ class KaraNarrative extends Component {
                           <Card.Body className="kara-phone-card-content">
                             <Row className="justify-content-md-center">
                               <Col md={5}>
-                                <img src="./assets/avatar.svg" width="100%" />
+                                <img src="./assets/avatar.svg" width="100%" alt="blank-avatar"/>
                               </Col>
                               <Col md={7}>
                                 <p>Mark R.</p>
@@ -186,7 +189,7 @@ class KaraNarrative extends Component {
                           <Card.Body className="kara-phone-card-content">
                             <Row className="justify-content-md-center">
                               <Col md={5}>
-                                <img src="./assets/avatar.svg" width="100%" />
+                                <img src="./assets/avatar.svg" width="100%" alt="blank-avatar" />
                               </Col>
                               <Col md={7}>
                                 <p>Amy Z.</p>
@@ -200,7 +203,11 @@ class KaraNarrative extends Component {
                     <Row className="justify-content-md-center">
                       <Col md={9}>
                         <h1>
-                          {this.querySlideContent(narrativeContent, 2, "heading")}
+                          {this.querySlideContent(
+                            narrativeContent,
+                            2,
+                            "heading"
+                          )}
                         </h1>
                         {this.querySlideContent(narrativeContent, 2, "body")}
                       </Col>
@@ -208,7 +215,6 @@ class KaraNarrative extends Component {
                   </div>
                 </div>
                 <div className="scroll-height"></div>
-
               </div>
 
               <div className="narrative-step">
@@ -217,24 +223,30 @@ class KaraNarrative extends Component {
                     <Row className="justify-content-md-center">
                       <Col md={8}>
                         <h1>
-                          {this.querySlideContent(narrativeContent, 3, "heading")}
+                          {this.querySlideContent(
+                            narrativeContent,
+                            3,
+                            "heading"
+                          )}
                         </h1>
                         {this.querySlideContent(narrativeContent, 3, "body")}
-                        <div style={{ display: "flex", justifyContent: "center" }}>
+                        <div
+                          style={{ display: "flex", justifyContent: "center" }}
+                        >
                           <Button
                             size="lg"
                             onClick={this.handleKaraModal1Show}
                             className="narrative-button-left"
                           >
                             Buy Landline
-                      </Button>
+                          </Button>
                           <Button
                             size="lg"
                             onClick={this.handleKaraModal2Show}
                             className="narrative-button-right"
                           >
                             Call Amy
-                      </Button>
+                          </Button>
                         </div>
                       </Col>
                     </Row>
@@ -264,6 +276,7 @@ class KaraNarrative extends Component {
                       <img
                         src={this.queryModalContent(modalContent, 3, "image")}
                         height="200px"
+                        alt="phone"
                       />
                     </Col>
                   </Row>
@@ -291,6 +304,7 @@ class KaraNarrative extends Component {
                       <img
                         src={this.queryModalContent(modalContent, 4, "image")}
                         width="125px"
+                        alt="hour glass"
                       />
                     </Col>
                   </Row>
@@ -303,7 +317,11 @@ class KaraNarrative extends Component {
                     <Row className="justify-content-md-center">
                       <Col md={8}>
                         <h1>
-                          {this.querySlideContent(narrativeContent, 4, "heading")}
+                          {this.querySlideContent(
+                            narrativeContent,
+                            4,
+                            "heading"
+                          )}
                         </h1>
                         {this.querySlideContent(narrativeContent, 4, "body")}
                       </Col>
@@ -311,7 +329,6 @@ class KaraNarrative extends Component {
                   </div>
                 </div>
                 <div className="scroll-height"></div>
-
               </div>
 
               <div className="narrative-step">
@@ -320,7 +337,11 @@ class KaraNarrative extends Component {
                     <Row className="justify-content-md-center">
                       <Col md={8}>
                         <h1>
-                          {this.querySlideContent(narrativeContent, 5, "heading")}
+                          {this.querySlideContent(
+                            narrativeContent,
+                            5,
+                            "heading"
+                          )}
                         </h1>
                         {this.querySlideContent(narrativeContent, 5, "body")}
                       </Col>
@@ -333,51 +354,61 @@ class KaraNarrative extends Component {
               <div className="narrative-step">
                 <div className="sticky">
                   <div className="narrative-content">
-                    <Row className="justify-content-md-center" >
-                      <Col>
-                        <Card className="kara-card">
-                          <Card.Body className="kara-card-content">
-                            <h1>Monique</h1>
-                            <ul>
-                              <li>Recently lost her job as a bank teller</li>
-                              <li>Instacart worker</li>
-                            </ul>
-                          </Card.Body>
-                        </Card>
-                        <Card className="kara-card">
-                          <Card.Body className="kara-card-content">
-                            <h1>Lisa</h1>
-                            <ul>
-                              <li>Home-care worker</li>
-                              <li>Lives with employer</li>
-                            </ul>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                      <Col>
-                        <Card className="kara-card">
-                          <Card.Body className="kara-card-content">
-                            <h1>Alex</h1>
-                            <ul>
-                              <li>Uber driver</li>
-                            </ul>
-                          </Card.Body>
-                        </Card>
-                        <Card className="kara-card">
-                          <Card.Body className="kara-card-content">
-                            <h1>Mike</h1>
-                            <ul>
-                              <li>Starbucks barista</li>
-                              <li>Night shift janitor</li>
-                              <li>Has a kid entering university</li>
-                            </ul>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                    </Row>
-                    <Row className="justify-content-md-center">
-                      <h1>None fits the requirements</h1>
-                    </Row>
+                    <Container>
+                      <Row className="justify-content-md-center" md={12}>
+                        <Col md={6}>
+                          <Card className="kara-card">
+                            <Card.Body className="kara-card-content">
+                              <h3 className="kara-card-content-heading">
+                                Monique
+                              </h3>
+                              <ul>
+                                <li>Recently lost her job as a bank teller</li>
+                                <li>Instacart worker</li>
+                              </ul>
+                            </Card.Body>
+                          </Card>
+                          <Card className="kara-card">
+                            <Card.Body className="kara-card-content">
+                              <h3 className="kara-card-content-heading">
+                                Lisa
+                              </h3>
+                              <ul>
+                                <li>Home-care worker</li>
+                                <li>Lives with employer</li>
+                              </ul>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                        <Col md={6}>
+                          <Card className="kara-card">
+                            <Card.Body className="kara-card-content">
+                              <h3 className="kara-card-content-heading">
+                                Alex
+                              </h3>
+                              <ul>
+                                <li>Uber driver</li>
+                              </ul>
+                            </Card.Body>
+                          </Card>
+                          <Card className="kara-card">
+                            <Card.Body className="kara-card-content">
+                              <h3 className="kara-card-content-heading">
+                                Mike
+                              </h3>
+                              <ul>
+                                <li>Starbucks barista</li>
+                                <li>Night shift janitor</li>
+                                <li>Has a kid entering university</li>
+                              </ul>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      </Row>
+                      <Row className="justify-content-md-center">
+                        <h1>None fits the requirements</h1>
+                      </Row>
+                    </Container>
                   </div>
                 </div>
                 <div className="scroll-height"></div>
@@ -388,11 +419,15 @@ class KaraNarrative extends Component {
                   <div className="narrative-content">
                     <Row className="justify-content-md-center">
                       <Col md={3}>
-                        <img src="./assets/mobile.png" width="80%" />
+                        <img src="./assets/mobile.png" width="80%" alt="mobile phone"/>
                       </Col>
                       <Col md={5}>
                         <h1>
-                          {this.querySlideContent(narrativeContent, 7, "heading")}
+                          {this.querySlideContent(
+                            narrativeContent,
+                            7,
+                            "heading"
+                          )}
                         </h1>
                         {this.querySlideContent(narrativeContent, 7, "body")}
                       </Col>
@@ -400,7 +435,6 @@ class KaraNarrative extends Component {
                   </div>
                 </div>
                 <div className="scroll-height"></div>
-
               </div>
 
               <div className="narrative-step">
@@ -409,7 +443,11 @@ class KaraNarrative extends Component {
                     <Row className="justify-content-md-center">
                       <Col md={7}>
                         <h1>
-                          {this.querySlideContent(narrativeContent, 8, "heading")}
+                          {this.querySlideContent(
+                            narrativeContent,
+                            8,
+                            "heading"
+                          )}
                         </h1>
                         {this.querySlideContent(narrativeContent, 8, "body")}
                       </Col>

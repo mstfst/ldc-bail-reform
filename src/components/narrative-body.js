@@ -6,6 +6,7 @@ import Img from "gatsby-image"
 import NathanNarrative from "./narrative/nathan"
 import KaraNarrative from "./narrative/kara"
 import GeorgeNarrative from "./narrative/george"
+import IntroNarrative from "./narrative/intro"
 
 import ProgressBar from "./progress-bar/index"
 
@@ -18,8 +19,7 @@ class NarrativeSection extends Component {
     this.karaRef = React.createRef()
     this.georgeRef = React.createRef()
     this.nathanRef = React.createRef()
-    this.narrativeRef = React.createRef();
-
+    this.narrativeRef = React.createRef()
   }
   scroller
 
@@ -27,6 +27,7 @@ class NarrativeSection extends Component {
     story_stp: 0,
     progress: 0,
     overall_step: 0,
+    nathan_opacity: 0,
     kara_opacity: 0,
     george_opacity: 0,
   }
@@ -36,21 +37,31 @@ class NarrativeSection extends Component {
     this.setState({
       overall_step: index,
     })
-
-    if (index <= 5) {
+    console.log(index)
+    if (index == 0) {
       this.setState({
+        nathan_opacity: 0,
+        kara_opacity: 0,
+        george_opacity: 0,
+        story_stp: 0,
+      })
+    } else if (index >= 1 && index <= 6) {
+      this.setState({
+        nathan_opacity: 1,
         kara_opacity: 0,
         george_opacity: 0,
         story_stp: 1,
       })
-    } else if (index >= 6 && index <= 13) {
+    } else if (index >= 7 && index <= 14) {
       this.setState({
+        nathan_opacity: 0,
         kara_opacity: 1,
         george_opacity: 0,
         story_stp: 2,
       })
-    } else if (index > 13) {
+    } else if (index > 14) {
       this.setState({
+        nathan_opacity: 0,
         kara_opacity: 0,
         george_opacity: 1,
         story_stp: 3,
@@ -94,10 +105,9 @@ class NarrativeSection extends Component {
 
   componentWillUnmount() {
     this.scroller.destroy()
-    
   }
 
-  scrollToRef = (character) => {
+  scrollToRef = character => {
     console.log(character)
     // window.scrollTo(0, this.karaRef.current.offsetTop)
   }
@@ -107,6 +117,7 @@ class NarrativeSection extends Component {
       story_stp,
       progress,
       overall_step,
+      nathan_opacity,
       kara_opacity,
       george_opacity,
       contentPosition,
@@ -138,6 +149,7 @@ class NarrativeSection extends Component {
               stepCount: 6,
             },
           ]}
+          opacity={1}
         />
         <div className="gradient-background"></div>
 
@@ -165,12 +177,25 @@ class NarrativeSection extends Component {
                   }
                 }
               }
+              intro_bg: file(relativePath: { eq: "images/intro_bg.jpg" }) {
+                childImageSharp {
+                  fluid(maxWidth: 2000) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
+              }
             }
           `}
           render={data => {
             return (
               <div>
                 <div className="narrative-background">
+                  <Img fluid={data.intro_bg.childImageSharp.fluid} />
+                </div>
+                <div
+                  className="narrative-background"
+                  style={{ opacity: nathan_opacity }}
+                >
                   <Img fluid={data.nathan_bg.childImageSharp.fluid} />
                 </div>
                 <div
@@ -189,8 +214,17 @@ class NarrativeSection extends Component {
             )
           }}
         />
+        <div
+          id="narrative-scroll"
+          style={{ opacity: content_opacity }}
+          ref={this.narrativeRef}
+        >
+          <IntroNarrative
+            progress={progress}
+            step={overall_step}
+            contentPosition={contentPosition}
+          />
 
-        <div id="narrative-scroll" style={{ opacity: content_opacity }} ref={this.narrativeRef}>
           {/* NATHAN */}
           {/* <div ref={this.nathanRef} ></div> */}
           <NathanNarrative

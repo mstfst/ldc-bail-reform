@@ -9,7 +9,7 @@ $bar-height: 30rem;
   position: fixed;
   height: $bar-height;
   background-color: rgba(0,0,0,0);
-  top: $box-dim+5rem;
+  top: $box-dim+10rem;
   right: 2vw;
   z-index: 9999999999;
 }
@@ -23,13 +23,18 @@ $bar-height: 30rem;
   
 }
 
+#intro-bar {
+  top:0.5rem;
+  height: 0.8rem;
+}
+
 #nathan-bar {
   top: 1.2rem;
-  height: 8.2rem;
+  height: 7.9rem;
 }
 #kara-bar {
   top: 1.8rem;
-  height: 11.5rem;
+  height: 11rem;
 }
 #george-bar {
   top: 2.5rem;
@@ -57,8 +62,8 @@ $bar-height: 30rem;
 
 .progress-dot {
   position: absolute;
-  width: $box-dim+0.1rem;
-  height: $box-dim;
-  background-color: rgba($color: lightblue, $alpha: 1);
-  left: (-1) * $box-dim / 2 + $box-border;
+  width: $box-dim+0.1rem - 0.3rem;
+  height: $box-dim - 0.4rem;
+  background-color: rgba($color: white, $alpha: 1);
+  left: (-1) * $box-dim / 2 + $box-border +0.15rem;
 }
