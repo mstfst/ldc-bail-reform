@@ -37,13 +37,13 @@ class MomentumTabs extends React.Component {
     
     return (
       <Row className="justify-content-center mt-2 momentum">
-        <Col md="8" >
+        <Col md="12" xl="8">
           <Tab.Container defaultActiveKey="2020">
-            <Row>
+            <Row className="pl-1">
                 { docsByYearReverse.map(item => (
-                  <Nav key={ item.year } variant="link" className="flex momentum-tab-row">
+                  <Nav key={ item.year } variant="link" className="flex momentum-tab-wrap px-1">
                     <Nav.Item className="momentum-tab">
-                      <Nav.Link eventKey={ item.year }>
+                      <Nav.Link eventKey={ item.year } className="px-3 py-1">
                         <h4>{ item.year }</h4>
                       </Nav.Link>
                     </Nav.Item>

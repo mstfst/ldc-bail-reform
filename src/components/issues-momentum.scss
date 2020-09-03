@@ -2,8 +2,7 @@
 @import "../styles/index.scss";
 
 .momentum {
-  .momentum-tab-row {
-    padding-left: 0.5rem;
+  .momentum-tab-wrap {
     padding-bottom: 0;
   }
 
@@ -14,6 +13,10 @@
     a {
       border-radius: 4px 4px 0 0;
       color: white;
+
+      h4 {
+        margin-bottom: 0;
+      }
     }
 
     a.active {
