@@ -73,7 +73,7 @@ class MomentumTabs extends React.Component {
                           {item.docs.map(function(doc, index) {
                             return (
                             <Tab.Content key={ index }>
-                              <Tab.Pane eventKey={ index } className="article-card">
+                              <Tab.Pane eventKey={ index } className="article-card bg-light">
                                 <div className="article-header">
                                   <div className="source">{ doc.Author_s_ }</div>
                                   <div className="date">{ doc.Publish__or_Start_Date_ }</div>

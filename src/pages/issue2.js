@@ -25,14 +25,14 @@ const Issue2Page = () => {
       <Head title="Issues"/>
       <IssuesHero issueName="Denying Dignity and Basic Rights" issueImg={ data.issue2.childImageSharp.fluid } link1="/issue2#momentum" link2="/issue2#opportunity" link3="/issue2#explanation" />
 
-      <Row id="momentum" className="justify-content-center">
+      <Row id="momentum" className="justify-content-center pt-5 bg-light">
         <Col className="mb-2" md="10" lg="8">
           <h2 className="text-center uppercase">Momentum</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris feugiat orci vel justo semper varius. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam fermentum, massa ut molestie venenatis, justo nibh laoreet risus, at imperdiet nisl purus sed augue.</p>
         </Col>
       </Row>
 
-      <Row className="justify-content-center pb-5">
+      <Row className="justify-content-center pb-5 bg-light">
         <Col md="12" lg="10">
           <MomentumTabs />
         </Col>
