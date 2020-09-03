@@ -54,22 +54,22 @@ class MomentumTabs extends React.Component {
             <Row className="pl-2 pr-2">
               { docsByYearReverse.map(item => (
                 <Tab.Content key={ item.year }>
-                  <Tab.Pane eventKey={ item.year } className="momentum-pane">
-                    <Row>
+                  <Tab.Pane eventKey={ item.year } className="momentum-pane px-4">
+                    <Row className="no-gutters">
                       <Tab.Container defaultActiveKey="0">
-                        <Col sm="6" className="article-list">
-                            <Nav variant="link">
+                        <Col sm="6" className="py-4 article-list">
+                            <Nav variant="link" className="pl-0 pt-0 pr-4">
                             {item.docs.map(function(doc, index) {
                               return (
                               <Nav.Item key={ index } className="article-item">
-                                <Nav.Link eventKey={ index } className="article-heading display-4 align-items-center">
+                                <Nav.Link eventKey={ index } className="article-heading align-items-center">
                                   { doc.Title }
                                 </Nav.Link>
                               </Nav.Item>
                               )})}
                             </Nav>
                         </Col>
-                        <Col sm="6" className="article-preview">
+                        <Col sm="6" className="py-4 article-preview">
                           {item.docs.map(function(doc, index) {
                             return (
                             <Tab.Content key={ index }>

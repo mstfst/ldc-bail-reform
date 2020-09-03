@@ -29,11 +29,8 @@
     width: 100%;
     color: white;
     box-sizing: border-box;
-    padding: 0 2rem;
 
     .article-list {
-      padding: 2rem;
-
       .article-item {
         position: relative;
         display: flex;
@@ -70,13 +67,11 @@
       .article-heading {
         display: flex;
         flex: 1;
-        padding: 1rem 2rem;
         color: white !important;
       }
     }
 
     .article-preview {
-      padding: 2rem;
       min-width: 45%;
 
       .article-card {
