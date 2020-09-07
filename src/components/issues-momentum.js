@@ -8,43 +8,43 @@ class MomentumTabs extends React.Component {
     const airtable = this.props.documents
 
     // Temp storage of keys
-    const docsByYear = {};
+    const docsByTab = {};
     // Check that data was fetched
     if (airtable && Object.keys(airtable)) {
       // Group docs from same year
       Object.keys(airtable).forEach(function(i) {
         // Create key for grouping
-        var tempKey = airtable[i].data.Publish__or_Start_Date_.slice(0,4);
-        if (!docsByYear.hasOwnProperty(tempKey)) {
-          docsByYear[tempKey] = {
-            "year": tempKey,
+        var tempKey = airtable[i].data.Momentum_Tab;
+        if (!docsByTab.hasOwnProperty(tempKey)) {
+          docsByTab[tempKey] = {
+            "tab": tempKey,
             "docs": [] // new nested array of docs
           }
         }
-        // push docs into the nested array under the year
-        docsByYear[tempKey].docs.push(airtable[i].data);
+        // push docs into the nested array under the tab
+        docsByTab[tempKey].docs.push(airtable[i].data);
       });
     }
     // Map objects to final results array
-    const docsByYearArray = Object.keys(docsByYear).map(function(key) {
-      return docsByYear[key];
+    const docsByTabArray = Object.keys(docsByTab).map(function(key) {
+      return docsByTab[key];
     })
 
-    // Reverse order of years
-    const docsByYearReverse = docsByYearArray.sort().reverse();
+    // Sort tabs in order
+    const docsByTabSorted = docsByTabArray.sort();
 
-    console.log(docsByYearReverse)
+    console.log(docsByTabSorted[0].tab)
     
     return (
       <Row className="justify-content-center mt-2 momentum">
-        <Col md="12" xl="8">
-          <Tab.Container defaultActiveKey="2020">
+        <Col md="12" xl="10">
+          <Tab.Container defaultActiveKey={docsByTabSorted[0].tab}>
             <Row className="pl-1">
-                { docsByYearReverse.map(item => (
-                  <Nav key={ item.year } variant="link" className="flex momentum-tab-wrap px-1">
+                { docsByTabSorted.map(item => (
+                  <Nav key={ item.tab } variant="link" className="flex momentum-tab-wrap px-1">
                     <Nav.Item className="momentum-tab">
-                      <Nav.Link eventKey={ item.year } className="px-3 py-1">
-                        <h4>{ item.year }</h4>
+                      <Nav.Link eventKey={ item.tab } className="px-3 py-1">
+                        <h4>{ item.tab }</h4>
                       </Nav.Link>
                     </Nav.Item>
                   </Nav>
@@ -52,9 +52,9 @@ class MomentumTabs extends React.Component {
             </Row>
 
             <Row className="pl-2 pr-2">
-              { docsByYearReverse.map(item => (
-                <Tab.Content key={ item.year }>
-                  <Tab.Pane eventKey={ item.year } className="momentum-pane px-4">
+              { docsByTabSorted.map(item => (
+                <Tab.Content key={ item.tab }>
+                  <Tab.Pane eventKey={ item.tab } className="momentum-pane px-4">
                     <Row className="no-gutters">
                       <Tab.Container defaultActiveKey="0">
                         <Col sm="6" className="py-4 article-list">
