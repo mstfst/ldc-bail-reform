@@ -32,18 +32,16 @@ class MomentumTabs extends React.Component {
 
     // Sort tabs in order
     const docsByTabSorted = docsByTabArray.sort();
-
-    console.log(docsByTabSorted[0].tab)
     
     return (
       <Row className="justify-content-center mt-2 momentum">
         <Col md="12" xl="10">
-          <Tab.Container defaultActiveKey={docsByTabSorted[0].tab}>
+          <Tab.Container defaultActiveKey="0">
             <Row className="pl-1">
-                { docsByTabSorted.map(item => (
-                  <Nav key={ item.tab } variant="link" className="flex momentum-tab-wrap px-1">
+                { docsByTabSorted.map((item, i) => (
+                  <Nav key={ i } variant="link" className="flex momentum-tab-wrap px-1">
                     <Nav.Item className="momentum-tab">
-                      <Nav.Link eventKey={ item.tab } className="px-3 py-1">
+                      <Nav.Link eventKey={ i } className="px-3 py-1">
                         <h4>{ item.tab }</h4>
                       </Nav.Link>
                     </Nav.Item>
@@ -52,9 +50,9 @@ class MomentumTabs extends React.Component {
             </Row>
 
             <Row className="pl-2 pr-2">
-              { docsByTabSorted.map(item => (
-                <Tab.Content key={ item.tab }>
-                  <Tab.Pane eventKey={ item.tab } className="momentum-pane px-4">
+              { docsByTabSorted.map((item, i) => (
+                <Tab.Content key={ i }>
+                  <Tab.Pane eventKey={ i } className="momentum-pane px-4">
                     <Row className="no-gutters">
                       <Tab.Container defaultActiveKey="0">
                         <Col sm="6" className="py-4 article-list">
