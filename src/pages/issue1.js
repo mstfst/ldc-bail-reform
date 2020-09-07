@@ -12,15 +12,15 @@ const Issue1Page = () => {
     query {
       issue1: file(relativePath: { eq: "images/issue1.jpg" }) {
         childImageSharp {
-          fixed(width: 300) {
-            ...GatsbyImageSharpFixed
+          fluid(quality: 75, maxWidth: 600) {
+            ...GatsbyImageSharpFluid
           }
         }
       }
       documents: allAirtable(
           filter: {
             data: { 
-              Include_in_Momentum_: { in : "Theme 1 - Punish S&E Conditions" }
+              Momentum_Theme: { in : "Theme 1 - Punish S&E Conditions" }
               Publish__or_Start_Date_: { ne: null }
               Momentum_Annotation: { ne: null }
             }
@@ -28,10 +28,11 @@ const Issue1Page = () => {
         ) {
           nodes {
             data {
+              Momentum_Theme
+              Momentum_Tab
               Title
               Author_s_
               URL
-              Include_in_Momentum_
               Publish__or_Start_Date_
               Momentum_Annotation
             }
@@ -43,17 +44,17 @@ const Issue1Page = () => {
   return (
     <Layout>
       <Head title="Issues"/>
-      <IssuesHero issueName="Worsening the Lives of Marginalized People" issueImg={ data.issue1.childImageSharp.fixed } link1="/issue1#momentum" link2="/issue1#opportunity" link3="/issue1#explanation" />
+      <IssuesHero issueName="Worsening the Lives of Marginalized People" issueImg={ data.issue1.childImageSharp.fluid } link1="/issue1#momentum" link2="/issue1#opportunity" link3="/issue1#explanation" />
 
-      <Row id="momentum" className="justify-content-center pt-5">
+      <Row id="momentum" className="justify-content-center pt-5 px-4 bg-light">
         <Col className="mb-2" md="10" lg="8">
           <h2 className="text-center uppercase">Momentum</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris feugiat orci vel justo semper varius. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam fermentum, massa ut molestie venenatis, justo nibh laoreet risus, at imperdiet nisl purus sed augue.</p>
         </Col>
       </Row>
 
-      <Row className="justify-content-center pb-5">
-        <Col md="12">
+      <Row className="justify-content-center pb-5 px-5 bg-light">
+        <Col>
           <MomentumTabs documents={ data.documents.nodes } />
         </Col>
       </Row>

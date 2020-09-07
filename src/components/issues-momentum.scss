@@ -2,8 +2,7 @@
 @import "../styles/index.scss";
 
 .momentum {
-  .momentum-tab-row {
-    padding-left: 0.5rem;
+  .momentum-tab-wrap {
     padding-bottom: 0;
   }
 
@@ -14,6 +13,10 @@
     a {
       border-radius: 4px 4px 0 0;
       color: white;
+
+      h4 {
+        margin-bottom: 0;
+      }
     }
 
     a.active {
@@ -26,11 +29,8 @@
     width: 100%;
     color: white;
     box-sizing: border-box;
-    padding: 0 2rem;
 
     .article-list {
-      padding: 2rem;
-
       .article-item {
         position: relative;
         display: flex;
@@ -52,7 +52,7 @@
         
         &:before {
           content: "";
-          background: linear-gradient(90deg,rgba(0,0,0,0.85),rgba(0,0,0,0.4));
+          background: linear-gradient(90deg,rgba(0,0,0,0.85),rgba(0,0,0,0.5));
           position: absolute;
           height: 100%;
           width: 100%;
@@ -67,13 +67,11 @@
       .article-heading {
         display: flex;
         flex: 1;
-        padding: 1rem 2rem;
         color: white !important;
       }
     }
 
     .article-preview {
-      padding: 2rem;
       min-width: 45%;
 
       .article-card {
