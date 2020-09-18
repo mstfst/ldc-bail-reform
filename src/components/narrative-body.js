@@ -11,6 +11,7 @@ import ProgressBar from "./progress-bar/index"
 
 import "./narrative-body.scss"
 
+//need something to commit to create new branch
 class NarrativeSection extends Component {
   constructor(props) {
     super(props)
